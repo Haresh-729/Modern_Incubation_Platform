@@ -25,8 +25,7 @@ const Sidebar = () => {
         <>
           <div className="flex justify-between items-center">
             <Link to="/" onClick={handleCloseSideBar} className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
-              <SiShopware /> <span>ModernVate</span>
-              
+              <img src={ModernVate} alt="logo" /> <span>ModernVate</span>
             </Link>
             <TooltipComponent content="Menu" position="BottomCenter">
               <button
@@ -56,7 +55,7 @@ const Sidebar = () => {
                     className={({ isActive }) => (isActive ? activeLink : normalLink)}
                   >
                   {link.icon}
-                   
+
                     <span className="capitalize ">{link.name}</span>
                   </NavLink>
                 ))}

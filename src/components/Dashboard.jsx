@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const Dashboard = () => {
+function Dashboard(){
   return (
     <div>
       {/* div 1 - containing image */}
@@ -146,6 +146,8 @@ const Dashboard = () => {
       </div>
     </div>
   );
-};
+
+}
+  
 
 export default Dashboard;
