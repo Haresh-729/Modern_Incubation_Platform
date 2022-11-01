@@ -33,7 +33,9 @@ const Sidebar = () => {
               className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
             >
               <img className="w-10" src={ModernVate} alt="logo" />{" "}
-              <span>ModernVate</span>
+              <div className="font-family:Georgia w-[16rem] decoration-wavy hover:scale-100 text-bold ">
+                ModernVate
+              </div>
             </Link>
             <TooltipComponent content="Menu" position="BottomCenter">
               <button

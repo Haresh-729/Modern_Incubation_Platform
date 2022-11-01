@@ -133,8 +133,7 @@ const App = () => {
                   type="button"
                   onClick={() => setThemeSettings(true)}
                   style={{ background: currentColor, borderRadius: "50%" }}
-                  className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
-                >
+                  className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray">
                   <FiSettings />
                 </button>
               </TooltipComponent>
@@ -151,7 +150,7 @@ const App = () => {
             <div
               className={
                 activeMenu
-                  ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  "
+                  ? "dark:bg-main-dark-bg bg-main-bg min-h-screen md:ml-72 w-full  "
                   : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
               }
             >
@@ -202,7 +201,7 @@ const App = () => {
                       <knowMore5 />,
                     ]}
                   />
-                  
+
                   <Route
                     path="/About-Us"
                     element={[
@@ -215,7 +214,7 @@ const App = () => {
                   />
 
                   {/* charts  */}
-                  <Route path="/pie" element={<Pie />} />
+                  {/* <Route path="/pie" element={<Pie />} /> */}
                 </Routes>
               </div>
               <Footer />
@@ -225,6 +224,16 @@ const App = () => {
       ) : !user ? (
         <>
           <Routes>
+          <Route
+              path="/"
+              element={[
+                <Nav />,
+                <HeroSection />,
+                <Slogens />,
+                <Features />,
+                <Footer />,
+              ]}
+            />
             <Route path="/forgot-pass" element={<ForgotPass />} />
             <Route path="/login" element={[<Nav />, <Login />]} />
             <Route path="/register" element={[<Nav />, <Register />]} />
@@ -255,11 +264,10 @@ const App = () => {
                 <AboutUs5 />,
               ]}
             />
-            <Route path="/service" element={[<Nav />, <AboutUs3 />]} />
+            <Route path="/service" element={[<AboutUs3 />]} />
             <Route
               path="/know-more"
               element={[
-                <Nav />,
                 <KnowMore1 />,
                 <KnowMore2 />,
                 <KnowMore3 />,
