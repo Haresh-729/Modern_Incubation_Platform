@@ -26,5 +26,12 @@ export { default as CurrentProjects } from './CurrentProjects';
 export { default as Tasks } from './Tasks';
 export { default as Sessions1 } from './Sessions1';
 export { default as Quiz } from './Quiz';
+export { default as IdeaForm } from './IdeaForm';
+export { default as KnowMore1 } from './KnowMore1';
+export { default as KnowMore2 } from './KnowMore2';
+export { default as KnowMore3 } from './KnowMore3';
+export { default as KnowMore4 } from './KnowMore4';
+export { default as KnowMore5 } from './KnowMore5';
+
 
 export { default as Profile} from './Profile';
