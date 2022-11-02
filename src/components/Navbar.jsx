@@ -5,6 +5,8 @@ import { BsChatLeft } from "react-icons/bs";
 import { RiNotification3Line } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+import { IconButton } from "rsuite";
+import { Menu } from "@rsuite/icons";
 
 import avatar from "../data/avatar.jpg";
 import { Cart, Chat, Notification, UserProfile } from ".";
@@ -16,7 +18,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
       type="button"
       onClick={() => customFunc()}
       style={{ color }}
-      className="relative text-xl rounded-full p-3 hover:bg-light-gray"
+      className="relative text-xl rounded-full p-3 hover:bg-red"
     >
       <span
         style={{ background: dotColor }}
@@ -60,12 +62,20 @@ const Navbar = () => {
 
   return (
     <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
-      <NavButton
+      {/* <NavButton
+        className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110"
         title="Menu"
         customFunc={handleActiveMenu}
         color={currentColor}
         icon={<AiOutlineMenu />}
-      />
+      /> */}
+      <IconButton
+        icon={<Menu />}
+        onClick={handleActiveMenu}
+        style={{ background: currentColor }}
+        className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[3rem] h-[3rem] pb-1 text-center justify-center font-extrabold font-poppins text-xl text-[#03c9d7] rounded-[5rem] hover:text-white "
+      ></IconButton>
+
       <div className="flex">
         {/* <NavButton title="Cart" customFunc={() => handleClick('cart')} color={currentColor} icon={<FiShoppingCart />} /> */}
         {/* <NavButton
@@ -84,7 +94,7 @@ const Navbar = () => {
         />*/}
         <TooltipComponent content="Profile" position="BottomCenter">
           <div
-            className="flex items-center gap-2 cursor-pointer p-1 hover:bg-[#65edf7e0] text-[#b2da45] rounded-lg"
+            className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 flex items-center gap-2 cursor-pointer p-1 hover:bg-[#65edf7e0] text-[#b2da45] rounded-lg"
             onClick={() => handleClick("userProfile")}
           >
             <img

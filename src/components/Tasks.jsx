@@ -92,22 +92,22 @@ function Tasks() {
     },
   ];
   return (
-    <div className="bg-cover px-2 xl:px-8 w-screen h-full ">
-      <div className="flow-root flex-col items-end xl:justify-center pt-2 w-auto h-auto xl:pt-8 xl:mx-3">
-        <div className="overflow-y-scroll no-scrollbar h-[30rem]  items-center mt-1 xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem] mt-[-8rem] xl:rounded-[5rem] border-1 border-offwhite shadow-lg md:mx-8 md:mt-4 ">
-          <div className="wrap w-[10rem] sm:w-[] xl:wrap lg:w-[80rem] md:w-[72rem] xl:w-[102rem]  ">
-            <div className="md:grid md:grid-cols-2 xl:mx-10 xl:grid-cols-16 xl:grid">
+    <div className="    ">
+      <div className="flow-root flex-col items-end xl:justify-center pt-2 xl:pt-8 xl:mx-3">
+        <div className="overflow-y-scroll no-scrollbar xl:no-scrollbar h-[34rem]  items-center mt-[4rem] xl:float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:h-[40rem] lg:h-[40rem]  md:h-[36rem] xl:rounded-[5rem] border-1 border-offwhite shadow-lg md:mx-8 md:mt-4 ">
+          <div className="wrap w-[10rem] sm:w-[] xl:wrap lg:w-[80rem] md:w-[72rem] xl:w-[76rem]   ">
+            <div className="md:grid md:grid-cols-2  xl:grid-cols-16 xl:grid">
               <div
                 className="row-span-full col-start-2 h-[8rem] w-[19rem] col-end-8 self-center  text-[#EF4A37] text-right  bg-gradient-to-tr to-blue-500 via-[#7CD4FD] from-[#0589c7] rounded-[2rem]
-                
-                xl:row-span-full xl:col-start-3 xl:h-[20rem] xl:w-[80rem] xl:mx-12 xl:col-end-12 xl:self-center xl:pr-[3rem] xl:ml-[-32rem]   xl:text-right xl:rounded-[4rem] 
+
+                xl:row-span-full xl:col-start-3 xl:h-[20rem] xl:w-[72rem] xl:mx-2 xl:col-end-12 xl:self-center  xl:text-right xl:rounded-[4rem]
 
               md:row-span-full md:col-start-2 md:h-[10rem] md:w-[36rem] md:mx-12 md:col-end-8 md:ml-[-32rem]   md:text-right md:rounded-[2rem]
-              
+
               lg:row-span-full lg:col-start-2 lg:h-[14rem] lg:w-[52rem] lg:mx-12 lg:col-end-8 lg:ml-[-36rem]   lg:text-right lg:rounded-[2rem]
               "
               >
-                <h1 className="mt-[1rem] mr-[3rem] text-[0.6rem] xl:mt-[2rem] xl:text-4xl font-bold poppins md:mt-[-1rem]  pt-10 md:text-[1rem] md:font-bold lg:text-2xl">
+                <h1 className="mt-[1rem] mr-[3rem] text-[0.6rem] xl:mt-[2rem] xl:text-3xl font-bold poppins md:mt-[-1rem]  pt-10 md:text-[1rem] md:font-bold lg:text-2xl">
                   Do not pray for tasks equal to your <br /> powers. Pray for
                   powers equal to your tasks
                 </h1>
@@ -127,15 +127,15 @@ function Tasks() {
             </div>
 
             <div
-              className="grid grid-cols-1 place-items-center sm:grid-cols-2 text-center gap-4 mt-[-17rem] mx-[10rem] 
-            md:grid md:grid-cols-2 md:place-items-center  md:text-center  md:mt-[-2rem] md:ml-[2rem] md:mr-[32rem] md:mx-[10rem] lg:mt-[-2rem] lg:ml-[8rem] lg:mr-[28rem] lg:mx-[2rem] 
-            xl:grid  xl:place-items-center xl:grid-cols-2 xl:gap-12 xl:mt-6"
+              className="grid grid-cols-1 place-items-center sm:grid-cols-2 text-center gap-4 mt-[-17rem] mx-[10rem]
+            md:grid md:grid-cols-2 md:place-items-center  md:text-center  md:mt-[-2rem] md:ml-[2rem] md:mr-[32rem] md:mx-[10rem] lg:mt-[-2rem] lg:ml-[8rem] lg:mr-[28rem] lg:mx-[2rem]
+            xl:grid  xl:place-items-center xl:grid-cols-2 xl:gap-x-[26rem] xl:gap-y-[4rem]  xl:mt-6"
             >
               {data.map((item) => (
                 <div
-                  className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110  bg-[#99B0E1]/40 border-2 border-offwhite shadow-lg 
+                  className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110  bg-[#99B0E1]/40 border-2 border-offwhite shadow-lg
                    flex w-[17rem] h-[6rem]  lg:w-[20rem] rounded-[2rem]
-                   xl:w-[32rem] xl:h-[12rem] xl:rounded-[5rem] xl:mr-[-32rem] "
+                   xl:w-[32rem] xl:h-[12rem] xl:rounded-[5rem] xl:mr-[-24rem] "
                 >
                   <div className="flex-none w-48 relative">
                     <img

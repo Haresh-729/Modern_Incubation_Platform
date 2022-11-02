@@ -91,33 +91,33 @@ const ProfileEdit = () => {
     e.preventDefault();
   }
 
-  // function firstHandler(e) {
-  //   let item = e.target.value;
-  //   if (item.length < 0) {
-  //     SetFirstErr(true);
-  //   } else {
-  //     SetFirstErr(false);
-  //   }
-  //   SetFirst(item);
-  // }
-  // function lastHandler(e) {
-  //   let item = e.target.value;
-  //   if (item.length > 10) {
-  //     SetLastErr(true);
-  //   } else {
-  //     SetLastErr(false);
-  //   }
-  //   SetLast(item);
-  // }
-  // function stateHandler(e) {
-  //   let item = e.target.value;
-  //   if (item.length > 10) {
-  //     SetStateErr(true);
-  //   } else {
-  //     SetStateErr(false);
-  //   }
-  //   SetState(item);
-  // }
+  function firstHandler(e) {
+    let item = e.target.value;
+    if (item.length < 0) {
+      SetFirstErr(true);
+    } else {
+      SetFirstErr(false);
+    }
+    SetFirst(item);
+  }
+  function lastHandler(e) {
+    let item = e.target.value;
+    if (item.length > 10) {
+      SetLastErr(true);
+    } else {
+      SetLastErr(false);
+    }
+    SetLast(item);
+  }
+  function stateHandler(e) {
+    let item = e.target.value;
+    if (item.length > 10) {
+      SetStateErr(true);
+    } else {
+      SetStateErr(false);
+    }
+    SetState(item);
+  }
   function addHandler(e) {
     let item = e.target.value;
     if (item.length > 50) {
@@ -146,24 +146,24 @@ const ProfileEdit = () => {
     }
     SetPhone(item);
   }
-  // function nameHandler(e) {
-  //   let item = e.target.value;
-  //   if (item.length > 10) {
-  //     SetNameErr(true);
-  //   } else {
-  //     SetNameErr(false);
-  //   }
-  //   SetName(item);
-  // }
-  // function cityHandler(e) {
-  //   let item = e.target.value;
-  //   if (item.length > 10) {
-  //     SetCityErr(true);
-  //   } else {
-  //     SetCityErr(false);
-  //   }
-  //   SetCity(item);
-  // }
+  function nameHandler(e) {
+    let item = e.target.value;
+    if (item.length > 10) {
+      SetNameErr(true);
+    } else {
+      SetNameErr(false);
+    }
+    SetName(item);
+  }
+  function cityHandler(e) {
+    let item = e.target.value;
+    if (item.length > 10) {
+      SetCityErr(true);
+    } else {
+      SetCityErr(false);
+    }
+    SetCity(item);
+  }
 
   const [first, SetFirst] = useState("");
   const [last, SetLast] = useState("");
@@ -185,14 +185,14 @@ const ProfileEdit = () => {
   return (
     <div>
       <form onSubmit={editHandler}>
-        <div className=" bg-[#6788D3]  w-screen h-full">
+        <div className=" bg-[#6788D3]  ">
           <div className="">
-            <div class="flex flex-wrap   justify-center">
-              <div className=" mt-[6rem] mr-2  ">
-                <h1 className=" text-4xl text-white leading-loose ">
+            <div class="md:flex md:flex-wrap xl:flex xl:flex-wrap  xl:justify-center md:justify-center">
+              <div className=" mt-[6rem] mr-4  ">
+                <h1 className=" text-lg xl:text-4xl  md:text-4xl lg:text-4xl text-center text-white leading-loose xl:mr-4 ">
                   Asim sali
                 </h1>
-                <h1 className=" text-xl flex flex-wrap  text-white">
+                <h1 className=" text-xl xl:flex xl:flex-wrap xl:text-center  xl:mt-[1rem] text-center mt-[-2rem] md:flex md:flex-wrap md:mt-[1rem] xl:mr-[4rem] lg:mr-[1rem] text-white">
                   {" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -200,7 +200,7 @@ const ProfileEdit = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 mt-1 h-6 m"
+                    className="w-6 xl:mt-1 md:mt-1 ml-[1rem] lg:mt-1  h-6 xl:mr-2 md:mr-2 lg:ml-2"
                   >
                     <path
                       strokeLinecap="round"
@@ -213,23 +213,28 @@ const ProfileEdit = () => {
               </div>
               <IconButton
                 icon={<Edit />}
-                className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[3rem] h-[3rem] text-center justify-center font-extrabold font-poppins text-3xl mt-[10rem] absolute ml-28 flex text-black bg-[#EAECF0] rounded-[5rem] hover:bg-lb hover:text-white "
+                className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[2rem] h-[2rem]  text-center  justify-center font-extrabold font-poppins text-xl mt-[4rem] absolute ml-[8rem] flex text-black bg-[#EAECF0] rounded-[5rem] xl:mr-[4rem] md:w-[2rem] md:h-[2rem] md:text-xl md:mt-[10rem]  lg:w-[3rem] lg:h-[3rem] lg:text-3xl lg:pt-2 lg:mt-[10rem] lg:mr-[1rem]
+                
+                "
               ></IconButton>
-              <div class=" flex flex-wrap w-40  ">
+              <div class=" flex flex-wrap md:w-40 lg:w-40 xl:w-40   ">
                 <img
                   src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-4-470x470.png"
                   alt="..."
-                  class="shadow-lg rounded-full w-[10rem] mt-10 mr-56 py-0 h-auto align-middle border-none"
+                  class="shadow-lg rounded-full w-[4rem] mt-4 mr-42 py-0 h-auto mx-[8rem] align-middle border-none 
+                  xl:shadow-lg xl:rounded-full xl:w-[10rem] xl:mt-10 xl:ml-[-4rem] xl:py-0 md:h-[6rem] md:ml-[-1rem] md:border-none 
+                  md:shadow-lg md:rounded-full md:w-[6rem] md:mt-[5rem]  md:py-0 lg:h-auto lg:align-middle lg:border-none
+                  lg:shadow-lg lg:rounded-full lg:w-[10rem] lg:mt-10 lg:mr-42 lg:py-0 lg:h-auto lg:align-middle lg:border-none"
                 />
               </div>
             </div>
           </div>
-          <div className=" flex flex-wrap justify-center mx-32 mt-24 w-[80rem] gap-12">
+          <div className=" xl:flex xl:flex-row xl:flex-wrap  md:flex mx-4 md:flex-row  md:flex-wrap justify-center md:justify-center  mt-24 xl:w-[80rem] md:w-[48rem]  md:gap-8 gap-4 xl:gap-12">
             <input
               type="text"
               placeholder="First name"
               name="Firstname"
-              className="w-[32rem] h-[3rem] bg-white  bg-opacity-20 placeholder-white  px-5  rounded-[2rem] "
+              className="xl:w-[32rem] xl:h-[3rem] bg-white  bg-opacity-20  md:w-[20rem] md:h-[3rem]  w-[17rem] h-[3rem] placeholder-white mt-8  px-5 rounded-[2rem] "
               // onChange={firstHandler}
             />
             {firstErr ? <span>Not valid</span> : ""}
@@ -237,7 +242,7 @@ const ProfileEdit = () => {
               type="text"
               placeholder="Last name"
               name="Lastname"
-              className="w-[32rem] h-[3rem] bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
+              className="xl:w-[32rem] xl:h-[3rem]  md:w-[20rem] md:h-[3rem] bg-white  bg-opacity-20 placeholder-white mt-8 w-[17rem] h-[3rem] px-5 rounded-[2rem]"
               // onChange={lastHandler}
             />
             {lastErr ? <span>Not valid</span> : ""}
@@ -252,32 +257,48 @@ const ProfileEdit = () => {
                 onChange={ddlHandler}
                 placeholder="Gender"
                 placeholderTextColor="#6495ed"
-                className="w-[32rem] h-[3rem]  text-white   px-5 rounded-[2rem]"
+                className="xl:w-[32rem] xl:h-[3rem]   text-white md:w-[20rem] md:h-[3rem]   px-5 rounded-[2rem]  mt-8 w-[17rem] h-[3rem] "
               ></Select>
             </div>
-            <input type="text" placeholder="State" name="State" className="w-[32rem] h-[3rem]  bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
+            <input
+              type="text"
+              placeholder="State"
+              name="State"
+              className="xl:w-[32rem] xl:h-[3rem]  md:w-[20rem] md:h-[3rem]  mt-8 w-[17rem] h-[3rem]  bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
               // onChange={stateHandler}
             />
             {stateErr ? <span>Not valid</span> : ""}
-            <input type="text" placeholder="City" name="City" className="w-[32rem] h-[3rem] bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
+            <input
+              type="text"
+              placeholder="City"
+              name="City"
+              className="xl:w-[32rem] xl:h-[3rem]  bg-white  bg-opacity-20 placeholder-white md:w-[20rem] md:h-[3rem]  mt-8 w-[17rem] h-[3rem]   px-5 rounded-[2rem]"
               // onChange={cityHandler}
             />
             {cityErr ? <span>Not valid</span> : ""}
-            <div className="flex flex-wrap w-[32rem]"> 
-              <input type="email" name="Email" placeholder="Mail-ID" className="w-[32rem] h-[3rem] bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]" onChange={emailHandler}/>
+            <div className="flex flex-wrap xl:w-[32rem]">
+              <input
+                type="email"
+                name="Email"
+                placeholder="Mail-ID"
+                className="xl:w-[32rem] xl:h-[3rem]  md:w-[20rem] md:h-[3rem]  mt-8 w-[17rem] h-[3rem]  bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
+                onChange={emailHandler}
+              />
               {emailErr ? (
                 <span className="mt-2 ml-2 text-red-600 text-xl">
                   Must inculde @
                 </span>
-              ) : ("")}
+              ) : (
+                ""
+              )}
             </div>
-            <div className="flex flex-wrap w-[32rem]">
+            <div className="flex flex-wrap xl:w-[32rem]">
               <input
                 type="text"
                 name="Address"
                 placeholder="Eduacation/Institution Address"
                 aria-multiline="true"
-                className="w-[32rem] h-[5rem] bg-white  bg-opacity-20 placeholder-white px-5 rounded-[2rem]"
+                className="xl:w-[32rem] xl:h-[3rem]  md:h-[3rem]  mt-8 w-[17rem] h-[3rem]   md:w-[20rem] h-[5rem] bg-white  bg-opacity-20 placeholder-white px-5 rounded-[2rem]"
                 onChange={addHandler}
               />
               {addErr ? (
@@ -288,19 +309,34 @@ const ProfileEdit = () => {
                 ""
               )}
             </div>
-            <input type="text" name="Edname" placeholder="Eduaction/Institution Name" className="w-[32rem] h-[3rem] bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
+            <input
+              type="text"
+              name="Edname"
+              placeholder="Eduaction/Institution Name"
+              className="xl:w-[32rem] xl:h-[3rem] md:w-[20rem] md:h-[3rem]  mt-8 w-[17rem] h-[3rem]  bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
               // onChange={nameHandler}
             />
             {nameErr ? <span>Not valid</span> : ""}
             <div>
-              <Select options={gradelist} theme={customTheme} styles={customStyles} required pattern="\S+.*" onChange={ddlHandler} placeholder=" Grade" name="Grade" className="w-[32rem] h-[3rem]  text-white   px-5 rounded-[2rem]"></Select>
+              <Select
+                options={gradelist}
+                theme={customTheme}
+                styles={customStyles}
+                required
+                pattern="\S+.*"
+                onChange={ddlHandler}
+                placeholder=" Grade"
+                name="Grade"
+                className="xl:w-[32rem] xl:h-[3rem]  text-white md:w-[20rem] md:h-[3rem]  mt-8 w-[17rem] h-[3rem]    px-5 rounded-[2rem]"
+              ></Select>
             </div>
-            <div className="flex flex-wrap w-[32rem]">
+            <div className="flex flex-wrap xl:w-[32rem]">
               <input
                 type="text"
                 placeholder="Phone no.. +91"
                 name="phone"
-                className="w-[32rem] h-[3rem] bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]" onChange={phoneHandler}
+                className="xl:w-[32rem] md:w-[20rem] md:h-[3rem]  xl:h-[3rem] bg-white  mt-8 w-[17rem] h-[3rem]  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
+                onChange={phoneHandler}
               />
               {phoneErr ? (
                 <span className="mt-2 ml-2 text-red-600 text-xl">
@@ -310,17 +346,21 @@ const ProfileEdit = () => {
                 ""
               )}
             </div>
+
             <input
               type="text"
               placeholder="I heard about Modervate from"
-              className="w-[32rem] h-[3rem] bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
+              className="xl:w-[32rem] md:w-[20rem] md:h-[3rem]  xl:h-[3rem] bg-white  bg-opacity-20 placeholder-white  mt-8 w-[17rem] h-[3rem]  px-5 rounded-[2rem]"
             />
           </div>
-          <div className="flex flex-wrap place-content-center mr-10 gap-12">
-            <div className="w-44 h-12 rounded-xl mt-10 mb-5 text-center text-2xl text-blue font-bold border-4 border-blue bg-white">
+          <div className="xl:flex xl:flex-wrap md:flex md:flex-wrap flex mx-6 pb-6  flex-row place-content-center mr-10  xl:mr-24 gap-12">
+            <div className="xl:w-44 xl:h-12 md:w-44 md:h-12 rounded-xl md:mt-10 xl:before:mt-10 xl:mb-5 md:mb-5  text-center xl:text-2xl md:text-2xl text-xl text-blue font-bold mt-6 border-4 border-blue   bg-white w-[8rem] h-8">
               Cancel
             </div>
-            <button type="submit" className="w-44 h-12 rounded-xl mb-5 mt-10 text-center text-blue font-bold border-blue border-4 text-2xl bg-white">
+            <button
+              type="submit"
+              className="xl:w-44 xl:h-12 md:w-44 md:h-12 rounded-xl md:mt-10 xl:before:mt-10 xl:mb-5 md:mb-5  text-center xl:text-2xl md:text-2xl text-xl text-blue font-bold border-4 border-blue mt-6  bg-white w-[8rem] h-8"
+            >
               Save
             </button>
           </div>

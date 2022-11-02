@@ -135,14 +135,14 @@ export const links = [
         icon: <img src="https://i.ibb.co/f0j8mnm/Profile.png" alt="Profile" />,
       },
       {
-        name: "verification",
+        name: "Verification",
         icon: <img src="https://i.ibb.co/S6DV7V6/verify.png" />,
       },
       {
-        name: "maturity",
+        name: "Maturity",
         icon: (
           <img
-            src="https://i.ibb.co/0FPkn59/image-removebg-preview.png"
+            src="https://i.ibb.co/Sfx8Ny9/icons8-innovation-30.png"
             alt="Maturity"
             border="0"
           />
@@ -183,7 +183,7 @@ export const links = [
       },
 
       {
-        name: "ToDoList",
+        name: "To-Do-List",
         icon: (
           <img
             src="https://i.ibb.co/XpFgSXL/todoList.png"
@@ -348,18 +348,20 @@ export const themeColors = [
 
 export const userProfileData = [
   {
-    icon: <BsCurrencyDollar />,
+    icon: <FiStar />,
     title: "My Profile",
     iconColor: "#03C9D7",
     iconBg: "#E5FAFB",
+    nav:"profile",
   },
-  {
-    icon: <FiCreditCard />,
-    title: "My Tasks",
-    desc: "To-do and Daily Tasks",
-    iconColor: "rgb(255, 244, 229)",
-    iconBg: "rgb(254, 201, 15)",
-  },
+  // {
+  //   icon: <FiCreditCard />,
+  //   title: "My Tasks",
+  //   desc: "To-do and Daily Tasks",
+  //   iconColor: "rgb(255, 244, 229)",
+  //   iconBg: "rgb(254, 201, 15)",
+  //   nav: "Switchi",
+  // },
 ];
 
 export const pieChartData = [

@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+import { IconButton } from "rsuite";
+import { Gear } from "@rsuite/icons";
 
 import FAQs from "./components/FAQs";
 import { AboutUs1, AboutUs2, AboutUs3, AboutUs4, AboutUs5 } from "./components";
@@ -33,17 +35,23 @@ import Interactions from "./components/Interactions";
 import ForgotPass from "./components/ForgotPass";
 import ProfileEdit from "./components/ProfileEdit";
 import Actions from "./components/Actions";
+import VScroll1 from "./components/VScroll1";
+import VScroll2 from "./components/VScroll2";
+import IdeaReview from "./components/IdeaReview";
+import IdeaPost from "./components/IdeaPost";
+import ContactUs from "./components/ContactUs";
+import Std from "./components/Std";
 
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-import IdeaPost from "./components/IdeaPost";
 import PNF from "./components/PNF";
 import { Oval } from "react-loader-spinner";
 import LoginRegister from "./components/LoginRegister";
 import Chat from "./components/Chat";
-import IdeaReview from "./components/IdeaReview";
+
 import VerifyIdeas from "./components/VerifyIdeas";
+import Verification from "./components/Verification";
 import { collection, orderBy, onSnapshot, doc } from "firebase/firestore";
 
 import {
@@ -129,17 +137,24 @@ const App = () => {
           <div className="flex relative dark:bg-main-dark-bg">
             <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
               <TooltipComponent content="Settings" position="Top">
-                <button
+                {/* <button
                   type="button"
                   onClick={() => setThemeSettings(true)}
                   style={{ background: currentColor, borderRadius: "50%" }}
-                  className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray">
+                  className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 text-[#03c9d7] bg-[#fdfdfd9a] text-3xl  p-3 hover:drop-shadow-xl hover:bg-light-gray">
                   <FiSettings />
-                </button>
+                </button> */}
+
+                <IconButton
+                  icon={<Gear />}
+                  onClick={() => setThemeSettings(true)}
+                  style={{ background: currentColor, borderRadius: "50%" }}
+                  className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[3.6rem] h-[3.6rem] pb-1 text-center justify-center font-extrabold font-poppins text-3xl font-bold text-[#03c9d7] rounded-[5rem] hover:text-white "
+                ></IconButton>
               </TooltipComponent>
             </div>
             {activeMenu ? (
-              <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
+              <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#B7F0FF] ">
                 <Sidebar />
               </div>
             ) : (
@@ -151,7 +166,7 @@ const App = () => {
               className={
                 activeMenu
                   ? "dark:bg-main-dark-bg bg-main-bg min-h-screen md:ml-72 w-full  "
-                  : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
+                  : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2  "
               }
             >
               <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
@@ -168,7 +183,7 @@ const App = () => {
                   <Route path="/profile" element={<Profile />} />
 
                   {/* apps  */}
-                  <Route path="/todolist" element={<ToDoList />} />
+                  <Route path="/To-Do-List" element={<Std />} />
 
                   <Route path="/calendar" element={<Calendar />} />
                   <Route path="/FAQs" element={<FAQs />} />
@@ -181,6 +196,15 @@ const App = () => {
                   <Route path="/Session-Details" element={<Sessions2 />} />
                   <Route path="/Maturity" element={<Maturity1 />} />
                   <Route path="/Quiz" element={<Quiz />} />
+                  <Route path="/Profile-Edit" element={<ProfileEdit />} />
+                  <Route path="/Idea-Review" element={<IdeaReview />} />
+                  <Route path="/Contact-us" element={<ContactUs />} />
+                  <Route path="/Post" element={<IdeaPost />} />
+                  <Route path="/Switchi" element={<ToDoList />} />
+                  <Route
+                    path="/Verification"
+                    element={[<Verification />, <VScroll1 />, <VScroll2 />]}
+                  />
                   <Route
                     path="/Idea-Upload"
                     element={
@@ -214,7 +238,7 @@ const App = () => {
                   />
 
                   {/* charts  */}
-                  {/* <Route path="/pie" element={<Pie />} /> */}
+                  <Route path="/pie" element={<Pie />} />
                 </Routes>
               </div>
               <Footer />
@@ -224,7 +248,7 @@ const App = () => {
       ) : !user ? (
         <>
           <Routes>
-          <Route
+            <Route
               path="/"
               element={[
                 <Nav />,

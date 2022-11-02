@@ -15,6 +15,9 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
         cambria: ["Cambria", "serif"],
       },
+      fontweight: {
+        extrabold: 800,
+      },
       fontSize: {
         14: "14px",
       },

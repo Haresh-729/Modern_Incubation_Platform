@@ -50,3 +50,8 @@ export { default as Tasks } from "./Tasks";
 export { default as ThemeSettings } from "./ThemeSettings";
 export { default as UserProfile } from "./UserProfile";
 export { default as VerifyIdeas } from "./VerifyIdeas";
+export { default as Verification } from "./Verification";
+export { default as VScroll1 } from "./VScroll1";
+export { default as VScroll2 } from "./VScroll2";
+export { default as Std } from "./Std";
+
