@@ -4,6 +4,7 @@ import React from "react";
   import questions from "./QuizData";
   import QuizResult from "./QuizResult";
   
+
   const Quiz = () => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [score, setScore] = useState(0);
@@ -62,7 +63,7 @@ import React from "react";
       setShowResult(false);
     };
     return (
-      <div className="flex items-center justify-center bg-cover w-screen min-h-screen bg-[url('https://i.ibb.co/Smq2X7B/background.png')]">
+      <div className="flex items-center justify-center w-screen min-h-screen">
         <div className="md:w-[32rem] md:h-auto app mx-4 bg-slate-400 rounded-[2rem] bg-opacity-50 w-[18rem] h-auto  text-violet-900 ">
           {showResult ? (
             <QuizResult
@@ -71,6 +72,9 @@ import React from "react";
               firstScore={firstScore}
               secondScore={secondScore}
               thirdScore={thirdScore}
+              FCA={TCA}
+              SCA={SCA}
+              TCA={TCA}
               ACA={ACA}
               handlePlayAgain={handlePlayAgain}
             />

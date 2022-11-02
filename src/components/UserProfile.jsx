@@ -1,16 +1,24 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import { MdOutlineCancel } from 'react-icons/md';
 
 import { Button } from '.';
 import { userProfileData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 import avatar from '../data/avatar.jpg';
+import { getElementByID } from '@syncfusion/ej2/maps';
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
 
+  const navigate = useNavigate();
+  const handleRoute1 = () => {
+        navigate("/profile");
+  };
+  
+
   return (
-    <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
+    <div className="nav-item absolute right-1 top-16 bg-[#B7F0FF] dark:bg-[#42464D] p-8 rounded-lg w-96">
       <div className="flex justify-between items-center">
         <p className="font-semibold text-lg dark:text-gray-200">User Profile</p>
         <Button
@@ -35,8 +43,9 @@ const UserProfile = () => {
       </div>
       <div>
         {userProfileData.map((item, index) => (
-          <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
+          <div className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
             <button
+              onClick={handleRoute1}
               type="button"
               style={{ color: item.iconColor, backgroundColor: item.iconBg }}
               className=" text-xl rounded-lg p-3 hover:bg-light-gray"
@@ -50,14 +59,31 @@ const UserProfile = () => {
             </div>
           </div>
         ))}
+        {/* <div className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
+            <button
+              onClick={handleRoute}
+              type="button"
+              style={{ color: rgb(255, 244, 229), backgroundColor: rgb(254, 201, 15) }}
+              className=" text-xl rounded-lg p-3 hover:bg-light-gray"
+            >
+              <FiCreditCard />
+            </button>
+
+            <div>
+              <p className="font-semibold dark:text-gray-200 ">My Tasks</p>
+              <p className="text-gray-500 text-sm dark:text-gray-400"> To-do and Daily Tasks </p>
+            </div>
+          </div> */}
       </div>
-      <div className="mt-5">
-        <Button
+      <div className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 mt-5">
+        <Button 
+          // onClick={()=>signOut(auth)}
           color="white"
           bgColor={currentColor}
           text="Logout"
           borderRadius="10px"
           width="full"
+          
         />
       </div>
     </div>

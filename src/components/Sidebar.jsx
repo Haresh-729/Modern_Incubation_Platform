@@ -23,16 +23,17 @@ const Sidebar = () => {
     "transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 flex items-center gap-5 pl-1 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
 
   return (
-    <div className="ml-1 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 bg-[#B7F0FF]">
+    <div className="ml-1 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 ">
       {activeMenu && (
         <>
           <div className="flex justify-between items-center">
+          
             <Link
               to="/"
               onClick={handleCloseSideBar}
               className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
             >
-              <img className="w-10" src={ModernVate} alt="logo" />{" "}
+              <img className="w-10" src={ModernVate} alt="logo" />
               <div className="font-family:Georgia w-[16rem] decoration-wavy hover:scale-100 text-bold ">
                 ModernVate
               </div>
@@ -48,7 +49,7 @@ const Sidebar = () => {
               </button>
             </TooltipComponent>
           </div>
-          <div className="mt-10 ">
+          <div className="mt-10 text-black ">
             {links.map((item) => (
               <div key={item.title}>
                 {/* <p className="text-gray-400 dark:text-gray-400 m-3 mt-4 uppercase">
