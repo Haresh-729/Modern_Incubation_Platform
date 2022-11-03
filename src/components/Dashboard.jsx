@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Dashboard(){
+function Dashboard({username}){
   return (
 
 
@@ -18,7 +18,7 @@ function Dashboard(){
           </div>
           <div className="grid justify-items-center  mx-auto">
             <h1 className="text-[#EF4A37] text-xl lg:text-4xl xl:font-extrabold xl:mt-4 md:text-3xl p-5 lg:font-semibold  font-extrabold">
-              Welcome Back <span>name</span>!
+              Welcome  <span>{username}</span>!
             </h1>
             <p className="text-[#7587A4] sm:px-10 lg:text-2xl md:text-xl font-semibold place-items-center pb-3 text-center lg:text-right">
               Your this week’s progress is Awesome. Keep it up and get rewards.

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { db, auth } from "../firebase";
-import sendMessage from "./sendMessage";
+import sendMessage from "./SendMessage";
 import { collection, onSnapshot, limit } from "firebase/firestore";
 
 function OurChat({ username, userId, ppUrl }) {
@@ -17,7 +17,7 @@ function OurChat({ username, userId, ppUrl }) {
         }))
       );
     });
-    return () => {};
+    return () => { };
   }, []);
 
   return (
@@ -27,9 +27,8 @@ function OurChat({ username, userId, ppUrl }) {
           <div>
             <div
               key={id}
-              className={`msg ${
-                data.userId === auth.currentUser.uid ? "sent" : "received"
-              }`}
+              className={`msg ${data.userId === auth.currentUser.uid ? "sent" : "received"
+                }`}
             >
               <img
                 className="flex justify-between rounded-full h-9 -mt-5 border-2 border-solid border-black"

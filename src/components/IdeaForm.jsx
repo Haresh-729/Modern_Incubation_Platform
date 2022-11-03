@@ -7,7 +7,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { Oval } from 'react-loader-spinner';
-import underVerification from '../assets/underVerification.png';
 
 function IdeaForm({ username, category, photoUrl }) {
     const [notify, setNotify] = useState();
@@ -17,7 +16,7 @@ function IdeaForm({ username, category, photoUrl }) {
     const [pdfFileError, setPdfFileError] = useState("");
     const [loading, setLoading] = useState(true);
 
-    console.log(category);
+    // console.log(category);
     console.log(photoUrl);
     const options = [
         { value: 'incubation', label: 'Incubation' },
@@ -107,11 +106,11 @@ function IdeaForm({ username, category, photoUrl }) {
                             userName: username,
                             timestamp: serverTimestamp(),
                             status: "under-verification",
-                            statusLogo:"https://i.ibb.co/5hbBY04/not-Verified.png",
+                            statusLogo: "https://i.ibb.co/W3Y9rx5/under-Verification.png",
                             category: category,
-                            photoUrl:photoUrl
+                            photoUrl: photoUrl
                         });
-                        navigate("/idea-review");
+                        navigate("/Idea-Review");
                         setReq([]);
                         setPdfFile(null);
                         setValues({
@@ -123,7 +122,7 @@ function IdeaForm({ username, category, photoUrl }) {
                         });
 
                     });
-                }else{
+                } else {
                     getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
                         console.log("done");
                         setLoading(true);
@@ -139,10 +138,11 @@ function IdeaForm({ username, category, photoUrl }) {
                             userName: username,
                             timestamp: serverTimestamp(),
                             status: "verified",
+                            statusLogo: "https://i.ibb.co/tJR9T3x/verified.png",
                             category: category,
-                            photoUrl:photoUrl
+                            photoUrl: photoUrl
                         });
-                        navigate("/display-ideas");
+                        navigate("/Post");
                         setReq([]);
                         setPdfFile(null);
                         setValues({
@@ -162,7 +162,7 @@ function IdeaForm({ username, category, photoUrl }) {
 
 
     return (
-        <div className="flex justify-center">
+        <div className="bg-cover w-screen h-screen bg-[url('https://i.ibb.co/Smq2X7B/background.png')] pb-5 ">
             <div >
                 <div className="p-8">
                     <h1 className="text-2xl text-center font-semibold text-blue">

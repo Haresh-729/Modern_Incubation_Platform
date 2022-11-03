@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { auth,db } from '../firebase';
 import { signInWithEmailAndPassword , signInWithPopup, GithubAuthProvider, GoogleAuthProvider, updateProfile} from 'firebase/auth';
@@ -58,7 +57,7 @@ const Login = () => {
                     category: "individual",
                     name: user.displayName,
                     email: user.email,
-                    photoUrl: user.photoURL,
+                    photoURL: user.photoURL,
                     timestamp: serverTimestamp(),
                 })
             navigate("/dashboard");
