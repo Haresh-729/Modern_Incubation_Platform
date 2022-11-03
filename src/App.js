@@ -94,6 +94,7 @@ const App = () => {
   const [ideas, setIdeas] = useState([]);
   const [category, setCategory] = useState();
   const [photoUrl, setPhotoUrl] = useState();
+  const [email, setEmail] = useState();
   const userId = user?.uid;
 
   useEffect(() => {
@@ -105,7 +106,7 @@ const App = () => {
           onSnapshot(doc(db, "users", userId), (doc) => {
             setCategory(doc.data().category);
             setPhotoUrl(doc.data().photoURL);
-            console.log(doc.data());
+            setEmail(doc.data().email);
           });
         }
       } else {
@@ -131,13 +132,14 @@ const App = () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      {user && user.displayName ? (
-        <div className={currentMode === "Dark" ? "dark" : ""}>
-          <div className="flex relative dark:bg-main-dark-bg">
-            <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
-              <TooltipComponent content="Settings" position="Top">
-                {/* <button
+    <div className="bg-[url('https://i.ibb.co/Smq2X7B/background.png')] bg-cover">
+      <BrowserRouter>
+        {user && user.displayName ? (
+          <div className={currentMode === "Dark" ? "dark" : ""}>
+            <div className="flex relative dark:bg-main-dark-bg">
+              <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
+                <TooltipComponent content="Settings" position="Top">
+                  {/* <button
                   type="button"
                   onClick={() => setThemeSettings(true)}
                   style={{ background: currentColor, borderRadius: "50%" }}
@@ -145,165 +147,152 @@ const App = () => {
                   <FiSettings />
                 </button> */}
 
-                <IconButton
-                  icon={<Gear />}
-                  onClick={() => setThemeSettings(true)}
-                  style={{ background: currentColor, borderRadius: "50%" }}
-                  className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[3.6rem] h-[3.6rem] pb-1 text-center justify-center font-extrabold font-poppins text-3xl font-bold text-[#03c9d7] rounded-[5rem] hover:text-white "
-                ></IconButton>
-              </TooltipComponent>
-            </div>
-            {activeMenu ? (
-              <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#B7F0FF] ">
-                <Sidebar />
+                  <IconButton
+                    icon={<Gear />}
+                    onClick={() => setThemeSettings(true)}
+                    style={{ background: currentColor, borderRadius: "50%" }}
+                    className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[3.6rem] h-[3.6rem] pb-1 text-center justify-center font-extrabold font-poppins text-3xl font-bold text-[#03c9d7] rounded-[5rem] hover:text-white "
+                  ></IconButton>
+                </TooltipComponent>
               </div>
-            ) : (
-              <div className="w-0 dark:bg-secondary-dark-bg">
-                <Sidebar />
+              {activeMenu ? (
+                <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#B7F0FF] ">
+                  <Sidebar />
+                </div>
+              ) : (
+                <div className="w-0 dark:bg-secondary-dark-bg">
+                  <Sidebar />
+                </div>
+              )}
+              <div
+                className={
+                  activeMenu
+                    ? "dark:bg-main-dark-bg bg-main-bg min-h-screen md:ml-72 w-full  "
+                    : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2  "
+                }
+              >
+                <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
+                  <Navbar username={user.displayName} photoUrl={photoUrl} email={email} category={category} />
+                </div>
+                <div>
+                  {themeSettings && <ThemeSettings />}
+
+                  <Routes>
+                    {/* dashboard  */}
+                    <Route path="/dashboard" element={<Dashboard username={user.displayName} />} />
+
+                    {/* profile */}
+                    <Route path="/profile" element={<Profile username={user.displayName} photoUrl={photoUrl}/>} />
+
+                    {/* apps  */}
+                    <Route path="/To-Do-List" element={<Std />} />
+
+                    <Route path="/Calendar" element={<Calendar />} />
+                    <Route path="/FAQs" element={<FAQs />} />
+                    <Route
+                      path="/Current-Projects"
+                      element={<CurrentProjects />}
+                    />
+                    <Route path="/Tasks" element={<Tasks />} />
+                    <Route path="/Session" element={<Sessions1 />} />
+                    <Route path="/Session-Details" element={<Sessions2 />} />
+                    <Route path="/Maturity" element={<Maturity1 />} />
+                    <Route path="/Quiz" element={<Quiz />} />
+                    <Route path="/Profile-Edit" element={<ProfileEdit username={user.displayName} photoUrl={photoUrl} electronicMail={email}/>} />
+                    <Route path="/Idea-Review" element={<IdeaReview />} />
+                    <Route path="/Contact-us" element={<ContactUs />} />
+                    <Route path="/Post" element={<IdeaPost />} />
+                    <Route path="/Switchi" element={<ToDoList />} />
+                    <Route path="/chat" element={<Chat />} />
+                    <Route
+                      path="/Verification"
+                      element={[<Verification />, <VScroll1 />, <VScroll2 />]}
+                    />
+                    <Route
+                      path="/Idea-Upload"
+                      element={
+                        <IdeaForm
+                          username={user.displayName}
+                          category={category}
+                          photoUrl={photoUrl}
+                        />
+                      }
+                    />
+                    <Route
+                      path="/Know-More"
+                      element={[
+                        <KnowMore1 />,
+                        <KnowMore2 />,
+                        <KnowMore3 />,
+                        <KnowMore4 />,
+                        <knowMore5 />,
+                      ]}
+                    />
+
+                    <Route
+                      path="/About-Us"
+                      element={[
+                        <AboutUs1 />,
+                        <AboutUs2 />,
+                        <AboutUs3 />,
+                        <AboutUs4 />,
+                        <AboutUs5 />,
+                      ]}
+                    />
+
+                    {/* charts  */}
+                    <Route path="/pie" element={<Pie />} />
+                  </Routes>
+                </div>
+                <Footer />
               </div>
-            )}
-            <div
-              className={
-                activeMenu
-                  ? "dark:bg-main-dark-bg bg-main-bg min-h-screen md:ml-72 w-full  "
-                  : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2  "
-              }
-            >
-              <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
-                <Navbar />
-              </div>
-              <div>
-                {themeSettings && <ThemeSettings />}
-
-                <Routes>
-                  {/* dashboard  */}
-                  <Route path="/dashboard" element={<Dashboard />} />
-
-                  {/* profile */}
-                  <Route path="/profile" element={<Profile />} />
-
-                  {/* apps  */}
-                  <Route path="/To-Do-List" element={<Std />} />
-
-                  <Route path="/calendar" element={<Calendar />} />
-                  <Route path="/FAQs" element={<FAQs />} />
-                  <Route
-                    path="/Current-Projects"
-                    element={<CurrentProjects />}
-                  />
-                  <Route path="/Tasks" element={<Tasks />} />
-                  <Route path="/Session" element={<Sessions1 />} />
-                  <Route path="/Session-Details" element={<Sessions2 />} />
-                  <Route path="/Maturity" element={<Maturity1 />} />
-                  <Route path="/Quiz" element={<Quiz />} />
-                  <Route path="/Profile-Edit" element={<ProfileEdit />} />
-                  <Route path="/Idea-Review" element={<IdeaReview />} />
-                  <Route path="/Contact-us" element={<ContactUs />} />
-                  <Route path="/Post" element={<IdeaPost />} />
-                  <Route path="/Switchi" element={<ToDoList />} />
-                  <Route
-                    path="/Verification"
-                    element={[<Verification />, <VScroll1 />, <VScroll2 />]}
-                  />
-                  <Route
-                    path="/Idea-Upload"
-                    element={
-                      <IdeaForm
-                        username={user.displayName}
-                        category={category}
-                        photoUrl={photoUrl}
-                      />
-                    }
-                  />
-                  <Route
-                    path="/Know-More"
-                    element={[
-                      <KnowMore1 />,
-                      <KnowMore2 />,
-                      <KnowMore3 />,
-                      <KnowMore4 />,
-                      <knowMore5 />,
-                    ]}
-                  />
-
-                  <Route
-                    path="/About-Us"
-                    element={[
-                      <AboutUs1 />,
-                      <AboutUs2 />,
-                      <AboutUs3 />,
-                      <AboutUs4 />,
-                      <AboutUs5 />,
-                    ]}
-                  />
-
-                  {/* charts  */}
-                  <Route path="/pie" element={<Pie />} />
-                </Routes>
-              </div>
-              <Footer />
             </div>
           </div>
-        </div>
-      ) : !user ? (
-        <>
-          <Routes>
-            <Route
-              path="/"
-              element={[
-                <Nav />,
-                <HeroSection />,
-                <Slogens />,
-                <Features />,
-                <Footer />,
-              ]}
-            />
-            <Route path="/forgot-pass" element={<ForgotPass />} />
-            <Route path="/login" element={[<Nav />, <Login />]} />
-            <Route path="/register" element={[<Nav />, <Register />]} />
-            <Route path="*" element={<PNF />} />
-          </Routes>
-        </>
-      ) : (
-        <>
-          <Routes>
-            <Route
-              path="/landing-page"
-              element={[
-                <Nav />,
-                <HeroSection />,
-                <Slogens />,
-                <Features />,
-                <Footer />,
-              ]}
-            />
-            <Route
-              path="/about"
-              element={[
-                <Nav />,
-                <AboutUs1 />,
-                <AboutUs2 />,
-                <AboutUs3 />,
-                <AboutUs4 />,
-                <AboutUs5 />,
-              ]}
-            />
-            <Route path="/service" element={[<AboutUs3 />]} />
-            <Route
-              path="/know-more"
-              element={[
-                <KnowMore1 />,
-                <KnowMore2 />,
-                <KnowMore3 />,
-                <KnowMore4 />,
-                <KnowMore5 />,
-              ]}
-            />
-            <Route path="/Logout" element={<LogOutSuccessful />} />
-          </Routes>
-        </>
-      )}
-    </BrowserRouter>
+        ) : (
+          <>
+            <Routes>
+              <Route
+                path="/"
+                element={[
+                  <Nav />,
+                  <HeroSection />,
+                  <Slogens />,
+                  <Features />,
+                ]}
+              />
+              <Route path="/forgot-pass" element={<ForgotPass />} />
+              <Route path="/login" element={[<Nav />, <Login />]} />
+              <Route path="/register" element={[<Nav />, <Register />]} />
+              <Route path="*" element={<PNF />} />
+              <Route
+                path="/about"
+                element={[
+                  <Nav />,
+                  <AboutUs1 />,
+                  <AboutUs2 />,
+                  <AboutUs3 />,
+                  <AboutUs4 />,
+                  <AboutUs5 />,
+                ]}
+              />
+              <Route path="/service" element={[<Nav />,<AboutUs3 />]} />
+              <Route
+                path="/know-more"
+                element={[
+                  <Nav />,
+                  <KnowMore1 />,
+                  <KnowMore2 />,
+                  <KnowMore3 />,
+                  <KnowMore4 />,
+                  <KnowMore5 />,
+                ]}
+              />
+              <Route path="/Logout" element={<LogOutSuccessful />} />
+            </Routes>
+          </>
+        )}
+      </BrowserRouter>
+    </div>
   );
 
   // return (

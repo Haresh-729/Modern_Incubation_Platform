@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
-const Profile = () => {
+const Profile = ({username,photoUrl}) => {
   const navigate = useNavigate();
   const handleEdit = () => {
 
@@ -61,7 +61,7 @@ const Profile = () => {
             className="xl:ml-[8rem] invisible xl:visible absolute z-50 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 xl:w-[2.5rem] xl:h-[2rem] xl:pb-[2.5rem] text-center justify-center font-extrabold font-poppins xl:text-2xl text-black bg-white/50 border-2 border-white shadow-xl xl:rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white xl:mt-[10rem] xl:mr-[-5rem]"
           ></IconButton>
           <img
-            src={avatar}
+            src={photoUrl}
             alt="profile-Picture"
             border="0"
             className="h-20 w-20 ml-8 mt-[2rem] rounded-full border-2 border-white md:h-40 md:w-40 md:ml-7 md:mt-[2rem] md:rounded-full md:border-4 md:border-white   lg:h-40 lg:w-40 lg:ml-7 lg:mt-[2rem] lg:rounded-full lg:border-4 lg:border-white    xl:h-40 xl:w-40 xl:ml-7 xl:mt-[2rem] xl:rounded-full xl:border-4 xl:border-white absolute "
@@ -72,7 +72,7 @@ const Profile = () => {
         <div className="w-full md:w-full lg:w-full md:h-auto h-14 mb-4 bg-indigo-400 bg-cover rounded-lg xl:h-24 xl:col-start-1 xl:col-span-6 xl:row-start-2 xl:row-span-1  xl:bg-indigo-400 xl:bg-cover xl:rounded-lg">
           <div className="flex items-start pl-32 md:pl-48 lg:pl-48 xl:pl-48">
             <h1 className="text-[#ffffff]  text-2xl md:text-5xl lg:text-5xl xl:text-5xl p-5 font-semibold ">
-              Michael
+              {username}
             </h1>
           </div>
         </div>

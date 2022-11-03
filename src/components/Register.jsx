@@ -198,6 +198,7 @@ const Register = () => {
                                 REGISTER ACCOUNT
                             </button>
                         </div>
+                        <ToastContainer/>
                         {/* <p className="font-bold text-[0.75rem] text-red-500">{errorMsg}</p> */}
                         <Link to="/login">
                             <p className="font-poppins text-xs lg:text-sm xl:text-2xl items-center">

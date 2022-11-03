@@ -29,7 +29,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   </TooltipComponent>
 );
 
-const Navbar = () => {
+const Navbar = ({username, photoUrl,email,category}) => {
   const {
     currentColor,
     activeMenu,
@@ -99,13 +99,13 @@ const Navbar = () => {
           >
             <img
               className="rounded-full w-9 h-9"
-              src={avatar}
+              src={photoUrl}
               alt="user-profile"
             />
             <p>
               <span className="text-[#c2e958] text-14">Hi,</span>{" "}
               <span className="text-[#596e1f] font-normal ml-1 text-14">
-                Michael
+                {username}
               </span>
             </p>
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
@@ -115,7 +115,7 @@ const Navbar = () => {
         {/* {isClicked.cart && (<Cart />)} */}
         {/* {isClicked.chat && <Chat />} */}
         {/* {isClicked.notification && <Notification />} */}
-        {isClicked.userProfile && <UserProfile />}
+        {isClicked.userProfile && <UserProfile username={username} photoUrl={photoUrl} email={email} category={category}/>}
       </div>
     </div>
   );
