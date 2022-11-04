@@ -2,6 +2,9 @@ import React from "react";
 import { useState } from "react";
 import questions from "./QuizData";
 import { FirstScore, SecondScore, ThirdScore} from "./Quiz";
+import {setDoc, doc} from "firebase/firestore";
+import {db,auth} from "../firebase";
+import { useEffect } from "react";
 
 const QuizResult = (props) => {
   const [resDiv, setRes] = useState(false);
@@ -30,6 +33,15 @@ const QuizResult = (props) => {
     </div>
   );
 
+  const maturityResult = props.firstScore + props.secondScore + props.thirdScore;
+
+  useEffect(() => {
+    setDoc(doc(db, "mpoints", auth.currentUser.uid), {
+      maturityResult: maturityResult,
+    });
+  });
+
+  
   return (
     <div className="flex flex-col items-center">
       <div className=" score-section py-8 font-poppins text-center mx-[1rem]">

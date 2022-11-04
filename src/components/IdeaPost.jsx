@@ -110,11 +110,11 @@ function IdeaPost({
 
 
   return (
-    <div className="bg-cover w-screen h-full flex flex-col items-center justify-start ">
+    <div className="w-full h-full flex flex-col items-center justify-start ">
       {/* <article className="drop-shadow-lg my-5 w-1/2 border rounded-[2rem] {/*  hover:bg-offwhite transition duration-350 ease-in-out"> */}
       {
         status === "verified" ?
-          <div className="bg-cover w-screen h-full flex flex-col items-center justify-start">
+          <div className="bg-cover w-full h-full flex flex-col items-center justify-start">
             <article className=" my-2 w-1/2 border rounded-[2rem] shadow-lg">
               <div className="flex flex-shrink-0 p-4 pb-0">
                 {/* <a href="#" className="flex-shrink-0 group block">  */}

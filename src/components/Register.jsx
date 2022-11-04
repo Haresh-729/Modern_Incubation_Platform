@@ -172,7 +172,7 @@ const Register = () => {
                             <span className="text-grey text-xs md:px-2 lg:text-base xl:text-lg traking-tight lg:tracking-normal">Sign in with Google</span>
                         </button>
                         <button onClick={signUpWithGithub} className="items-center justify-center flex  m-5  p-1 xl:p-3 w-auto border-[0.1rem] lg:border-[0.2rem] border-grey border-solid hover:bg-offwhite/30 rounded-[0.5rem] lg:rounded-2xl">
-                            <img className="w-4 lg:w-6 xl:w-8 m-1" src="https://i.ibb.co/TPWntzW/icons8-github-48.png" alt="img desc" />
+                            <img className="w-4 lg:w-6 xl:w-8 m-1" src="https://i.ibb.co/z8SL7zX/icons8-github-48.png" alt="img desc" />
                             <span className="text-grey text-xs md:px-2 lg:text-base xl:text-lg traking-tight lg:tracking-normal">Sign in with Github</span>
                         </button>
                     </div>

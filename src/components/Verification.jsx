@@ -22,12 +22,6 @@ function Verification() {
                 src={veriimg}
                 alt="verification steps"
             ></img>
-            {/* <div className="mt-4 text-sm text-[#013BBA] lg:grid lg:grid-cols-4 lg:mb-8 lg:place-items-center text-center lg:gap-8 lg:text-xl sm:pb-2 sm:gap-6 sm:text-base md:gap-6 gap-2 md:mx-14  md:text-lg  grid-cols-4 text-[0.6rem] font-bold flex">
-                <div className="lg:mr-12">Create your Account <span ><ArrowRightLine/></span></div>
-                <div className="lg:mr-5">Pass Maturity Test   <span><ArrowRightLine/></span></div>
-                <div>Upload Required Documents   <span><ArrowRightLine/></span></div>
-                <div>Get Verified  </div>
-            </div> */}
         </div>
     </div>
 

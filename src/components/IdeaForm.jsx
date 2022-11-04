@@ -162,7 +162,7 @@ function IdeaForm({ username, category, photoUrl }) {
 
 
     return (
-        <div className="bg-cover w-screen h-screen bg-[url('https://i.ibb.co/Smq2X7B/background.png')] pb-5 ">
+        <div className="w-full h-screen pb-5 ">
             <div >
                 <div className="p-8">
                     <h1 className="text-2xl text-center font-semibold text-blue">
