@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
 function VScroll2() {
   const AADHARKEY = "ReVB97084HRXc4NDXWyF8552VzkC1GS1GvnMGRwwCIr07Xv6RKnzh1OJFc4d";

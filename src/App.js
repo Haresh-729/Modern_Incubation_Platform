@@ -41,6 +41,20 @@ import IdeaReview from "./components/IdeaReview";
 import IdeaPost from "./components/IdeaPost";
 import ContactUs from "./components/ContactUs";
 import Std from "./components/Std";
+import Editor from "./pages/Editor";
+import GRegister from "./Group/GRegister";
+import Glogin from "./Group/Glogin";
+import CreateSession from "./Group/CreateSession";
+
+import GroupTasks from "./Group/GroupTasks";
+import UpdateSession from "./Group/UpdateSession";
+import GroupDashboard from "./Group/GroupDashboard";
+import GprofileEdit from "./Group/GprofileEdit";
+import CPDCreate from "./Group/CPDCreate";
+
+
+
+
 
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -152,10 +166,13 @@ const App = () => {
 
 
   return (
-    <div className="bg-[url('https://i.ibb.co/Smq2X7B/background.png')] bg-cover">
+    <div className="bg-[url('https://i.ibb.co/Smq2X7B/background.png')] bg-cover ">
       <BrowserRouter>
         {user && user.displayName ? (
+          
+
           <div className={currentMode === "Dark" ? "dark" : ""}>
+
             <div className="flex relative dark:bg-main-dark-bg">
               <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
                 <TooltipComponent content="Settings" position="Top">
@@ -198,6 +215,40 @@ const App = () => {
                   {themeSettings && <ThemeSettings />}
 
                   <Routes>
+                    <>
+                    {category=== "organization" || category === "institute" ? (
+                      <>
+                      <Route path="/CreateSession" element={<CreateSession/>} />
+                      <Route path="/CPDCreate" element={<CPDCreate/>} />
+                      <Route path="/GprofileEdit" element={<GprofileEdit/>} />
+                      <Route path="/GroupDashboard" element={<GroupDashboard/>} />
+                      <Route path="/UpdateSession" element={<UpdateSession/>} />
+                      <Route path="/GroupTasks" element={<GroupTasks/>} /><Route path="/Tasks" element={<GroupTasks/>}/>
+                    <Route path="/Create-Project" element={<CPDCreate/>}/>
+                    <Route path="/Verify-Ideas" element={ideas.map(({ id, data }) => (
+                      <VerifyIdeas
+                        key={id}
+                        ideaId={id}
+                        user={user}
+                        username={data.userName}
+                        title={data.title}
+                        description={data.desc}
+                        pdfFile={data.pdfFile}
+                        statusLogo="https://i.ibb.co/W3Y9rx5/under-Verification.png"
+                        status={data.status}
+                        category={data.category}      // category of the user who uploaded the idea
+                        photoUrl={data.photoUrl}
+                        cat={category}               // current user category
+                      />
+                    ))} />
+                    <Route path="/Dashboard" element={<GroupDashboard/>}/>
+                    <Route path="/Create-Session" element={<CreateSession/>}/>
+                    <Route path="/ProfileEdit" element={<GprofileEdit/>} />
+                    <Route path="/UpdateSession" element={<UpdateSession/>} />
+                      </>
+
+                    ):<>null</>}
+                    
                     {/* dashboard  */}
                     <Route path="/dashboard" element={<Dashboard username={user.displayName} maturityResult={maturityResult} />} />
 
@@ -305,6 +356,9 @@ const App = () => {
 
                     {/* charts  */}
                     <Route path="/pie" element={<Pie />} />
+                    <Route path="/Editor" element={<Editor />} />
+
+                    </>
                   </Routes>
                 </div>
                 {/* <Footer /> */}
@@ -327,6 +381,8 @@ const App = () => {
               <Route path="/login" element={[<Nav />, <Login />]} />
               <Route path="/register" element={[<Nav />, <Register />]} />
               <Route path="*" element={<PNF />} />
+              <Route path="/groupregister" element={<GRegister />} />
+              <Route path="/grouplogin" element={<Glogin />} />
               <Route
                 path="/about"
                 element={[
@@ -351,11 +407,15 @@ const App = () => {
                 ]}
               />
               <Route path="/Logout" element={<LogOutSuccessful />} />
+              
+
             </Routes>
           </>
         )}
       </BrowserRouter>
+      
     </div>
+    
   );
 
   // return (
