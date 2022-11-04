@@ -19,6 +19,15 @@ export const interests = [
         {
             name: 'Ruby',
         },
+        {
+            name: 'R',
+        },
+        {
+            name: 'C',
+        },
+        {
+            name: 'DBMS',
+        },
         
         
        
