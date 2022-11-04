@@ -66,7 +66,7 @@ import {
 import { Calendar, ToDoList, Pie } from "./pages";
 import "./App.css";
 
-import { useStateContext } from "./contexts/ContextProvider";
+import { useStateContext } from './contexts/ContextProvider';
 
 const App = () => {
   const {
@@ -95,8 +95,10 @@ const App = () => {
   const [category, setCategory] = useState();
   const [photoUrl, setPhotoUrl] = useState();
   const [email, setEmail] = useState();
+  const [maturityResult, setMaturityResult] = useState();
   const userId = user?.uid;
 
+  //retrieved user info from firebase
   useEffect(() => {
     const unsub = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
@@ -119,6 +121,7 @@ const App = () => {
     };
   }, [userId]);
 
+  //retrieved ideas info from firebase
   useEffect(() => {
     onSnapshot(
       collection(db, "ideas"),
@@ -130,6 +133,18 @@ const App = () => {
       }
     );
   }, []);
+
+  useEffect(() => {
+    if (userId) {
+      onSnapshot(
+        doc(db, "mpoints", auth.currentUser.uid),
+        (doc) => {
+          setMaturityResult(doc.data().maturityResult);
+        }
+      );
+    }
+  }, [userId]);
+
 
   return (
     <div className="bg-[url('https://i.ibb.co/Smq2X7B/background.png')] bg-cover">
@@ -179,10 +194,10 @@ const App = () => {
 
                   <Routes>
                     {/* dashboard  */}
-                    <Route path="/dashboard" element={<Dashboard username={user.displayName} />} />
+                    <Route path="/dashboard" element={<Dashboard username={user.displayName} maturityResult={maturityResult} />} />
 
                     {/* profile */}
-                    <Route path="/profile" element={<Profile username={user.displayName} photoUrl={photoUrl}/>} />
+                    <Route path="/profile" element={<Profile username={user.displayName} photoUrl={photoUrl} />} />
 
                     {/* apps  */}
                     <Route path="/To-Do-List" element={<Std />} />
@@ -198,10 +213,53 @@ const App = () => {
                     <Route path="/Session-Details" element={<Sessions2 />} />
                     <Route path="/Maturity" element={<Maturity1 />} />
                     <Route path="/Quiz" element={<Quiz />} />
-                    <Route path="/Profile-Edit" element={<ProfileEdit username={user.displayName} photoUrl={photoUrl} electronicMail={email}/>} />
-                    <Route path="/Idea-Review" element={<IdeaReview />} />
+                    <Route path="/Profile-Edit" element={<ProfileEdit username={user.displayName} photoUrl={photoUrl} electronicMail={email} />} />
+                    <Route path="/Idea-Review" element={ideas.map(({ id, data }) => (
+                      <IdeaReview
+                        key={id}
+                        ideaId={id}
+                        user={user}
+                        username={data.userName}
+                        title={data.title}
+                        description={data.desc}
+                        pdfFile={data.pdfFile}
+                        statusLogo={data.statusLogo}
+                        status={data.status}
+                        category={data.category}
+                        photoUrl={data.photoUrl}
+                      />
+                    ))} />
+                    <Route path="/Verify-Ideas" element={ideas.map(({ id, data }) => (
+                      <VerifyIdeas
+                        key={id}
+                        ideaId={id}
+                        user={user}
+                        username={data.userName}
+                        title={data.title}
+                        description={data.desc}
+                        pdfFile={data.pdfFile}
+                        statusLogo="https://i.ibb.co/W3Y9rx5/under-Verification.png"
+                        status={data.status}
+                        category={data.category}      // category of the user who uploaded the idea
+                        photoUrl={data.photoUrl}
+                        cat={category}               // current user category
+                      />
+                    ))} />
                     <Route path="/Contact-us" element={<ContactUs />} />
-                    <Route path="/Post" element={<IdeaPost />} />
+                    <Route path="/Post" element={ideas.map(({ id, data }) => (
+                      <IdeaPost
+                        key={id}
+                        ideaId={id}
+                        user={user}
+                        username={data.userName}
+                        title={data.title}
+                        description={data.desc}
+                        pdfFile={data.pdfFile}
+                        status={data.status}
+                        photoUrl={data.photoUrl}
+                        cmntPhoto={photoUrl}
+                      />
+                    ))} />
                     <Route path="/Switchi" element={<ToDoList />} />
                     <Route path="/chat" element={<Chat />} />
                     <Route
@@ -244,7 +302,7 @@ const App = () => {
                     <Route path="/pie" element={<Pie />} />
                   </Routes>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
               </div>
             </div>
           </div>
@@ -275,7 +333,7 @@ const App = () => {
                   <AboutUs5 />,
                 ]}
               />
-              <Route path="/service" element={[<Nav />,<AboutUs3 />]} />
+              <Route path="/service" element={[<Nav />, <AboutUs3 />]} />
               <Route
                 path="/know-more"
                 element={[

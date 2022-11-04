@@ -1,6 +1,12 @@
-import React from 'react';
+import React,{useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 
-function Dashboard({username}){
+
+function Dashboard({username,maturityResult}){
+
+
+    const navigate = useNavigate();
+
   return (
 
 
@@ -23,7 +29,7 @@ function Dashboard({username}){
             <p className="text-[#7587A4] sm:px-10 lg:text-2xl md:text-xl font-semibold place-items-center pb-3 text-center lg:text-right">
               Your this week’s progress is Awesome. Keep it up and get rewards.
             </p>
-            <button className="bg-[#013BBA] text-[#FFFFFF] py-1 xl:py-0 xl:rounded-2xl px-8 rounded hover:-translate-y-1 hover:scale-110 font-extrabold lg:text-xl md:text-lg mb-4">
+            <button onClick={()=>{navigate("/Tasks")}} className="bg-[#013BBA] text-[#FFFFFF] py-1 xl:py-0 xl:rounded-2xl px-8 rounded hover:-translate-y-1 hover:scale-110 font-extrabold lg:text-xl md:text-lg mb-4">
               SEE TASKS
             </button>
           </div>
@@ -58,7 +64,7 @@ function Dashboard({username}){
                 className="lg:h-14 lg:w-14 md:h-14 md:w-14 h-14 w-14 pl-2 pt-3"
               />
               <h1 className="lg:flex lg:flex-wrap text-[#EF4A37] font-bold lg:text-2xl sm:text-2xl md:text-2xl pl-2 lg:pt-5 md:pt-5">
-                654
+                110
               </h1>
             </div>
             <h1 className="text-[#94A3B9] font-medium lg:text-xl md:text-lg text-sm lg:text-center md:text-center pl-3 lg:pl-0 md:pl-0 xl:pl-0 lg:pt-2">
@@ -90,7 +96,12 @@ function Dashboard({username}){
                 className="lg:h-14 lg:w-14 md:h-14 md:w-14 h-14 w-14 pl-2 pt-3"
               />
               <h1 className="lg:flex lg:flex-wrap text-[#EF4A37] font-bold lg:text-2xl sm:text-2xl md:text-2xl pl-2 lg:pt-5 md:pt-5">
-                569
+              {
+                  maturityResult ?
+                  maturityResult
+                  :
+                  0
+                }
               </h1>
             </div>
             <h1 className="text-[#94A3B9] font-medium lg:text-xl md:text-lg text-sm lg:text-center md:text-center pl-3 lg:pl-0 md:pl-0 xl:pl-0 lg:pt-2">

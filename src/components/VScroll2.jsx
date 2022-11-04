@@ -1,7 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function VScroll2() {
+  const AADHARKEY = "ReVB97084HRXc4NDXWyF8552VzkC1GS1GvnMGRwwCIr07Xv6RKnzh1OJFc4d";
+  const [selectedFile, setSelectedFile] = React.useState(null);
+
+  const handleChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const formData = new FormData();
+    formData.append("selectedFile", selectedFile);
+    try {
+      await axios({
+        method: "post",
+        url: "https://nationalapi.docsumo.com/api/v1/national/extract/?side=back&save_data=false&return_redacted=false&fraud_check=true",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "X-Api-Key": AADHARKEY
+        }
+      }).then((res) => {
+        console.log(res.data)
+      })
+      console.log("Done")
+    } catch (error) {
+      console.log(error)
+    }
+    setSelectedFile(null);
+  }
+  console.log(selectedFile);
   return (
     <div className=" bg-opacity-30 rounded-3xl mt-[3rem] md:mt-[0rem] ">
       <div className="flex">
@@ -34,12 +65,12 @@ function VScroll2() {
               PAN Card, Driving License, etc.
             </div>
             <div className="lg:pt-8 md:pt-8 xl:pt-8 sm:pt-6 pt-4 flex flex-wrap mx-auto justify-center items-center">
-              <Link
-                to=""
-                className="font-bold bg-blue rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-white hover:border-white border-4"
-              >
+
+              <input type="file" id="File" name="File" accept="images/*" onChange={handleChange} className="font-bold bg-white rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-blue hover:border-blue border-4"
+              />
+              <button onClick={handleSubmit} className="font-bold bg-blue rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-white hover:border-white border-4">
                 Upload
-              </Link>
+              </button>
 
               <div className="flex">
                 <img
@@ -77,12 +108,11 @@ function VScroll2() {
               In case not there, upload your last passed examination certificate
             </div>
             <div className="lg:pt-8 md:pt-8 xl:pt-8 sm:pt-6 pt-4 flex flex-wrap mx-auto justify-center items-center">
-              <Link
-                to="/null"
-                className="font-bold bg-blue rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-white hover:border-white border-4"
-              >
+              <input type="file" id="File" name="File" accept="images/*" onChange={handleChange} className="font-bold bg-white rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-blue hover:border-blue border-4"
+              />
+              <button onClick={handleSubmit} className="font-bold bg-blue rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-white hover:border-white border-4">
                 Upload
-              </Link>
+              </button>
 
               <div className="flex">
                 <img

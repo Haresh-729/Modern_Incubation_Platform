@@ -65,7 +65,7 @@ function VerifyIdeas({
 
 
     return (
-        <div className=" bg-cover w-screen h-full flex flex-col items-center justify-start">
+        <div className="bg-cover w-full h-full flex flex-col items-center justify-start">
             {
                 status === "under-verification" ?
                     category === "student" || category === "individual" ?

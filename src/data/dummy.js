@@ -44,6 +44,29 @@ import product5 from "./product5.jpg";
 import product6 from "./product6.jpg";
 import product7 from "./product7.jpg";
 import product8 from "./product8.jpg";
+import { useEffect, useState } from "react";
+import { onSnapshot, doc } from "firebase/firestore";
+import { auth, db } from '../firebase';
+
+function dummy() {
+  // const [category, setCategory] = useState();
+//   useEffect(() => {
+
+//     if (auth.currentUser.uid) {
+//       onSnapshot(doc(db, "users", auth.currentUser.uid), (doc) => {
+//         setCategory(doc.data().category);
+//       });
+//     }
+  
+//     });
+// return () => {
+
+// };
+//   }, []);
+  
+}
+
+console.log(dummy());
 
 export const kanbanGrid = [
   { headerText: "To Do", keyField: "Open", allowToggle: true },
@@ -153,8 +176,14 @@ export const links = [
   {
     links: [
       {
-        name: "Idea-Review",
-        icon: <img src="https://i.ibb.co/7nYC9XW/idea.png" alt="idea" />,
+        name: (dummy() === "institute" || dummy() === "organization") ? "Verify-Ideas" : "Idea-Review",
+        icon: (dummy() === "institute" || dummy() === "organization") ? <img src="https://i.ibb.co/7nYC9XW/idea.png" alt="idea" /> : <img src="https://i.ibb.co/7nYC9XW/idea.png" alt="idea" />,
+        // (category==="institute" || category==="organization")?
+        //   name: "Idea-Review",
+        // icon: <img src="https://i.ibb.co/7nYC9XW/idea.png" alt="idea" />,
+        //   :
+        //   name: "Verify-Ideas",
+        //   icon: <img src="https://i.ibb.co/7nYC9XW/idea.png" alt="idea" />,
       },
       {
         name: "Idea-Upload",
@@ -166,7 +195,7 @@ export const links = [
         ),
       },
       {
-        name: "post",
+        name: "Post",
         icon: (
           <img src="https://i.ibb.co/r00QXSD/Post.png" alt="Post" border="0" />
         ),
@@ -352,7 +381,7 @@ export const userProfileData = [
     title: "My Profile",
     iconColor: "#03C9D7",
     iconBg: "#E5FAFB",
-    nav:"profile",
+    nav: "profile",
   },
   // {
   //   icon: <FiCreditCard />,

@@ -64,7 +64,7 @@ function IdeaReview({
 
 
   return (
-    <div className=" bg-cover w-screen h-full flex flex-col items-center justify-start">
+    <div className=" bg-cover w-full h-full flex flex-col items-center justify-start">
       {
         user.displayName === username ?
 
