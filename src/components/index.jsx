@@ -42,7 +42,7 @@ export { default as PNF } from "./PNF";
 export { default as Profile } from "./Profile";
 export { default as Quiz } from "./Quiz";
 export { default as Register } from "./Register";
-export { default as sendMessage } from "./SendMessage";
+export { default as sendMessage } from "./sendMessage";
 export { default as Sessions1 } from "./Sessions1";
 export { default as Sidebar } from "./Sidebar";
 export { default as Slogens } from "./Slogens";

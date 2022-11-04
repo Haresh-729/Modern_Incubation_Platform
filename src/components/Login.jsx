@@ -103,7 +103,10 @@ const Login = () => {
 
 
     return (
-        <div className="w-screen h-full">
+      
+        
+
+        <div className="w-screen h-screen">
             <div className="mx-4 flex-col justify-center w-auto h-auto, md:mx-4 lg:mx-8 pt-2">
                 <div className="float-none md:float-right flex flex-col items-center justify-center md:w-1/2 lg:w-2/5 py-4 sm:mx-14 md:mx-4 lg:mx-2 lg:py-5  xl:py-14 my-4 lg:my-8 bg-white/30 rounded-[2rem] lg:rounded-[4rem] xl:rounded-[5rem]  border-2 border-offwhite shadow-lg xl:1/3">
                     <h1 className="sm:text-2xl sm:mt-[4rem] md:my-[2rem] mt-[2rem]   md:text-2xl lg:text-3xl xl:text-4xl text-xl font-extrabold poppins  text-orange">Login Account</h1>
@@ -154,7 +157,7 @@ const Login = () => {
                     </div>
                     <div className="font-cambria text-blue ml-6   text-5xl md:text-2xl lg:text-4xl xl:text-5xl tracking-wider"> With The </div>
                     <div className="font-cambria  text-6xl ml-6  md:text-3xl lg:text-5xl xl:text-6xl  text-orange tracking-wider"> Big Thing</div>
-                    <img className="float-left w-[30rem] md:w-[20rem] lg:w-[40rem] xl:w-[45rem] h-[22rem] md:h-[22rem] lg:h-[32rem] xl:h-[38rem] object-bottom " src="https://i.ibb.co/71DDfsV/Mobile-login-cuate-1.png" alt="img desc" />
+                    {/* <img className="float-left w-[30rem] md:w-[20rem] lg:w-[40rem] xl:w-[45rem] h-[22rem] md:h-[22rem] lg:h-[32rem] xl:h-[38rem] object-bottom " src="https://i.ibb.co/71DDfsV/Mobile-login-cuate-1.png" alt="img desc" /> */}
                 </div>
             </div>
         </div >

@@ -3,6 +3,10 @@ import { useState } from "react";
 import questions from "./QuizData";
 import { FirstScore, SecondScore, ThirdScore} from "./Quiz";
 
+
+
+import { PieChart, Pie} from 'recharts';
+
 const QuizResult = (props) => {
   const [resDiv, setRes] = useState(false);
 
@@ -14,6 +18,12 @@ const QuizResult = (props) => {
     { x: "Incubation", y: 5000, text: "5" },
     { x: "Team", y: 2000, text: "2" },
     { x: "Programming", y: 1000, text: "1" },
+  ];
+  const data = [
+    {name: 'Geeksforgeeks', students: 400},
+    {name: 'Technical scripter', students: 700},
+    {name: 'Geek-i-knack', students: 200},
+    {name: 'Geek-o-mania', students: 1000}
   ];
 
   const ChartsHeader = ({ category, title }) => (
@@ -73,6 +83,9 @@ const QuizResult = (props) => {
                 <h2 className="text-xl ">Programming Section: {props.TCA}</h2>
               </div>
               {/* ChartsHeader(category="Pie" title="Project Cost Breakdown") */}
+              <PieChart width={700} height={700}>
+          <Pie data={data} dataKey="students" outerRadius={250} fill="green" />
+        </PieChart>
             
             </div>
           ) : null}

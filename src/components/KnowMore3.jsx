@@ -31,7 +31,7 @@ function KnowMore3() {
                     alt="Maturity Testing"
                 />
             </div>
-            <div className="select-none flex lg:pt-10 md:pt-4">
+            <div data-aos="fade-right" className="select-none flex lg:pt-10 md:pt-4">
                 <img
                     className="select-none hidden lg:block md:block h-28 w-auto lg:h-96 lg:w-auto md:h-44 md:w-auto md:pt-6 md:pl-6 lg:pt-6 lg:pl-6"
                     src="https://i.ibb.co/KmRHKhK/collab.png"
