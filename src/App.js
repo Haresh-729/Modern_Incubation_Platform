@@ -69,6 +69,11 @@ import "./App.css";
 import { useStateContext } from './contexts/ContextProvider';
 
 const App = () => {
+
+  useEffect(() =>{
+    Aos.init({duration:2000})
+},[]);
+
   const {
     setCurrentColor,
     setCurrentMode,

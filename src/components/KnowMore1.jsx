@@ -3,12 +3,12 @@ import React from 'react';
 function KnowMore1() {
     return (
         <div className="select-none w-full h-full">
-            <img className="hidden lg:block md:block absolute hover:translate-x-1" src="https://i.ibb.co/BTBrmV7/cloud6.png" alt="cloud6" />
+            <img data-aos="fade-right" className="hidden lg:block md:block absolute hover:translate-x-1" src="https://i.ibb.co/BTBrmV7/cloud6.png" alt="cloud6" />
             
             <div className="relative px-auto lg:pt-10 h-auto w-auto">
                 <h1 className="lg:text-2xl sm:text-3xl md:text-4xl text-xl text-center font-bold text-[#0139B5] tracking-tight ">
                     <span className="block xl:inline underline">Know More</span> </h1>
-                <div className="flex justify-evenly">
+                <div data-aos="fade-in" className="flex justify-evenly">
                     <div className="pr-30 justify-center">
                         <div className="select-none lg:text-center md:text-left lg:pt-12 md:pt-12 pt-6 lg:tracking-widest lg:leading-10 md:leading-8 lg:pl-10 md:pl-8 pl-6">
                             <span className="lg:text-3xl md:text-2xl text-grey font-bold">Have </span>
@@ -27,6 +27,7 @@ function KnowMore1() {
                         </div>
                     </div>
                     <img
+                        data-aos="fade-left"
                         className="select-none hidden lg:block md:block lg:pr-10 lg:h-auto lg:w-96 md:h-60 md:w-64"
                         src="https://i.ibb.co/ydMyLYC/Girl1.png"
                         alt="Girl Reading Books"
@@ -41,7 +42,7 @@ function KnowMore1() {
                         />
                         <span className="select-none lg:text-2xl md:text-xl text-sm font-extrabold lg:tracking-wider text-redish pl-2">MODERNVATE</span>
                     </div>
-                    <div className="select-none lg:text-xl md:text-sm text-[12px] text-grey lg:p-5 md:p-5 p-2 lg:tracking-wider md:tracking-wider">
+                    <div data-aos="fade-left" className="select-none lg:text-xl md:text-sm text-[12px] text-grey lg:p-5 md:p-5 p-2 lg:tracking-wider md:tracking-wider">
                         <span className="text-blue font-bold">Modernvate</span> is an Incubation Digital Platform hosted completely on cloud.
                         It is a one-stop destination for all your professional needs.
                         A website which will provide a platform for young students to showcase their ideas,

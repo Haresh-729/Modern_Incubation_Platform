@@ -93,7 +93,7 @@ const HomeFooter = () => {
                     </div>
                     {/* <hr className=" border-gray-200 sm:mx-auto lg:mb-2" /> */}
                     <div className=" mb-2 flex gap-2 sm:mt-3 lg:pr-5 md:pr-5 md:w-96 w-32 pb-2 h-8 pt-2 justify-center mx-auto">
-                        <a href="https://www.instagram.com/drastic_coder/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
+                        <a href="https://www.instagram.com/haresh_kurade_729/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
                             <img
                                 alt="instagram"
                                 src="https://i.ibb.co/BwmjsLB/instagram.png"
@@ -101,7 +101,7 @@ const HomeFooter = () => {
                             ></img>
                             <span className="sr-only">instagram page</span>
                         </a>
-                        <a href="https://www.instagram.com/drastic_coder/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
+                        <a href="https://www.facebook.com/haresh.kurade.729/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
                             <img
                                 alt="Facebook"
                                 src="https://i.ibb.co/c8nkskK/facebook.png"
@@ -109,7 +109,7 @@ const HomeFooter = () => {
                             ></img>
                             <span className="sr-only">facebook page</span>
                         </a>
-                        <a href="https://www.instagram.com/drastic_coder/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
+                        <a href="https://web.telegram.org/k/#@Haresh_Kurade_729" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
                             <img
                                 alt="telegram"
                                 src="https://i.ibb.co/T8YTjmF/telegram.png"
@@ -117,7 +117,7 @@ const HomeFooter = () => {
                             ></img>
                             <span className="sr-only">telegram page</span>
                         </a>
-                        <a href="https://www.instagram.com/drastic_coder/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
+                        <a href="http://www.linkedin.com/in/haresh-kurade-22a04b241" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
                             <img
                                 alt="in"
                                 src="https://i.ibb.co/YZBFK1h/in.png"
@@ -125,7 +125,7 @@ const HomeFooter = () => {
                             ></img>
                             <span className="sr-only">in page</span>
                         </a>
-                        <a href="https://www.instagram.com/drastic_coder/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
+                        <a href="https://twitter.com/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
                             <img
                                 alt="twitter"
                                 src="https://i.ibb.co/d0mY9Zp/twitter.png"

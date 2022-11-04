@@ -9,7 +9,7 @@ export default function HeroSection() {
         Aos.init({duration:2000})
     },[]);
     return (
-        <div className="w-screen md:relative h-full lg:h-screen ">
+        <div className="w-screen md:relative h-full lg:h-screen lx:w-screen md:w-screen sm:w-screen">
             <img 
             data-aos="fade-right" className="  absolute will-change-scroll" src="https://i.ibb.co/BjHYqT0/cloud4.png" alt="clouds"/>
             <div className="mx-auto max-w-7xl">

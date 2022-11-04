@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { db, auth } from '../firebase';
-import SendMessage from './SendMessage';
+import SendMessage from './sendMessage';
 import { collection, onSnapshot, limit, orderBy, doc } from "firebase/firestore";
 
 function Chat({ ideaUname, username, userId, photoUrl }) {
