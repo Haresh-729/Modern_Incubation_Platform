@@ -266,7 +266,7 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
             state: state.value,
             instAdr: "",
             grade: gradelist.value,
-            phone: "",
+            
           });
 
         });

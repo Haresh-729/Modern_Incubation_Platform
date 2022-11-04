@@ -10,6 +10,7 @@ import { Oval } from 'react-loader-spinner';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
+    const navigate = useNavigate();
 
     const options = [
         { value: 'student', label: 'Student' },
@@ -19,19 +20,38 @@ const Register = () => {
         
     ]
 
+    // const [cate,setcate] = useState(false);
+    
+    // const [result,ddlvalue]=useState(options.label)
+    //     const handleRoute = e =>{
+    //         if(e.value === "organization" || e.value === "institute"){
+    //             setcate(true);
+    //         }
+            // {cate?(navigate("/groupregister")):null}
+    // const handleRoute = e => {
+    //     if(options.values === "Organization" && options.values === "Institute"){
+    //         navigate("/groupregister");
+    //     }
+
+        
+      
+
     const [values, setValues] = useState({
         category: options.value,
         name: "",
         email: "",
         password: "",
     });
+    if(values.category === "organization" || values.category === "institute"){
+        navigate("/groupregister");
+    }
 
     const [error,setErrorMsg] = useState("");
     const [loading, setLoading] = useState(true);
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
     const [ppUrl,setPpUrl] = useState("https://i.ibb.co/3MH6BD3/profile.png");
 
-    const navigate = useNavigate();
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -161,8 +181,14 @@ const Register = () => {
             },
         }
     }
+
+
+    const [guDiv, setRes] = useState(false);
+    
+    
+
     return (
-        <div className="w-screen h-screen">
+        <div className="w-screen h-full">
             <div className="mx-4 flex-col justify-center w-auto h-auto, md:mx-4 lg:mx-8 pt-2">
                 <div className="float-none md:float-right flex flex-col items-center justify-center md:w-1/2 lg:w-2/5 py-4 sm:mx-14 md:mx-4 lg:mx-2 lg:py-5  xl:py-14 my-4 lg:my-8 bg-white/30 rounded-[2rem] lg:rounded-[4rem] xl:rounded-[5rem]  border-2 border-offwhite shadow-lg xl:1/3">
                     <h1 className="sm:text-2xl sm:mt-[4rem] md:my-[2rem] mt-[2rem]   md:text-2xl lg:text-3xl xl:text-4xl text-xl font-extrabold poppins  text-orange">Register Account</h1>
@@ -197,6 +223,8 @@ const Register = () => {
                             <button className="w-full p-1 my-4 sm:my-8 lg:my-4 xl:my-8 font-bold lg:extrabold xl:font-extrabold font-poppins text-sm sm:text-sm md:text-sm lg:text-xl xl:text-2xl text-white bg-blue rounded-[0.3rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 sm:text-2xl" disabled={submitButtonDisabled}>
                                 REGISTER ACCOUNT
                             </button>
+                            
+                            
                         </div>
                         <ToastContainer/>
                         {/* <p className="font-bold text-[0.75rem] text-red-500">{errorMsg}</p> */}
@@ -221,4 +249,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default Register;

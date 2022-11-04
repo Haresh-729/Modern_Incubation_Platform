@@ -103,9 +103,6 @@ const Login = () => {
 
 
     return (
-      
-        
-
         <div className="w-screen h-screen">
             <div className="mx-4 flex-col justify-center w-auto h-auto, md:mx-4 lg:mx-8 pt-2">
                 <div className="float-none md:float-right flex flex-col items-center justify-center md:w-1/2 lg:w-2/5 py-4 sm:mx-14 md:mx-4 lg:mx-2 lg:py-5  xl:py-14 my-4 lg:my-8 bg-white/30 rounded-[2rem] lg:rounded-[4rem] xl:rounded-[5rem]  border-2 border-offwhite shadow-lg xl:1/3">
@@ -161,7 +158,6 @@ const Login = () => {
                 </div>
             </div>
         </div >
-
     )
 }
 
