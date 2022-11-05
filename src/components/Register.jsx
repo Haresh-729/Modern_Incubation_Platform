@@ -45,7 +45,7 @@ const Register = () => {
     if(values.category === "organization" || values.category === "institute"){
         navigate("/groupregister");
     }
-
+    
     const [error,setErrorMsg] = useState("");
     const [loading, setLoading] = useState(true);
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);

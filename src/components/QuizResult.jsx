@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import questions from "./QuizData";
-import { FirstScore, SecondScore, ThirdScore} from "./Quiz";
 import {setDoc, doc} from "firebase/firestore";
 import {db,auth} from "../firebase";
 import { useEffect } from "react";
@@ -22,12 +21,6 @@ const QuizResult = (props) => {
     { x: "Incubation", y: 5000, text: "5" },
     { x: "Team", y: 2000, text: "2" },
     { x: "Programming", y: 1000, text: "1" },
-  ];
-  const data = [
-    {name: 'Geeksforgeeks', students: 400},
-    {name: 'Technical scripter', students: 700},
-    {name: 'Geek-i-knack', students: 200},
-    {name: 'Geek-o-mania', students: 1000}
   ];
 
   const ChartsHeader = ({ category, title }) => (
