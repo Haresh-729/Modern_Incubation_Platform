@@ -51,10 +51,7 @@ import UpdateSession from "./Group/UpdateSession";
 import GroupDashboard from "./Group/GroupDashboard";
 import GprofileEdit from "./Group/GprofileEdit";
 import CPDCreate from "./Group/CPDCreate";
-
-
-
-
+import GSidebar from "./Group/GSidebar";
 
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -80,13 +77,12 @@ import {
 import { Calendar, ToDoList, Pie } from "./pages";
 import "./App.css";
 
-import { useStateContext } from './contexts/ContextProvider';
+import { useStateContext } from "./contexts/ContextProvider";
 
 const App = () => {
-
-  useEffect(() =>{
-    Aos.init({duration:2000})
-},[]);
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
 
   const {
     setCurrentColor,
@@ -155,26 +151,22 @@ const App = () => {
 
   useEffect(() => {
     if (userId) {
-      onSnapshot(
-        doc(db, "mpoints", auth.currentUser.uid),
-        (doc) => {
-          setMaturityResult(doc.data().maturityResult);
-        }
-      );
+      onSnapshot(doc(db, "mpoints", auth.currentUser.uid), (doc) => {
+        setMaturityResult(doc.data().maturityResult);
+      });
     }
   }, [userId]);
-
 
   return (
     <div className="bg-[url('https://i.ibb.co/Smq2X7B/background.png')] bg-cover ">
       <BrowserRouter>
         {user && user.displayName ? (
-          
-
           <div className={currentMode === "Dark" ? "dark" : ""}>
-
             <div className="flex relative dark:bg-main-dark-bg">
-              <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
+              <div
+                className="fixed right-4 bottom-4"
+                style={{ zIndex: "1000" }}
+              >
                 <TooltipComponent content="Settings" position="Top">
                   {/* <button
                   type="button"
@@ -192,7 +184,17 @@ const App = () => {
                   ></IconButton>
                 </TooltipComponent>
               </div>
-              {activeMenu ? (
+              {category === "institute" || category === "organization" ? (
+                activeMenu ? (
+                  <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#B7F0FF] ">
+                    <GSidebar />
+                  </div>
+                ) : (
+                  <div className="w-0 dark:bg-secondary-dark-bg">
+                    <GSidebar />
+                  </div>
+                )
+              ) : activeMenu ? (
                 <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#B7F0FF] ">
                   <Sidebar />
                 </div>
@@ -209,155 +211,226 @@ const App = () => {
                 }
               >
                 <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
-                  <Navbar username={user.displayName} photoUrl={photoUrl} email={email} category={category} />
+                  <Navbar
+                    username={user.displayName}
+                    photoUrl={photoUrl}
+                    email={email}
+                    category={category}
+                  />
                 </div>
                 <div>
                   {themeSettings && <ThemeSettings />}
 
                   <Routes>
                     <>
-                    {category=== "organization" || category === "institute" ? (
-                      <>
-                      <Route path="/CreateSession" element={<CreateSession/>} />
-                      <Route path="/CPDCreate" element={<CPDCreate/>} />
-                      <Route path="/GprofileEdit" element={<GprofileEdit/>} />
-                      <Route path="/GroupDashboard" element={<GroupDashboard/>} />
-                      <Route path="/UpdateSession" element={<UpdateSession/>} />
-                      <Route path="/GroupTasks" element={<GroupTasks/>} /><Route path="/Tasks" element={<GroupTasks/>}/>
-                    <Route path="/Create-Project" element={<CPDCreate/>}/>
-                    <Route path="/Verify-Ideas" element={ideas.map(({ id, data }) => (
-                      <VerifyIdeas
-                        key={id}
-                        ideaId={id}
-                        user={user}
-                        username={data.userName}
-                        title={data.title}
-                        description={data.desc}
-                        pdfFile={data.pdfFile}
-                        statusLogo="https://i.ibb.co/W3Y9rx5/under-Verification.png"
-                        status={data.status}
-                        category={data.category}      // category of the user who uploaded the idea
-                        photoUrl={data.photoUrl}
-                        cat={category}               // current user category
+                      {category === "organization" ||
+                      category === "institute" ? (
+                        <>
+                          <Route
+                            path="/CreateSession"
+                            element={<CreateSession />}
+                          />
+                          <Route path="/CPDCreate" element={<CPDCreate />} />
+                          <Route
+                            path="/GprofileEdit"
+                            element={<GprofileEdit />}
+                          />
+                          <Route
+                            path="/GroupDashboard"
+                            element={<GroupDashboard />}
+                          />
+                          <Route
+                            path="/UpdateSession"
+                            element={<UpdateSession />}
+                          />
+                          <Route path="/GroupTasks" element={<GroupTasks />} />
+                          <Route path="/Tasks" element={<GroupTasks />} />
+                          <Route
+                            path="/Create-Project"
+                            element={<CPDCreate />}
+                          />
+                          <Route
+                            path="/Verify-Ideas"
+                            element={ideas.map(({ id, data }) => (
+                              <VerifyIdeas
+                                key={id}
+                                ideaId={id}
+                                user={user}
+                                username={data.userName}
+                                title={data.title}
+                                description={data.desc}
+                                pdfFile={data.pdfFile}
+                                statusLogo="https://i.ibb.co/W3Y9rx5/under-Verification.png"
+                                status={data.status}
+                                category={data.category} // category of the user who uploaded the idea
+                                photoUrl={data.photoUrl}
+                                cat={category} // current user category
+                              />
+                            ))}
+                          />
+                          <Route
+                            path="/Dashboard"
+                            element={<GroupDashboard />}
+                          />
+                          <Route
+                            path="/Create-Session"
+                            element={<CreateSession />}
+                          />
+                          <Route
+                            path="/ProfileEdit"
+                            element={<GprofileEdit />}
+                          />
+                          <Route
+                            path="/UpdateSession"
+                            element={<UpdateSession />}
+                          />
+                        </>
+                      ) : (
+                        <>null</>
+                      )}
+
+                      {/* dashboard  */}
+                      <Route
+                        path="/dashboard"
+                        element={
+                          <Dashboard
+                            username={user.displayName}
+                            maturityResult={maturityResult}
+                          />
+                        }
                       />
-                    ))} />
-                    <Route path="/Dashboard" element={<GroupDashboard/>}/>
-                    <Route path="/Create-Session" element={<CreateSession/>}/>
-                    <Route path="/ProfileEdit" element={<GprofileEdit/>} />
-                    <Route path="/UpdateSession" element={<UpdateSession/>} />
-                      </>
 
-                    ):<>null</>}
-                    
-                    {/* dashboard  */}
-                    <Route path="/dashboard" element={<Dashboard username={user.displayName} maturityResult={maturityResult} />} />
-
-                    {/* profile */}
-                    <Route path="/profile" element={<Profile username={user.displayName} photoUrl={photoUrl} />} />
-
-                    {/* apps  */}
-                    <Route path="/To-Do-List" element={<Std />} />
-
-                    <Route path="/Calendar" element={<Calendar />} />
-                    <Route path="/FAQs" element={<FAQs />} />
-                    <Route
-                      path="/Current-Projects"
-                      element={<CurrentProjects />}
-                    />
-                    <Route path="/Tasks" element={<Tasks />} />
-                    <Route path="/Session" element={<Sessions1 />} />
-                    <Route path="/Session-Details" element={<Sessions2 />} />
-                    <Route path="/Maturity" element={<Maturity1 />} />
-                    <Route path="/Quiz" element={<Quiz />} />
-                    <Route path="/Profile-Edit" element={<ProfileEdit username={user.displayName} photoUrl={photoUrl} electronicMail={email} />} />
-                    <Route path="/Idea-Review" element={ideas.map(({ id, data }) => (
-                      <IdeaReview
-                        key={id}
-                        ideaId={id}
-                        user={user}
-                        username={data.userName}
-                        title={data.title}
-                        description={data.desc}
-                        pdfFile={data.pdfFile}
-                        statusLogo={data.statusLogo}
-                        status={data.status}
-                        category={data.category}
-                        photoUrl={data.photoUrl}
+                      {/* profile */}
+                      <Route
+                        path="/profile"
+                        element={
+                          <Profile
+                            username={user.displayName}
+                            photoUrl={photoUrl}
+                          />
+                        }
                       />
-                    ))} />
-                    <Route path="/Verify-Ideas" element={ideas.map(({ id, data }) => (
-                      <VerifyIdeas
-                        key={id}
-                        ideaId={id}
-                        user={user}
-                        username={data.userName}
-                        title={data.title}
-                        description={data.desc}
-                        pdfFile={data.pdfFile}
-                        statusLogo="https://i.ibb.co/W3Y9rx5/under-Verification.png"
-                        status={data.status}
-                        category={data.category}      // category of the user who uploaded the idea
-                        photoUrl={data.photoUrl}
-                        cat={category}               // current user category
+
+                      {/* apps  */}
+                      <Route path="/To-Do-List" element={<Std />} />
+
+                      <Route path="/Calendar" element={<Calendar />} />
+                      <Route path="/FAQs" element={<FAQs />} />
+                      <Route
+                        path="/Current-Projects"
+                        element={<CurrentProjects />}
                       />
-                    ))} />
-                    <Route path="/Contact-us" element={<ContactUs />} />
-                    <Route path="/Post" element={ideas.map(({ id, data }) => (
-                      <IdeaPost
-                        key={id}
-                        ideaId={id}
-                        user={user}
-                        username={data.userName}
-                        title={data.title}
-                        description={data.desc}
-                        pdfFile={data.pdfFile}
-                        status={data.status}
-                        photoUrl={data.photoUrl}
-                        cmntPhoto={photoUrl}
+                      <Route path="/Tasks" element={<Tasks />} />
+                      <Route path="/Session" element={<Sessions1 />} />
+                      <Route path="/Session-Details" element={<Sessions2 />} />
+                      <Route path="/Maturity" element={<Maturity1 />} />
+                      <Route path="/Quiz" element={<Quiz />} />
+                      <Route
+                        path="/Profile-Edit"
+                        element={
+                          <ProfileEdit
+                            username={user.displayName}
+                            photoUrl={photoUrl}
+                            electronicMail={email}
+                          />
+                        }
                       />
-                    ))} />
-                    <Route path="/Switchi" element={<ToDoList />} />
-                    <Route path="/chat" element={<Chat />} />
-                    <Route
-                      path="/Verification"
-                      element={[<Verification />, <VScroll1 />, <VScroll2 />]}
-                    />
-                    <Route
-                      path="/Idea-Upload"
-                      element={
-                        <IdeaForm
-                          username={user.displayName}
-                          category={category}
-                          photoUrl={photoUrl}
-                        />
-                      }
-                    />
-                    <Route
-                      path="/Know-More"
-                      element={[
-                        <KnowMore1 />,
-                        <KnowMore2 />,
-                        <KnowMore3 />,
-                        <KnowMore4 />,
-                        <knowMore5 />,
-                      ]}
-                    />
+                      <Route
+                        path="/Idea-Review"
+                        element={ideas.map(({ id, data }) => (
+                          <IdeaReview
+                            key={id}
+                            ideaId={id}
+                            user={user}
+                            username={data.userName}
+                            title={data.title}
+                            description={data.desc}
+                            pdfFile={data.pdfFile}
+                            statusLogo={data.statusLogo}
+                            status={data.status}
+                            category={data.category}
+                            photoUrl={data.photoUrl}
+                          />
+                        ))}
+                      />
+                      <Route
+                        path="/Verify-Ideas"
+                        element={ideas.map(({ id, data }) => (
+                          <VerifyIdeas
+                            key={id}
+                            ideaId={id}
+                            user={user}
+                            username={data.userName}
+                            title={data.title}
+                            description={data.desc}
+                            pdfFile={data.pdfFile}
+                            statusLogo="https://i.ibb.co/W3Y9rx5/under-Verification.png"
+                            status={data.status}
+                            category={data.category} // category of the user who uploaded the idea
+                            photoUrl={data.photoUrl}
+                            cat={category} // current user category
+                          />
+                        ))}
+                      />
+                      <Route path="/Contact-us" element={<ContactUs />} />
+                      <Route
+                        path="/Post"
+                        element={ideas.map(({ id, data }) => (
+                          <IdeaPost
+                            key={id}
+                            ideaId={id}
+                            user={user}
+                            username={data.userName}
+                            title={data.title}
+                            description={data.desc}
+                            pdfFile={data.pdfFile}
+                            status={data.status}
+                            photoUrl={data.photoUrl}
+                            cmntPhoto={photoUrl}
+                          />
+                        ))}
+                      />
+                      <Route path="/Switchi" element={<ToDoList />} />
+                      <Route path="/chat" element={<Chat />} />
+                      <Route
+                        path="/Verification"
+                        element={[<Verification />, <VScroll1 />, <VScroll2 />]}
+                      />
+                      <Route
+                        path="/Idea-Upload"
+                        element={
+                          <IdeaForm
+                            username={user.displayName}
+                            category={category}
+                            photoUrl={photoUrl}
+                          />
+                        }
+                      />
+                      <Route
+                        path="/Know-More"
+                        element={[
+                          <KnowMore1 />,
+                          <KnowMore2 />,
+                          <KnowMore3 />,
+                          <KnowMore4 />,
+                          <knowMore5 />,
+                        ]}
+                      />
 
-                    <Route
-                      path="/About-Us"
-                      element={[
-                        <AboutUs1 />,
-                        <AboutUs2 />,
-                        <AboutUs3 />,
-                        <AboutUs4 />,
-                        <AboutUs5 />,
-                      ]}
-                    />
+                      <Route
+                        path="/About-Us"
+                        element={[
+                          <AboutUs1 />,
+                          <AboutUs2 />,
+                          <AboutUs3 />,
+                          <AboutUs4 />,
+                          <AboutUs5 />,
+                        ]}
+                      />
 
-                    {/* charts  */}
-                    <Route path="/pie" element={<Pie />} />
-                    <Route path="/Editor" element={<Editor />} />
-
+                      {/* charts  */}
+                      <Route path="/pie" element={<Pie />} />
+                      <Route path="/Editor" element={<Editor />} />
                     </>
                   </Routes>
                 </div>
@@ -370,12 +443,7 @@ const App = () => {
             <Routes>
               <Route
                 path="/"
-                element={[
-                  <Nav />,
-                  <HeroSection />,
-                  <Slogens />,
-                  <Features />,
-                ]}
+                element={[<Nav />, <HeroSection />, <Slogens />, <Features />]}
               />
               <Route path="/forgot-pass" element={<ForgotPass />} />
               <Route path="/login" element={[<Nav />, <Login />]} />
@@ -407,15 +475,11 @@ const App = () => {
                 ]}
               />
               <Route path="/Logout" element={<LogOutSuccessful />} />
-              
-
             </Routes>
           </>
         )}
       </BrowserRouter>
-      
     </div>
-    
   );
 
   // return (

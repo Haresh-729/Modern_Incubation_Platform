@@ -1,6 +1,7 @@
 import React from "react";
 
 function CreateSession() {
+
   return (
     <div className="bg-[#6788D3]">
       <div className="flex justify-center">
@@ -21,6 +22,7 @@ function CreateSession() {
             <input
               type="text"
               name="sname"
+              required
               className="lg:ml-20 md:ml-16 text-white bg-offwhite bg-opacity-20 lg:rounded-xl md:rounded-xl rounded-md lg:w-72 md:w-64 w-56 lg:h-8 md:h-6 h-6 lg:p-3 md:p-2 p-1"
             />
           </label>
@@ -30,6 +32,7 @@ function CreateSession() {
             <input
               type="text"
               name="heldby"
+              required
               className="lg:ml-20 md:ml-16 text-white bg-offwhite bg-opacity-20 lg:rounded-xl md:rounded-xl rounded-md lg:w-72 md:w-64 w-56 lg:h-8 md:h-6 h-6 lg:mt-4 md:mt-3 lg:p-3 md:p-2 p-1"
             />
           </label>
@@ -39,15 +42,17 @@ function CreateSession() {
             <input
               type="text"
               name="host"
+              required
               className="lg:ml-20 md:ml-16 text-white bg-offwhite bg-opacity-20 lg:rounded-xl md:rounded-xl rounded-md lg:w-72 md:w-64 w-56 lg:h-8 md:h-6 h-6 lg:mt-4 md:mt-3 lg:p-3 md:p-2 p-1"
             />
           </label>
 
           <label className="lg:flex md:flex lg:ml-0 md:ml-0 sm:ml-0 xl:ml-0 ml-4 mt-3">
-            <span className="lg:place-self-center md:place-self-center">
+            <span  className="lg:place-self-center md:place-self-center">
               Description:
             </span>
             <textarea
+              required
               name="desc"
               className="lg:ml-20 md:ml-16 text-white lg:h-20 md:h-16 h-14 bg-offwhite bg-opacity-20 lg:rounded-xl rounded-md md:rounded-xl lg:w-72 md:w-64 w-56 lg:mt-4 md:mt-3 lg:p-3 md:p-2 p-1"
             />
