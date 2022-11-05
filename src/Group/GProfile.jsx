@@ -11,7 +11,7 @@ const Profile = ({username,photoUrl}) => {
   const navigate = useNavigate();
   const handleEdit = () => {
 
-    navigate("/Profile-Edit");
+    navigate("/ProfileEdit");
   };
 
   function toggleText1() {
