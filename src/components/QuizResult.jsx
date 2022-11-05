@@ -47,7 +47,7 @@ const QuizResult = (props) => {
   const maturityResult = props.firstScore + props.secondScore + props.thirdScore;
 
   useEffect(() => {
-    setDoc(doc(db, "mpoints", auth.currentUser.uid), {
+    setDoc(doc(db, "maturityPoints", auth.currentUser.uid), {
       maturityResult: maturityResult,
     });
   });

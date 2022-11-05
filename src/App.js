@@ -52,6 +52,7 @@ import GroupDashboard from "./Group/GroupDashboard";
 import GprofileEdit from "./Group/GprofileEdit";
 import CPDCreate from "./Group/CPDCreate";
 import GSidebar from "./Group/GSidebar";
+import GProfile from "./Group/GProfile";
 
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -226,24 +227,6 @@ const App = () => {
                       {category === "organization" ||
                       category === "institute" ? (
                         <>
-                          <Route
-                            path="/CreateSession"
-                            element={<CreateSession />}
-                          />
-                          <Route path="/CPDCreate" element={<CPDCreate />} />
-                          <Route
-                            path="/GprofileEdit"
-                            element={<GprofileEdit />}
-                          />
-                          <Route
-                            path="/GroupDashboard"
-                            element={<GroupDashboard />}
-                          />
-                          <Route
-                            path="/UpdateSession"
-                            element={<UpdateSession />}
-                          />
-                          <Route path="/GroupTasks" element={<GroupTasks />} />
                           <Route path="/Tasks" element={<GroupTasks />} />
                           <Route
                             path="/Create-Project"
@@ -270,7 +253,7 @@ const App = () => {
                           />
                           <Route
                             path="/Dashboard"
-                            element={<GroupDashboard />}
+                            element={<GroupDashboard username={user.displayName} maturityResult={maturityResult}/>}
                           />
                           <Route
                             path="/Create-Session"
@@ -284,9 +267,25 @@ const App = () => {
                             path="/UpdateSession"
                             element={<UpdateSession />}
                           />
+                        <Route
+                        path="/Profile"
+                        element={
+                          <GProfile />
+                        }
+                      />
                         </>
                       ) : (
-                        <>null</>
+                        <>
+                          <Route
+                        path="/profile"
+                        element={
+                          <Profile
+                            username={user.displayName}
+                            photoUrl={photoUrl}
+                          />
+                        }
+                      />
+                        </>
                       )}
 
                       {/* dashboard  */}
@@ -301,15 +300,7 @@ const App = () => {
                       />
 
                       {/* profile */}
-                      <Route
-                        path="/profile"
-                        element={
-                          <Profile
-                            username={user.displayName}
-                            photoUrl={photoUrl}
-                          />
-                        }
-                      />
+                      
 
                       {/* apps  */}
                       <Route path="/To-Do-List" element={<Std />} />
