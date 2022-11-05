@@ -3,6 +3,7 @@ import React from "react";
   import Maturity1 from "./Maturity1";
   import questions from "./QuizData";
   import QuizResult from "./QuizResult";
+import Register from "./Register";
   
 
   const Quiz = () => {
@@ -56,6 +57,7 @@ import React from "react";
         console.log(TCA);
       }
     };
+    <Dashboard score={score}/>
   
     const handlePlayAgain = () => {
       const prev = currentQuestion - 1;

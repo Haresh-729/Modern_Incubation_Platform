@@ -1,6 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import { Oval } from 'react-loader-spinner';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CreateSession() {
+
+  
+
+  const [values, setValues] = useState({
+    sname: "",
+    heldby: "",
+    desc: "",
+    host: "",
+  });
+
+  const [error,setErrorMsg] = useState("");
+    const [loading, setLoading] = useState(true);
+
+  const handleSubmit = ()=>{
+    if(values.sname === " " || values.heldby === " " || values.desc ===" " || values.host === " "){
+      setErrorMsg(toast("Please fill all the fields"));
+      setLoading(true);
+    }
+
+   }
+   console.log(category); 
+    
 
   return (
     <div className="bg-[#6788D3]">
@@ -30,6 +55,9 @@ function CreateSession() {
           <label className="lg:ml-0 md:ml-0 sm:ml-0 xl:ml-0 ml-4 mt-3">
             Held By:
             <input
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, sname: event.target.value }))
+              }
               type="text"
               name="heldby"
               required
@@ -40,6 +68,9 @@ function CreateSession() {
           <label className="lg:ml-0 md:ml-0 sm:ml-0 xl:ml-0 ml-4 mt-3">
             About The Host:
             <input
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, host: event.target.value }))
+              }
               type="text"
               name="host"
               required
@@ -54,11 +85,15 @@ function CreateSession() {
             <textarea
               required
               name="desc"
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, desc: event.target.value }))
+              }
               className="lg:ml-20 md:ml-16 text-white lg:h-20 md:h-16 h-14 bg-offwhite bg-opacity-20 lg:rounded-xl rounded-md md:rounded-xl lg:w-72 md:w-64 w-56 lg:mt-4 md:mt-3 lg:p-3 md:p-2 p-1"
             />
           </label>
 
           <button
+            onclick={handleSubmit}
             type="submit"
             value="Submit"
             className="place-self-center lg:my-10 md:my-8 my-6 bg-white lg:px-6 md:px-3 px-2 lg:py-1 md:py-1 py-1 lg:rounded-lg md:rounded-lg rounded-md text-blue border-2 border-blue hover:bg-blue hover:text-white"
