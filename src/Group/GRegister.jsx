@@ -16,7 +16,8 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const GRegister = () => {
+const GRegister = ({category}) => {
+  console.log(category)
   const [notify, setNotify] = useState();
   const navigate = useNavigate();
   const handleClick = () => {
@@ -56,8 +57,7 @@ const GRegister = () => {
     setErrorMsg("");
     setSubmitButtonDisabled(false);
     const storageRef = ref(storage, `files/${values.iname}/${doc1.name}`);
-    console.log(values.iname);
-
+    
     const uploadTask = uploadBytesResumable(storageRef, doc1);
     uploadTask.on(
       "state_changed",
@@ -67,6 +67,7 @@ const GRegister = () => {
         );
       },
       error => {
+        console.log(values.iname);
         console.log(error);
         setNotify(toast("Idea Uploading Failed!"))
         setSubmitButtonDisabled(false);
@@ -74,7 +75,7 @@ const GRegister = () => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
-          createUserWithEmailAndPassword(auth, values.email, values.password).then(async (res) => {
+          createUserWithEmailAndPassword(auth, values.heademail, values.password).then(async (res) => {
             setSubmitButtonDisabled(false);
             const user = res.user;
             await updateProfile(user, {
@@ -86,6 +87,7 @@ const GRegister = () => {
             formDataCopy.photoURL = ppUrl;
             formDataCopy.doc1 = url
             formDataCopy.doc2 = url
+            formDataCopy.category=category
             console.log(formDataCopy);
             
             await setDoc(doc(db, 'users', user.uid), formDataCopy)
@@ -291,9 +293,6 @@ const GRegister = () => {
                 onChange={(event) =>
                   setValues((prev) => ({ ...prev, pocRole: event.target.value }))
                 }
-                className=""
-                name="post"
-                id="post"
               >
                 <option value="">Point of contact Role/Post</option>
                 <option value="lecturer">Lecturer</option>
