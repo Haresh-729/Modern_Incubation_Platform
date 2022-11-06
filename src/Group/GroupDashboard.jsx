@@ -1,18 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const GroupDashboard = () => {
+const GroupDashboard = ({username,maturityResult}) => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="flex-col h-2/4 lg:w-4/5 md:w-4/5 xl:w-4/5 sm:w-4/5 mb-7 lg:ml-36 md:ml-24  bg-[url('https://i.ibb.co/LYQ3cs3/bg.png')] bg-cover rounded-lg">
         <div className="flex gap-3">
           <div className="grid justify-items-center mx-auto">
             <h1 className="text-[#EF4A37] lg:text-5xl md:text-4xl p-5 lg:font-semibold md:font-semibold font-bold">
-              Welcome Back GPM
+              Welcome <span>{username}</span>
             </h1>
             <p className="text-[#7587A4] lg:text-2xl md:text-xl font-semibold place-items-center p-3 ">
               Complete tasks and get rewards.
             </p>
-            <button className="bg-[#013BBA] text-[#FFFFFF] py-1 px-8 rounded font-extrabold lg:text-2xl md:text-lg mb-4">
+            <button onClick={()=>{navigate("/Tasks")}} className="bg-[#013BBA] text-[#FFFFFF] py-1 px-8 rounded font-extrabold lg:text-2xl md:text-lg mb-4">
               SEE TASKS
             </button>
           </div>
@@ -82,7 +84,7 @@ const GroupDashboard = () => {
                 className="lg:h-16 lg:w-16 md:h-10 md:w-10 h-14 w-14 pl-3 pt-3"
               />
               <h1 className="text-[#EF4A37] font-bold lg:text-4xl md:text-3xl pl-5 lg:pt-5 md:pt-5">
-                569
+              {maturityResult}
               </h1>
             </div>
             <h1 className="text-[#94A3B9] font-medium pb-2 lg:text-xl md:text-lg text-sm lg:text-center md:text-center pl-3 lg:pl-0 md:pl-0 xl:pl-0">
