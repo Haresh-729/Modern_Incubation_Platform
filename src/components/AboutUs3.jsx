@@ -82,20 +82,20 @@ function AboutUs3() {
   }
 
   return (
-    <section className="flex mx-auto h-full w-screen md:pt-6">
+    <section data-aos="fade-up"  className="flex mx-auto h-full w-screen md:pt-6">
       <div className="">
         <h1 className="text-center text-[#0139B5] lg:mr-0 font-bold text-2xl md:text-3xl lg:text-4xl pt-5 underline  decoration-[#0139B5]">
           Pillars of innovation
         </h1>
         <div className="md:flex justify-between items-center">
          <div className="flex justify-center">
-          <img
+          <img data-aos="fade-right"
             className="w-[15rem] md:w-[20rem] md:pl-4   mt-3"
             src="https://i.ibb.co/7RDbj3F/modernvate-Pillar.png"
             alt="Pillars of Modernvate"
           /></div>
           <div className="md:text-left md:grid md:grid-cols-2 gap-12 md:ml-10 md:mr-10 mt-[4vh]">
-            <div className="flex justify-left items-center">
+            <div data-aos="flip-right" className="flex justify-left items-center">
               <img
                 src="https://i.ibb.co/RP4h19S/Better.png"
                 alt="Better"
@@ -109,7 +109,7 @@ function AboutUs3() {
               </span>
             </div>
 
-            <div className="flex justify-left items-center">
+            <div data-aos="flip-left" className="flex justify-left items-center">
               <img
                 src="https://i.ibb.co/G9RZZ5B/Cheaper.png"
                 alt="Cheaper"
@@ -123,7 +123,7 @@ function AboutUs3() {
               </span>
             </div>
 
-            <div className="flex justify-left items-center">
+            <div data-aos="flip-right" className="flex justify-left items-center">
               <img
                 src="https://i.ibb.co/YbtpGcG/Faster.png"
                 alt="Faster"
@@ -137,7 +137,7 @@ function AboutUs3() {
               </span>
             </div>
 
-            <div className="flex justify-left items-center">
+            <div data-aos="flip-left" className="flex justify-left items-center">
               <img
                 src="https://i.ibb.co/Z6Ztp2n/Easier.png"
                 alt="Easier"
@@ -155,7 +155,7 @@ function AboutUs3() {
 
         <div className="md:flex md:justify-beetween md:items-stretch md:flex-row md:text-justify">
 
-          <div className="md:mt-10 md:ml-5  md:w-3/12 rounded-lg md:rounded-[3rem] border-4 mx-3 shadow-2xl mt-[2vh] px-[3px] md:mb-8 bg-white bg-opacity-25 ">
+          <div data-aos="fade-up" className="md:mt-10 md:ml-5  md:w-3/12 rounded-lg md:rounded-[3rem] border-4 mx-3 shadow-2xl mt-[2vh] px-[3px] md:mb-8 bg-white bg-opacity-25 ">
             <h1 className="text-[#0139B5] font-bold lg:text-2xl md:text-xl text-center pt-4 md:py-3">
               Sharpen your Ideas
             </h1>
@@ -179,7 +179,7 @@ function AboutUs3() {
               </button>
             </p>
           </div>
-          <div className="md:mt-10 md:ml-5  md:w-3/12 rounded-lg md:rounded-[3rem] border-4 mx-4 shadow-2xl mt-[2vh] px-[3px] md:mb-8 bg-white bg-opacity-25 ">
+          <div data-aos="fade-up" className="md:mt-10 md:ml-5  md:w-3/12 rounded-lg md:rounded-[3rem] border-4 mx-4 shadow-2xl mt-[2vh] px-[3px] md:mb-8 bg-white bg-opacity-25 ">
             <h1 className="text-[#0139B5] font-bold lg:text-2xl md:text-xl  text-center pt-4 md:py-3">
               Guidance for students
             </h1>
@@ -203,7 +203,7 @@ function AboutUs3() {
               </button>
             </p>
           </div>
-          <div className="md:mt-10 md:ml-5  md:w-3/12 rounded-lg md:rounded-[3rem] border-4 mx-4 shadow-2xl mt-[2vh] px-[3px] md:mb-8 bg-white bg-opacity-25 ">
+          <div data-aos="fade-up" className="md:mt-10 md:ml-5  md:w-3/12 rounded-lg md:rounded-[3rem] border-4 mx-4 shadow-2xl mt-[2vh] px-[3px] md:mb-8 bg-white bg-opacity-25 ">
             <h1 className="text-[#0139B5] font-bold lg:text-2xl md:text-xl   text-center pt-4 md:py-3">
               Internships & Investment
             </h1>
@@ -225,7 +225,7 @@ function AboutUs3() {
               </button>
             </p>
           </div>
-          <div className="md:mt-10 md:ml-5  md:w-3/12 rounded-lg md:rounded-[3rem] border-4 mx-4 shadow-2xl mt-[2vh] px-[3px] md:mb-8 bg-white bg-opacity-25 ">
+          <div data-aos="fade-up" className="md:mt-10 md:ml-5  md:w-3/12 rounded-lg md:rounded-[3rem] border-4 mx-4 shadow-2xl mt-[2vh] px-[3px] md:mb-8 bg-white bg-opacity-25 ">
             <h1 className="text-[#0139B5] font-bold lg:text-2xl md:text-xl  text-center pt-4 md:py-3">
               Test Maturity Level
             </h1>

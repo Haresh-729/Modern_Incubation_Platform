@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import axios from "axios";
+import axios from "axios";
 
 function VScroll2() {
-  const AADHARKEY = "ReVB97084HRXc4NDXWyF8552VzkC1GS1GvnMGRwwCIr07Xv6RKnzh1OJFc4d";
-  const [selectedFile, setSelectedFile] = React.useState(null);
+  
+  const [isVerified,setIsVerified] = useState(false);
 
-  const handleChange = (e) => {
-    setSelectedFile(e.target.files[0]);
+  const APIKEY = "ReVB97084HRXc4NDXWyF8552VzkC1GS1GvnMGRwwCIr07Xv6RKnzh1OJFc4d";
+  const [selectedAadharFile, setSelectedAadharFile] = useState(null);
+  const [selectedPanFile, setSelectedPanFile] = useState(null);
+
+
+  const handleAadharChange = (e) => {
+    setSelectedAadharFile(e.target.files[0]);
+  }
+  const handlePanChange = (e) => {
+    setSelectedPanFile(e.target.files[0]);
   }
 
-  const handleSubmit = async (event) => {
+  const handleAadharSubmit = async (event) => {
     event.preventDefault()
     const formData = new FormData();
-    formData.append("selectedFile", selectedFile);
+    formData.append("selectedAadharFile", selectedAadharFile);
     try {
       await axios({
         method: "post",
@@ -21,18 +29,52 @@ function VScroll2() {
         data: formData,
         headers: {
           "Content-Type": "multipart/form-data",
-          "X-Api-Key": AADHARKEY
+          "X-Api-Key": APIKEY
         }
       }).then((res) => {
+        if(res.data.messege==""){
+          setIsVerified(true)
+          alert('Aadhar uploaded sucessfully')
+        }
         console.log(res.data)
       })
       console.log("Done")
     } catch (error) {
+      alert('something went wrong!')
       console.log(error)
     }
-    setSelectedFile(null);
+    setSelectedAadharFile(null);
   }
-  console.log(selectedFile);
+
+  const handlePanSubmit = async (event) => {
+    event.preventDefault()
+    const formData = new FormData();
+    formData.append("selectedPanFile", selectedPanFile);
+    try {
+      await axios({
+        method: "post",
+        url: "https://panapi.docsumo.com/api/v1/pan/extract/?save_data=false&fraud_check=true",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "X-Api-Key": APIKEY
+        }
+      }).then((res) => {
+        if(res.data.messege==""){
+          setIsVerified(true)
+          alert('PAN uploaded sucessfully')
+        }
+        console.log(res.data)
+      })
+      console.log("Done")
+    } catch (error) {
+      alert('something went wrong!')
+      console.log(error)
+    }
+    setSelectedPanFile(null);
+  }
+  // console.log(selectedAadharFile);
+  
   return (
     <div className=" bg-opacity-30 rounded-3xl mt-[3rem] md:mt-[0rem] ">
       <div className="flex">
@@ -66,9 +108,9 @@ function VScroll2() {
             </div>
             <div className="lg:pt-8 md:pt-8 xl:pt-8 sm:pt-6 pt-4 flex flex-wrap mx-auto justify-center items-center">
 
-              <input type="file" id="File" name="File" accept="images/*" onChange={handleChange} className="font-bold bg-white rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-blue hover:border-blue border-4"
+              <input type="file" id="File" name="File" accept="images/*" onChange={handleAadharChange} className="font-bold bg-white rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-blue hover:border-blue border-4"
               />
-              <button onClick={handleSubmit} className="font-bold bg-blue rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-white hover:border-white border-4">
+              <button onClick={handleAadharSubmit} className="font-bold bg-blue rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-white hover:border-white border-4">
                 Upload
               </button>
 
@@ -108,9 +150,9 @@ function VScroll2() {
               In case not there, upload your last passed examination certificate
             </div>
             <div className="lg:pt-8 md:pt-8 xl:pt-8 sm:pt-6 pt-4 flex flex-wrap mx-auto justify-center items-center">
-              <input type="file" id="File" name="File" accept="images/*" onChange={handleChange} className="font-bold bg-white rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-blue hover:border-blue border-4"
+              <input type="file" id="File" name="File" accept="images/*" onChange={handlePanChange} className="font-bold bg-white rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-blue hover:border-blue border-4"
               />
-              <button onClick={handleSubmit} className="font-bold bg-blue rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-white hover:border-white border-4">
+              <button onClick={handlePanSubmit} className="font-bold bg-blue rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-white hover:border-white border-4">
                 Upload
               </button>
 

@@ -1,13 +1,13 @@
 function AboutUs5() {
     return (
-    <section className="flex">
+    <section data-aos="fade-up" className="flex">
         <div className="w-screen md:min-h-auto" >
             <div className="mx-auto pt-4 md:pt-10 h-full w-auto">
                 <h1 className="text-xl text-center font-bold lg:font-extrabold text-[#0139B5] tracking-tight md:text-3xl">
                     <span className="block xl:inline">Founders of ModernVate</span> </h1>
                 <div className="md:flex justify-end items-right">
                     <div className="md:grid md:grid-rows-2 gap-10 md:ml-10 md:mr-10">
-                        <div className="md:mt-10 mt-6 md:flex md:justify-left md:items-center">
+                        <div data-aos="fade-right" className="md:mt-10 mt-6 md:flex md:justify-left md:items-center">
                             <span className="md:text-xl md:text-left mx-20 text-center md:ml-0  font-bold text-[#EF4A37]">MR. ANIKET MHALA
                                 <p className="md:text-lg md:text-left text-center font-semibold md:font-bold text-black">Global Technology Expert & Innovation Leader</p>
                                 <div className="flex flex-col md:block   items-center justify-center">
@@ -24,7 +24,7 @@ function AboutUs5() {
                                 </div>
                             </span>
                         </div>
-                        <div className="md:mt-10 mt-9 md:flex md:justify-left md:items-center ">
+                        <div data-aos="fade-left" className="md:mt-10 mt-9 md:flex md:justify-left md:items-center ">
                             <span className="md:text-xl md:text-right mx-20 md:ml-0 font-bold text-[#EF4A37]">MR. RANDOM EXPOSES
                                 <p className="md:text-lg md:text-right text-center font-semibold md:font-bold text-black">Global Technology Expert & Innovation Leader</p>
                                 <div className="mt-5 md:flex md:justify-left md:items-center">
@@ -150,7 +150,7 @@ function AboutUs5() {
                     </div>
                     {/* <hr className=" border-gray-200 sm:mx-auto lg:mb-2" /> */}
                     <div className=" mb-2 flex gap-2 sm:mt-3 lg:pr-5 md:pr-5 md:w-96 w-32 pb-2 h-8 pt-2 justify-center mx-auto">
-                        <a href="https://www.instagram.com/drastic_coder/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
+                        <a href="https://www.instagram.com/haresh_kurade_729/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
                             <img
                                 alt="instagram"
                                 src="https://i.ibb.co/BwmjsLB/instagram.png"
@@ -158,7 +158,7 @@ function AboutUs5() {
                             ></img>
                             <span className="sr-only">instagram page</span>
                         </a>
-                        <a href="https://www.instagram.com/drastic_coder/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
+                        <a href="https://www.facebook.com/haresh.kurade.729/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
                             <img
                                 alt="Facebook"
                                 src="https://i.ibb.co/c8nkskK/facebook.png"
@@ -166,7 +166,7 @@ function AboutUs5() {
                             ></img>
                             <span className="sr-only">facebook page</span>
                         </a>
-                        <a href="https://www.instagram.com/drastic_coder/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
+                        <a href="https://web.telegram.org/k/#@Haresh_Kurade_729" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
                             <img
                                 alt="telegram"
                                 src="https://i.ibb.co/T8YTjmF/telegram.png"
@@ -174,7 +174,7 @@ function AboutUs5() {
                             ></img>
                             <span className="sr-only">telegram page</span>
                         </a>
-                        <a href="https://www.instagram.com/drastic_coder/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
+                        <a href="http://www.linkedin.com/in/haresh-kurade-22a04b241" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
                             <img
                                 alt="in"
                                 src="https://i.ibb.co/YZBFK1h/in.png"
@@ -182,7 +182,7 @@ function AboutUs5() {
                             ></img>
                             <span className="sr-only">in page</span>
                         </a>
-                        <a href="https://www.instagram.com/drastic_coder/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
+                        <a href="https://twitter.com/" className="lg:mt-[11.5rem] md:mt-[9.5rem]">
                             <img
                                 alt="twitter"
                                 src="https://i.ibb.co/d0mY9Zp/twitter.png"
