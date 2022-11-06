@@ -8,7 +8,9 @@ const AboutUs = () => {
       style={{ fontFamily: "Baloo Bhai 2" }}
     >
       <div className="md:flex">
-        <div className="md:float-left md:text-left md:pl-10  md:pt-10 pl-[10vw] pr-4 pt-[4vh]   md:w-2/3">
+      <img 
+            data-aos="fade-down" className=" mt-[15rem] absolute will-change-scroll" src="https://i.ibb.co/BjHYqT0/cloud4.png" alt="clouds"/>
+        <div data-aos="fade-right" className="md:float-left md:text-left md:pl-10  md:pt-10 pl-[10vw] pr-4 pt-[4vh]   md:w-2/3">
           <p className="">
             <span className="font-weight-700 font-extrabold text-2xl lg:text-4xl  text-redish ">
               Innovation
@@ -43,7 +45,7 @@ const AboutUs = () => {
             their idea to survive and scale..
           </p>
         </div>
-        <div className="flex justify-center md:w-1/3 md:float-right md:h-auto md:mr-8">
+        <div data-aos="fade-left" className="flex justify-center md:w-1/3 md:float-right md:h-auto md:mr-8">
           <img src="https://i.ibb.co/kg2bySL/group1.png" className=" h-[15rem]  md:h-auto  " alt="icon" />
         </div>
       </div>

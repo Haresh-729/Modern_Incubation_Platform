@@ -3,7 +3,9 @@ import React from "react";
 function AboutUs2() {
   return (
     <div className="flex top-0">
-      <div className=" w-screen md:pt-0 pt-[2vh] h-full ">
+      <img data-aos="fade-right" className="mt-[25rem]  absolute will-change-scroll" src="https://i.ibb.co/BjHYqT0/cloud4.png" alt="clouds"/>
+      <div data-aos="fade-up" className=" w-screen md:pt-0 pt-[2vh] h-full ">
+      
         <h1 className=" md:mb-10 text-center md:text-3xl font-bold lg:font-extrabold text-blue sm:text-2xl text-xl">
           Philosophy
         </h1>
@@ -11,6 +13,7 @@ function AboutUs2() {
           Our philosophy is to work with you to transform you and your ideas, to
           drive your own success, where and when you need it.
         </h1>
+        
 
         <div className="flex flex-col md:flex-row items-center justify-center">
           <img

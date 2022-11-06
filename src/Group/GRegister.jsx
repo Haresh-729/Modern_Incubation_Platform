@@ -55,54 +55,55 @@ const GRegister = () => {
     setLoading(false);
     setErrorMsg("");
     setSubmitButtonDisabled(false);
-    const storageRef = ref(storage, `files/${values.iname}/${doc1.name}`);
-    console.log(values.iname);
+    console.log(doc1);
+    // const storageRef = ref(storage, `files/${doc1.name}`);
+    // console.log(values.iname);
 
-    const uploadTask = uploadBytesResumable(storageRef, doc1);
-    uploadTask.on(
-      "state_changed",
-      snapshot => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-      },
-      error => {
-        console.log(error);
-        setNotify(toast("Idea Uploading Failed!"))
-        setSubmitButtonDisabled(false);
-        setLoading(true);
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
-          createUserWithEmailAndPassword(auth, values.email, values.password).then(async (res) => {
-            setSubmitButtonDisabled(false);
-            const user = res.user;
-            await updateProfile(user, {
-                displayName: values.iname,
-            });
-            const formDataCopy = { ...values }
-            delete formDataCopy.password
-            formDataCopy.timestamp = serverTimestamp();
-            formDataCopy.photoURL = ppUrl;
-            formDataCopy.doc1 = url
-            formDataCopy.doc2 = url
-            console.log(formDataCopy);
-            
-            await setDoc(doc(db, 'users', user.uid), formDataCopy)
-            if(values.verifyStatus==="yes"){
-              navigate("/Dashboard");
-            }
-            setPpUrl("");
-            setLoading(true);
-        }).catch((err) => {
-            setSubmitButtonDisabled(false);
-            setLoading(true);
-            setErrorMsg(toast(err.message));
-        })
-        })
+    // const uploadTask = uploadBytesResumable(storageRef, doc1);
+    // uploadTask.on(
+    //   "state_changed",
+    //   snapshot => {
+    //     const progress = Math.round(
+    //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    //     );
+      // },
+      // error => {
+      //   console.log(error);
+      //   setNotify(toast("Idea Uploading Failed!"))
+      //   setSubmitButtonDisabled(false);
+      //   setLoading(true);
+      // },
+      // () => {
+      //   getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
+      //   })
+  //   }
+  // )
+        createUserWithEmailAndPassword(auth, values.email, values.password).then(async (res) => {
+          setSubmitButtonDisabled(false);
+          const user = res.user;
+          await updateProfile(user, {
+              displayName: values.iname,
+          });
+          const formDataCopy = { ...values }
+          delete formDataCopy.password
+          formDataCopy.timestamp = serverTimestamp();
+          formDataCopy.photoURL = ppUrl;
+          formDataCopy.doc1 = url
+          formDataCopy.doc2 = url
+          console.log(formDataCopy);
+          
+          await setDoc(doc(db, 'users', user.uid), formDataCopy)
+          if(values.verifyStatus==="yes"){
+            navigate("/Dashboard");
+          }
+          setPpUrl("");
+          setLoading(true);
+      }).catch((err) => {
+          setSubmitButtonDisabled(false);
+          setLoading(true);
+          setErrorMsg(toast(err.message));
+      })
 
-      }
-    )
   }
 
   return (
