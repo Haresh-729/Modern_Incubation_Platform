@@ -440,7 +440,7 @@ const App = () => {
               <Route path="/login" element={[<Nav />, <Login />]} />
               <Route path="/register" element={[<Nav />, <Register />]} />
               <Route path="*" element={<PNF />} />
-              {/* <Route path="/groupregister" element={<GRegister category={values.category}/>} /> */}
+              <Route path="/groupregister" element={<GRegister />} />
               <Route path="/grouplogin" element={<Glogin />} />
               <Route
                 path="/about"
