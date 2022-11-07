@@ -16,8 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const GRegister = ({category}) => {
-  console.log(category)
+const GRegister = () => {
   const [notify, setNotify] = useState();
   const navigate = useNavigate();
   const handleClick = () => {
@@ -57,7 +56,8 @@ const GRegister = ({category}) => {
     setErrorMsg("");
     setSubmitButtonDisabled(false);
     const storageRef = ref(storage, `files/${values.iname}/${doc1.name}`);
-    
+    console.log(values.iname);
+
     const uploadTask = uploadBytesResumable(storageRef, doc1);
     uploadTask.on(
       "state_changed",
@@ -67,7 +67,6 @@ const GRegister = ({category}) => {
         );
       },
       error => {
-        console.log(values.iname);
         console.log(error);
         setNotify(toast("Idea Uploading Failed!"))
         setSubmitButtonDisabled(false);
@@ -75,7 +74,7 @@ const GRegister = ({category}) => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
-          createUserWithEmailAndPassword(auth, values.heademail, values.password).then(async (res) => {
+          createUserWithEmailAndPassword(auth, values.email, values.password).then(async (res) => {
             setSubmitButtonDisabled(false);
             const user = res.user;
             await updateProfile(user, {
@@ -87,7 +86,6 @@ const GRegister = ({category}) => {
             formDataCopy.photoURL = ppUrl;
             formDataCopy.doc1 = url
             formDataCopy.doc2 = url
-            formDataCopy.category=category
             console.log(formDataCopy);
             
             await setDoc(doc(db, 'users', user.uid), formDataCopy)
@@ -293,6 +291,9 @@ const GRegister = ({category}) => {
                 onChange={(event) =>
                   setValues((prev) => ({ ...prev, pocRole: event.target.value }))
                 }
+                className=""
+                name="post"
+                id="post"
               >
                 <option value="">Point of contact Role/Post</option>
                 <option value="lecturer">Lecturer</option>

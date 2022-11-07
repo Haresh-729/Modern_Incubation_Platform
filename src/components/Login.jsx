@@ -52,6 +52,14 @@ const Login = () => {
                 displayName: user.displayName,
             });
 
+            await setDoc(doc(db, 'users', user.uid),
+                {
+                    category: "individual",
+                    name: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL,
+                    timestamp: serverTimestamp(),
+                })
             navigate("/dashboard");
             setLoading(true);
         })
@@ -73,6 +81,14 @@ const Login = () => {
                 displayName: user.displayName,
             });
 
+            await setDoc(doc(db, 'users', user.uid),
+                {
+                    category: "individual",
+                    name: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL,
+                    timestamp: serverTimestamp(),
+                })
             navigate("/dashboard");
             setLoading(true);
         })

@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
-import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import {setDoc,  doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { auth } from "../firebase";
 import { ToastContainer, toast } from 'react-toastify';
 import { Oval } from 'react-loader-spinner';
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import GRegister from '../Group/GRegister';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -19,24 +17,24 @@ const Register = () => {
         { value: 'individual', label: 'Individual' },
         { value: 'organization', label: 'Organization' },
         { value: 'institute', label: 'Institute' },
-
+        
     ]
 
     // const [cate,setcate] = useState(false);
-
+    
     // const [result,ddlvalue]=useState(options.label)
     //     const handleRoute = e =>{
     //         if(e.value === "organization" || e.value === "institute"){
     //             setcate(true);
     //         }
-    // {cate?(navigate("/groupregister")):null}
+            // {cate?(navigate("/groupregister")):null}
     // const handleRoute = e => {
     //     if(options.values === "Organization" && options.values === "Institute"){
     //         navigate("/groupregister");
     //     }
 
-
-
+        
+      
 
     const [values, setValues] = useState({
         category: options.value,
@@ -44,16 +42,16 @@ const Register = () => {
         email: "",
         password: "",
     });
-    if (values.category === "organization" || values.category === "institute") {
+    if(values.category === "organization" || values.category === "institute"){
         navigate("/groupregister");
     }
 
-    const [error, setErrorMsg] = useState("");
+    const [error,setErrorMsg] = useState("");
     const [loading, setLoading] = useState(true);
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
-    const [ppUrl, setPpUrl] = useState("https://i.ibb.co/3MH6BD3/profile.png");
+    const [ppUrl,setPpUrl] = useState("https://i.ibb.co/3MH6BD3/profile.png");
 
-
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -77,9 +75,9 @@ const Register = () => {
             formDataCopy.timestamp = serverTimestamp();
             formDataCopy.photoURL = ppUrl;
             console.log(formDataCopy);
-
+            
             await setDoc(doc(db, 'users', user.uid), formDataCopy)
-
+            
             navigate("/dashboard");
             setPpUrl("");
             setLoading(true);
@@ -95,21 +93,21 @@ const Register = () => {
         setSubmitButtonDisabled(true);
         setLoading(false);
         signInWithPopup(auth, new GoogleAuthProvider())
-            .then(async (res) => {
-                toast("Successfully signed in with google!");
-                setSubmitButtonDisabled(false);
-                const user = res.user;
-                await updateProfile(user, {
-                    displayName: user.displayName,
-                });
+        .then(async (res) => {
+            toast("Successfully signed in with google!");
+            setSubmitButtonDisabled(false);
+            const user = res.user;
+            await updateProfile(user, {
+                displayName: user.displayName,
+            });
                 await setDoc(doc(db, 'users', user.uid),
                     {
                         category: "individual",
                         name: user.displayName,
-                        email: user.email,
+                        email: user.email,  
                         photoURL: user.photoURL,
                         timestamp: serverTimestamp(),
-                    }
+                    }   
                 )
                 // console.log(ppUrl);
                 navigate("/dashboard");
@@ -186,8 +184,8 @@ const Register = () => {
 
 
     const [guDiv, setRes] = useState(false);
-
-
+    
+    
 
     return (
         <div className="w-screen h-full">
@@ -208,7 +206,7 @@ const Register = () => {
                         <span className=" items-center text-grey tracking-[0.3em] pb-2 text-xs lg:text-xl xl:text-2xl lg:mt-4 font-poppins">-OR-</span>
                     </div>
                     <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center w-full gap-4  xl:gap-4 lg:mt-6 xl:px-12">
-                        <div className="relative w-full px-10">
+                    <div className="relative w-full px-10">
                             <Select onChange={event => setValues((prev => ({ ...prev, category: event.value })))} options={options} theme={customTheme} id="category" styles={customStyles} required pattern="\S+.*" />
                         </div>
                         <div className="relative w-full px-10" id='form'>
@@ -225,10 +223,10 @@ const Register = () => {
                             <button className="w-full p-1 my-4 sm:my-8 lg:my-4 xl:my-8 font-bold lg:extrabold xl:font-extrabold font-poppins text-sm sm:text-sm md:text-sm lg:text-xl xl:text-2xl text-white bg-blue rounded-[0.3rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 sm:text-2xl" disabled={submitButtonDisabled}>
                                 REGISTER ACCOUNT
                             </button>
-
-
+                            
+                            
                         </div>
-                        <ToastContainer />
+                        <ToastContainer/>
                         {/* <p className="font-bold text-[0.75rem] text-red-500">{errorMsg}</p> */}
                         <Link to="/login">
                             <p className="font-poppins text-xs lg:text-sm xl:text-2xl items-center">
@@ -238,15 +236,15 @@ const Register = () => {
                         </Link>
                     </form>
                 </div>
-                <div className='h-screen hidden md:block lg:block md:w-1/2 xl:2/3'>
-                    <div className="font-cambria text-blue ml-6  mt-6 text-5xl md:text-2xl lg:text-4xl xl:text-5xl  tracking-wider">
-                        It's Never too late to
-                    </div>
-                    <div className="font-cambria text-blue ml-6   text-5xl md:text-2xl lg:text-4xl xl:text-5xl tracking-wider"> become an </div>
-                    <div className="font-cambria  text-6xl ml-6  md:text-3xl lg:text-5xl xl:text-6xl  text-orange tracking-wider">Entrepreneur</div>
-                    <img className="float-left w-[30rem] md:w-[20rem] lg:w-[40rem] xl:w-[45rem] h-[22rem] md:h-[22rem] lg:h-[32rem] xl:h-[38rem] object-bottom" src="https://i.ibb.co/WDFcrf9/register-Img.png" alt="img desc" />
+            <div className='h-screen hidden md:block lg:block md:w-1/2 xl:2/3'>
+                <div className="font-cambria text-blue ml-6  mt-6 text-5xl md:text-2xl lg:text-4xl xl:text-5xl  tracking-wider">
+                    It's Never too late to                    
                 </div>
+                <div className="font-cambria text-blue ml-6   text-5xl md:text-2xl lg:text-4xl xl:text-5xl tracking-wider"> become an </div>
+                <div className="font-cambria  text-6xl ml-6  md:text-3xl lg:text-5xl xl:text-6xl  text-orange tracking-wider">Entrepreneur</div>
+                <img className="float-left w-[30rem] md:w-[20rem] lg:w-[40rem] xl:w-[45rem] h-[22rem] md:h-[22rem] lg:h-[32rem] xl:h-[38rem] object-bottom" src="https://i.ibb.co/WDFcrf9/register-Img.png" alt="img desc" />
             </div>
+        </div>
         </div>
     )
 }
