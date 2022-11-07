@@ -11,7 +11,7 @@ export default function HeroSection() {
     return (
         <div className="w-screen md:relative h-full lg:h-screen lx:w-screen md:w-screen sm:w-screen">
             <img 
-            data-aos="fade-right" className="  absolute will-change-scroll" src="https://i.ibb.co/BjHYqT0/cloud4.png" alt="clouds"/>
+            data-aos="fade-right" className="mt-10  absolute will-change-scroll" src="https://i.ibb.co/BjHYqT0/cloud4.png" alt="clouds"/>
             <div className="mx-auto max-w-7xl">
                 <div className=" md:relative z-2 pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl  lg:pb-28 xl:pb-32 ">
 
@@ -51,9 +51,9 @@ export default function HeroSection() {
             </div>
             <div data-aos="fade-left" className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2  hidden lg:block ">
                 <img
-                    className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-auto lg:w-full"
-                    src="https://i.ibb.co/gmypWwr/heroImg.png"
-                    alt=""
+                    className="h-46 w-full object-cover sm:h-62 md:h-96 lg:h-auto lg:w-full"
+                    src="https://i.ibb.co/chcdwS0/Group-540.png"
+                    alt="heroImage"
                 />
             </div>
         </div>
