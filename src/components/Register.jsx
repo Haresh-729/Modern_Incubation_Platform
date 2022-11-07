@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
-import {setDoc,  doc, serverTimestamp } from "firebase/firestore";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { auth } from "../firebase";
 import { ToastContainer, toast } from 'react-toastify';
 import { Oval } from 'react-loader-spinner';
 import 'react-toastify/dist/ReactToastify.css';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import GRegister from '../Group/GRegister';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -17,7 +19,7 @@ const Register = () => {
         { value: 'individual', label: 'Individual' },
         { value: 'organization', label: 'Organization' },
         { value: 'institute', label: 'Institute' },
-        
+
     ]
 
     // const [cate,setcate] = useState(false);
@@ -27,7 +29,7 @@ const Register = () => {
     //         if(e.value === "organization" || e.value === "institute"){
     //             setcate(true);
     //         }
-            // {cate?(navigate("/groupregister")):null}
+    // {cate?(navigate("/groupregister")):null}
     // const handleRoute = e => {
     //     if(options.values === "Organization" && options.values === "Institute"){
     //         navigate("/groupregister");
@@ -42,14 +44,14 @@ const Register = () => {
         email: "",
         password: "",
     });
-    if(values.category === "organization" || values.category === "institute"){
+    if (values.category === "organization" || values.category === "institute") {
         navigate("/groupregister");
     }
     
-    const [error,setErrorMsg] = useState("");
+    const [error, setErrorMsg] = useState("");
     const [loading, setLoading] = useState(true);
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
-    const [ppUrl,setPpUrl] = useState("https://i.ibb.co/3MH6BD3/profile.png");
+    const [ppUrl, setPpUrl] = useState("https://i.ibb.co/3MH6BD3/profile.png");
 
     
 
@@ -93,21 +95,21 @@ const Register = () => {
         setSubmitButtonDisabled(true);
         setLoading(false);
         signInWithPopup(auth, new GoogleAuthProvider())
-        .then(async (res) => {
-            toast("Successfully signed in with google!");
-            setSubmitButtonDisabled(false);
-            const user = res.user;
-            await updateProfile(user, {
-                displayName: user.displayName,
-            });
+            .then(async (res) => {
+                toast("Successfully signed in with google!");
+                setSubmitButtonDisabled(false);
+                const user = res.user;
+                await updateProfile(user, {
+                    displayName: user.displayName,
+                });
                 await setDoc(doc(db, 'users', user.uid),
                     {
                         category: "individual",
                         name: user.displayName,
-                        email: user.email,  
+                        email: user.email,
                         photoURL: user.photoURL,
                         timestamp: serverTimestamp(),
-                    }   
+                    }
                 )
                 // console.log(ppUrl);
                 navigate("/dashboard");
@@ -181,23 +183,18 @@ const Register = () => {
             },
         }
     }
-
-
     const [guDiv, setRes] = useState(false);
-    
-    
-
     return (
         <div className="w-screen h-full">
             <div className="mx-4 flex-col justify-center w-auto h-auto, md:mx-4 lg:mx-8 pt-2">
-                <div className="float-none md:float-right flex flex-col items-center justify-center md:w-1/2 lg:w-2/5 py-4 sm:mx-14 md:mx-4 lg:mx-2 lg:py-5  xl:py-14 my-4 lg:my-8 bg-white/30 rounded-[2rem] lg:rounded-[4rem] xl:rounded-[5rem]  border-2 border-offwhite shadow-lg xl:1/3">
+                <div data-aos="fade-left" className="float-none md:float-right flex flex-col items-center justify-center md:w-1/2 lg:w-2/5 py-4 sm:mx-14 md:mx-4 lg:mx-2 lg:py-5  xl:py-14 my-4 lg:my-8 bg-white/30 rounded-[2rem] lg:rounded-[4rem] xl:rounded-[5rem]  border-2 border-offwhite shadow-lg xl:1/3">
                     <h1 className="sm:text-2xl sm:mt-[4rem] md:my-[2rem] mt-[2rem]   md:text-2xl lg:text-3xl xl:text-4xl text-xl font-extrabold poppins  text-orange">Register Account</h1>
                     <div className="flex gap-2 lg:gap-8">
-                        <button onClick={signUpWithGoogle} className="items-center justify-center flex m-5 p-1 xl:p-3 w-auto border-[0.1rem] lg:border-[0.2rem] border-grey border-solid hover:bg-offwhite/30 rounded-[0.5rem] lg:rounded-2xl">
+                        <button onClick={signUpWithGoogle} className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 items-center justify-center flex m-5 p-1 xl:p-3 w-auto border-[0.1rem] lg:border-[0.2rem] border-grey border-solid hover:bg-offwhite/30 rounded-[0.5rem] lg:rounded-2xl">
                             <img className="w-4 lg:w-6 xl:w-8 m-1" src="https://i.ibb.co/ccpyr20/google.png" alt="img desc" />
                             <span className="text-grey text-xs md:px-2 lg:text-base xl:text-lg traking-tight lg:tracking-normal">Sign in with Google</span>
                         </button>
-                        <button onClick={signUpWithGithub} className="items-center justify-center flex  m-5  p-1 xl:p-3 w-auto border-[0.1rem] lg:border-[0.2rem] border-grey border-solid hover:bg-offwhite/30 rounded-[0.5rem] lg:rounded-2xl">
+                        <button onClick={signUpWithGithub} className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 items-center justify-center flex  m-5  p-1 xl:p-3 w-auto border-[0.1rem] lg:border-[0.2rem] border-grey border-solid hover:bg-offwhite/30 rounded-[0.5rem] lg:rounded-2xl">
                             <img className="w-4 lg:w-6 xl:w-8 m-1" src="https://i.ibb.co/z8SL7zX/icons8-github-48.png" alt="img desc" />
                             <span className="text-grey text-xs md:px-2 lg:text-base xl:text-lg traking-tight lg:tracking-normal">Sign in with Github</span>
                         </button>
@@ -206,7 +203,7 @@ const Register = () => {
                         <span className=" items-center text-grey tracking-[0.3em] pb-2 text-xs lg:text-xl xl:text-2xl lg:mt-4 font-poppins">-OR-</span>
                     </div>
                     <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center w-full gap-4  xl:gap-4 lg:mt-6 xl:px-12">
-                    <div className="relative w-full px-10">
+                        <div className="relative w-full px-10">
                             <Select onChange={event => setValues((prev => ({ ...prev, category: event.value })))} options={options} theme={customTheme} id="category" styles={customStyles} required pattern="\S+.*" />
                         </div>
                         <div className="relative w-full px-10" id='form'>
@@ -218,15 +215,12 @@ const Register = () => {
                         <div className="relative w-full px-10">
                             <input onChange={event => setValues((prev) => ({ ...prev, password: event.target.value }))} type="password" name="password" id="password" className=" border-b-2 border-grey shadow-sm bg-white/0 w-full py-2 focus:outline-none focus:shadow-md focus:border-b-blue focus:border-b-2 transition-colors" autoComplete="on" placeholder='Password' required pattern="\S+.*" />
                         </div>
-
                         <div className='relative w-full px-12'>
-                            <button className="w-full p-1 my-4 sm:my-8 lg:my-4 xl:my-8 font-bold lg:extrabold xl:font-extrabold font-poppins text-sm sm:text-sm md:text-sm lg:text-xl xl:text-2xl text-white bg-blue rounded-[0.3rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 sm:text-2xl" disabled={submitButtonDisabled}>
+                            <button className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-full p-1 my-4 sm:my-8 lg:my-4 xl:my-8 font-bold lg:extrabold xl:font-extrabold font-poppins text-sm sm:text-sm md:text-sm lg:text-xl xl:text-2xl text-white bg-blue rounded-[0.3rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 sm:text-2xl" disabled={submitButtonDisabled}>
                                 REGISTER ACCOUNT
                             </button>
-                            
-                            
                         </div>
-                        <ToastContainer/>
+                        <ToastContainer />
                         {/* <p className="font-bold text-[0.75rem] text-red-500">{errorMsg}</p> */}
                         <Link to="/login">
                             <p className="font-poppins text-xs lg:text-sm xl:text-2xl items-center">
@@ -236,15 +230,15 @@ const Register = () => {
                         </Link>
                     </form>
                 </div>
-            <div className='h-screen hidden md:block lg:block md:w-1/2 xl:2/3'>
-                <div className="font-cambria text-blue ml-6  mt-6 text-5xl md:text-2xl lg:text-4xl xl:text-5xl  tracking-wider">
-                    It's Never too late to                    
+                <div className='h-screen hidden md:block lg:block md:w-1/2 xl:2/3'>
+                    <div className="font-cambria text-blue ml-6  mt-6 text-5xl md:text-2xl lg:text-4xl xl:text-5xl  tracking-wider">
+                        It's Never too late to
+                    </div>
+                    <div className="font-cambria text-blue ml-6   text-5xl md:text-2xl lg:text-4xl xl:text-5xl tracking-wider"> become an </div>
+                    <div className="font-cambria  text-6xl ml-6  md:text-3xl lg:text-5xl xl:text-6xl  text-orange tracking-wider">Entrepreneur</div>
+                    <img data-aos="fade-right" className="float-left w-[30rem] md:w-[20rem] lg:w-[40rem] xl:w-[45rem] h-[22rem] md:h-[22rem] lg:h-[32rem] xl:h-[38rem] object-bottom" src="https://i.ibb.co/WDFcrf9/register-Img.png" alt="img desc" />
                 </div>
-                <div className="font-cambria text-blue ml-6   text-5xl md:text-2xl lg:text-4xl xl:text-5xl tracking-wider"> become an </div>
-                <div className="font-cambria  text-6xl ml-6  md:text-3xl lg:text-5xl xl:text-6xl  text-orange tracking-wider">Entrepreneur</div>
-                <img className="float-left w-[30rem] md:w-[20rem] lg:w-[40rem] xl:w-[45rem] h-[22rem] md:h-[22rem] lg:h-[32rem] xl:h-[38rem] object-bottom" src="https://i.ibb.co/WDFcrf9/register-Img.png" alt="img desc" />
             </div>
-        </div>
         </div>
     )
 }
