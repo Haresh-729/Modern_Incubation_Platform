@@ -2,7 +2,7 @@ import React from "react";
 
 function Sessions2() {
   return (
-    <div className="bg-cover ml-10 w-screen min-h-screen bg-[url('https://i.ibb.co/Smq2X7B/background.png')]">
+    <div className="bg-cover ml-10 w-full min-h-screen bg-[url('https://i.ibb.co/Smq2X7B/background.png')]">
       <div className="invisible">hhhhhhhhhhhhhhhhhhhhhhhhhhhh</div>
       <div className="w-[80rem] h-[8rem] bg-yellow-300 mx-[10rem] bg-gradient-to-t from-white rounded-full">
         <div>
@@ -25,9 +25,9 @@ function Sessions2() {
           <input
             type="text" placeholder="Full name" name="Fullname" className="w-[32rem] h-[3rem] border rounded-[2rem] bg-white mt-8 bg-opacity-20 placeholder-grey  px-5  "/>
           <input type="email" placeholder="Email" name="Email" className="w-[32rem] h-[3rem] bg-white border rounded-[2rem]  bg-opacity-20 placeholder-grey px-5 "/>
-          <div className="text-2xl text-white  ml-32 text-center py-2  bg-blue w-60 h-14 rounded-lg font-semibold">
+          <button className="text-2xl text-white  ml-32 text-center py-2  bg-blue w-60 h-14 rounded-lg font-semibold">
             GET REGISTERED
-          </div>
+          </button>
         </div>
 
         <div className="">

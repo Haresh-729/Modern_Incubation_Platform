@@ -45,7 +45,7 @@ const Register = () => {
         password: "",
     });
     if (values.category === "organization" || values.category === "institute") {
-        navigate("/groupregister");
+        navigate("/groupregister", { state: values.category });
     }
     
     const [error, setErrorMsg] = useState("");

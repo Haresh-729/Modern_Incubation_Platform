@@ -1,14 +1,8 @@
 import React from "react";
 import IdeaPost from "./IdeaPost";
+import { useState } from "react";
 
-function Post() {
-  const incubation = [console.log("incubation")];
-  const programming = [console.log("programmin")];
-  const professional = [console.log("profesional")];
-  const civil = [console.log("civil")];
-  const electrical = [console.log("electrical")];
-  const science = [console.log("science")];
-
+function Post1() {
   const data1 = [
     {
       h: "Tanvi Kinjale",
@@ -92,6 +86,15 @@ function Post() {
     },
   ];
 
+  const [incub, setincub] = useState(false);
+  const handleIncub = (e) => {
+    setincub((current) => !current);
+  };
+  const [prog, setprog] = useState(false);
+  const handleProg = (e) => {
+    setprog((current) => !current);
+  };
+
   return (
     <div className="  xl:flex xl:flex-wrap xl:flex-row sm:mt-[2rem] mt-[4rem]  xl:mt-[-1rem]">
       <div
@@ -100,38 +103,16 @@ function Post() {
       "
       >
         <div className="">
-          <button
-            className="xl:h-[4rem] xl:mx-[2rem]  xl:rounded-2xl  xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue   xl:text-2xl
-         md:mx-[2rem]  md:rounded-xl md:h-[2rem] md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue  md:text-lg
-
-          lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl  lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue text-white bg-white lg:py-2 lg:text-3xl
-          sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue  
-          
-        rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.8rem]  mt-4 mx-1 font-semibold
-          "
-            onClick={handleIncub}
-          >
+          <button onClick={handleIncub} className="xl:h-[4rem] xl:mx-[2rem]  xl:rounded-2xl  xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue   xl:text-2xl md:mx-[2rem]  md:rounded-xl md:h-[2rem] md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue  md:text-lg lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl  lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue text-white bg-white lg:py-2 lg:text-3xl sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.8rem]  mt-4 mx-1 font-semibold ">
             <img
               src="https://i.ibb.co/7Gh9CKL/Incubator.png"
               className="xl:w-[6rem] md:w-[3rem] lg:w-[5rem] xl:ml-[-1rem] sm:w-[3rem] xl:mt-[-0.9rem] w-[1.5rem] mt-1"
             />
-            <h1
-              className="xl:py-2 
-py-1  text-black xl:font-semibold"
-            >
+            <h1 className="xl:py-2 py-1  text-black xl:font-semibold">
               Incubation
             </h1>
           </button>
-          <button
-            className="xl:h-[4rem] xl:mx-[2rem]  xl:rounded-2xl  xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue xl:text-2xl
-          md:h-[2rem] md:mx-[2rem]  md:rounded-xl md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue  md:text-lg
-
-          lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue lg:py-2 
-
-          sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue text-white bg-white 
-          rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.7rem]  mt-4 mx-1 font-semibold "
-            onClick={() => [programming]}
-          >
+          <button onClick={handleProg} className="xl:h-[4rem] xl:mx-[2rem]  xl:rounded-2xl  xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue xl:text-2xl md:h-[2rem] md:mx-[2rem]  md:rounded-xl md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue  md:text-lg lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue lg:py-2 sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue text-white bg-white rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.7rem]  mt-4 mx-1 font-semibold ">
             <img
               src="https://i.ibb.co/jvZ4F6K/Google-Code.png"
               className="xl:w-[6rem] sm:w-[3rem] md:w-[3rem] lg:w-[5rem] xl:mt-[-0.5rem] xl:ml-[-1rem] w-[1.5rem]  mt-1"
@@ -146,7 +127,6 @@ py-1  text-black xl:font-semibold"
           lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl  lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue  lg:py-2 lg:text-3xl
           sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue text-white bg-white
           rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.8rem]  mt-4 mx-1 font-semibold "
-            onClick={() => [professional]}
           >
             <img
               src="https://i.ibb.co/Scyfs1q/Constructing.png"
@@ -162,7 +142,6 @@ py-1  text-black xl:font-semibold"
           lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl  lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue text-white bg-white lg:py-2 lg:text-3xl
           sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue 
           rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.8rem]  mt-4 mx-1 font-semibold"
-            onClick={() => [civil]}
           >
             <img
               src="https://i.ibb.co/bPtf10X/Tie.png"
@@ -176,7 +155,6 @@ py-1  text-black xl:font-semibold"
           lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl  lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue  lg:py-2 lg:text-3xl
           sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue text-white bg-white
           rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.8rem]  mt-4 mx-1 font-semibold"
-            onClick={() => [electrical]}
           >
             <img
               src="https://i.ibb.co/LrxJPWp/Electrical.png"
@@ -192,7 +170,6 @@ py-1  text-black xl:font-semibold"
           lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue lg:py-2 lg:text-3xl
           sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue 
           rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.8rem]  mt-4 mx-1 font-semibold"
-            onClick={() => [science]}
           >
             <img
               src="https://i.ibb.co/njtzBzg/Benzene-Ring.png"
@@ -203,66 +180,36 @@ py-1  text-black xl:font-semibold"
             </h1>
           </button>
         </div>
-        if(data1.category === "incubation")
-        {
-          <div
-            id="IncuDiv"
-            className="overflow-y-scroll sm:mt-[-1rem] no-scrollbarmd:h-[32rem]  items-center xl:grow xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:rounded-[3rem] border-1 xl:w-[52rem] border-offwhite shadow-lg  md:w-[26rem] lg:w-[36rem] lg:h-[38rem]  xl:absolute xl:inset xl:right-0 xl:mt-[-3rem] sm:w-[26rem] sm:h-[32rem] lg:mr-4 xl:h-[40rem]
-      absolute inset right-0  w-[12rem] h-[32rem] mr-2"
-          >
-            {data1.map((item) => (
-              <div>
-                <IdeaPost
-                  name={item.h}
-                  gmail={item.gmail}
-                  title={item.title}
-                  description={item.description}
-                  imgUrl={item.imgUrl}
-                />
-              </div>
-            ))}
-          </div>
-        }
-        if(data1.category === "Civil")
-        {
-          <div
-            id="CivilDiv"
-            className="overflow-y-scroll sm:mt-[-1rem] no-scrollbarmd:h-[32rem]  items-center xl:grow xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:rounded-[3rem] border-1 xl:w-[52rem] border-offwhite shadow-lg  md:w-[26rem] lg:w-[36rem] lg:h-[38rem]  xl:absolute xl:inset xl:right-0 xl:mt-[-3rem] sm:w-[26rem] sm:h-[32rem] lg:mr-4 xl:h-[40rem]
-      absolute inset right-0  w-[12rem] h-[32rem] mr-2"
-          >
-            {data1.map((item) => (
-              <div>
-                <IdeaPost
-                  name={item.h}
-                  gmail={item.gmail}
-                  title={item.title}
-                  description={item.description}
-                  imgUrl={item.imgUrl}
-                />
-              </div>
-            ))}
-          </div>
-        }
-        if(data1.category === "non-technical")
-        {
-          <div
-            id="nonTechDiv"
-            className="overflow-y-scroll sm:mt-[-1rem] no-scrollbarmd:h-[32rem]  items-center xl:grow xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:rounded-[3rem] border-1 xl:w-[52rem] border-offwhite shadow-lg  md:w-[26rem] lg:w-[36rem] lg:h-[38rem]  xl:absolute xl:inset xl:right-0 xl:mt-[-3rem] sm:w-[26rem] sm:h-[32rem] lg:mr-4 xl:h-[40rem]
-      absolute inset right-0  w-[12rem] h-[32rem] mr-2"
-          >
-            {data1.map((item) => (
-              <div>
-                <IdeaPost
-                  name={item.h}
-                  gmail={item.gmail}
-                  title={item.title}
-                  description={item.description}
-                  imgUrl={item.imgUrl}
-                />
-              </div>
-            ))}
-          </div>
-        }
+        {incub?(<div className="overflow-y-scroll sm:mt-[-1rem] no-scrollbarmd:h-[32rem]  items-center xl:grow xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:rounded-[3rem] border-1 xl:w-[52rem] border-offwhite shadow-lg  md:w-[26rem] lg:w-[36rem] lg:h-[38rem]  xl:absolute xl:inset xl:right-0 xl:mt-[-3rem] sm:w-[26rem] sm:h-[32rem] lg:mr-4 xl:h-[40rem] absolute inset right-0  w-[12rem] h-[32rem] mr-2">
+          <h1>Incub div</h1>
+          {data1.map((item) => (
+            <div>
+              <IdeaPost
+                name={item.h}
+                gmail={item.gmail}
+                title={item.title}
+                description={item.description}
+                imgUrl={item.imgUrl}
+              />
+            </div>
+          ))}
+        </div>):null}
+
+        {prog?(<div className="overflow-y-scroll sm:mt-[-1rem] no-scrollbarmd:h-[32rem]  items-center xl:grow xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:rounded-[3rem] border-1 xl:w-[52rem] border-offwhite shadow-lg  md:w-[26rem] lg:w-[36rem] lg:h-[38rem]  xl:absolute xl:inset xl:right-0 xl:mt-[-3rem] sm:w-[26rem] sm:h-[32rem] lg:mr-4 xl:h-[40rem] absolute inset right-0  w-[12rem] h-[32rem] mr-2">
+          <h1>Prog div</h1>
+          {data1.map((item) => (
+            <div>
+              <IdeaPost
+                name={item.h}
+                gmail={item.gmail}
+                title={item.title}
+                description={item.description}
+                imgUrl={item.imgUrl}
+              />
+            </div>
+          ))}
+        </div>):null}
+        
       </div>
     </div>
   );
