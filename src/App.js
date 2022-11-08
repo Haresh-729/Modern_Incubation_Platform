@@ -45,6 +45,7 @@ import Editor from "./pages/Editor";
 import GRegister from "./Group/GRegister";
 import Glogin from "./Group/Glogin";
 import CreateSession from "./Group/CreateSession";
+import Post1 from "./components/Post1";
 
 import GroupTasks from "./Group/GroupTasks";
 import UpdateSession from "./Group/UpdateSession";
@@ -108,6 +109,7 @@ const App = () => {
 
   const [user, setUser] = useState(null);
   const [ideas, setIdeas] = useState([]);
+  const [sessions, setSessions] = useState([]);
   const [category, setCategory] = useState();
   const [photoUrl, setPhotoUrl] = useState();
   const [email, setEmail] = useState();
@@ -152,11 +154,17 @@ const App = () => {
 
   useEffect(() => {
     if (userId) {
-      onSnapshot(doc(db, "mpoints", auth.currentUser.uid), (doc) => {
+      onSnapshot(doc(db, "maturityPoints", auth.currentUser.uid), (doc) => {
         setMaturityResult(doc.data().maturityResult);
       });
     }
   }, [userId]);
+
+  useEffect(() => {
+    onSnapshot(collection(db, "sessions"), orderBy("timestamp", "desc"), (snapshot) => {
+      setSessions(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })))
+    })
+  }, [])
 
   return (
     <div className="bg-[url('https://i.ibb.co/Smq2X7B/background.png')] bg-cover ">
@@ -253,7 +261,7 @@ const App = () => {
                           />
                           <Route
                             path="/Dashboard"
-                            element={<GroupDashboard username={user.displayName} maturityResult={maturityResult}/>}
+                            element={<GroupDashboard username={user.displayName} maturityResult={maturityResult} />}
                           />
                           <Route
                             path="/Create-Session"
@@ -312,8 +320,35 @@ const App = () => {
                         element={<CurrentProjects />}
                       />
                       <Route path="/Tasks" element={<Tasks />} />
-                      <Route path="/Session" element={<Sessions1 />} />
-                      <Route path="/Session-Details" element={<Sessions2 />} />
+                      <Route path="/Session" element={sessions.map(({ id, data }) => (
+                        <Sessions1
+                          key={id}
+                          sessionId={id}
+                          user={user}
+                          photoUrl={photoUrl}
+                          sname={data.sname}
+                          host={data.host}
+                          heldby={data.heldby}
+                          simg={data.simg}
+                          completed={data.completed}
+                          desc={data.desc}
+                        />
+                      ))} />
+                      <Route path="/Session-Details" element={sessions.map(({ id, data }) => (
+                        <Sessions2
+                          key={id}
+                          sessionId={id}
+                          user={user}
+                          himg={data.himg}
+                          sname={data.sname}
+                          host={data.host}
+                          heldby={data.heldby}
+                          simg={data.simg}
+                          completed={data.completed}
+                          desc={data.desc}
+
+                        />
+                      ))} />
                       <Route path="/Maturity" element={<Maturity1 />} />
                       <Route path="/Quiz" element={<Quiz />} />
                       <Route
@@ -422,6 +457,7 @@ const App = () => {
                       {/* charts  */}
                       <Route path="/pie" element={<Pie />} />
                       <Route path="/Editor" element={<Editor />} />
+                      <Route path="/Post1" element={<Post1 />} />
                     </>
                   </Routes>
                 </div>

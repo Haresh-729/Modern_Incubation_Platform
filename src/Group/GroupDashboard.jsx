@@ -84,7 +84,10 @@ const GroupDashboard = ({username,maturityResult}) => {
                 className="lg:h-16 lg:w-16 md:h-10 md:w-10 h-14 w-14 pl-3 pt-3"
               />
               <h1 className="text-[#EF4A37] font-bold lg:text-4xl md:text-3xl pl-5 lg:pt-5 md:pt-5">
-              {maturityResult}
+              {maturityResult?
+              maturityResult
+              :
+              0}
               </h1>
             </div>
             <h1 className="text-[#94A3B9] font-medium pb-2 lg:text-xl md:text-lg text-sm lg:text-center md:text-center pl-3 lg:pl-0 md:pl-0 xl:pl-0">

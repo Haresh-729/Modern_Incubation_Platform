@@ -2,30 +2,73 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import { Oval } from 'react-loader-spinner';
 import 'react-toastify/dist/ReactToastify.css';
+import {addDoc, collection} from "firebase/firestore";
+import {db,storage} from "../firebase";
+import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
+import {useNavigate} from "react-router-dom";
 
 function CreateSession() {
-
-  
+  const navigate = useNavigate();
 
   const [values, setValues] = useState({
     sname: "",
     heldby: "",
     desc: "",
     host: "",
+    simg: "",
+    himg:""
   });
 
   const [error,setErrorMsg] = useState("");
-    const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  const handleSubmit = ()=>{
-    if(values.sname === " " || values.heldby === " " || values.desc ===" " || values.host === " "){
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
+    if(values.sname === " " ||  values.heldby === " " || values.desc ===" " || values.host === " "){
       setErrorMsg(toast("Please fill all the fields"));
       setLoading(true);
     }
-
-   }
-   console.log(category); 
-    
+    const storageRef = ref(storage, `files/${values.sname}/${values.simg.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, values.simg);
+    uploadTask.on('state_changed', (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          console.log('Upload is running');
+          break;
+      }
+    }, (error) => {
+      setErrorMsg(toast("Error in uploading image"));
+      setLoading(true);
+    }, () => {
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        addDoc(collection(db, "sessions"), {
+          sname: values.sname,
+          heldby: values.heldby,
+          desc: values.desc,
+          host: values.host,
+          simg: downloadURL,
+        }).then(()=>{
+          setErrorMsg(toast("Session Created Successfully"));
+          setLoading(true);
+          navigate("/session");
+        }).catch((error)=>{
+          setErrorMsg(toast("Error in creating session"));
+          setLoading(true);
+        });
+      });
+    });
+  }
+  
+  console.log(values.sname)    
+  console.log(values.heldby)    
+  console.log(values.desc)    
+  console.log(values.host)    
+  console.log(values.simg)    
 
   return (
     <div className="bg-[#6788D3]">
@@ -45,6 +88,9 @@ function CreateSession() {
           <label className="lg:ml-0 md:ml-0 sm:ml-0 xl:ml-0 ml-4">
             Session Name:
             <input
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, sname: event.target.value }))
+              }
               type="text"
               name="sname"
               required
@@ -56,12 +102,28 @@ function CreateSession() {
             Held By:
             <input
               onChange={(event) =>
-                setValues((prev) => ({ ...prev, sname: event.target.value }))
+                setValues((prev) => ({ ...prev, heldby: event.target.value }))
               }
               type="text"
               name="heldby"
               required
               className="lg:ml-20 md:ml-16 text-white bg-offwhite bg-opacity-20 lg:rounded-xl md:rounded-xl rounded-md lg:w-72 md:w-64 w-56 lg:h-8 md:h-6 h-6 lg:mt-4 md:mt-3 lg:p-3 md:p-2 p-1"
+            />
+          </label>
+
+          <label className="lg:flex md:flex lg:ml-0 md:ml-0 sm:ml-0 xl:ml-0 ml-4 mt-3">
+            <span  className="lg:place-self-center md:place-self-center">
+              Session Image:
+            </span>
+            <input
+              type="file"
+              accept="image/*"
+              required
+              name="desc"
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, himg: event.target.files[0] }))
+              }
+              className="lg:ml-20 md:ml-16 text-white bg-offwhite bg-opacity-20 lg:rounded-xl md:rounded-xl rounded-md lg:w-72 md:w-64 w-56 lg:h-10 md:h-6 h-6 md:mt-3 lg:p-3 md:p-2 p-1"
             />
           </label>
 
@@ -91,9 +153,24 @@ function CreateSession() {
               className="lg:ml-20 md:ml-16 text-white lg:h-20 md:h-16 h-14 bg-offwhite bg-opacity-20 lg:rounded-xl rounded-md md:rounded-xl lg:w-72 md:w-64 w-56 lg:mt-4 md:mt-3 lg:p-3 md:p-2 p-1"
             />
           </label>
+          <label className="lg:flex md:flex lg:ml-0 md:ml-0 sm:ml-0 xl:ml-0 ml-4 mt-3">
+            <span  className="lg:place-self-center md:place-self-center">
+              Session Image:
+            </span>
+            <input
+              type="file"
+              accept="image/*"
+              required
+              name="desc"
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, simg: event.target.files[0] }))
+              }
+              className="lg:ml-20 md:ml-16 text-white bg-offwhite bg-opacity-20 lg:rounded-xl md:rounded-xl rounded-md lg:w-72 md:w-64 w-56 lg:h-10 md:h-6 h-6 md:mt-3 lg:p-3 md:p-2 p-1"
+            />
+          </label>
 
           <button
-            onclick={handleSubmit}
+            onClick={handleSubmit}
             type="submit"
             value="Submit"
             className="place-self-center lg:my-10 md:my-8 my-6 bg-white lg:px-6 md:px-3 px-2 lg:py-1 md:py-1 py-1 lg:rounded-lg md:rounded-lg rounded-md text-blue border-2 border-blue hover:bg-blue hover:text-white"
