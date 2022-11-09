@@ -2,17 +2,26 @@ import React from "react";
 import IdeaTemp from "./IdeaTemp";
 import { useState } from "react";
 
-function Post1() {
+function Post1({
+  ideaId,
+    user,
+    cat,
+    category,
+    username,
+    title,
+    statusLogo,
+    pdfFile,
+    description,
+    photoUrl,
+    status
+}) {
   const data1 = [
     {
-      h: "Incubation",
-      gmail: "tanvikinjale@gmail.com",
-      description:
-        " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
-      title: "Idea title",
-      category: "Incubation",
-      imgUrl:
-        "https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png",
+      h: {username},
+      gmail: {user},
+      description: {description},
+      category: {cat},
+      imgUrl:{photoUrl},
     },
     {
       h: "Programming",

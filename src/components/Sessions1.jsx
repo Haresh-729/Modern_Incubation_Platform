@@ -3,6 +3,7 @@ import Imag from './../assets/Sessons1.png';
 import Imag1 from './../assets/Sessons2.png';
 import { IconButton } from "rsuite";
 import { ArrowRight, ArrowLeft } from '@rsuite/icons';
+import { Link } from 'react-router-dom';
 
 
 function Sessions1({sessionId, user, himg, sname, host, heldby,desc, simg, completed}) {
@@ -38,77 +39,103 @@ function Sessions1({sessionId, user, himg, sname, host, heldby,desc, simg, compl
 
   const slideLeft = () => {
     var slider1 = document.getElementById('slider')
-    slider1.scrollLeft = slider1.scrollLeft + 1610;
+    slider1.scrollLeft = slider1.scrollLeft + 1000;
   }
 
   const slideRight = () => {
     var slider1 = document.getElementById('slider');
-    slider1.scrollLeft = slider1.scrollLeft - 1610;
+    slider1.scrollLeft = slider1.scrollLeft - 1000;
   }
 
   return (
     <div>
-      <div className="ml-10 w-full min-h-full">
-        <h1 className="text-blue text-3xl font-bold mx-[44rem] py-4">
+    <div data-aos="fade-down" className="select-none h-fit w-full  flex flex-col justify-center items-center ">
+      <div className=" flex flex-col items-center justify-center">
+        <h1 className="text-blue text-center lg:text-3xl xl:text-3xl md:text-2xl sm:text-2xl text-xl font-bold flex justify-center py-4">
           Sessions
         </h1>
-        <div className="flex flex-wrap">
-          <img
-            src="https://i.ibb.co/xfdwFbT/image-removebg-preview-3-1.png"
-            alt=""
-            border="0"
-            className="w-[24rem] h-[24rem] ml-28"
-          />
-          <p className="text-5xl leading-loose text-center mt-16 text-[#7587A4] font-bold">
-            <a className="text-6xl text-[#EFA451] font-bold">
-              Learning Together
-            </a>{" "}
-            even we are Apart <br /> Be a{" "}
-            <a className="text-6xl text-[#EF4A37] font-bold">Helping Hand</a> to
-            Others
-          </p>
+        <div className="flex ">
+          <div>
+            <img
+              src="https://i.ibb.co/xfdwFbT/image-removebg-preview-3-1.png"
+              alt=""
+              border="0"
+              className="w-auto xl:h-[16rem] lg:h-48 md:h-44 sm:h-40 h-32 xl:ml-16 lg:ml-20 md:ml-12 ml-16"
+            />
+          </div>
+          <div className="xl:pl-24 lg:pl-10 md:pl-8 sm:pl-8 pl-6 xl:mt-32 lg:mt-16 md:mt-10 sm:mt-8 mt-6">
+            <div className="flex flex-wrap">
+              <div className="xl:text-5xl lg:text-3xl md:text-4xl sm:text-3xl text-2xl text-[#EFA451] font-bold">
+                Learning Together &nbsp;
+              </div>
+              <div className="xl:leading-loose lg:leading-relaxed md:leading-relaxed sm:leading-relaxed xl:text-3xl lg:text-2xl md:text-3xl sm:text-2xl text-xl text-center text-[#7587A4] font-bold">
+                even we are Apart
+              </div>
+            </div>
+            <div className="flex flex-wrap ">
+              <div className="xl:leading-loose lg:leading-relaxed md:leading-relaxed sm:leading-relaxed xl:text-3xl lg:text-3xl md:text-3xl sm:text-2xl text-xl text-center text-[#7587A4] font-bold">
+                Be a &nbsp;
+              </div>
+              <div className="xl:text-5xl lg:text-4xl md:text-4xl sm:text-3xl text-2xl text-[#EF4A37] font-bold">
+                Helping Hand &nbsp;
+              </div>
+              <div className="xl:leading-loose lg:leading-relaxed md:leading-relaxed sm:leading-relaxed xl:text-3xl lg:text-3xl md:text-3xl sm:text-2xl text-xl text-center text-[#7587A4] font-bold">
+                to Others
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    {/* hh */}
 
+    
+      <Link to="/Session-Details" className="select-none flex items-center mt-[1rem] w-[77rem] justify-center">
+        <IconButton icon={<ArrowLeft />} onClick={slideLeft} className="xl:ml-[4rem] lg:ml-[4rem] md:ml-6 sm:ml-6 ml-4 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110
+        w-[4rem] h-[3rem] lg:py-8 xl:py-8 md:py-6 sm:py-6 py-4 text-center flex items-center justify-center font-extrabold font-poppins xl:text-5xl lg:text-5xl md:text-4xl sm:text-3xl text-2xl text-black bg-white/30 border-2 border-white
+        shadow-lg rounded-full hover:bg-[#0589c7d3] hover:border-0 hover:text-white "></IconButton>
 
-        <div className="flex items-center absolute mt-[1rem] w-auto">
-          <IconButton icon={<ArrowLeft />} onClick={slideLeft} className="ml-[4rem] absolute z-50 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[4rem] h-[3rem] pb-[4rem] text-center justify-center font-extrabold font-poppins text-5xl text-black bg-white/30 border-2 border-white shadow-lg rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white "></IconButton>
-          <div id='slider' className="overflow-x-scroll no-scrollbar scroll-smooth ... w-[94rem] mx-[2rem] relative flex items-center">
-            {data.map((item) => (
-              <div key={item.id} className="bg-[#B1A429] w-[84rem] h-[28rem] rounded-[3rem] flex flex-wrap mx-32 mt-10 py-8">
-                <div className="bg-yellow-300 bg-gradient-to-t from-[#B1A429] w-[74rem] flex flex-wrap h-[18rem] rounded-[4rem] mx-20 px-4 ">
-                  <h1 className="text-4xl leading-loose text-left ml-8 mt-4 drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] text-blue font-bold">
+        <div id="slider" className="overflow-x-scroll scrollbar-hide scroll-smooth ...w-full  xl:mx-[2rem] xl:relative flex items-center">
+          {data.map((item) => (
+            <div key={item.id} className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-101 bg-[#B1A429] w-[60rem] h-[20rem]  rounded-[3rem] flex  xl:mx-[2rem] mx-2 mt-2 py-2">
+              <div className="bg-yellow-300 bg-gradient-to-t from-[#B1A429] w-[50rem] flex-wrap  flex rounded-[2rem] mx-16 px-4 ">
+
+                <div className="flex items-center justify-center">
+
+                  <div className="flex flex-col justify-center items-center">
+                    <h1 className="text-3xl leading-loose text-center  mt-4 drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] text-blue font-bold">
                     {item.sname}
-                  </h1>
-                  <div className="">
+                    </h1>
+                    <h1 className="text-black text-xl">By:</h1>
+                    <img
+                      src={item.img}
+                      alt="..."
+                      class="shadow-lg rounded-full w-[5rem] mt-2 h-auto "
+                    />
+                    <h1 className="text-[#EF4A37] text-2xl">
+                      {item.heldby}
+                    </h1>
+                    <p className="text-xl leading-normal mt-2 text-black font-normal text-center ">
+                      {item.desc}
+                    </p>
+                  </div>
+                  <div>
                     <img
                       src={item.s}
                       alt="python"
                       border="0"
-                      className="mr-[23rem] right-0 w-[20rem] absolute h-[20rem]"
+                      className="w-[15rem]"
                     />
-                    <div className="flex flex-wrap place-content-center mr-56">
-                      <h1 className="text-black text-2xl absolute mr-4 ">By:</h1>
-                      <img
-                        src={item.img}
-                        alt="..."
-                        className="shadow-lg rounded-full w-[8rem] mt-12 mx-[12rem] mr-56 h-auto align-middle border-none"
-                      />
-                      <h1 className="text-[#EF4A37] text-3xl mx-[12rem]">
-                        {item.heldby}
-                      </h1>
-                      <p className="text-2xl leading-normal mt-2 text-black font-normal mx-[8rem] text-center ">
-                        {item.desc}
-                      </p>
-                    </div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-          <IconButton icon={<ArrowRight />} onClick={slideRight} className="absolute z-50 ml-[92rem] transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[4rem] h-[3rem] pb-[4rem] font-extrabold font-poppins text-5xl text-black bg-white/30 border-2 border-white shadow-lg rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white "></IconButton>
+            </div>
+          ))}
         </div>
-      </div>
+        <IconButton icon={<ArrowRight />} onClick={slideRight} className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[4rem] h-[3rem] pb-[4rem] font-extrabold font-poppins text-5xl text-black bg-white/30 border-2 border-white shadow-lg rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white "></IconButton>
+      </Link>
     </div>
+    
+  </div>
   );
 }
 

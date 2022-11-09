@@ -271,7 +271,6 @@ export const links = [
         icon: (
           <img
             src="https://i.ibb.co/LSNFnKZ/icons8-reading-24.png"
-            alt="icons8-reading-24"
             alt="contactus"
             border="0"
           />
@@ -368,23 +367,19 @@ export const themeColors = [
   },
   {
     name: "green-theme",
-    color: "#03C9D7",
+    color: "#146c22",
   },
   {
     name: "purple-theme",
     color: "#7352FF",
   },
   {
-    name: "red-theme",
-    color: "#FF5C8E",
-  },
-  {
     name: "indigo-theme",
     color: "#1E4DB7",
   },
   {
-    color: "#FB9678",
-    name: "orange-theme",
+    color: "#595C62",
+    name: "gray-theme",
   },
 ];
 
