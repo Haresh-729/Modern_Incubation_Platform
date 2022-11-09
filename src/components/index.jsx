@@ -56,6 +56,6 @@ export { default as VScroll2 } from "./VScroll2";
 export { default as Std } from "./Std";
 export { default as Editor } from "./../pages/Editor";
 export { default as Post1 } from "./Post1";
-
-
-
+export { default as Badges } from "./Badges";
+export { default as IdeaTemp } from "./IdeaTemp";
+export { default as CPDetails } from "./CPDetails";

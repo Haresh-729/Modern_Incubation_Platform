@@ -85,47 +85,11 @@ export const interests = [
         
         {
           name: 'Free Bird',
-          icon: <img src="https://i.ibb.co/mBXbwHb/freeBird.png" alt="freeBird" border="0"></img>,
+          icon: <img src="https://i.ibb.co/crFgY9m/Bird-Badge.png" alt="freeBird" border="0"></img>,
         },
         {
           name: 'Shield',
-          icon: <img src="https://i.ibb.co/phWdHq6/shield.png" alt="shield" border="0"></img>,
-        },
-        {
-          name: 'Free Bird',
-          icon: <img src="https://i.ibb.co/mBXbwHb/freeBird.png" alt="freeBird" border="0"></img>,
-        },
-        {
-          name: 'Shield',
-          icon: <img src="https://i.ibb.co/phWdHq6/shield.png" alt="shield" border="0"></img>,
-        },
-        {
-          name: 'Free Bird',
-          icon: <img src="https://i.ibb.co/mBXbwHb/freeBird.png" alt="freeBird" border="0"></img>,
-        },
-        {
-          name: 'Free Bird',
-          icon: <img src="https://i.ibb.co/mBXbwHb/freeBird.png" alt="freeBird" border="0"></img>,
-        },
-        {
-          name: 'Shield',
-          icon: <img src="https://i.ibb.co/phWdHq6/shield.png" alt="shield" border="0"></img>,
-        },
-        {
-          name: 'Free Bird',
-          icon: <img src="https://i.ibb.co/mBXbwHb/freeBird.png" alt="freeBird" border="0"></img>,
-        },
-        {
-          name: 'Free Bird',
-          icon: <img src="https://i.ibb.co/mBXbwHb/freeBird.png" alt="freeBird" border="0"></img>,
-        },
-        {
-          name: 'Shield',
-          icon: <img src="https://i.ibb.co/phWdHq6/shield.png" alt="shield" border="0"></img>,
-        },
-        {
-          name: 'Free Bird',
-          icon: <img src="https://i.ibb.co/mBXbwHb/freeBird.png" alt="freeBird" border="0"></img>,
+          icon: <img src="https://i.ibb.co/xYNFDJv/Shield-logo.png" alt="shield" border="0"></img>,
         },
        
       ],

@@ -1,11 +1,11 @@
 import React from "react";
-import IdeaPost from "./IdeaPost";
+import IdeaTemp from "./IdeaTemp";
 import { useState } from "react";
 
 function Post1() {
   const data1 = [
     {
-      h: "Tanvi Kinjale",
+      h: "Incubation",
       gmail: "tanvikinjale@gmail.com",
       description:
         " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
@@ -15,47 +15,17 @@ function Post1() {
         "https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png",
     },
     {
-      h: "Tanvi Kinjale",
+      h: "Programming",
       gmail: "tanvikinjale@gmail.com",
       description:
         " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
       title: "Idea title",
-      category: "non-technical",
+      category: "Programming",
       imgUrl:
         "https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png",
     },
     {
-      h: "Tanvi Kinjale",
-      gmail: "tanvikinjale@gmail.com",
-      description:
-        " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
-      title: "Idea title",
-      category: "Civil",
-      imgUrl:
-        "https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png",
-    },
-    {
-      h: "Tanvi Kinjale",
-      gmail: "tanvikinjale@gmail.com",
-      category: "Civil",
-      description:
-        " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
-      title: "Idea title",
-      imgUrl:
-        "https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png",
-    },
-    {
-      h: "Tanvi Kinjale",
-      gmail: "tanvikinjale@gmail.com",
-      category: "Incubation",
-      description:
-        " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
-      title: "Idea title",
-      imgUrl:
-        "https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png",
-    },
-    {
-      h: "Tanvi Kinjale",
+      h: "Civil",
       gmail: "tanvikinjale@gmail.com",
       description:
         " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
@@ -65,8 +35,9 @@ function Post1() {
         "https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png",
     },
     {
-      h: "Tanvi Kinjale",
+      h: "Civil 1",
       gmail: "tanvikinjale@gmail.com",
+      category: "Civil",
       description:
         " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
       title: "Idea title",
@@ -74,7 +45,37 @@ function Post1() {
         "https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png",
     },
     {
-      h: "Tanvi Kinjale",
+      h: "Electric",
+      gmail: "tanvikinjale@gmail.com",
+      category: "Electric",
+      description:
+        " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
+      title: "Idea title",
+      imgUrl:
+        "https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png",
+    },
+    {
+      h: "Electric 1",
+      gmail: "tanvikinjale@gmail.com",
+      description:
+        " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
+      title: "Idea title",
+      category: "Electric",
+      imgUrl:
+        "https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png",
+    },
+    {
+      h: "Science",
+      gmail: "tanvikinjale@gmail.com",
+      description:
+        " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
+      title: "Idea title",
+      category:"Science",
+      imgUrl:
+        "https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png",
+    },
+    {
+      h: "Sumit",
       gmail: "tanvikinjale@gmail.com",
       description:
         " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem ex, officia temporibus animi similique ullam, eius provident, nam repellat ad quia? Aliquam, rem aperiam alias tempore voluptatibus ad consectetur rerum ",
@@ -94,6 +95,77 @@ function Post1() {
   const handleProg = (e) => {
     setprog((current) => !current);
   };
+  const [prof, setprof] = useState(false);
+  const handleProf = (e) => {
+    setprof((current) => !current);
+  };
+  const [civil, setcivil] = useState(false);
+  const handleCivil = (e) => {
+    setcivil((current) => !current);
+  };
+  const [elec, setelec] = useState(false);
+  const handleElec = (e) => {
+    setelec((current) => !current);
+  };
+  const [sci, setsci] = useState(false);
+  const handleSci = (e) => {
+    setsci((current) => !current);
+  };
+
+  
+  const handleClose1 = (e) => {
+    setincub(true);
+    setprog(false);
+    setprof(false);
+    setcivil(false);
+    setelec(false);
+    setsci(false);
+  }
+
+  const handleClose2 = (e) => {
+    setincub(false);
+    setprog(true);
+    setprof(false);
+    setcivil(false);
+    setelec(false);
+    setsci(false);
+  }
+  
+  const handleClose3 = (e) => {
+    setincub(false);
+    setprog(false);
+    setprof(true);
+    setcivil(false);
+    setelec(false);
+    setsci(false);
+  }
+  
+  const handleClose4 = (e) => {
+    setincub(false);
+    setprog(false);
+    setprof(false);
+    setcivil(true);
+    setelec(false);
+    setsci(false);
+  }
+
+  const handleClose5 = (e) => {
+    setincub(false);
+    setprog(false);
+    setprof(false);
+    setcivil(false);
+    setelec(true);
+    setsci(false);
+  }
+
+  const handleClose6 = (e) => {
+    setincub(false);
+    setprog(false);
+    setprof(false);
+    setcivil(false);
+    setelec(false);
+    setsci(true);
+  }
 
   return (
     <div className="  xl:flex xl:flex-wrap xl:flex-row sm:mt-[2rem] mt-[4rem]  xl:mt-[-1rem]">
@@ -103,7 +175,7 @@ function Post1() {
       "
       >
         <div className="">
-          <button onClick={handleIncub} className="xl:h-[4rem] xl:mx-[2rem]  xl:rounded-2xl  xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue   xl:text-2xl md:mx-[2rem]  md:rounded-xl md:h-[2rem] md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue  md:text-lg lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl  lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue text-white bg-white lg:py-2 lg:text-3xl sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.8rem]  mt-4 mx-1 font-semibold ">
+          <button onClick={handleIncub, handleClose1} className="xl:h-[4rem] xl:mx-[2rem]  xl:rounded-2xl  xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue   xl:text-2xl md:mx-[2rem]  md:rounded-xl md:h-[2rem] md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue  md:text-lg lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl  lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue text-white bg-white lg:py-2 lg:text-3xl sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.8rem]  mt-4 mx-1 font-semibold ">
             <img
               src="https://i.ibb.co/7Gh9CKL/Incubator.png"
               className="xl:w-[6rem] md:w-[3rem] lg:w-[5rem] xl:ml-[-1rem] sm:w-[3rem] xl:mt-[-0.9rem] w-[1.5rem] mt-1"
@@ -112,7 +184,7 @@ function Post1() {
               Incubation
             </h1>
           </button>
-          <button onClick={handleProg} className="xl:h-[4rem] xl:mx-[2rem]  xl:rounded-2xl  xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue xl:text-2xl md:h-[2rem] md:mx-[2rem]  md:rounded-xl md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue  md:text-lg lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue lg:py-2 sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue text-white bg-white rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.7rem]  mt-4 mx-1 font-semibold ">
+          <button onClick={handleProg, handleClose2} className="xl:h-[4rem] xl:mx-[2rem]  xl:rounded-2xl  xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue xl:text-2xl md:h-[2rem] md:mx-[2rem]  md:rounded-xl md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue  md:text-lg lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue lg:py-2 sm:text-xl sm:h-[2rem] sm:mx-[1rem]  sm:rounded-xl  sm:flex sm:flex-wrap sm:w-[14rem] sm:mb-6 hover:bg-blue text-white bg-white rounded-xl h-[2rem] flex flex-wrap w-[6.5rem] mb-6 hover:bg-blue  text-[0.7rem]  mt-4 mx-1 font-semibold ">
             <img
               src="https://i.ibb.co/jvZ4F6K/Google-Code.png"
               className="xl:w-[6rem] sm:w-[3rem] md:w-[3rem] lg:w-[5rem] xl:mt-[-0.5rem] xl:ml-[-1rem] w-[1.5rem]  mt-1"
@@ -121,7 +193,7 @@ function Post1() {
               Programming
             </h1>
           </button>
-          <button
+          <button onClick={handleProf, handleClose3}
             className=" xl:mx-[2rem]  xl:rounded-2xl xl:h-[4rem] xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue  xl:text-2xl
           md:h-[2rem] md:mx-[2rem]  md:rounded-xl  md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue md:text-lg
           lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl  lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue  lg:py-2 lg:text-3xl
@@ -136,7 +208,7 @@ function Post1() {
               Professional
             </h1>
           </button>
-          <button
+          <button onClick={handleCivil, handleClose4}
             className="xl:h-[4rem] xl:mx-[2rem]  xl:rounded-2xl xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue  xl:text-2xl
            md:mx-[2rem]  md:rounded-xl md:h-[2rem] md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue md:text-lg
           lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl  lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue text-white bg-white lg:py-2 lg:text-3xl
@@ -149,7 +221,7 @@ function Post1() {
             />
             <h1 className="xl:py-2 text-black xl:font-semibold py-1">Civil</h1>
           </button>
-          <button
+          <button onClick={handleElec, handleClose5}
             className="xl:mx-[2rem]  xl:rounded-2xl xl:h-[4rem] xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue   xl:text-2xl
           md:mx-[2rem]  md:rounded-xl md:h-[2rem] md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue  md:text-lg
           lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl  lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue  lg:py-2 lg:text-3xl
@@ -164,7 +236,7 @@ function Post1() {
               Electrical
             </h1>
           </button>
-          <button
+          <button onClick={handleSci, handleClose6}
             className="xl:h-[4rem] xl:mx-[2rem]  xl:rounded-2xl xl:flex xl:flex-wrap xl:w-[20rem] xl:mb-6 hover:bg-blue text-white bg-white xl:text-2xl
           md:h-[2rem] md:mx-[2rem]  md:rounded-xl  md:flex md:flex-wrap md:w-[12rem] md:mb-6 hover:bg-blue  md:text-lg
           lg:h-[4rem] lg:mx-[2rem]  lg:rounded-2xl lg:flex lg:flex-wrap lg:w-[20rem] lg:mb-6 hover:bg-blue lg:py-2 lg:text-3xl
@@ -181,33 +253,93 @@ function Post1() {
           </button>
         </div>
         {incub?(<div className="overflow-y-scroll sm:mt-[-1rem] no-scrollbarmd:h-[32rem]  items-center xl:grow xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:rounded-[3rem] border-1 xl:w-[52rem] border-offwhite shadow-lg  md:w-[26rem] lg:w-[36rem] lg:h-[38rem]  xl:absolute xl:inset xl:right-0 xl:mt-[-3rem] sm:w-[26rem] sm:h-[32rem] lg:mr-4 xl:h-[40rem] absolute inset right-0  w-[12rem] h-[32rem] mr-2">
-          <h1>Incub div</h1>
-          {data1.map((item) => (
-            <div>
-              <IdeaPost
+          <h1>Incubation div</h1>
+          {data1.map((item) => {
+            return item.category==="Incubation" ? (<div>
+              <IdeaTemp
                 name={item.h}
                 gmail={item.gmail}
                 title={item.title}
                 description={item.description}
                 imgUrl={item.imgUrl}
               />
-            </div>
-          ))}
+            </div>):null
+          })}
         </div>):null}
 
         {prog?(<div className="overflow-y-scroll sm:mt-[-1rem] no-scrollbarmd:h-[32rem]  items-center xl:grow xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:rounded-[3rem] border-1 xl:w-[52rem] border-offwhite shadow-lg  md:w-[26rem] lg:w-[36rem] lg:h-[38rem]  xl:absolute xl:inset xl:right-0 xl:mt-[-3rem] sm:w-[26rem] sm:h-[32rem] lg:mr-4 xl:h-[40rem] absolute inset right-0  w-[12rem] h-[32rem] mr-2">
-          <h1>Prog div</h1>
-          {data1.map((item) => (
-            <div>
-              <IdeaPost
+          <h1>Programming div</h1>
+          {data1.map((item) => {
+            return item.category==="Programming" ? (<div>
+              <IdeaTemp
                 name={item.h}
                 gmail={item.gmail}
                 title={item.title}
                 description={item.description}
                 imgUrl={item.imgUrl}
               />
-            </div>
-          ))}
+            </div>):null
+          })}
+        </div>):null}
+
+        {prof?(<div className="overflow-y-scroll sm:mt-[-1rem] no-scrollbarmd:h-[32rem]  items-center xl:grow xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:rounded-[3rem] border-1 xl:w-[52rem] border-offwhite shadow-lg  md:w-[26rem] lg:w-[36rem] lg:h-[38rem]  xl:absolute xl:inset xl:right-0 xl:mt-[-3rem] sm:w-[26rem] sm:h-[32rem] lg:mr-4 xl:h-[40rem] absolute inset right-0  w-[12rem] h-[32rem] mr-2">
+          <h1>Professional div</h1>
+          {data1.map((item) => {
+            return item.category==="Professional" ?(<div>
+              <IdeaTemp
+                name={item.h}
+                gmail={item.gmail}
+                title={item.title}
+                description={item.description}
+                imgUrl={item.imgUrl}
+              />
+            </div>):null
+          })}
+        </div>):null}
+
+        {civil?(<div className="overflow-y-scroll sm:mt-[-1rem] no-scrollbarmd:h-[32rem]  items-center xl:grow xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:rounded-[3rem] border-1 xl:w-[52rem] border-offwhite shadow-lg  md:w-[26rem] lg:w-[36rem] lg:h-[38rem]  xl:absolute xl:inset xl:right-0 xl:mt-[-3rem] sm:w-[26rem] sm:h-[32rem] lg:mr-4 xl:h-[40rem] absolute inset right-0  w-[12rem] h-[32rem] mr-2">
+          <h1>Civil div</h1>
+          {data1.map((item) => {
+            return item.category === "Civil" ? (<div>
+              <IdeaTemp
+                name={item.h}
+                gmail={item.gmail}
+                title={item.title}
+                description={item.description}
+                imgUrl={item.imgUrl}
+              />
+            </div>):null
+          })}
+        </div>):null}
+
+        {elec?(<div className="overflow-y-scroll sm:mt-[-1rem] no-scrollbarmd:h-[32rem]  items-center xl:grow xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:rounded-[3rem] border-1 xl:w-[52rem] border-offwhite shadow-lg  md:w-[26rem] lg:w-[36rem] lg:h-[38rem]  xl:absolute xl:inset xl:right-0 xl:mt-[-3rem] sm:w-[26rem] sm:h-[32rem] lg:mr-4 xl:h-[40rem] absolute inset right-0  w-[12rem] h-[32rem] mr-2">
+          <h1>Electric div</h1>
+          {data1.map((item) => {
+            return item.category === "Electric" ? (<div>
+              <IdeaTemp
+                name={item.h}
+                gmail={item.gmail}
+                title={item.title}
+                description={item.description}
+                imgUrl={item.imgUrl}
+              />
+            </div>):null
+          })}
+        </div>):null}
+
+        {sci?(<div className="overflow-y-scroll sm:mt-[-1rem] no-scrollbarmd:h-[32rem]  items-center xl:grow xl:...float-center xl:flex xl:flex-col xl:items-center bg-white/30 rounded-[2rem]  xl:rounded-[3rem] border-1 xl:w-[52rem] border-offwhite shadow-lg  md:w-[26rem] lg:w-[36rem] lg:h-[38rem]  xl:absolute xl:inset xl:right-0 xl:mt-[-3rem] sm:w-[26rem] sm:h-[32rem] lg:mr-4 xl:h-[40rem] absolute inset right-0  w-[12rem] h-[32rem] mr-2">
+          <h1>Science div</h1>
+          {data1.map((item) => {
+            return item.category === "Science" ? (<div>
+              <IdeaTemp
+                name={item.h}
+                gmail={item.gmail}
+                title={item.title}
+                description={item.description}
+                imgUrl={item.imgUrl}
+              />
+            </div>) :null
+          })}
         </div>):null}
         
       </div>

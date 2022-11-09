@@ -12,7 +12,7 @@ function Std() {
     navigate("/Switchi");
   };
     return (
-        <div className=" mt-[3rem] md:mt-[0rem]">
+        <div data-aos="fade-right" className=" mt-[3rem] md:mt-[0rem]">
       <div className="px-6">
        <h1 className="text-center font-bold text-sm md:text-base xl:text-xl text-blue-800 leading-2 ">
         <br />

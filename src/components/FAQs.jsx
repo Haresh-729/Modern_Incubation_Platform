@@ -220,7 +220,7 @@ function FAQs(){
         // <div className="bg-cover mt-10  h-full">
             // <div className="flow-root flex-col items-end justify-center mx-2 sm:m-10 md:mx-8 lg:my-5 lg:mx-18 xl:mx-28 pt-2 md:py-10 w-auto h-auto">
                 // <div className="float-center flex flex-col items-center lg:py-10  bg-white/30 rounded-[1rem] border-2 border-offwhite shadow-lg">
-                    <div className="flex flex-col">
+                    <div data-aos="fade-down" className="select-none flex flex-col">
                     <h1 className="text-sm md:text-base lg:text-2xl font-bold poppins mt-[1rem]  text-center text-[#0139B5]">GET YOUR QUESTIONS ANSWERED </h1>
                     <h1 className="text-xs md:text-sm  lg:text-lg font-bold poppins mt-[1rem] text-center text-black">Find answers to the Most Frequently Commonly asked questions below.</h1>
                     <div className="relative w-full px-4 mt-[1rem] ">
@@ -242,7 +242,7 @@ function FAQs(){
                     <div className="relative w-full flex justify-center md:px-4 ">
                         <div className="grid grid-cols-2 place-items-start  gap-4 sm:grid-cols-4 text-center mt-2 ">
                             
-                            <div className="float-center flex flex-col items-center w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] lg:w-[13rem] lg:h-[13rem] bg-white/30 rounded-[2rem] lg:rounded-[3rem] border-2 border-offwhite shadow-lg">
+                            <div className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 float-center flex flex-col items-center w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] lg:w-[13rem] lg:h-[13rem] bg-white/30 rounded-[2rem] lg:rounded-[3rem] border-2 border-offwhite shadow-lg">
                                 <h1 className="font-bold poppins text-[#EF4A37] text-[0.6rem] md:text-[0.8rem] lg:text-[1rem] mt-2 mx-2">
                                 What is Idea?
                                 </h1>
@@ -251,7 +251,7 @@ function FAQs(){
                                     Idea is something that you think will be successful in future that requires support or guidance of someone.
                                 </p>
                             </div>
-                            <div className="float-center flex flex-col items-center w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] lg:w-[13rem] lg:h-[13rem] bg-white/30 rounded-[2rem] lg:rounded-[3rem] border-2 border-offwhite shadow-lg">
+                            <div className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 float-center flex flex-col items-center w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] lg:w-[13rem] lg:h-[13rem] bg-white/30 rounded-[2rem] lg:rounded-[3rem] border-2 border-offwhite shadow-lg">
                                 <h1 className="font-bold poppins text-[#EF4A37] text-[0.6rem] md:text-[0.8rem]  lg:text-[1rem] mt-2 mx-2">
                                     How to insert an Idea?
                                 </h1>
@@ -260,7 +260,7 @@ function FAQs(){
                                     Idea is something that you think will be successful in future that requires support or guidance of someone.
                                 </p>
                             </div>
-                            <div className="float-center flex flex-col items-center w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] lg:w-[13rem] lg:h-[13rem] bg-white/30 rounded-[2rem]  lg:rounded-[3rem] border-2 border-offwhite shadow-lg">
+                            <div className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 float-center flex flex-col items-center w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] lg:w-[13rem] lg:h-[13rem] bg-white/30 rounded-[2rem]  lg:rounded-[3rem] border-2 border-offwhite shadow-lg">
                                 <h1 className="font-bold poppins text-[#EF4A37] text-[0.6rem] md:text-[0.8rem] lg:text-[1rem] mt-2 mx-2">
                                     How to comment on idea?
                                 </h1>
@@ -269,7 +269,7 @@ function FAQs(){
                                     Idea is something that you think will be successful in future that requires support or guidance of someone.
                                 </p>
                             </div>
-                            <div className="float-center flex flex-col items-center w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] lg:w-[13rem] lg:h-[13rem] bg-white/30 rounded-[2rem] lg:rounded-[3rem] border-2 border-offwhite shadow-lg">
+                            <div className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 float-center flex flex-col items-center w-[8rem] h-[8rem] md:w-[10rem] md:h-[10rem] lg:w-[13rem] lg:h-[13rem] bg-white/30 rounded-[2rem] lg:rounded-[3rem] border-2 border-offwhite shadow-lg">
                                 <h1 className="font-bold poppins text-[#EF4A37] text-[0.6rem] md:text-[0.8rem] lg:text-[1rem] mt-2  mx-2">
                                     Who can upload the Idea?
                                 </h1>

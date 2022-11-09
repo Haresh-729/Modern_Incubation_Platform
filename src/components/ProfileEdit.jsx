@@ -189,7 +189,6 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
     }),
   };
 
-
   const [values, setValues] = useState({
     fname: "",
     lname: "",
@@ -206,16 +205,12 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
   });
 
   console.log(values);
-
   const [pngFile, setPngFile] = useState(null);
   const [pngFileError, setPngFileError] = useState("");
-
-
 
   const handlePngFileChange = (e) => {
     setPngFile(e.target.files[0]);
   }
-
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -236,8 +231,6 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
           console.log("done");
-
-
 
           await updateDoc(doc(db, 'users', auth.currentUser.uid), {
             fname: values.fname,
@@ -280,13 +273,13 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
     <div>
       <form onSubmit={handleUpdate}>
         <div className=" bg-[#6788D3]  ">
-          <div className="">
-            <div className="md:flex md:flex-wrap xl:flex xl:flex-wrap  xl:justify-center md:justify-center">
-              <div className=" mt-[6rem] mr-4  ">
-                <h1 className=" text-lg xl:text-4xl  md:text-4xl lg:text-4xl text-center text-white leading-loose xl:mr-4 ">
+          <div className="flex flex-col items-center justify-center">
+            <div className="md:flex md:flex-wrap xl:flex xl:flex-wrap justify-center  xl:justify-center md:justify-center">
+              <div className="  mt-[6rem] md:mt-[3rem]  ">
+                <h1 className=" text-base  font-bold  md:text-2xl lg:text-3xl text-center text-white leading-loose xl:mr-4 ">
                   {username}
                 </h1>
-                <h1 className=" text-xl xl:flex xl:flex-wrap xl:text-center  xl:mt-[1rem] text-center mt-[-2rem] md:flex md:flex-wrap md:mt-[1rem] xl:mr-[4rem] lg:mr-[1rem] text-white">
+                <h1 className=" text-sm lg:text-base text-center mt-[-1.9rem] md:flex md:flex-wrap md:mt-[0.4rem] xl:mr-[4rem] lg:mr-[1rem] text-white">
                   {" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -294,7 +287,7 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 xl:mt-1 md:mt-1 ml-[1rem] lg:mt-1  h-6 xl:mr-2 md:mr-2 lg:ml-2"
+                    className="w-6  ml-[1rem]   h-6 xl:mr-2 md:mr-2 lg:ml-2"
                   >
                     <path
                       strokeLinecap="round"
@@ -308,42 +301,42 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
         
 
               <IconButton
-                className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[2rem] h-[2rem]  text-center  justify-center font-extrabold font-poppins text-xl mt-[4rem] absolute ml-[8rem] flex text-black bg-[#EAECF0] rounded-[5rem] xl:mr-[4rem] md:w-[2rem] md:h-[2rem] md:text-xl md:mt-[10rem]  lg:w-[3rem] lg:h-[3rem] lg:text-3xl lg:pt-2 lg:mt-[10rem] lg:mr-[1rem]"
+                className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[2rem] h-[2rem]  text-center  justify-center font-extrabold font-poppins text-xl mt-[3.5rem] absolute ml-[10.5rem] flex text-black bg-[#EAECF0] rounded-[5rem]  md:w-[2rem] md:h-[2rem] md:text-xl md:mt-[6rem] md:ml-[10rem] xl:mb-[3rem] xl:ml-[26rem] lg:ml-[14rem] lg:w-[2.5rem] lg:h-[2.5rem] lg:text-2xl lg:pt-2 lg:mt-[7rem] "
                 // onClick={handlePngFileChange}
                 aria-label="upload picture"
 
               >
-                <label htmlFor="image-upload">
+                <label htmlFor="image-upload" className="lg:mt-[-0.5rem]">
                 <Edit />
                 </label>
                 <input type="file" id="image-upload" accept="image/png" style={{ display: 'none' }} onChange={handlePngFileChange} />
               </IconButton>
               <div>{pngFileError}</div>
-              <div className=" flex flex-wrap md:w-40 lg:w-40 xl:w-40   ">
+              <div className=" flex flex-wrap">
                 <img
                   src={photoUrl}
                   alt="..."
                   className="shadow-lg rounded-full w-[4rem] mt-4 mr-42 py-0 h-auto mx-[8rem] align-middle border-none 
-                  xl:shadow-lg xl:rounded-full xl:w-[6rem] xl:mt-10 xl:ml-[-4rem] xl:py-0 md:h-[6rem] md:ml-[-1rem] md:border-none 
-                  md:shadow-lg md:rounded-full md:w-[6rem] md:mt-[5rem]  md:py-0 lg:h-auto lg:align-middle lg:border-none
-                  lg:shadow-lg lg:rounded-full lg:w-[6rem] lg:mt-10 lg:mr-42 lg:py-0 lg:h-auto lg:align-middle lg:border-none"
+                  xl:mt-10 xl:ml-[-0.5rem] xl:py-0 md:h-[6rem] md:w-[6rem] md:ml-[1rem] md:border-none md:mr-16 
+                   md:mt-[2rem]  md:py-0 
+                  lg:shadow-lg lg:rounded-full lg:w-[6rem] lg:mt-10  lg:py-0 lg:h-auto"
                 />
               </div>
             </div>
           </div>
-          <div className=" xl:flex xl:flex-row xl:flex-wrap  md:flex mx-4 md:flex-row  md:flex-wrap justify-center md:justify-center  mt-24 xl:w-[80rem] md:w-[48rem]  md:gap-8 gap-4 xl:gap-12">
+          <div data-aos="fade-right" className="sm:mt-4 lg:mt-10 md:px-8 lg:px-[5rem] flex-col mx-4 sm:grid sm:grid-cols-2 px-4 justify-center md:justify-center  mt-4  sm:gap-x-7 sm:gap-y-2 space-y-4 ">
             <input
               type="text"
               placeholder="First name"
               name="Firstname"
-              className="xl:w-[32rem] xl:h-[3rem] bg-white  bg-opacity-20  md:w-[20rem] md:h-[3rem]  w-[17rem] h-[3rem] placeholder-white mt-8  px-5 rounded-[2rem] "
+              className="  bg-white  bg-opacity-20 w-full  py-1 lg:py-3 placeholder-white mt-6 sm:mt-4  px-5  rounded-[2rem] "
               onChange={event => setValues((prev => ({ ...prev, fname: event.target.value })))}
             />
             <input
               type="text"
               placeholder="Last name"
               name="Lastname"
-              className="xl:w-[32rem] xl:h-[3rem]  md:w-[20rem] md:h-[3rem] bg-white  bg-opacity-20 placeholder-white mt-8 w-[17rem] h-[3rem] px-5 rounded-[2rem]"
+              className=" bg-white lg:py-3   bg-opacity-20 w-full placeholder-white py-1 px-5 rounded-[2rem]"
               onChange={event => setValues((prev => ({ ...prev, lname: event.target.value })))}
             />
 
@@ -357,7 +350,7 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
                 onChange={event => setValues((prev => ({ ...prev, gender: event.value })))}
                 placeholder="Gender"
                 placeholderTextColor="#6495ed"
-                className="xl:w-[32rem] xl:h-[3rem]   text-white md:w-[20rem] md:h-[3rem]   px-5 rounded-[2rem]  mt-8 w-[17rem] h-[3rem] "
+                className="   text-white text-sm rounded-[2rem]  w-full"
               ></Select>
             </div>
 
@@ -371,7 +364,7 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
                 onChange={event => setValues((prev => ({ ...prev, state: event.value })))}
                 placeholder="State"
                 name="State"
-                className="xl:w-[32rem] xl:h-[3rem]  text-white md:w-[20rem] md:h-[3rem]  mt-8 w-[17rem] h-[3rem]    px-5 rounded-[2rem]"
+                className="  text-white  rounded-[2rem]"
               ></Select>
             </div>
 
@@ -380,29 +373,18 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
               placeholder="City"
               name="City"
               pattern="\S+.*"
-              className="xl:w-[32rem] xl:h-[3rem]  bg-white  bg-opacity-20 placeholder-white md:w-[20rem] md:h-[3rem]  mt-8 w-[17rem] h-[3rem]   px-5 rounded-[2rem]"
+              className=" bg-white  bg-opacity-20 placeholder-white lg:py-3   w-full py-1 px-5 rounded-[2rem]"
               onChange={event => setValues((prev => ({ ...prev, city: event.target.value })))}
             />
 
-            <div className="flex flex-wrap xl:w-[32rem]">
+            <div className="flex flex-wrap w-full flex-col">
               <input
                 type="email"
                 name="Email"
                 placeholder="Mail-ID"
-                className="xl:w-[32rem] xl:h-[3rem]  md:w-[20rem] md:h-[3rem]  mt-8 w-[17rem] h-[3rem]  bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
+                className="  bg-white  bg-opacity-20 placeholder-white py-1 lg:py-3 px-5 rounded-[2rem]"
                 pattern="\S+.*"
                 onChange={event => setValues((prev => ({ ...prev, email: event.target.value })))}
-              />
-            </div>
-            <div className="flex flex-wrap xl:w-[32rem]">
-              <input
-                type="text"
-                name="Address"
-                placeholder="Eduacation/Institution Address"
-                aria-multiline="true"
-                pattern="\S+.*"
-                className="xl:w-[32rem] xl:h-[3rem]  md:h-[3rem]  mt-8 w-[17rem] h-[3rem]   md:w-[20rem] h-[5rem] bg-white  bg-opacity-20 placeholder-white px-5 rounded-[2rem]"
-                onChange={event => setValues((prev => ({ ...prev, addr: event.target.value })))}
               />
             </div>
             <input
@@ -410,9 +392,22 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
               name="Edname"
               pattern="\S+.*"
               placeholder="Eduaction/Institution Name"
-              className="xl:w-[32rem] xl:h-[3rem] md:w-[20rem] md:h-[3rem]  mt-8 w-[17rem] h-[3rem]  bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
+              className="w-full py-1  bg-white  bg-opacity-20 placeholder-white lg:py-3  px-5 rounded-[2rem]"
               onChange={event => setValues((prev => ({ ...prev, instAdr: event.target.value })))}
             />
+            <div className="flex flex-wrap  ">
+              <input
+                type="text"
+                name="Address"
+                placeholder="Eduacation/Institution Address"
+                aria-multiline="true"
+                pattern="\S+.*"
+                className=" w-full py-1 bg-white  lg:py-3 bg-opacity-20 placeholder-white px-5 rounded-[2rem]"
+                onChange={(event) =>
+                  setValues((prev) => ({ ...prev, addr: event.target.value }))
+                }
+              />
+            </div>
             <div>
               <Select
                 options={gradelist}
@@ -423,16 +418,16 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
                 onChange={event => setValues((prev => ({ ...prev, grade: event.value })))}
                 placeholder=" Grade"
                 name="Grade"
-                className="xl:w-[32rem] xl:h-[3rem]  text-white md:w-[20rem] md:h-[3rem]  mt-8 w-[17rem] h-[3rem]    px-5 rounded-[2rem]"
+                className="text-white w-full   rounded-[2rem]"
               ></Select>
             </div>
-            <div className="flex flex-wrap xl:w-[32rem]">
+            <div className="flex flex-wrap">
               <input
                 type="text"
                 placeholder="Phone no.. +91"
                 name="phone"
                 pattern="\S+.*"
-                className="xl:w-[32rem] md:w-[20rem] md:h-[3rem]  xl:h-[3rem] bg-white  mt-8 w-[17rem] h-[3rem]  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
+                className="   bg-white lg:py-3   bg-opacity-20 placeholder-white w-full py-1 px-5 rounded-[2rem]"
                 onChange={event => setValues((prev => ({ ...prev, phone: event.target.value })))}
               />
             </div>
@@ -440,23 +435,19 @@ const ProfileEdit = ({ username, photoUrl, electronicMail }) => {
             <input
               type="text"
               placeholder="I heard about Modervate from"
-              className="xl:w-[32rem] md:w-[20rem] md:h-[3rem]  xl:h-[3rem] bg-white  bg-opacity-20 placeholder-white  mt-8 w-[17rem] h-[3rem]  px-5 rounded-[2rem]"
+              className=" w-full py-1  lg:py-3 col-span-full sm:w-1/2 sm:place-self-center bg-white  bg-opacity-20 placeholder-white  px-5 rounded-[2rem]"
             />
-          </div>
-          <div className="xl:flex xl:flex-wrap md:flex md:flex-wrap flex mx-6 pb-6  flex-row place-content-center mr-10  xl:mr-24 gap-12">
-            <div className="xl:w-44 xl:h-12 md:w-44 md:h-12 rounded-xl md:mt-10 xl:before:mt-10 xl:mb-5 md:mb-5  text-center xl:text-2xl md:text-2xl text-xl text-blue font-bold mt-6 border-4 border-blue   bg-white w-[8rem] h-8">
+          </div>  
+          <div className="py-8 flex justify-center items-center gap-4 md:gap-10">
+            <button className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 rounded-xl  px-2 text-center xl:text-xl md:text-xl text-base text-blue font-bold lg:font-extrabold border-4 border-blue   bg-white ">
               Cancel
-            </div>
-            <button
-              type="submit"
-              className="xl:w-44 xl:h-12 md:w-44 md:h-12 rounded-xl md:mt-10 xl:before:mt-10 xl:mb-5 md:mb-5  text-center xl:text-2xl md:text-2xl text-xl text-blue font-bold border-4 border-blue mt-6  bg-white w-[8rem] h-8"
-            >
+            </button>
+            <button type="submit" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 rounded-xl  px-3 text-center xl:text-xl md:text-xl text-base text-blue font-bold lg:font-extrabold border-4 border-blue   bg-white ">
               Save
             </button>
           </div>
           <ToastContainer/>
-
-        </div>
+          </div>
       </form>
     </div>
   );
