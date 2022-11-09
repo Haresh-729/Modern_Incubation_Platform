@@ -1,55 +1,123 @@
 import React from "react";
+import { IconButton } from "rsuite";
+import { ArrowRight, ArrowLeft } from "@rsuite/icons";
+
 
 function Sessions2() {
   return (
-    <div className="bg-cover ml-10 w-full min-h-screen bg-[url('https://i.ibb.co/Smq2X7B/background.png')]">
-      <div className="invisible">hhhhhhhhhhhhhhhhhhhhhhhhhhhh</div>
-      <div className="w-[80rem] h-[8rem] bg-yellow-300 mx-[10rem] bg-gradient-to-t from-white rounded-full">
-        <div>
-          <img src="https://i.ibb.co/x71K8MG/python.png" alt="python" border="0" className=" float float-right mr-32 "/>
-          <h1 className="text-5xl leading-loose text-left ml-8 mt-16 drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] text-blue font-bold">
-            Interactive Session with Python
+    <div className="py-0 px-0">
+      <div className="flex flex-col self-center items-center mt-[4rem] md:mx-4 xl:pt-10 ">
+        <div
+          className="xl:w-[58rem] xl:h-[8rem] w-[19rem] h-[5rem] rounded-full mx-2 bg-yellow-300  bg-gradient-to-t from-white xl:rounded-full
+        md:w-[46rem] md:h-[8rem] xl:mx-[1rem]  md:mx-2  md:rounded-full"
+        >
+          <div>
+            <img
+              src="https://i.ibb.co/x71K8MG/python.png"
+              alt="python"
+              border="0"
+              className=" xl:float xl:float-right xl:mr-32
+              md:float md:float-right md:w-[6rem] w-14 float float-right md:mr-[6rem] xl:w-[7rem] lg:w-[6rem] py-2  "
+            />
+            <h1
+              className="xl:text-4xl xl:leading-loose xl:text-left xl:ml-8 text-[1rem] text-center  text-blue xl:font-bold
+            md:text-3xl md:leading-loose md:text-left md:ml-8 md:py-4 py-6 md:font-bold font-bold"
+            >
+              Interactive Session with Python
+            </h1>
+          </div>
+          <h1
+            className="xl:text-2xl xl:mt-14 xl:ml-10
+          text-black
+          md:text-2xl md:mt-16 mt-[1rem] text-center md:font-semibold md:ml-10 md:text-center "
+          >
+            Get ready with your Python environvement this session will take you
+            to another level
           </h1>
         </div>
 
-        <h1 className="text-3xl mt-10 ml-10 text-black"> 
-          Get ready with your Python environvement this session will take you to another level
-        </h1>
-      </div>
-      <div className="w-[84rem] mt-32 bg-slate-100 flex flex-wrap gap-44  drop-shadow-[0_35px_35px_rgba(0,0,0,0.15)] mx-32 border border-grey h-[16rem] rounded-[4rem]">
-        <div className="ml-10">
-          <img src="https://i.ibb.co/xjmzVT0/Location.png" alt="Location" border="0" className="ml-16 mt-24" />
-          <h1 className="text-xl text-[#7587A4] ">Online through zoom</h1>
-        </div>
-        <div className=" flex flex-wrap w-[32rem]">
-          <input
-            type="text" placeholder="Full name" name="Fullname" className="w-[32rem] h-[3rem] border rounded-[2rem] bg-white mt-8 bg-opacity-20 placeholder-grey  px-5  "/>
-          <input type="email" placeholder="Email" name="Email" className="w-[32rem] h-[3rem] bg-white border rounded-[2rem]  bg-opacity-20 placeholder-grey px-5 "/>
-          <button className="text-2xl text-white  ml-32 text-center py-2  bg-blue w-60 h-14 rounded-lg font-semibold">
-            GET REGISTERED
-          </button>
+        <div
+          className="xl:w-[58rem] xl:mt-40 bg-slate-100 xl:flex xl:flex-wrap xl:gap-[2rem] xl:mx-[1rem]   xl:border border-grey xl:h-[16rem] xl:rounded-[4rem]
+
+        md:w-[44rem] md:mt-32  md:flex md:flex-row md:gap-2   md:border border-grey md:h-[17rem] md:rounded-[4rem] mt-10 md:mx-[2rem]
+
+     w-[16rem] mt-[6rem] flex flex-wrap gap-[1rem]  mx-[2rem] border border-grey h-[24rem] rounded-[1rem]  "
+        >
+          <div className="xl:ml-8  xl:mt-[-2rem] ">
+            <img
+              src="https://i.ibb.co/xjmzVT0/Location.png"
+              alt="Location"
+              border="0"
+              className="xl:ml-12 xl:w-[2rem] mx-[7rem] xl:mt-24
+              md:ml-12 md:mt-20  md:w-[2rem] w-[2rem] "
+            />
+            <h1 className="xl:text-[1rem] md:ml-2 md:text-sm md:text-center mx-[4rem] text-center mt-2 md:leading-tight text-[#7587A4] ">
+              Online through <br /> zoom
+            </h1>
+          </div>
+          <div className=" xl:flex xl:flex-wrap xl:w-[28rem] md:ml-1 md:flex  md:flex-wrap md:w-[24rem]">
+            <input
+              type="text"
+              placeholder="Full name"
+              name="Fullname"
+              className="xl:w-[24rem] xl:ml-[-0.1rem] xl:h-[3rem] xl:border xl:rounded-[2rem] bg-white xl:mt-8 bg-opacity-20 placeholder-grey
+              md:w-[20rem] md:h-[3rem] md:border md:rounded-[2rem] md:ml-[-0.1rem] m-[2rem] mt-[-2rem] rounded-[2rem]  md:mt-16 md:px-5  w-[12rem] "
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              name="Email"
+              className="xl:w-[24rem] xl:h-[3rem] bg-white border xl:rounded-[2rem]   bg-opacity-20 placeholder-grey xl:px-5
+              md:w-[20rem] md:h-[3rem] rounded-[2rem]   w-[12rem] ml-[2rem] mt-[-4] md:rounded-[2rem]  md:px-5 "
+            />
+            <div
+              className="xl:text-2xl text-white  xl:ml-[4rem] xl:text-center xl:py-2  bg-blue-800 xl:w-60 xl:h-14 xl:rounded-lg font-semibold
+            md:text-xl  md:ml-[4rem] md:text-center md:py-2 md:mt-4  md:w-48 md:h-14 md:rounded-lg w-[8rem] mx-[4rem] mt-4  h-[2rem] rounded-lg md:font-semibold"
+            >
+              GET REGISTERED
+            </div>
+          </div>
+          <div className="xl:ml-8 md:ml-[-1rem] xl:mt-[-2rem]">
+            <img
+              src="https://i.ibb.co/qpyPtTS/Timer.png"
+              alt="Timer"
+              border="0"
+              className=" mx-[6rem]  md:w-[2rem] xl:ml-12 xl:w-[2rem] xl:mt-24
+              md:ml-10 md:mt-20"
+            />
+            <h1 className="xl:text-[1rem] md:ml-2  mx-[4rem] md:text-sm md:text-center  text-center md:leading-tight text-[#7587A4] ">
+            Time :<br /> 10:00 am IST
+            </h1>
+          </div>
         </div>
 
-        <div className="">
-          <img src="https://i.ibb.co/qpyPtTS/Timer.png" alt="Timer" border="0" className=" mt-24 ml-14"/>
-          <h1 className="text-xl text-[#7587A4]  ">Time : 10:00 am IST</h1>
+        <div
+          className="xl:w-[58rem] xl:mx-[1rem] xl:mt-8 bg-slate-100  mt-4   border border-grey xl:h-[21rem] xl:rounded-[4rem]
+        md:w-[44rem] md:mt-8 md:mx-[1rem] md:h-[22rem] md:rounded-[4rem] rounded-[2rem] w-[19rem] ml-2"
+        >
+          <h1
+            className="text-blue xl:text-center xl:text-2xl xl:font-bold xl:mx-[20rem] xl:py-4
+          md:text-2xl md:font-bold text-lg text-center md:mx-[14rem] md:py-4"
+          >
+            About the speaker
+          </h1>
+          <img
+            src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-4-470x470.png"
+            alt="..."
+            class="shadow-lg xl:rounded-full xl:w-[8rem] xl:mx-[24rem] xl:mr-56 xl:h-auto xl:align-middle md:rounded-full md:w-[8rem] md:mx-[16rem] md:mr-56 md:h-auto v:align-middle border-none rounded-full w-[6rem] mx-[6rem] mr-56 h-auto align-middle rounded-full"
+          />
+          <h1 className="text-[#EF4A37] xl:text-center xl:mx-[20rem] xl:text-2xl  md:mx-[14rem] md:text-2xl text-lg text-center">
+            Mr. Dennis Ritche
+          </h1>
+          <p
+            className="xl:text-xl xl:leading-normal text-[#7587A4] xl:text-center xl:mx-[8rem]
+          md:text-xl md:leading-normal md:text-center md:mx-[2rem] text-sm text-center pb-[2rem] "
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Praesentium, id. Nemo tenetur voluptatum fugiat debitis ut aliquam
+            neque?
+          </p>
         </div>
-      </div>
-      <div className="w-[84rem] mt-8 bg-slate-100   drop-shadow-[0_35px_35px_rgba(0,0,0,0.15)] mx-32 border border-grey h-[24rem] rounded-[4rem]">
-        <h1 className="text-blue text-3xl font-bold mx-[32rem] py-4">
-          About the speaker
-        </h1>
-        <img src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-4-470x470.png" alt="..." class="shadow-lg rounded-full w-[8rem] mx-[36rem] mr-56 h-auto align-middle border-none"
-        />
-        <h1 className="text-[#EF4A37] mx-[32rem] text-3xl">
-          Mr. Dennis Ritche
-        </h1>
-        <p className="text-2xl leading-normal text-[#7587A4] text-center mx-[8rem]">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium,
-          id. Nemo tenetur voluptatum distinctio veritatis, laboriosam cumque
-          nihil vero laborum quod minus ab perferendis blanditiis, fugiat
-          debitis ut aliquam neque?
-        </p>
       </div>
     </div>
   );

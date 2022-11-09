@@ -23,7 +23,7 @@ const Sidebar = () => {
     "transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 flex items-center gap-5 pl-1 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
 
   return (
-    <div className="ml-1 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 ">
+    <div className="ml-1  h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 ">
       {activeMenu && (
         <>
           <div className="flex justify-between items-center">
@@ -38,7 +38,15 @@ const Sidebar = () => {
                 ModernVate
               </div>
             </Link>
-            <TooltipComponent content="Menu" position="BottomCenter">
+            <button
+                type="button"
+                onClick={() => setActiveMenu(!activeMenu)}
+                style={{ color: currentColor }}
+                className="absolute ml-[14rem] text-xl rounded-full p-3 hover:bg-[#AABABE] mt-4 block md:hidden"
+              >
+                <MdOutlineCancel />
+              </button>
+            {/* <TooltipComponent content="Menu" position="BottomCenter">
               <button
                 type="button"
                 onClick={() => setActiveMenu(!activeMenu)}
@@ -47,7 +55,7 @@ const Sidebar = () => {
               >
                 <MdOutlineCancel />
               </button>
-            </TooltipComponent>
+            </TooltipComponent> */}
           </div>
           <div className="mt-10 text-black ">
             {links.map((item) => (

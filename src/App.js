@@ -180,10 +180,7 @@ const App = () => {
         {user && user.displayName ? (
           <div className={currentMode === "Dark" ? "dark" : ""}>
             <div className="flex relative dark:bg-main-dark-bg">
-              <div
-                className="fixed right-4 bottom-4"
-                style={{ zIndex: "1000" }}
-              >
+              <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
                 <TooltipComponent content="Settings" position="Top">
                   {/* <button
                   type="button"
@@ -267,6 +264,11 @@ const App = () => {
                               />
                             ))}
                           />
+
+                          
+
+
+
                           <Route
                             path="/Dashboard"
                             element={
@@ -469,14 +471,36 @@ const App = () => {
                       {/* charts  */}
                       <Route path="/pie" element={<Pie />} />
                       <Route path="/Editor" element={<Editor />} />
-                      <Route path="/Post1" element={<Post1 />} />
+                      
                       <Route path="/pbadges" element={<Badges />} />
                       <Route path="/uploadv" element={<VScroll2 />} />
                       <Route path="/cpdetails" element={<CPDetails />} />
+                      <Route
+                            path="/Post1"
+                            element={ideas.map(({ id, data }) => (
+                              <Post1
+                                key={id}
+                                ideaId={id}
+                                user={user}
+                                username={data.userName}
+                                title={data.title}
+                                description={data.desc}
+                                pdfFile={data.pdfFile}
+                                statusLogo="https://i.ibb.co/W3Y9rx5/under-Verification.png"
+                                status={data.status}
+                                category={data.category} // category of the user who uploaded the idea
+                                photoUrl={data.photoUrl}
+                                cat={category} // current user category
+                              />
+                            ))}
+                          />
+
+
+                          {/* <Route path="/Post1" element={<Post1 />} /> */}
                     </>
                   </Routes>
                 </div>
-                {/* <Footer /> */}
+                <Footer />
               </div>
             </div>
           </div>
