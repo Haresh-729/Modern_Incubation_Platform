@@ -7,7 +7,7 @@ import { ArrowRightLine } from "@rsuite/icons";
 
 function Verification() {
     return (
-        <div className= "rounded-xl">
+        <div data-aos="fade-right" className= "rounded-xl">
     <div className="flex justify-center font-serif  text-red-600 font-extrabold text-lg md:text-xl lg:text-2xl xl:text-3xl mt-[3rem] pt-3  md:mt-[1rem]">
         Verification Steps
     </div>

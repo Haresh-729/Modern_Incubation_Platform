@@ -7,11 +7,14 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
-const Profile = ({username,photoUrl}) => {
+const Profile = ({ username, photoUrl }) => {
   const navigate = useNavigate();
   const handleEdit = () => {
-
     navigate("/Profile-Edit");
+  };
+
+  const handlenavigate = () => {
+    navigate("/pbadges");
   };
 
   function toggleText1() {
@@ -51,14 +54,14 @@ const Profile = ({username,photoUrl}) => {
   };
 
   return (
-    <div className="mx-3">
+    <div data-aos="fade-right" className="select-none mx-3">
       <div className=" md:mx-8 lg:mx-6 md:mt-6  mt-20   xl:grid xl:grid-cols-6 xl:grid-rows-2 xl:gap-4 xl:mx-16 xl:mt-6 ">
         {/* div 1 */}
         <div className="w-full mb-1 h-20 md:col-start-1 md:col-span-6 md:row-start-1 md:row-span-1 md:mb-1 md:h-32   lg:col-start-1 lg:col-span-6 lg:row-start-1 lg:row-span-1 lg:mb-1 lg:h-32    xl:col-start-1 xl:col-span-6 xl:row-start-1 xl:row-span-1 xl:mb-1 xl:h-32 bg-[url('https://i.ibb.co/LYQ3cs3/bg.png')] bg-cover rounded-lg  bg-local static justify-items-stretch">
           <IconButton
             icon={<Edit />}
             onClick={handleEdit}
-            className="xl:ml-[8rem] invisible xl:visible absolute z-50 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 xl:w-[2.5rem] xl:h-[2rem] xl:pb-[2.5rem] text-center justify-center font-extrabold font-poppins xl:text-2xl text-black bg-white/50 border-2 border-white shadow-xl xl:rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white xl:mt-[10rem] xl:mr-[-5rem]"
+            className="xl:ml-[9rem] md:ml-[9rem] md:text-[1.5rem] md:mt-[9rem] md:w-[3rem] md:h-[3rem] lg:mt-[9rem] lg:ml-[9rem] lg:h-[3rem] lg:w-[3rem] lg:text-[1.5rem] rounded-[3rem] h-[2rem] w-[2rem] ml-[5.5rem] mt-[5rem] text-[1rem] xl:visible absolute z-50 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 xl:w-[3rem] xl:h-[3rem]  text-center justify-center font-extrabold font-poppins xl:text-2xl text-black bg-white/80 border-2 border-white shadow-xl xl:rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white xl:mt-[9rem]"
           ></IconButton>
           <img
             src={photoUrl}
@@ -71,7 +74,7 @@ const Profile = ({username,photoUrl}) => {
         {/* div 2 */}
         <div className="w-full md:w-full lg:w-full md:h-auto h-14 mb-4 bg-indigo-400 bg-cover rounded-lg xl:h-24 xl:col-start-1 xl:col-span-6 xl:row-start-2 xl:row-span-1  xl:bg-indigo-400 xl:bg-cover xl:rounded-lg">
           <div className="flex items-start pl-32 md:pl-48 lg:pl-48 xl:pl-48">
-            <h1 className="text-[#ffffff]  text-2xl md:text-5xl lg:text-5xl xl:text-5xl p-5 font-semibold ">
+            <h1 className="text-[#ffffff] select-none text-1xl md:text-3xl lg:text-4xl p-5 font-semibold ">
               {username}
             </h1>
           </div>
@@ -126,7 +129,7 @@ const Profile = ({username,photoUrl}) => {
             <button
               onClick={toggleText1}
               id="button1"
-              className=" xl:w-[4rem] ml-3 mb-2  xl:mr-4 xl:ml-8 rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm xl:text-base xl:font-medium text-white shadow-sm hover:bg-indigo-700 "
+              className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 xl:w-[4rem] ml-3 mb-2  xl:mr-4 xl:ml-8 rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm xl:text-base xl:font-medium text-white shadow-sm hover:bg-indigo-700 "
             >
               More
             </button>
@@ -137,14 +140,14 @@ const Profile = ({username,photoUrl}) => {
         <div className="rounded-lg mt-2 md:col-start-1 md:col-span-4 md:row-start-2 md:row-end-4  md:rounded-[2rem] lg:col-start-1 lg:col-span-4 lg:row-start-2 lg:row-end-4  lg:rounded-[2rem]  xl:col-start-1 xl:col-span-4 xl:row-start-2 xl:row-end-4  xl:rounded-[2rem] bg-indigo-400 ">
           <div className=" flex items-center">
             <MdChevronLeft
-              className="opacity-50 bg-white rounded-sm ml-2 mr-2  cursor-pointer hover:opacity-100"
+              className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 opacity-50 bg-white rounded-sm ml-2 mr-2  cursor-pointer hover:opacity-100"
               onClick={slideLeft}
               size={40}
             />
 
             <div
               id="slider"
-              className=" bg-cover rounded-[1rem] overflow-x-scroll scroll whitespace-nowrap scroll-smooth no-scrollbar xl:no-scrollbar 2xl:no-scrollbar"
+              className=" bg-cover rounded-[1rem] overflow-x-scroll scroll whitespace-nowrap scrollbar-hide scroll scroll-smooth "
             >
               <h1 className="sticky left-0 font-bold text-lg pt-3 xl:text-2xl xl:p-4">
                 Enrolled Sessions
@@ -169,7 +172,7 @@ const Profile = ({username,photoUrl}) => {
               ))}
             </div>
             <MdChevronRight
-              className="opacity-50 bg-white rounded-sm mr-2 ml-2 cursor-pointer hover:opacity-100"
+              className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 opacity-50 bg-white rounded-sm mr-2 ml-2 cursor-pointer hover:opacity-100"
               onClick={slideRight}
               size={40}
             />
@@ -179,7 +182,7 @@ const Profile = ({username,photoUrl}) => {
 
         {/* Badges */}
 
-        <div className="mt-2 md:mt-0 lg:mt-0 xl:mt-0 h-[12rem] md:h-[32rem]  lg:h-[32rem] xl:h-[37rem] md:col-start-5 md:col-end-7 md:row-start-1 md:row-end-4     lg:col-start-5 lg:col-end-7 lg:row-start-1 lg:row-end-4     xl:col-start-5 xl:col-end-7 xl:row-start-1 xl:row-end-4 rounded-[1rem]  bg-slate-200 overflow-y-scroll   ">
+        <div className="mt-2 md:mt-0 lg:mt-0 xl:mt-0 h-[12rem] md:h-[32rem]  lg:h-[32rem] xl:h-[37rem] md:col-start-5 md:col-end-7 md:row-start-1 md:row-end-4     lg:col-start-5 lg:col-end-7 lg:row-start-1 lg:row-end-4     xl:col-start-5 xl:col-end-7 xl:row-start-1 xl:row-end-4 rounded-[1rem]  bg-slate-200 overflow-y-scroll">
           <div className="sticky top-0 bg-slate-300 rounded-md  m-0">
             <h3 className=" md:p-4 lg:p-4 xl:p-4 pl-6 py-3 md:text-2xl lgxl::text-2xl xl:text-2xl text-lg font-bold text-grey ">
               Badges Earned
@@ -189,7 +192,7 @@ const Profile = ({username,photoUrl}) => {
           {badges.map((item) => (
             <div
               key={item.name}
-              className=" flex flex-col items-center justify-center md:flex md:justify-start md:items-start  lg:flex lg:justify-start lg:items-start   xl:flex xl:justify-start xl:items-start"
+              className=" flex flex-col items-center justify-center md:flex md:justify-start md:items-start  lg:flex lg:justify-start lg:items-start   xl:flex xl:justify-start xl:items-start "
             >
               {item.badges.map((badge) => (
                 <NavLink
@@ -197,15 +200,27 @@ const Profile = ({username,photoUrl}) => {
                   key={badge.name}
                   className=" p-4 mb-8 "
                 >
-                  <div className="flex flex-col md:flex md:flex-row md:gap-2 lg:flex lg:flex-row lg:gap-4  xl:flex xl:flex-row xl:gap-4">
-                    <span className=""> {badge.icon}</span>
+                  <div className="flex flex-row gap-4 md:flex md:flex-row md:gap-2 lg:flex lg:flex-row lg:gap-4  xl:flex xl:flex-row xl:gap-4 ">
+                    <span className="w-[5rem] transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110">
+                      {" "}
+                      {badge.icon}
+                    </span>
 
-                    <span className="capitalize  ">{badge.name}</span>
+                    <span className="capitalize mt-[2rem] md:mt-[3rem] lg:mt-[2rem] xl:mt-[3rem] font-bold">
+                      {badge.name}
+                    </span>
                   </div>
                 </NavLink>
               ))}
             </div>
           ))}
+          <button
+            onClick={handlenavigate}
+            id="button1"
+            className="ml-[14rem] md:ml-[7rem] lg:ml-[12rem] transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 xl:w-[4rem] mb-2  xl:mr-4 xl:ml-8 rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm xl:text-base xl:font-medium text-white shadow-sm hover:bg-indigo-700 "
+          >
+            More
+          </button>
         </div>
 
         {/* badges end */}

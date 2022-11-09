@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function VScroll1() {
     return (
-        <div className=" rounded-xl">
+        <div data-aos="fade-up" className="rounded-xl">
         <div className="flex justify-start mt-[3rem] md:mt-[0rem] text-sky-900 font-bold font-serif lg:text-xl lg:pl-10 lg:pt-6 xl:text-xl xl:pl-10 xl:pt-6 md:text-xl md:pl-10 md:pt-6 sm:text-lg sm:pl-8 sm:pt-4 text-lg pl-6 pt-4">
             Verification
         </div>
@@ -26,7 +26,7 @@ function VScroll1() {
         </div>
     
         <div className="flex flex-wrap justify-center gap-4 mt-10 mb-10">
-            <div className="bg-[#6788D3] bg-opacity-40 rounded-xl">
+            <div data-aos="fade-up" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 bg-[#6788D3] bg-opacity-40 rounded-xl">
                 <div className="flex items-end justify-end">
                     <img
                         src="https://i.ibb.co/jwd9RMq/image.png"
@@ -43,7 +43,7 @@ function VScroll1() {
                     {/* column 1 */}
                 </div>
                 <span className="lg:text-xl text-blue font-poppins font-bold flex justify-center pt-4">Account Created</span>
-                <div>
+                <div >
                     <div className="flex justify-around items-center px-8 pt-6">
                         <span className="lg:text-lg text-blue font-bold h-8 w-8 text-center rounded-full border-blue border-2">
                             1
@@ -64,7 +64,7 @@ function VScroll1() {
             </div>
     
             {/* column 2 */}
-            <div className="bg-[#6788D3] bg-opacity-40 rounded-xl">
+            <div data-aos="fade-up" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 bg-[#6788D3] bg-opacity-40 rounded-xl">
                 <div className="flex items-end justify-end">
                     <img
                         src="https://i.ibb.co/5K0PWXt/image.png"
@@ -107,7 +107,7 @@ function VScroll1() {
             </div>
     
             {/* column 3 */}
-            <div className="bg-[#6788D3] bg-opacity-40 rounded-xl">
+            <div data-aos="fade-up" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 bg-[#6788D3] bg-opacity-40 rounded-xl">
                 <div className="flex items-end justify-end">
                     <img
                         src="https://i.ibb.co/828jFbL/image.png"
@@ -130,8 +130,8 @@ function VScroll1() {
                             Upload Documents
                         </span>
                     </div>
-                    <div className="lg:mt-4 flex">
-                        <Link to='' className="font-bold mx-auto bg-blue rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-white hover:border-white border-4">
+                    <div className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 lg:mt-4 flex">
+                        <Link to='/uploadv' className="font-bold mx-auto bg-blue rounded-full lg:px-10 md:px-6 px-4 lg:py-1 md:py-1 py-1 text-white hover:border-white border-4">
                             Upload
                         </Link>
                     </div>
@@ -147,7 +147,7 @@ function VScroll1() {
             </div>
     
             {/* column 4 */}
-            <div className="bg-[#6788D3] bg-opacity-40 rounded-xl">
+            <div data-aos="fade-up" className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 bg-[#6788D3] bg-opacity-40 rounded-xl">
                 <div className="flex items-end justify-end">
                     <img
                         src="https://i.ibb.co/mX0WPNb/image.png"
@@ -182,7 +182,7 @@ function VScroll1() {
             </div>
     
         </div>
-    </div>
+        </div>
     
     )
 }

@@ -3,6 +3,7 @@ import { data } from "./CPData";
 import head from "./../assets/CPHead.png";
 import { IconButton } from "rsuite";
 import { ArrowRight, ArrowLeft } from "@rsuite/icons";
+import { Link } from "react-router-dom";
 
 function CurrentProjects() {
   const slideLeft = () => {
@@ -16,68 +17,74 @@ function CurrentProjects() {
   };
 
   return (
-    <div className=" flex w-screen h-full">
-      <div className="xl:flow-root flow-root xl:flex-col flex-col items-end justify-center xl:mx-3 mx-3 xl:pt-8 pt-4 ">
-        <div className="xl:flex-col flex-col xl:mx-5 mx-1 xl:grid xl:grid-cols-16 grid-cols-16 md:grid md:grid-cols-16  ">
-          <div className="xl:row-span-full mt-[3rem] md:mt-[0rem] xl:col-start-3 md:row-span-full  md:col-start-3 xl:h-[20rem] md:h-[16rem] h-[8rem] xl:col-end-12 md:col-end-12 xl:self-center self-center xl:pr-[4rem]  p-[1rem] xl:mr-[5rem] text-[#EF4A37] xl:text-right text-center bg-gradient-to-tr to-blue-500 via-[#7CD4FD] from-[#0589c7] xl:rounded-[4rem] rounded-[3rem]">
-            <h1 className="xl:mt-[3rem] md:mt-[2rem]  xl:text-3xl md:text-2xl text-sm xl:font-bold font-semibold poppins">
-              It takes half your life before you
-              <br />
-              discover life is ado-it-yourself project.
-            </h1>
-            <h1 className="xl:mt-[4rem] xl:text-2xl md:text-xl  text-xs pt-4 font-bold text-[#454951] font-poppins">
-              Get your idea selected so that you can find
-              <br />
-              yourself in this section
-            </h1>
-          </div>
-          <div className="  flex justify-center lg:justify-start items-center xl:row-span-full xl:w-[80rem] md:w-[20rem]  xl:h-[20rem] xl:col-span-9 xl:col-end-11 xl:self-center xl:p-4 md:p-2">
-            <img
-              src={head}
-              className="xl:w-[30rem] md:w-[20rem] lg:w-[25rem] w-[15rem]"
-              alt="Task-imgage"
-            />
+    <div data-aos="fade-right" className="select-none">
+      <div className="xl:flow-root flow-root xl:flex-col flex-col  justify-center xl:mx-1 mx-3 xl:pt-8 pt-4 ">
+        <div className=" xl:mx-5 mx-1 flex justify-start items-center ">
+          <div className="flex flex-col font-serif md:flex-row mt-[3rem] md:mt-[0rem] md:justify-between justify-center items-center xl:h-[15rem] md:h-[16rem] h-[15rem] w-full xl:self-center s  p-[1rem]  text-[#EF4A37] lg:text-right text-center bg-gradient-to-tr to-blue-500 via-[#7CD4FD] from-[#0589c7] xl:rounded-[4rem] rounded-[3rem]">
+            <div>
+              <img
+                src={head}
+                className="xl:w-[18rem] md:w-[20rem] lg:w-[25rem] w-[10rem]"
+                alt="Task-imgage"
+              />
+            </div>
+            <div>
+              <h1 className=" md:mt-[2rem]  xl:text-2xl md:text-2xl text-sm xl:font-bold font-semibold poppins">
+                It takes half your life before you
+                <br />
+                discover life is ado-it-yourself project.
+              </h1>
+              <h1 className=" xl:text-2xl md:text-xl  text-sm pt-4 font-bold text-[#454951] font-poppins">
+                Get your idea selected so that you can find
+                <br />
+                yourself in this section
+              </h1>
+            </div>
           </div>
         </div>
 
-        <div className="flex items-center pt-5  xl:mt-[3rem] ">
-          <IconButton
-            icon={<ArrowLeft />}
-            onClick={slideLeft}
-            className="xl:ml-[8rem] xl:visible absolute z-50 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 xl:w-[4rem] xl:h-[3rem] xl:pb-[4rem] text-center justify-center font-extrabold font-poppins xl:text-5xl text-black bg-white/30 border-2 border-white shadow-xl xl:rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white "
-          ></IconButton>
-          <div
-            id="slider"
-            className=" overflow-x-scroll  xl:no-scrollbar scroll-smooth  xl:w-[75rem] lg:w-[64rem] w-[44rem] xl:mx-[12.4rem] mx-[2.3rem] relative  flex items-center"
-          >
-            {data.map((item) => (
-              <div className="xl:flex xl:flex-col xl:items-center  ">
-                <div className="transition ease-in-out delay-150 hover:shadow-2xl  xl:relative hover:scale-10 shadow-md items-center justify-center xl:flex xl:m-2 mb-4 xl:w-[18rem] md:w-[16rem]  w-[13.8rem] xl:h-[25rem] md:h-[20rem]   bg-white/30 xl:rounded-[5rem] mr-2 rounded-[2rem] border-2 border-offwhite">
-                  <div className="flex flex-col items-center justify-center">
-                    <h1 className="xl:flex xl:text-[1.7rem] md:text-[1.3rem] text-[1rem] my-6 mx-2 text-center font-bold poppins text-[#EFA451]">
-                      {item.id}
-                    </h1>
-                    <img
-                      className="xl:w-[7rem] w-[6rem] xl:mt-[1rem] m-2"
-                      src={item.img}
-                      alt="profile"
-                    />
-                    <h1 className="xl:float-left xl:text-[1.5rem] xl:pl-[-2rem] font-normal poppins text-center align-center  text-black">
-                      {item.td}
-                    </h1>
-                    <button className=" transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 xl:w-[12rem] xl:mt-[3rem] xl:mb-[2rem] px-2 xl:h-12 xl:px-4 text-base font-extrabold font-poppins xl:text-2xl text-white bg-[#0139B5] xl:rounded-[3rem] m-4 rounded-[0.5rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
-                      DETAILS
-                    </button>
+        <div className="flex items-center pt-4 justify-center ">
+          <div className="flex items-center justify-between ">
+            <IconButton
+              icon={<ArrowLeft />}
+              onClick={slideLeft}
+              className="  xl:visible xl:rounded-[5rem] xl:w-[3rem] xl:h-[3rem] absolute z-50 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110  pb-1 text-center justify-center font-extrabold font-poppins xl:text-3xl text-black bg-white/30 border-2 border-white shadow-xl  hover:bg-[#0589c7d3] hover:border-0 hover:text-white "
+            ></IconButton>
+            <div className="flex justify-center items-center lg:m-2">
+              <div
+                id="slider"
+                className=" overflow-x-scroll scrollbar-hide scroll-smooth  lg:w-[55rem] xl:w-[60rem] md:w-[38rem] w-[18rem] xl:mx-[2rem]  relative  flex items-center"
+              >
+                {data.map((item) => (
+                  <div className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 xl:flex  xl:flex-col xl:items-center  ">
+                    <div className="  transition ease-in-out delay-150 hover:shadow-2xl  xl:relative hover:scale-10 shadow-md items-center justify-center xl:flex mb-4  md:w-[15rem]  w-[13.8rem]  md:h-[20rem]   bg-white/30 xl:rounded-[3rem] mr-2 rounded-[2rem] border-2 border-offwhite">
+                      <div className="flex flex-col items-center justify-center">
+                        <h1 className="xl:flex md:text-[1.3rem] text-[1rem] my-6 mx-2 text-center font-bold poppins text-[#EFA451]">
+                          {item.id}
+                        </h1>
+                        <img
+                          className=" w-[6rem]  m-2"
+                          src={item.img}
+                          alt="profile"
+                        />
+                        <h1 className="xl:float-left  xl:pl-[-2rem] font-normal poppins text-center align-center  text-black">
+                          {item.td}
+                        </h1>
+                        <Link to="/cpdetails"  className=" transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110   px-2 xl:py-2 xl:px-4 text-base font-extrabold font-poppins  text-white bg-[#0139B5] xl:rounded-[3rem] m-4 rounded-[0.5rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
+                          DETAILS
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <IconButton
+              icon={<ArrowRight />}
+              onClick={slideRight}
+              className="  xl:visible  z-50 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 xl:w-[3rem] xl:h-[3rem] pb-1 text-center justify-center font-extrabold font-poppins xl:text-3xl text-black bg-white/30 border-2 border-white shadow-xl xl:rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white"
+            ></IconButton>
           </div>
-          <IconButton
-            icon={<ArrowRight />}
-            onClick={slideRight}
-            className="xl:ml-[86rem] right-4 absolute z-50 invisible xl:visible transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 xl:w-[4rem] xl:h-[3rem] xl:pb-[4rem] text-center justify-center font-extrabold font-poppins xl:text-5xl text-black bg-white/30 border-2 border-white shadow-xl xl:rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white "
-          ></IconButton>
         </div>
       </div>
     </div>

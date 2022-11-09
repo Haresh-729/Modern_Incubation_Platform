@@ -10,7 +10,7 @@ function Dashboard({username,maturityResult}){
   return (
 
 
-    <div className='select-none flex flex-col justify-center items-center' >
+    <div data-aos="zoom-in" className='select-none flex flex-col justify-center items-center' >
       {/* div 1 - containing image */}
       <div className="flex-col mt-20 md:mt-8 mx-4 h-2/4 lg:w-4/5 md:w-4/5 xl:w-4/5 sm:w-4/5 mb-7 lg:ml-20   bg-[url('https://i.ibb.co/LYQ3cs3/bg.png')] bg-cover rounded-lg">
         <div className="xl:flex xl:gap-3 lg:flex lg:gap-3 ">

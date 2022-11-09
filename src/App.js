@@ -54,6 +54,8 @@ import GprofileEdit from "./Group/GprofileEdit";
 import CPDCreate from "./Group/CPDCreate";
 import GSidebar from "./Group/GSidebar";
 import GProfile from "./Group/GProfile";
+import Badges from "./components/Badges";
+import CPDetails from "./components/CPDetails";
 
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -161,10 +163,16 @@ const App = () => {
   }, [userId]);
 
   useEffect(() => {
-    onSnapshot(collection(db, "sessions"), orderBy("timestamp", "desc"), (snapshot) => {
-      setSessions(snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })))
-    })
-  }, [])
+    onSnapshot(
+      collection(db, "sessions"),
+      orderBy("timestamp", "desc"),
+      (snapshot) => {
+        setSessions(
+          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+        );
+      }
+    );
+  }, []);
 
   return (
     <div className="bg-[url('https://i.ibb.co/Smq2X7B/background.png')] bg-cover ">
@@ -261,7 +269,12 @@ const App = () => {
                           />
                           <Route
                             path="/Dashboard"
-                            element={<GroupDashboard username={user.displayName} maturityResult={maturityResult} />}
+                            element={
+                              <GroupDashboard
+                                username={user.displayName}
+                                maturityResult={maturityResult}
+                              />
+                            }
                           />
                           <Route
                             path="/Create-Session"
@@ -275,24 +288,19 @@ const App = () => {
                             path="/UpdateSession"
                             element={<UpdateSession />}
                           />
-                        <Route
-                        path="/Profile"
-                        element={
-                          <GProfile />
-                        }
-                      />
+                          <Route path="/Profile" element={<GProfile />} />
                         </>
                       ) : (
                         <>
                           <Route
-                        path="/profile"
-                        element={
-                          <Profile
-                            username={user.displayName}
-                            photoUrl={photoUrl}
+                            path="/profile"
+                            element={
+                              <Profile
+                                username={user.displayName}
+                                photoUrl={photoUrl}
+                              />
+                            }
                           />
-                        }
-                      />
                         </>
                       )}
 
@@ -308,7 +316,6 @@ const App = () => {
                       />
 
                       {/* profile */}
-                      
 
                       {/* apps  */}
                       <Route path="/To-Do-List" element={<Std />} />
@@ -320,35 +327,40 @@ const App = () => {
                         element={<CurrentProjects />}
                       />
                       <Route path="/Tasks" element={<Tasks />} />
-                      <Route path="/Session" element={sessions.map(({ id, data }) => (
-                        <Sessions1
-                          key={id}
-                          sessionId={id}
-                          user={user}
-                          photoUrl={photoUrl}
-                          sname={data.sname}
-                          host={data.host}
-                          heldby={data.heldby}
-                          simg={data.simg}
-                          completed={data.completed}
-                          desc={data.desc}
-                        />
-                      ))} />
-                      <Route path="/Session-Details" element={sessions.map(({ id, data }) => (
-                        <Sessions2
-                          key={id}
-                          sessionId={id}
-                          user={user}
-                          himg={data.himg}
-                          sname={data.sname}
-                          host={data.host}
-                          heldby={data.heldby}
-                          simg={data.simg}
-                          completed={data.completed}
-                          desc={data.desc}
-
-                        />
-                      ))} />
+                      <Route
+                        path="/Session"
+                        element={sessions.map(({ id, data }) => (
+                          <Sessions1
+                            key={id}
+                            sessionId={id}
+                            user={user}
+                            photoUrl={photoUrl}
+                            sname={data.sname}
+                            host={data.host}
+                            heldby={data.heldby}
+                            simg={data.simg}
+                            completed={data.completed}
+                            desc={data.desc}
+                          />
+                        ))}
+                      />
+                      <Route
+                        path="/Session-Details"
+                        element={sessions.map(({ id, data }) => (
+                          <Sessions2
+                            key={id}
+                            sessionId={id}
+                            user={user}
+                            himg={data.himg}
+                            sname={data.sname}
+                            host={data.host}
+                            heldby={data.heldby}
+                            simg={data.simg}
+                            completed={data.completed}
+                            desc={data.desc}
+                          />
+                        ))}
+                      />
                       <Route path="/Maturity" element={<Maturity1 />} />
                       <Route path="/Quiz" element={<Quiz />} />
                       <Route
@@ -420,7 +432,7 @@ const App = () => {
                       <Route path="/chat" element={<Chat />} />
                       <Route
                         path="/Verification"
-                        element={[<Verification />, <VScroll1 />, <VScroll2 />]}
+                        element={[<Verification />, <VScroll1 />]}
                       />
                       <Route
                         path="/Idea-Upload"
@@ -458,6 +470,9 @@ const App = () => {
                       <Route path="/pie" element={<Pie />} />
                       <Route path="/Editor" element={<Editor />} />
                       <Route path="/Post1" element={<Post1 />} />
+                      <Route path="/pbadges" element={<Badges />} />
+                      <Route path="/uploadv" element={<VScroll2 />} />
+                      <Route path="/cpdetails" element={<CPDetails />} />
                     </>
                   </Routes>
                 </div>
