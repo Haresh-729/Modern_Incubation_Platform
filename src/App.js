@@ -343,6 +343,7 @@ const App = () => {
                             simg={data.simg}
                             completed={data.completed}
                             desc={data.desc}
+                            himg={data.himg}
                           />
                         ))}
                       />
@@ -352,9 +353,10 @@ const App = () => {
                           <Sessions2
                             key={id}
                             sessionId={id}
-                            user={user}
+                            user={user.uid}
                             himg={data.himg}
                             sname={data.sname}
+                            slink={data.slink}
                             host={data.host}
                             heldby={data.heldby}
                             simg={data.simg}
@@ -479,18 +481,17 @@ const App = () => {
                             path="/Post1"
                             element={ideas.map(({ id, data }) => (
                               <Post1
-                                key={id}
-                                ideaId={id}
-                                user={user}
-                                username={data.userName}
-                                title={data.title}
-                                description={data.desc}
-                                pdfFile={data.pdfFile}
-                                statusLogo="https://i.ibb.co/W3Y9rx5/under-Verification.png"
-                                status={data.status}
-                                category={data.category} // category of the user who uploaded the idea
-                                photoUrl={data.photoUrl}
-                                cat={category} // current user category
+                              key={id}
+                              ideaId={id}
+                              user={user}
+                              username={data.userName}
+                              title={data.title}
+                              description={data.desc}
+                              pdfFile={data.pdfFile}
+                              status={data.status}
+                              photoUrl={data.photoUrl}
+                              cmntPhoto={photoUrl}
+                              cat={data.cat}
                               />
                             ))}
                           />

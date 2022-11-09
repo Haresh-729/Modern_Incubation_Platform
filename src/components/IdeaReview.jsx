@@ -383,7 +383,7 @@ function IdeaReview({
                                 <div>
                                   <img
                                     className="h-10 w-10 rounded-full mr-3"
-                                    src="https://i.ibb.co/smDcGmp/profile.png"
+                                    src={data.photoUrl}
                                     alt="Profie"
                                   />
                                 </div>

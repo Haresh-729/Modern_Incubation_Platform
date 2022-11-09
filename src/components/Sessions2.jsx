@@ -1,11 +1,13 @@
 import React from "react";
 import { IconButton } from "rsuite";
 import { ArrowRight, ArrowLeft } from "@rsuite/icons";
+import {db} from "../firebase";
+import {deleteDoc, doc} from "firebase/firestore";
 
 
-function Sessions2() {
+function Sessions2({sessionId, user, himg, sname, host, heldby,desc, simg, completed,slink}) {
   return (
-    <div className="py-0 px-0">
+    <div key={sessionId} className="py-0 px-0">
       <div className="flex flex-col self-center items-center mt-[4rem] md:mx-4 xl:pt-10 ">
         <div
           className="xl:w-[58rem] xl:h-[8rem] w-[19rem] h-[5rem] rounded-full mx-2 bg-yellow-300  bg-gradient-to-t from-white xl:rounded-full
@@ -13,7 +15,7 @@ function Sessions2() {
         >
           <div>
             <img
-              src="https://i.ibb.co/x71K8MG/python.png"
+              src={simg}
               alt="python"
               border="0"
               className=" xl:float xl:float-right xl:mr-32
@@ -23,7 +25,7 @@ function Sessions2() {
               className="xl:text-4xl xl:leading-loose xl:text-left xl:ml-8 text-[1rem] text-center  text-blue xl:font-bold
             md:text-3xl md:leading-loose md:text-left md:ml-8 md:py-4 py-6 md:font-bold font-bold"
             >
-              Interactive Session with Python
+              {sname}
             </h1>
           </div>
           <h1
@@ -31,8 +33,7 @@ function Sessions2() {
           text-black
           md:text-2xl md:mt-16 mt-[1rem] text-center md:font-semibold md:ml-10 md:text-center "
           >
-            Get ready with your Python environvement this session will take you
-            to another level
+            {desc}
           </h1>
         </div>
 
@@ -55,40 +56,23 @@ function Sessions2() {
               Online through <br /> zoom
             </h1>
           </div>
-          <div className=" xl:flex xl:flex-wrap xl:w-[28rem] md:ml-1 md:flex  md:flex-wrap md:w-[24rem]">
-            <input
-              type="text"
-              placeholder="Full name"
-              name="Fullname"
-              className="xl:w-[24rem] xl:ml-[-0.1rem] xl:h-[3rem] xl:border xl:rounded-[2rem] bg-white xl:mt-8 bg-opacity-20 placeholder-grey
-              md:w-[20rem] md:h-[3rem] md:border md:rounded-[2rem] md:ml-[-0.1rem] m-[2rem] mt-[-2rem] rounded-[2rem]  md:mt-16 md:px-5  w-[12rem] "
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              name="Email"
-              className="xl:w-[24rem] xl:h-[3rem] bg-white border xl:rounded-[2rem]   bg-opacity-20 placeholder-grey xl:px-5
-              md:w-[20rem] md:h-[3rem] rounded-[2rem]   w-[12rem] ml-[2rem] mt-[-4] md:rounded-[2rem]  md:px-5 "
-            />
-            <div
-              className="xl:text-2xl text-white  xl:ml-[4rem] xl:text-center xl:py-2  bg-blue-800 xl:w-60 xl:h-14 xl:rounded-lg font-semibold
-            md:text-xl  md:ml-[4rem] md:text-center md:py-2 md:mt-4  md:w-48 md:h-14 md:rounded-lg w-[8rem] mx-[4rem] mt-4  h-[2rem] rounded-lg md:font-semibold"
-            >
-              GET REGISTERED
-            </div>
-          </div>
-          <div className="xl:ml-8 md:ml-[-1rem] xl:mt-[-2rem]">
-            <img
-              src="https://i.ibb.co/qpyPtTS/Timer.png"
-              alt="Timer"
-              border="0"
-              className=" mx-[6rem]  md:w-[2rem] xl:ml-12 xl:w-[2rem] xl:mt-24
-              md:ml-10 md:mt-20"
-            />
-            <h1 className="xl:text-[1rem] md:ml-2  mx-[4rem] md:text-sm md:text-center  text-center md:leading-tight text-[#7587A4] ">
-            Time :<br /> 10:00 am IST
+          <div className="flex justify-center items-center xl:flex xl:flex-wrap xl:w-[28rem] md:ml-1 md:flex  md:flex-wrap md:w-[24rem]">
+            <h1 className="xl:w-[24rem] xl:h-[3rem] bg-white border xl:rounded-[2rem]   bg-opacity-20 placeholder-grey xl:px-5
+              md:w-[20rem] md:h-[3rem] rounded-[2rem]   w-[12rem] ml-[2rem] mt-[-4] md:rounded-[2rem]  md:px-5 ">
+                Your Meeting Link is : {slink}
             </h1>
+            {sessionId === user?
+            <button
+            onClick={() => {
+              deleteDoc(doc(db, "sessions", sessionId));
+            }}
+            className="xl:text-2xl text-white  xl:ml-[4rem] xl:text-center xl:py-2  bg-blue xl:w-60 xl:h-14 xl:rounded-lg font-semibold
+          md:text-xl  md:ml-[4rem] md:text-center md:py-2 md:mt-4  md:w-48 md:h-14 md:rounded-lg w-[8rem] mx-[4rem] mt-4  h-[2rem] rounded-lg md:font-semibold"
+          >
+            Meeting Done
+          </button>:null}
           </div>
+          
         </div>
 
         <div
@@ -102,20 +86,18 @@ function Sessions2() {
             About the speaker
           </h1>
           <img
-            src="https://www.creative-tim.com/learning-lab/tailwind-starter-kit/img/team-4-470x470.png"
+            src={himg}
             alt="..."
             class="shadow-lg xl:rounded-full xl:w-[8rem] xl:mx-[24rem] xl:mr-56 xl:h-auto xl:align-middle md:rounded-full md:w-[8rem] md:mx-[16rem] md:mr-56 md:h-auto v:align-middle border-none rounded-full w-[6rem] mx-[6rem] mr-56 h-auto align-middle rounded-full"
           />
           <h1 className="text-[#EF4A37] xl:text-center xl:mx-[20rem] xl:text-2xl  md:mx-[14rem] md:text-2xl text-lg text-center">
-            Mr. Dennis Ritche
+            {heldby}
           </h1>
           <p
             className="xl:text-xl xl:leading-normal text-[#7587A4] xl:text-center xl:mx-[8rem]
           md:text-xl md:leading-normal md:text-center md:mx-[2rem] text-sm text-center pb-[2rem] "
           >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Praesentium, id. Nemo tenetur voluptatum fugiat debitis ut aliquam
-            neque?
+            {host}
           </p>
         </div>
       </div>
