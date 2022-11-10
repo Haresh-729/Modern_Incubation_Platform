@@ -6,6 +6,7 @@ import { ArrowRight, ArrowLeft } from '@rsuite/icons';
 import { Link } from 'react-router-dom';
 
 
+
 function Sessions1({sessionId, user, himg, sname, host, heldby,desc, simg, completed}) {
   // const data = [
   //   {
@@ -96,7 +97,7 @@ function Sessions1({sessionId, user, himg, sname, host, heldby,desc, simg, compl
 
         <div id="slider" className="overflow-x-scroll scrollbar-hide scroll-smooth ...w-full  xl:mx-[2rem] xl:relative flex items-center">
           {data.map((item) => (
-            <div key={item.id} className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-101 bg-[#B1A429] w-[60rem] h-[20rem]  rounded-[3rem] flex  xl:mx-[2rem] mx-2 mt-2 py-2">
+            <div key={item.id} className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-101 bg-[#B1A429] w-full h-auto  rounded-[3rem] flex  xl:mx-[2rem] mx-2 mt-2 py-2">
               <div className="bg-yellow-300 bg-gradient-to-t from-[#B1A429] w-[50rem] flex-wrap  flex rounded-[2rem] mx-16 px-4 ">
 
                 <div className="flex items-center justify-center">
@@ -109,7 +110,7 @@ function Sessions1({sessionId, user, himg, sname, host, heldby,desc, simg, compl
                     <img
                       src={item.img}
                       alt="..."
-                      class="shadow-lg rounded-full w-[5rem] mt-2 h-auto "
+                      className="shadow-lg rounded-full w-[5rem] mt-2 h-auto "
                     />
                     <h1 className="text-[#EF4A37] text-2xl">
                       {item.heldby}
@@ -123,7 +124,7 @@ function Sessions1({sessionId, user, himg, sname, host, heldby,desc, simg, compl
                       src={item.s}
                       alt="python"
                       border="0"
-                      className="w-[15rem]"
+                      className="rounded w-[15rem]"
                     />
                   </div>
                 </div>
