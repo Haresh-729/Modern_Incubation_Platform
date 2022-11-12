@@ -162,17 +162,6 @@ const App = () => {
     }
   }, [userId]);
 
-  useEffect(() => {
-    onSnapshot(
-      collection(db, "sessions"),
-      orderBy("timestamp", "desc"),
-      (snapshot) => {
-        setSessions(
-          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-        );
-      }
-    );
-  }, []);
 
   return (
     <div className="bg-[url('https://i.ibb.co/Smq2X7B/background.png')] bg-cover ">
@@ -331,39 +320,11 @@ const App = () => {
                       <Route path="/Tasks" element={<Tasks />} />
                       <Route
                         path="/Session"
-                        element={sessions.map(({ id, data }) => (
-                          <Sessions1
-                            key={id}
-                            sessionId={id}
-                            user={user}
-                            photoUrl={photoUrl}
-                            sname={data.sname}
-                            host={data.host}
-                            heldby={data.heldby}
-                            simg={data.simg}
-                            completed={data.completed}
-                            desc={data.desc}
-                            himg={data.himg}
-                          />
-                        ))}
+                        element={<Sessions1/>}
                       />
                       <Route
                         path="/Session-Details"
-                        element={sessions.map(({ id, data }) => (
-                          <Sessions2
-                            key={id}
-                            sessionId={id}
-                            user={user.uid}
-                            himg={data.himg}
-                            sname={data.sname}
-                            slink={data.slink}
-                            host={data.host}
-                            heldby={data.heldby}
-                            simg={data.simg}
-                            completed={data.completed}
-                            desc={data.desc}
-                          />
-                        ))}
+                        element={<Sessions2 user={user.uid}/>}
                       />
                       <Route path="/Maturity" element={<Maturity1 />} />
                       <Route path="/Quiz" element={<Quiz />} />
@@ -477,7 +438,7 @@ const App = () => {
                       <Route path="/pbadges" element={<Badges />} />
                       <Route path="/uploadv" element={<VScroll2 />} />
                       <Route path="/cpdetails" element={<CPDetails />} />
-                      <Route
+                      {/* <Route
                             path="/Post1"
                             element={ideas.map(({ id, data }) => (
                               <Post1
@@ -494,7 +455,10 @@ const App = () => {
                               cat={data.cat}
                               />
                             ))}
-                          />
+                          /> */}
+
+                          <Route path="/Post1"
+                            element={<Post1 user={user} cmntPhoto={photoUrl} ideas={ideas}/>}/>
 
 
                           {/* <Route path="/Post1" element={<Post1 />} /> */}
