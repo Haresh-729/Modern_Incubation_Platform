@@ -46,6 +46,7 @@ import GRegister from "./Group/GRegister";
 import Glogin from "./Group/Glogin";
 import CreateSession from "./Group/CreateSession";
 import Post1 from "./components/Post1";
+import Upload1 from "./components/Upload1";
 
 import GroupTasks from "./Group/GroupTasks";
 import UpdateSession from "./Group/UpdateSession";
@@ -108,6 +109,30 @@ const App = () => {
   }, []);
 
   // Manas Code Start
+  //Send mail
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        const unsubscribe = onSnapshot(
+          collection(db, "users"),
+          { includeMetadataChanges: true },
+          (querySnapshot) => {
+            querySnapshot.docChanges().forEach((change) => {
+              if (change.type === "added") {
+                if (change.doc.data().email === user.email) {
+                  if (change.doc.data().isVerified === false) {
+                    user.sendEmailVerification();
+                  }
+                }
+              }
+            });
+          }
+        );
+        return unsubscribe;
+      }
+    });
+  }, []);
+
 
   const [user, setUser] = useState(null);
   const [ideas, setIdeas] = useState([]);
@@ -264,11 +289,6 @@ const App = () => {
                               />
                             ))}
                           />
-
-                          
-
-
-
                           <Route
                             path="/Dashboard"
                             element={
@@ -471,10 +491,10 @@ const App = () => {
                       {/* charts  */}
                       <Route path="/pie" element={<Pie />} />
                       <Route path="/Editor" element={<Editor />} />
-                      
                       <Route path="/pbadges" element={<Badges />} />
                       <Route path="/uploadv" element={<VScroll2 />} />
                       <Route path="/cpdetails" element={<CPDetails />} />
+                      <Route path="/Upload1" element={<Upload1 />} />
                       <Route
                             path="/Post1"
                             element={ideas.map(({ id, data }) => (
@@ -547,385 +567,5 @@ const App = () => {
       </BrowserRouter>
     </div>
   );
-
-  // return (
-
-  //   <div className="bg-cover bg-[url('https://i.ibb.co/Smq2X7B/background.png')]">
-  //     <BrowserRouter>
-  //       <Routes>
-  //         <Route
-  //           path="/landing-page"
-  //           element={[
-  //             <Nav />,
-  //             <HeroSection />,
-  //             <Slogens />,
-  //             <Features />,
-  //             <Footer />,
-  //           ]}
-  //         />
-  //         <Route
-  //           path="/about"
-  //           element={[
-  //             <Nav />,
-  //             <AboutUs1 />,
-  //             <AboutUs2 />,
-  //             <AboutUs3 />,
-  //             <AboutUs4 />,
-  //             <AboutUs5 />,
-  //           ]}
-  //         />
-  //         <Route path="/service" element={[<Nav />, <AboutUs3 />]} />
-  //         <Route
-  //           path="/know-more"
-  //           element={[
-  //             <Nav />,
-  //             <KnowMore1 />,
-  //             <KnowMore2 />,
-  //             <KnowMore3 />,
-  //             <KnowMore4 />,
-  //             <KnowMore5 />,
-  //           ]}
-  //         />
-  //         {user && user.displayName ? (
-  //           <>
-  //             <Route
-  //               path="/"
-  //               element={
-  //                 <div className={currentMode === "Dark" ? "dark" : ""}>
-  //                   <div className="flex relative dark:bg-main-dark-bg">
-  //                     <div
-  //                       className="fixed right-4 bottom-4"
-  //                       style={{ zIndex: "1000" }}
-  //                     >
-  //                       <TooltipComponent content="Settings" position="Top">
-  //                         <button
-  //                           type="button"
-  //                           onClick={() => setThemeSettings(true)}
-  //                           style={{
-  //                             background: currentColor,
-  //                             borderRadius: "50%",
-  //                           }}
-  //                           className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
-  //                         >
-  //                           <FiSettings />
-  //                         </button>
-  //                       </TooltipComponent>
-  //                     </div>
-  //                     {activeMenu ? (
-  //                       <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
-  //                         <Sidebar />
-  //                       </div>
-  //                     ) : (
-  //                       <div className="w-0 dark:bg-secondary-dark-bg">
-  //                         <Sidebar />
-  //                       </div>
-  //                     )}
-  //                     <div
-  //                       className={
-  //                         activeMenu
-  //                           ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  "
-  //                           : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
-  //                       }
-  //                     >
-  //                       <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
-  //                         <Navbar />
-  //                       </div>
-
-  //                       <Footer />
-  //                     </div>
-  //                   </div>
-  //                 </div>
-  //               }
-  //             >
-  //               {/* <div> */}
-
-  //               {themeSettings && <ThemeSettings />}
-
-  //               {/* dashboard  */}
-  //               <Route path="/dashboard" element={<Dashboard />} />
-
-  //               {/* profile */}
-  //               <Route path="/profile" element={<Profile />} />
-
-  //               {/* apps  */}
-  //               <Route path="/todolist" element={<ToDoList />} />
-
-  //               <Route path="/calendar" element={<Calendar />} />
-  //               <Route path="/FAQs" element={<FAQs />} />
-  //               <Route path="/Current-Projects" element={<CurrentProjects />} />
-  //               <Route path="/Tasks" element={<Tasks />} />
-  //               <Route path="/Session" element={<Sessions1 />} />
-  //               <Route path="/Session-Details" element={<Sessions2 />} />
-  //               <Route path="/Maturity" element={<Maturity1 />} />
-  //               <Route path="/Quiz" element={<Quiz />} />
-
-  //               {/* charts  */}
-  //               <Route path="/pie" element={<Pie />} />
-
-  //               {/* </div> */}
-  //               <Route
-  //                 path="/chat"
-  //                 element={
-  //                   <Chat
-  //                     username={user.displayName}
-  //                     userId={userId}
-  //                     photoUrL={photoUrl}
-  //                   />
-  //                 }
-  //               />
-  //             </Route>
-  //             <Route
-  //               path="/upload-idea"
-  //               element={
-  //                 <IdeaForm
-  //                   username={user.displayName}
-  //                   category={category}
-  //                   photoUrl={photoUrl}
-  //                 />
-  //               }
-  //             />
-
-  //             <Route
-  //               path="/display-ideas"
-  //               element={ideas.map(({ id, data }) => (
-  //                 <IdeaPost
-  //                   key={id}
-  //                   ideaId={id}
-  //                   user={user}
-  //                   username={data.userName}
-  //                   title={data.title}
-  //                   description={data.desc}
-  //                   pdfFile={data.pdfFile}
-  //                   status={data.status}
-  //                   photoUrl={data.photoUrl}
-  //                 />
-  //               ))}
-  //             />
-  //             <Route
-  //               path="/idea-review"
-  //               element={ideas.map(({ id, data }) => (
-  //                 <IdeaReview
-  //                   key={id}
-  //                   ideaId={id}
-  //                   user={user}
-  //                   username={data.userName}
-  //                   title={data.title}
-  //                   description={data.desc}
-  //                   pdfFile={data.pdfFile}
-  //                   statusLogo={data.statusLogo}
-  //                   status={data.status}
-  //                   category={data.category}
-  //                   photoUrl={data.photoUrl}
-  //                 />
-  //               ))}
-  //             />
-  //             <Route
-  //               path="/verify-ideas"
-  //               element={ideas.map(({ id, data }) => (
-  //                 <VerifyIdeas
-  //                   key={id}
-  //                   ideaId={id}
-  //                   user={user}
-  //                   username={data.userName}
-  //                   title={data.title}
-  //                   description={data.desc}
-  //                   pdfFile={data.pdfFile}
-  //                   statusLogo="https://i.ibb.co/W3Y9rx5/under-Verification.png"
-  //                   status={data.status}
-  //                   category={data.category}
-  //                   photoUrl={data.photoUrl}
-  //                   cat={category}
-  //                 />
-  //               ))}
-  //             />
-  //             <Route path="*" element={<PNF />} />
-  //           </>
-  //         ) : (
-  //           <>
-  //              <Route path="/login" element={[<Nav />, <Login />]} />
-  //              <Route path="/register" element={[<Nav />, <Register />]} />
-  //              <Route path="/forgot-pass" element={<ForgotPass />} />
-  //              user ?
-  //              <Route
-  //               path="*"
-  //               element={
-  //                 <div className="h-screen flex justify-center items-center">
-  //                   <Oval
-  //                     height="70"
-  //                     width="80"
-  //                     radius="7"
-  //                     color="blue"
-  //                     ariaLabel="loading"
-  //                     wrapperStyle
-  //                     wrapperClass
-  //                   />
-  //                 </div>
-  //               }
-  //             />
-  //             :
-  //             <Route path="*" element={<LoginRegister />} />
-  //           </>
-  //         )}
-  //       </Routes>
-  //     </BrowserRouter>
-  //   </div>
-  // );
-};
-
-// return (
-//   <div className="bg-cover bg-[url('https://i.ibb.co/Smq2X7B/background.png')]">
-//     <BrowserRouter>
-//       <Routes>
-//         {user && user.displayName ? (
-//           <>
-//             <Route
-//               path="/"
-//               element={<Dashboard username={user.displayName} />}
-//             />
-//             <Route
-//               path="/upload-idea"
-//               element={<IdeaForm username={user.displayName} />}
-//             />
-//             <Route
-//               path="/display-idea"
-//               element={[<IdeaList />, <Interactions />]}
-//             />
-
-//             <div className={currentMode === "Dark" ? "dark" : ""}>
-//               <div className="flex relative dark:bg-main-dark-bg">
-//                 <div
-//                   className="fixed right-4 bottom-4"
-//                   style={{ zIndex: "1000" }}
-//                 >
-//                   <TooltipComponent content="Settings" position="Top">
-//                     <button
-//                       type="button"
-//                       onClick={() => setThemeSettings(true)}
-//                       style={{
-//                         background: currentColor,
-//                         borderRadius: "50%",
-//                       }}
-//                       className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
-//                     >
-//                       <FiSettings />
-//                     </button>
-//                   </TooltipComponent>
-//                 </div>
-//                 {activeMenu ? (
-//                   <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
-//                     <Sidebar />
-//                   </div>
-//                 ) : (
-//                   <div className="w-0 dark:bg-secondary-dark-bg">
-//                     <Sidebar />
-//                   </div>
-//                 )}
-//                 <div
-//                   className={
-//                     activeMenu
-//                       ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  "
-//                       : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
-//                   }
-//                 >
-//                   <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
-//                     <Navbar />
-//                   </div>
-//                   <div>
-//                     {themeSettings && <ThemeSettings />}
-
-//                     {/* dashboard  */}
-//                     <Route path="/dashboard" element={<Dashboard />} />
-
-//                     {/* profile */}
-//                     <Route path="/profile" element={<Profile />} />
-
-//                     {/* apps  */}
-//                     <Route path="/todolist" element={<ToDoList />} />
-
-//                     <Route path="/calendar" element={<Calendar />} />
-//                     <Route path="/FAQs" element={<FAQs />} />
-//                     <Route
-//                       path="/Current-Projects"
-//                       element={<CurrentProjects />}
-//                     />
-//                     <Route path="/Tasks" element={<Tasks />} />
-//                     <Route path="/Session" element={<Sessions1 />} />
-//                     <Route path="/Session-Details" element={<Sessions2 />} />
-//                     <Route path="/Maturity" element={<Maturity1 />} />
-//                     <Route path="/Quiz" element={<Quiz />} />
-
-//                     {/* charts  */}
-//                     <Route path="/pie" element={<Pie />} />
-//                   </div>
-//                   <Footer />
-//                 </div>
-//               </div>
-//             </div>
-//           </>
-//         ) : (
-//           <>
-//             <Route
-//               path="/"
-//               element={[
-//                 <Nav />,
-//                 <HeroSection />,
-//                 <Slogens />,
-//                 <Features />,
-//                 <Footer />,
-//               ]}
-//             />
-//             <Route
-//               path="/about"
-//               element={[
-//                 <Nav />,
-//                 <AboutUs1 />,
-//                 <AboutUs2 />,
-//                 <AboutUs3 />,
-//                 <AboutUs4 />,
-//                 <AboutUs5 />,
-//               ]}
-//             />
-//             <Route path="/service" element={[<Nav />, <AboutUs3 />]} />
-//             <Route path="/login" element={[<Nav />, <Login />]} />
-//             <Route path="/register" element={[<Nav />, <Register />]} />
-//             <Route
-//               path="/know-more"
-//               element={[
-//                 <Nav />,
-//                 <KnowMore1 />,
-//                 <KnowMore2 />,
-//                 <KnowMore3 />,
-//                 <KnowMore4 />,
-//                 <KnowMore5 />,
-//               ]}
-//             />
-//             <Route path="/forgot-pass" element={<ForgotPass />} />
-//             <Route path="/Lougout" element={<LogOutSuccessful />} />
-//           </>
-//         )}
-//       </Routes>
-//     </BrowserRouter>
-
-//     {/*  <Maturity1/>
-//     <Quiz/>
-//     <FAQ/>
-//     <Tasks/>
-//     <LogOutSuccessful/>
-//     <CurrentProjects/>
-//      <Sessions1/>
-//         <Sessions2/>
-//         <ProfileEdit/>
-
-//     */}
-//   </div>
-//   //   <Nav />
-//   //   <HeroSection />
-//   //   <Info />
-//   //   <Features />
-//   //   <UserInfo />
-//   //   <Newsletter />
-//   //   <Footer />
-//   // </div>
-// );
-
+}
 export default App;
