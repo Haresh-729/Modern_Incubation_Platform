@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import { Oval } from 'react-loader-spinner';
 import 'react-toastify/dist/ReactToastify.css';
-import {addDoc, collection} from "firebase/firestore";
-import {db,storage} from "../firebase";
+import {setDoc, doc, updateDoc} from "firebase/firestore";
+import {db,storage,auth} from "../firebase";
 import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 import {useNavigate} from "react-router-dom";
 
@@ -16,7 +16,8 @@ function CreateSession() {
     desc: "",
     host: "",
     simg: "",
-    himg:""
+    himg:"",
+    slink:"",
   });
 
   const [error,setErrorMsg] = useState("");
@@ -45,13 +46,45 @@ function CreateSession() {
       setErrorMsg(toast("Error in uploading image"));
       setLoading(true);
     }, () => {
-      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-        addDoc(collection(db, "sessions"), {
+      getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
+        await setDoc(doc(db, "sessions",auth.currentUser.uid), {
           sname: values.sname,
           heldby: values.heldby,
           desc: values.desc,
           host: values.host,
           simg: downloadURL,
+          himg: values.himg.name,
+          slink: values.slink,
+        }).then(()=>{
+          setErrorMsg(toast("Session Created Successfully"));
+          setLoading(true);
+          navigate("/session");
+        }).catch((error)=>{
+          setErrorMsg(toast("Error in creating session"));
+          setLoading(true);
+        });
+      });
+    });
+    const storageRef1 = ref(storage, `files/${values.sname}/${values.himg.name}`);
+    const uploadTask1 = uploadBytesResumable(storageRef1, values.himg);
+    uploadTask1.on('state_changed', (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          console.log('Upload is running');
+          break;
+      }
+    }, (error) => {
+      setErrorMsg(toast("Error in uploading image"));
+      setLoading(true);
+    }, () => {
+      getDownloadURL(uploadTask1.snapshot.ref).then((downloadURL) => {
+        updateDoc(doc(db, "sessions",auth.currentUser.uid), {
+          himg: downloadURL,
         }).then(()=>{
           setErrorMsg(toast("Session Created Successfully"));
           setLoading(true);
@@ -113,7 +146,7 @@ function CreateSession() {
 
           <label className="lg:flex md:flex lg:ml-0 md:ml-0 sm:ml-0 xl:ml-0 ml-4 mt-3">
             <span  className="lg:place-self-center md:place-self-center">
-              Session Image:
+              Host Image:
             </span>
             <input
               type="file"
@@ -169,6 +202,19 @@ function CreateSession() {
             />
           </label>
 
+          <label className="lg:ml-0 md:ml-0 sm:ml-0 xl:ml-0 ml-4 mt-3">
+            Session Link:
+            <input
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, slink: event.target.value }))
+              }
+              type="text"
+              name="slink"
+              required
+              className="lg:ml-20 md:ml-16 text-white bg-offwhite bg-opacity-20 lg:rounded-xl md:rounded-xl rounded-md lg:w-72 md:w-64 w-56 lg:h-8 md:h-6 h-6 lg:mt-4 md:mt-3 lg:p-3 md:p-2 p-1"
+            />
+          </label>
+
           <button
             onClick={handleSubmit}
             type="submit"
@@ -177,6 +223,7 @@ function CreateSession() {
           >
             Create
           </button>
+          <ToastContainer/>
         </form>
       </div>
     </div>

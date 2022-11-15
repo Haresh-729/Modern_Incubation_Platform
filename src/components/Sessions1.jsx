@@ -3,39 +3,30 @@ import Imag from './../assets/Sessons1.png';
 import Imag1 from './../assets/Sessons2.png';
 import { IconButton } from "rsuite";
 import { ArrowRight, ArrowLeft } from '@rsuite/icons';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import {onSnapshot,collection,orderBy} from 'firebase/firestore';
+import {db} from '../firebase';
 
 
-function Sessions1({sessionId, user, himg, sname, host, heldby,desc, simg, completed}) {
-  // const data = [
-  //   {
-  //     id: sessionId,
-  //     sname: sname,
-  //     user: user,
-  //     heldby: heldby,
-  //     h: host,
-  //     desc: desc,
-  //     s: simg,
-  //     img: himg,
-  //   },
-  // ]
 
-  const [data,setData]=useState([]);
-  useEffect(()=>{
-    setData((prev)=>[...prev,{
-      id: sessionId,
-      sname: sname,
-      user: user,
-      heldby: heldby,
-      h: host,
-      desc: desc,
-      s: simg,
-      img: himg,
-    }   
-    ])
-  },[])
+function Sessions1() {
 
-  const [sessions, setSessions] = useState([]);
+  const [sessions,setSessions]=useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    onSnapshot(
+      collection(db, "sessions"),
+      orderBy("timestamp", "desc"),
+      (snapshot) => {
+        setSessions(
+          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+        );
+      }
+    );
+  }, []);
+
+  console.log(sessions.map(({id, data}) => (data.sname)));
 
   const slideLeft = () => {
     var slider1 = document.getElementById('slider')
@@ -89,41 +80,41 @@ function Sessions1({sessionId, user, himg, sname, host, heldby,desc, simg, compl
     {/* hh */}
 
     
-      <Link to="/Session-Details" className="select-none flex items-center mt-[1rem] w-[77rem] justify-center">
+      <div className="select-none flex items-center mt-[1rem] w-[77rem] justify-center">
         <IconButton icon={<ArrowLeft />} onClick={slideLeft} className="xl:ml-[4rem] lg:ml-[4rem] md:ml-6 sm:ml-6 ml-4 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110
         w-[4rem] h-[3rem] lg:py-8 xl:py-8 md:py-6 sm:py-6 py-4 text-center flex items-center justify-center font-extrabold font-poppins xl:text-5xl lg:text-5xl md:text-4xl sm:text-3xl text-2xl text-black bg-white/30 border-2 border-white
         shadow-lg rounded-full hover:bg-[#0589c7d3] hover:border-0 hover:text-white "></IconButton>
 
         <div id="slider" className="overflow-x-scroll scrollbar-hide scroll-smooth ...w-full  xl:mx-[2rem] xl:relative flex items-center">
-          {data.map((item) => (
-            <div key={item.id} className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-101 bg-[#B1A429] w-[60rem] h-[20rem]  rounded-[3rem] flex  xl:mx-[2rem] mx-2 mt-2 py-2">
+          {sessions.map(({id,data}) => (
+            <div key={id} onClick={()=>{navigate("/Session-Details",{state:id})}} className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-101 bg-[#B1A429] w-full h-auto  rounded-[3rem] flex  xl:mx-[2rem] mx-2 mt-2 py-2">
               <div className="bg-yellow-300 bg-gradient-to-t from-[#B1A429] w-[50rem] flex-wrap  flex rounded-[2rem] mx-16 px-4 ">
 
                 <div className="flex items-center justify-center">
 
                   <div className="flex flex-col justify-center items-center">
                     <h1 className="text-3xl leading-loose text-center  mt-4 drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] text-blue font-bold">
-                    {item.sname}
+                    {data.sname}
                     </h1>
                     <h1 className="text-black text-xl">By:</h1>
                     <img
-                      src={item.img}
+                      src={data.himg}
                       alt="..."
-                      class="shadow-lg rounded-full w-[5rem] mt-2 h-auto "
+                      className="shadow-lg rounded-full w-[5rem] mt-2 h-auto "
                     />
                     <h1 className="text-[#EF4A37] text-2xl">
-                      {item.heldby}
+                      {data.heldby}
                     </h1>
                     <p className="text-xl leading-normal mt-2 text-black font-normal text-center ">
-                      {item.desc}
+                      {data.desc}
                     </p>
                   </div>
                   <div>
                     <img
-                      src={item.s}
+                      src={data.simg}
                       alt="python"
                       border="0"
-                      className="w-[15rem]"
+                      className="rounded w-[15rem]"
                     />
                   </div>
                 </div>
@@ -132,7 +123,7 @@ function Sessions1({sessionId, user, himg, sname, host, heldby,desc, simg, compl
           ))}
         </div>
         <IconButton icon={<ArrowRight />} onClick={slideRight} className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[4rem] h-[3rem] pb-[4rem] font-extrabold font-poppins text-5xl text-black bg-white/30 border-2 border-white shadow-lg rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white "></IconButton>
-      </Link>
+      </div>
     </div>
     
   </div>
