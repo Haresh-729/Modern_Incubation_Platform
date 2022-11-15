@@ -10,6 +10,7 @@ import { Oval } from 'react-loader-spinner';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import GRegister from '../Group/GRegister';
+import axios from 'axios';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -79,6 +80,7 @@ const Register = () => {
             console.log(formDataCopy);
             
             await setDoc(doc(db, 'users', user.uid), formDataCopy)
+            axios.post("https://api.emailjs.com/api/v1.0/email/send/contact_service",(result)=>{console.log(result)})
             
             navigate("/dashboard");
             setPpUrl("");
