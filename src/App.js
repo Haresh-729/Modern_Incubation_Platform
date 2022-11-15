@@ -494,7 +494,7 @@ const App = () => {
                       <Route path="/pbadges" element={<Badges />} />
                       <Route path="/uploadv" element={<VScroll2 />} />
                       <Route path="/cpdetails" element={<CPDetails />} />
-                      <Route path="/Upload1" element={<Upload1 />} />
+                      
                       <Route
                             path="/Post1"
                             element={ideas.map(({ id, data }) => (
