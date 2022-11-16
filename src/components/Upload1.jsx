@@ -108,7 +108,7 @@ const Upload1 = () => {
 
     {form1?(<div className="mt-8 p-4">
         <div>
-            <div className="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">Form 1</div>
+            <div className="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">Idea Category </div>
             <div className="flex flex-col md:flex-row">
                 <div className="w-full flex-1 mx-2 svelte-1l8159u">
                     <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">

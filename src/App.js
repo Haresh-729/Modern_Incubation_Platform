@@ -46,6 +46,7 @@ import GRegister from "./Group/GRegister";
 import Glogin from "./Group/Glogin";
 import CreateSession from "./Group/CreateSession";
 import Post1 from "./components/Post1";
+import Upload1 from "./components/Upload1"
 
 import GroupTasks from "./Group/GroupTasks";
 import UpdateSession from "./Group/UpdateSession";
@@ -429,7 +430,8 @@ const App = () => {
                       {/* charts  */}
                       <Route path="/pie" element={<Pie />} />
                       <Route path="/Editor" element={<Editor />} />
-
+                      <Route path="/Upload1" element={<Upload1 />} />
+                      
                       <Route path="/pbadges" element={<Badges />} />
                       <Route path="/uploadv" element={<VScroll2 />} />
                       <Route path="/cpdetails" element={<CPDetails />} />
