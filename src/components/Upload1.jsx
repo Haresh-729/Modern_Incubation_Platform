@@ -22,16 +22,15 @@ import {
 } from "react-component-export-image";
 
 const Upload1 = () => {
-
   // Tags
 
   // const KeyCodes = {
   //   comma: 188,
   //   enter: 13
   // };
-  
+
   // const delimiters = [KeyCodes.comma, KeyCodes.enter];
-  
+
   // const sug = ["Dombivli", "Thane", "Mumbai"]
   // const suggestions = sug.map(items =>{
   //   return{
@@ -45,29 +44,28 @@ const Upload1 = () => {
   //     { id: 'Vietnam', text: 'Vietnam' },
   //     { id: 'Turkey', text: 'Turkey' }
   //   ]);
-  
+
   //   const handleDelete = i => {
   //     setTags(tags.filter((tag, index) => index !== i));
   //   };
-  
+
   //   const handleAddition = tag => {
   //     setTags([...tags, tag]);
   //   };
-  
+
   //   const handleDrag = (tag, currPos, newPos) => {
   //     const newTags = tags.slice();
-  
+
   //     newTags.splice(currPos, 1);
   //     newTags.splice(newPos, 0, tag);
-  
+
   //     // re-render
   //     setTags(newTags);
   //   };
-  
+
   //   const handleTagClick = index => {
   //     console.log('The tag at index ' + index + ' was clicked');
   //   };
-  
 
   // Export PNG
   const componentRef = useRef();
@@ -87,23 +85,23 @@ const Upload1 = () => {
     },
   });
 
-
-  let error=0;
+  let error = 0;
   const check_val = () => {
-    const bad_words=["death","kill","murder"];
+    const bad_words = ["death", "kill", "murder"];
     let check_text = values.title;
-    for(var i=0; i<bad_word.length; i++){
-      var val=bad_word[i];
-      if((check_text.toLowerCase()).indexOf(val.toString())>-1){
-        error=error+1;
+    for (var i = 0; i < bad_word.length; i++) {
+      var val = bad_word[i];
+      if (check_text.toLowerCase().indexOf(val.toString()) > -1) {
+        error = error + 1;
       }
     }
-    if(error>0){
-      document.getElementById("bad_notice").innerHTML="Warning: Something abusive";
-    }else{
-      document.getElementById("bad_notice").innerHTML="";
+    if (error > 0) {
+      document.getElementById("bad_notice").innerHTML =
+        "Warning: Something abusive";
+    } else {
+      document.getElementById("bad_notice").innerHTML = "";
     }
-  }
+  };
 
   const [req, setReq] = useState([]);
   const [form1, setForm1] = useState(true);
@@ -174,7 +172,6 @@ const Upload1 = () => {
     req: req,
     reason: "",
   });
-
 
   const validationSchema = Yup.object().shape({
     cat: Yup.string().required,
@@ -830,7 +827,7 @@ const Upload1 = () => {
             </div>
           </div>
           <div className="mt-8 p-4 ">
-              {/* <ReactTags
+            {/* <ReactTags
               tags={tags}
               suggestions={suggestions}
               delimiters={delimiters}
