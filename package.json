@@ -36,7 +36,8 @@
     "react-toastify": "^9.0.8",
     "recharts": "^2.1.16",
     "rsuite": "^5.21.0",
-    "tailwind-scrollbar-hide": "^1.1.7"
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts --max_old_space_size=4096 start",
