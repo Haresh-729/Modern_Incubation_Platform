@@ -1,11 +1,36 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import { Formik, Form, Field, ErroMessage } from "formik";
 import * as Yup from "yup";
+import { Document, Page, Text, View, StyleSheet, PDFViewer } from "@react-pdf/renderer";
+import jsPDF from 'jspdf';
+import { exportComponentAsPDF, exportComponentAsPNG } from 'react-component-export-image';
+
+
 
 const Upload1 = () => {
+
+  const componentRef = useRef();
+
+  const styles = StyleSheet.create({
+    page: {
+      backgroundColor: "white",
+      color: "white",
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+    },
+    viewer: {
+      width: window.innerWidth, //the pdf viewer will take up all of the width and height
+      height: window.innerHeight,
+    },
+  });
+  
+
+
   const [req, setReq] = useState([]);
   const [form1, setForm1] = useState(true);
   const [form2, setForm2] = useState(false);
@@ -110,7 +135,6 @@ const Upload1 = () => {
     }
   };
 
-  
   const hForm1N = () => {
     if (!values.cat) {
       setErr1(true);
@@ -148,37 +172,44 @@ const Upload1 = () => {
     setForm1(true);
   };
   const hForm2N = (e) => {
-    if(!values.prob){
+    if (!values.prob) {
       setErr7(true);
-    }if(!values.sol){
+    }
+    if (!values.sol) {
       setErr8(true);
-    }if(!values.core){
+    }
+    if (!values.core) {
       setErr9(true);
-    }if(!values.desc){
+    }
+    if (!values.desc) {
       setErr10(true);
-    }else{
+    } else {
       setErr7(false);
       setErr8(false);
       setErr9(false);
       setErr10(false);
       setForm1(false);
       setForm2(false);
-      setForm3(true);      
+      setForm3(true);
     }
   };
 
   const hForm3N = (e) => {
-    if(!values.users){
+    if (!values.users) {
       setErr11(true);
-    }if(!values.keyf){
+    }
+    if (!values.keyf) {
       setErr12(true);
-    }if(!values.stack){
+    }
+    if (!values.stack) {
       setErr13(true);
-    }if(!values.rfs){
+    }
+    if (!values.rfs) {
       setErr14(true);
-    }if(!values.stcu){
+    }
+    if (!values.stcu) {
       setErr15(true);
-    }else{
+    } else {
       setErr11(false);
       setErr12(false);
       setErr13(false);
@@ -197,19 +228,24 @@ const Upload1 = () => {
   };
 
   const hForm4N = () => {
-    if(values.mem){
+    if (values.mem) {
       setErr16(true);
-    }if(!values.time){
+    }
+    if (!values.time) {
       setErr17(true);
-    }if(!values.purpose){
+    }
+    if (!values.purpose) {
       setErr18(true);
-    }if(!values.otherp){
+    }
+    if (!values.otherp) {
       setErr19(true);
-    }if(req){
+    }
+    if (req) {
       setErr20(true);
-    }if(!values.reason){
+    }
+    if (!values.reason) {
       setErr21(true);
-    }else{
+    } else {
       setErr16(false);
       setErr17(false);
       setErr18(false);
@@ -222,7 +258,7 @@ const Upload1 = () => {
       setForm4(false);
       setFormS(true);
     }
-    console.log(err16, err17, err18, err19, err20, err21)
+    console.log(err16, err17, err18, err19, err20, err21);
   };
   const hForm4P = (e) => {
     setForm1(false);
@@ -239,6 +275,23 @@ const Upload1 = () => {
   const handleSubmit = () => {
     console.log(values);
   };
+  const ComponentToPrint = React.forwardRef((props, ref) => (
+    // <div ref={ref}>Hello World</div>
+    <div ref={ref} className=" my-2 p-1 flex svelte-1l8159u">
+                    <Select
+                      placeholder="Idea Category"
+                      className="w-full  rounded-md border-[#7587A4] bg-white text-base font-normal text-[#7587A4] outline-none focus:border-blue focus:drop-shadow-2xl"
+                      onChange={(event) =>
+                        setValues((prev) => ({ ...prev, cat: event.value }))
+                      }
+                      options={options}
+                      id="cat"
+                      name="cat"
+                      required
+                      autoComplete="on"
+                    />
+                  </div>
+  ));
 
   return (
     <div className="p-5">
@@ -339,6 +392,14 @@ const Upload1 = () => {
           </div>
         </div>
       </div> */}
+
+      <React.Fragment>
+        <ComponentToPrint ref={componentRef} />
+        <button onClick={() => exportComponentAsPDF(componentRef)}>Export as PDF</button>
+        <button onClick={() => exportComponentAsPNG(componentRef)}>
+         Export As PNG
+       </button>
+      </React.Fragment>
 
       {form1 ? (
         <div>
@@ -1534,7 +1595,11 @@ const Upload1 = () => {
                       </div>
                     </div>
                   </div>
-                  {err20 ? (<div className="ml-2 text-red-500 animate-bounce duration-75">This is must</div>) : null}
+                  {err20 ? (
+                    <div className="ml-2 text-red-500 animate-bounce duration-75">
+                      This is must
+                    </div>
+                  ) : null}
                 </div>
                 <div className="w-full mx-2 flex-1 svelte-1l8159u">
                   <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
@@ -1585,6 +1650,7 @@ const Upload1 = () => {
       ) : null}
 
       {formS ? (
+        
         <div>
           <div className="mx-4 p-4 mt-[2rem] md:mt-0">
             <div className="flex items-center">
@@ -1717,263 +1783,280 @@ const Upload1 = () => {
               </div>
             </div>
           </div>
-          <div className="mt-8 p-4 ">
-            <div className="border-2 rounded-[2rem] md:p-[3rem] p-2">
-              <div className="flex w-full justify-center">
-                <h1 className="font-normal text-gray-600">
-                  *Confirm your Idea details before Submitting
-                </h1>
-              </div>
-              <div
-                id="dispBe"
-                className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
-              >
-                <div className="flex justify-center w-full mt-2">
-                  <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl mt-2">
-                    Basic Details
-                  </h1>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Idea/Project Category
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.cat}</h1>
-                    </div>
-                  </div>
-                  <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Sub Category
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.subcat}</h1>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Idea/Project Title
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.title}</h1>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Idea/Project Owner
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.owner}</h1>
-                    </div>
-                  </div>
-                  <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Idea/Project Reference
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.refe}</h1>
-                    </div>
-                  </div>
-                  <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Idea/Project Members
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.mem}</h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              <div
-                id="dispId"
-                className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
-              >
-                <div className="flex justify-center w-full mt-2">
-                  <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
-                    IDEA DESCRIPTION
-                  </h1>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Idea/Project Problem Statement
+          <PDFViewer style={styles.viewer}>
+          <Document>
+            <Page size="A4" style={styles.page}>
+              <View style={styles.section}>
+                <div className="mt-8 p-4 ">
+                <View style={styles.section}>
+                  <div className="border-2 rounded-[2rem] md:p-[3rem] p-2">
+                  <View style={styles.section}>
+                    <div className="flex w-full justify-center">
+                    <View style={styles.section}>
+                      <h1 className="font-normal text-gray-600">
+                        *Confirm your Idea details before Submitting
+                      </h1>
+                      </View>
                     </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.prob}</h1>
+                    </View>
+                    <div
+                      id="dispBe"
+                      className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
+                    >
+                      <div className="flex justify-center w-full mt-2">
+                        <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl mt-2">
+                          Basic Details
+                        </h1>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Idea/Project Category
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.cat}</h1>
+                          </div>
+                        </div>
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Sub Category
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.subcat}</h1>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Idea/Project Title
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.title}</h1>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Idea/Project Owner
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.owner}</h1>
+                          </div>
+                        </div>
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Idea/Project Reference
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.refe}</h1>
+                          </div>
+                        </div>
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Idea/Project Members
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.mem}</h1>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Idea/Project Solution
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.sol}</h1>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Core Functionality of Idea
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.core}</h1>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Idea Description
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.desc}</h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              <div
-                id="dispImp"
-                className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
-              >
-                <div className="flex justify-center w-full mt-2">
-                  <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
-                    Implementation
-                  </h1>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Users for the Product
+                    <div
+                      id="dispId"
+                      className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
+                    >
+                      <div className="flex justify-center w-full mt-2">
+                        <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
+                          IDEA DESCRIPTION
+                        </h1>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Idea/Project Problem Statement
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.prob}</h1>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Idea/Project Solution
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.sol}</h1>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Core Functionality of Idea
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.core}</h1>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Idea Description
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.desc}</h1>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.users}</h1>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Key features in Idea/Project
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.keyf}</h1>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Technology Stack I am thinking of
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.stack}</h1>
-                    </div>
-                  </div>
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Reasons for selecting this stack
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.rfs}</h1>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Technology stack that can also be used
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.stcu}</h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              <div
-                id="dispReq"
-                className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
-              >
-                <div className="flex justify-center w-full mt-2">
-                  <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
-                    Requirement
-                  </h1>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      Members required for this Idea/Project
+                    <div
+                      id="dispImp"
+                      className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
+                    >
+                      <div className="flex justify-center w-full mt-2">
+                        <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
+                          Implementation
+                        </h1>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Users for the Product
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.users}</h1>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Key features in Idea/Project
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.keyf}</h1>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Technology Stack I am thinking of
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.stack}</h1>
+                          </div>
+                        </div>
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Reasons for selecting this stack
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.rfs}</h1>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Technology stack that can also be used
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.stcu}</h1>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.mem}</h1>
-                    </div>
-                  </div>
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold md:h-6 mt-3 text-gray-600 text-md md:leading-8 uppercase">
-                      Expected time to implement this Idea/Project
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.time}</h1>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold md:h-6 mt-3 text-gray-600 text-md md:leading-8 uppercase">
-                      Idea/Project is being developed for the Purpose of
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.purpose}</h1>
-                    </div>
-                  </div>
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      My requirent through Modernvate is/are
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{req+" "}</h1>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col md:flex-row">
-                  <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                    <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                      How this idea came to my mind
-                    </div>
-                    <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                      <h1 className="p-1 px-2">{values.reason}</h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div className="flex flex-row items-center justify-center w-full gap-8 mt-[4rem]">
-              <button
-                onClick={hFormSP}
-                className="text-xl hover:scale-110 focus:outline-none flex justify-center w-1/3 px-4 py-2 rounded font-bold cursor-pointer 
-                hover:bg-teal-400 font-poppins font-bold hover:text-white bg-gray-100 text-teal-600 border-2 duration-200 ease-in-out border-teal-600 transition"
-              >
-                Previous{" "}
-              </button>
-              <button
-                onClick={handleSubmit}
-                className="text-xl hover:scale-110 focus:outline-none flex justify-center w-1/3 px-4 py-2 rounded font-bold cursor-pointer
-               hover:bg-teal-400 font-poppins font-bold bg-teal-600 text-teal-100 border duration-200 ease-in-out border-teal-600 transition"
-              >
-                SUBMIT
-              </button>
-            </div>
-          </div>
+                    <div
+                      id="dispReq"
+                      className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
+                    >
+                      <div className="flex justify-center w-full mt-2">
+                        <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
+                          Requirement
+                        </h1>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            Members required for this Idea/Project
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.mem}</h1>
+                          </div>
+                        </div>
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold md:h-6 mt-3 text-gray-600 text-md md:leading-8 uppercase">
+                            Expected time to implement this Idea/Project
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.time}</h1>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold md:h-6 mt-3 text-gray-600 text-md md:leading-8 uppercase">
+                            Idea/Project is being developed for the Purpose of
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.purpose}</h1>
+                          </div>
+                        </div>
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            My requirent through Modernvate is/are
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{req + " "}</h1>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
+                            How this idea came to my mind
+                          </div>
+                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <h1 className="p-1 px-2">{values.reason}</h1>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-row items-center justify-center w-full gap-8 mt-[4rem]">
+                    <button
+                      onClick={hFormSP}
+                      className="text-xl hover:scale-110 focus:outline-none flex justify-center w-1/3 px-4 py-2 rounded font-bold cursor-pointer 
+                      hover:bg-teal-400 font-poppins font-bold hover:text-white bg-gray-100 text-teal-600 border-2 duration-200 ease-in-out border-teal-600 transition"
+                    >
+                      Previous{" "}
+                    </button>
+                    <button
+                      onClick={handleSubmit}
+                      className="text-xl hover:scale-110 focus:outline-none flex justify-center w-1/3 px-4 py-2 rounded font-bold cursor-pointer
+                    hover:bg-teal-400 font-poppins font-bold bg-teal-600 text-teal-100 border duration-200 ease-in-out border-teal-600 transition"
+                    >
+                      SUBMIT
+                    </button>
+                  </div>
+                </View>
+                </div>
+              </View>
+            </Page>
+          </Document>
+        </PDFViewer>
+
+
+          
         </div>
       ) : null}
     </div>
