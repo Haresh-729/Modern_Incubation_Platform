@@ -127,6 +127,11 @@ export const ColorMappingPrimaryXAxis = {
   title: "Months",
 };
 
+export const bad_word = [
+  "kill","fuck","fuck you","mother fucker","fucker","fuck", "shit", "cock", "titties", "boner", "muff", "pussy", 
+  "asshole", "cunt", "ass", "cockfoam", "nigger", "shit", "Oh, for fuck's sake", "fuck off", "fuk", "Hi", "Hii", "Byee", "bye", "Good morning",
+];
+
 export const ColorMappingPrimaryYAxis = {
   lineStyle: { width: 0 },
   majorTickLines: { width: 0 },
