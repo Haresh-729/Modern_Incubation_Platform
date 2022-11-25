@@ -6,8 +6,6 @@ import { deleteDoc, doc, collection, orderBy, onSnapshot } from "firebase/firest
 import { useLocation } from 'react-router-dom';
 
 
-
-
 function Sessions2({ user }) {
   const [data, setData] = useState([]);
   const location = useLocation();

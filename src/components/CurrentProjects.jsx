@@ -1,11 +1,30 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import { data } from "./CPData";
 import head from "./../assets/CPHead.png";
 import { IconButton } from "rsuite";
 import { ArrowRight, ArrowLeft } from "@rsuite/icons";
 import { Link } from "react-router-dom";
+import {onSnapshot,collection,orderBy} from 'firebase/firestore';
+import {db} from '../firebase';
 
 function CurrentProjects() {
+
+  const [projects,setProjects]=useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    onSnapshot(
+      collection(db, "projects"),
+      orderBy("timestamp", "desc"),
+      (snapshot) => {
+        setProjects(
+          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+        );
+      }
+    );
+  }, []);
+
   const slideLeft = () => {
     var slider1 = document.getElementById("slider");
     slider1.scrollLeft = slider1.scrollLeft + 500;
@@ -55,24 +74,24 @@ function CurrentProjects() {
                 id="slider"
                 className=" overflow-x-scroll scrollbar-hide scroll-smooth  lg:w-[55rem] xl:w-[60rem] md:w-[38rem] w-[18rem] xl:mx-[2rem]  relative  flex items-center"
               >
-                {data.map((item) => (
+                {projects.map(({id,data}) => (
                   <div className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 xl:flex  xl:flex-col xl:items-center  ">
                     <div className="  transition ease-in-out delay-150 hover:shadow-2xl  xl:relative hover:scale-10 shadow-md items-center justify-center xl:flex mb-4  md:w-[15rem]  w-[13.8rem]  md:h-[20rem]   bg-white/30 xl:rounded-[3rem] mr-2 rounded-[2rem] border-2 border-offwhite">
                       <div className="flex flex-col items-center justify-center">
                         <h1 className="xl:flex md:text-[1.3rem] text-[1rem] my-6 mx-2 text-center font-bold poppins text-[#EFA451]">
-                          {item.id}
+                          {data.pname}
                         </h1>
                         <img
                           className=" w-[6rem]  m-2"
-                          src={item.img}
+                          src={data.pimg}
                           alt="profile"
                         />
                         <h1 className="xl:float-left  xl:pl-[-2rem] font-normal poppins text-center align-center  text-black">
-                          {item.td}
+                          {data.heldby}
                         </h1>
-                        <Link to="/cpdetails"  className=" transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110   px-2 xl:py-2 xl:px-4 text-base font-extrabold font-poppins  text-white bg-[#0139B5] xl:rounded-[3rem] m-4 rounded-[0.5rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
+                        <button onClick={()=>navigate('/cpdetails',{state:id})}  className=" transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110   px-2 xl:py-2 xl:px-4 text-base font-extrabold font-poppins  text-white bg-[#0139B5] xl:rounded-[3rem] m-4 rounded-[0.5rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
                           DETAILS
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </div>

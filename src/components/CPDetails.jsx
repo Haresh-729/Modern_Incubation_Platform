@@ -1,9 +1,26 @@
-
-
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { curProDetails } from "./curProDetails";
+import { useLocation } from 'react-router-dom';
+import { db } from "../firebase";
+import { deleteDoc, doc, collection, orderBy, onSnapshot } from "firebase/firestore";
 
 const CPDetails = () => {
+  const [projects, setProjects] = useState([]);
+  const location = useLocation();
+
+  useEffect(() => {
+    onSnapshot(
+      collection(db, 'projects'),
+      orderBy('timestamp', 'desc'),
+      (snapshot) => {
+        setProjects(
+          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+        );
+      }
+    );
+  }, []);
+
+
   return (
    <div data-aos="fade-left" className="select-none flex justify-center mt-[4rem] md:mt-0 w-full h-screen">
       <div className="mx-[1rem]  flex-wrap shadow-2xl bg-slate-100  border-gray-300  transperant-4 md:w-4/5 my-5  xl:mx-10 h-fit xl:w-4/5 rounded-[2rem] xl:rounded-[4rem]  flex items-center justify-center">
@@ -14,17 +31,12 @@ const CPDetails = () => {
                 Project Title :
               </h1>
               <div className="xl:w-10/12 xl:flex text-blue-800  xl:mt-[-1rem] md:flex   xl:ml-24 border-b-4 border-r-4 bg-white py-2 rounded-xl  pl-6 pr-6 text-xs xl:text-xl">
-                {curProDetails.map((item) => (
-                  <div
-                    key={item.title}
+                {projects.map(({id,data}) => (
+                  id===location.state ? 
+                  (<div
+                    key={id}
                     className="flex flex-wrap xl:break-all  "
-                  >
-                    {item.curProDetails.map((link) => (
-                      <h1 to={`/${link.title}`} key={link.title} className=" ">
-                        <span className="capitalize ">{link.title}</span>
-                      </h1>
-                    ))}
-                  </div>
+                  >{data.pname}</div>):null
                 ))}
               </div>
             </div>
@@ -34,17 +46,12 @@ const CPDetails = () => {
                 Team Members :
               </h1>
               <div className="xl:w-10/12 mt-2 xl:flex text-blue-800  xl:mt-[-1rem] md:flex ml-2  xl:ml-24 border-b-4 border-r-4 bg-white py-2 rounded-xl  pl-6 pr-6 text-xs xl:text-xl">
-                {curProDetails.map((item) => (
+                {projects.map(({id,data}) => (
+                  id===location.state ? 
                   <div
-                    key={item.title}
+                    key={id}
                     className="flex flex-wrap xl:break-all  "
-                  >
-                    {item.curProDetails.map((link) => (
-                      <h1 to={`/${link.title}`} key={link.title} className=" ">
-                        <span className="capitalize ">{link.members}</span>
-                      </h1>
-                    ))}
-                  </div>
+                  >{data.members}</div>:null
                 ))}
               </div>
             </div>
@@ -55,17 +62,12 @@ const CPDetails = () => {
               </h1>
 
               <div className="mt-2 xl:10/12 xl:flex text-blue-800  xl:mt-[-1rem] md:flex ml-2 xl:ml-24  border-b-4 border-r-4 bg-white py-2 rounded-xl  pl-6 pr-6 text-xs xl:text-xl">
-                {curProDetails.map((item) => (
+              {projects.map(({id,data}) => (
+                  id===location.state ? 
                   <div
-                    key={item.title}
+                    key={id}
                     className="flex flex-wrap xl:break-all  "
-                  >
-                    {item.curProDetails.map((link) => (
-                      <h1 to={`/${link.title}`} key={link.title} className=" ">
-                        <span className="capitalize ">{link.heldBy}</span>
-                      </h1>
-                    ))}
-                  </div>
+                  >{data.heldby}</div>:null
                 ))}
               </div>
             </div>
@@ -75,17 +77,12 @@ const CPDetails = () => {
                 Description:
               </h1>
               <div className="mt-2 xl:w-10/12  xl:flex text-blue-800  xl:mt-[-1rem] md:flex ml-2  xl:ml-24 border-b-4 border-r-4 bg-white py-2 rounded-xl  pl-6 pr-6 text-xs xl:text-xl">
-                {curProDetails.map((item) => (
+              {projects.map(({id,data}) => (
+                  id===location.state ? 
                   <div
-                    key={item.title}
+                    key={id}
                     className="flex flex-wrap xl:break-all  "
-                  >
-                    {item.curProDetails.map((link) => (
-                      <h1 to={`/${link.title}`} key={link.title} className=" ">
-                        <span className="capitalize ">{link.description}</span>
-                      </h1>
-                    ))}
-                  </div>
+                  >{data.desc}</div>:null
                 ))}
               </div>
             </div>
