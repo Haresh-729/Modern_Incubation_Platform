@@ -53,6 +53,7 @@ import UpdateSession from "./Group/UpdateSession";
 import GroupDashboard from "./Group/GroupDashboard";
 import GprofileEdit from "./Group/GprofileEdit";
 import CPDCreate from "./Group/CPDCreate";
+import CreateProject from './Group/CreateProject';
 import GSidebar from "./Group/GSidebar";
 import GProfile from "./Group/GProfile";
 import Badges from "./components/Badges";
@@ -83,6 +84,7 @@ import { Calendar, ToDoList, Pie } from "./pages";
 import "./App.css";
 
 import { useStateContext } from "./contexts/ContextProvider";
+import CreatePro from "./Group/CreatePro";
 
 const App = () => {
   useEffect(() => {
@@ -235,7 +237,7 @@ const App = () => {
                           <Route path="/Tasks" element={<GroupTasks />} />
                           <Route
                             path="/Create-Project"
-                            element={<CPDCreate />}
+                            element={<CreatePro />}
                           />
                           <Route
                             path="/Verify-Ideas"

@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { curProDetails } from "./curProDetails";
 
@@ -17,7 +15,7 @@ const CPDCreate = () => {
                 {curProDetails.map((item) => (
                   <div
                     key={item.title}
-                    className="flex flex-wrap xl:break-all  "
+                    className="flex flex-wrap xl:break-all "
                   >
                     {item.curProDetails.map((link) => (
                       <h1 to={`/${link.title}`} key={link.title} className=" ">
