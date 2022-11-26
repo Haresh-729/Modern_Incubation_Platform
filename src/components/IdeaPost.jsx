@@ -26,6 +26,7 @@ function IdeaPost({
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
   const [show, setShow] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   console.log(photoUrl);
 
   const postComment = async (e) => {
@@ -110,12 +111,12 @@ function IdeaPost({
 
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-start ">
+    <div className="pt-5 w-full h-full flex flex-col items-center justify-start ">
       {/* <article className="drop-shadow-lg my-5 w-1/2 border rounded-[2rem] {/*  hover:bg-offwhite transition duration-350 ease-in-out"> */}
       {
         status === "verified" ?
           <div className="bg-cover w-full h-full flex flex-col items-center justify-start">
-            <article className=" my-2 w-1/2 border rounded-[2rem] shadow-lg">
+            <article className=" my-2 w-4/5 sm:w-1/2 border rounded-[2rem] shadow-lg">
               <div className="flex flex-shrink-0 p-4 pb-0">
                 {/* <a href="#" className="flex-shrink-0 group block">  */}
 
@@ -210,11 +211,14 @@ function IdeaPost({
                         {description}
                       </p>
                     </div>
-                    <div className="pl-16">
-                      <p className="text-base width-auto font-medium text-black flex-shrink">
-                        <a className="text-grey hover:text-gray-300" href={pdfFile}>View Document</a>
-                      </p>
-                    </div>
+                    {/* <div className="pl-16">
+                      <p className="text-base width-auto font-medium text-black flex-shrink"> */}
+                        {showDetails ? (
+                          <span className="text-grey pl-16 text-base width-auto font-medium flex-shrink hover:text-gray-300 cursor-pointer" onClick={() => setShowDetails(!showDetails)}>Hide Details
+                            <img className="mx-1" src={pdfFile} />
+                          </span>) : <span className="text-grey pl-16 text-base width-auto font-medium flex-shrink hover:text-gray-300 cursor-pointer " onClick={() => setShowDetails(!showDetails)}>View Details</span>}
+                      {/* </p>
+                    </div> */}
                     <div className="pt-2 pl-16 flex flex-row space-x-8 ">
                       <button
                         onClick={() => [setToggleLike(!toggleLike), setCollab(false), setToggleCmts(false)]}
