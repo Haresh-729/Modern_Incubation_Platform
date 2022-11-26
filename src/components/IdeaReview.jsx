@@ -64,13 +64,13 @@ function IdeaReview({
 
 
   return (
-    <div className=" bg-cover w-full h-full flex flex-col items-center justify-start">
+    <div className="pt-5 bg-cover w-full h-full flex flex-col items-center justify-start">
       {
         user.displayName === username ?
 
           <>
             {/* <article className="drop-shadow-lg my-5 w-1/2 border rounded-[2rem] {/*  hover:bg-offwhite transition duration-350 ease-in-out"> */}
-            <article className=" my-2 w-1/2 border rounded-[2rem] shadow-lg">
+            <article className=" my-2 w-4/5 sm:w-1/2 border rounded-[2rem] shadow-lg">
               <div className="flex flex-shrink-0 p-4 pb-0">
                 {/* <a href="#" className="flex-shrink-0 group block">  */}
 

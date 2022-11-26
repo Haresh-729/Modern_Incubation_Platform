@@ -5,6 +5,10 @@ import { ToastContainer, toast } from "react-toastify";
 import { Formik, Form, Field, ErroMessage } from "formik";
 import * as Yup from "yup";
 import { bad_word } from "../data/dummy";
+import html2canvas from 'html2canvas';
+import {addDoc,collection,serverTimestamp} from 'firebase/firestore';
+import {db} from '../firebase';
+import {useNavigate} from 'react-router-dom';
 // import { WithContext as ReactTags } from 'react-tag-input';
 
 import {
@@ -21,7 +25,7 @@ import {
   exportComponentAsPNG,
 } from "react-component-export-image";
 
-const Upload1 = () => {
+const Upload1 = ({ username, category, photoUrl }) => {
   // Tags
 
   // const KeyCodes = {
@@ -66,6 +70,8 @@ const Upload1 = () => {
   //   const handleTagClick = index => {
   //     console.log('The tag at index ' + index + ' was clicked');
   //   };
+
+  const navigate = useNavigate();
 
   // Export PNG
   const componentRef = useRef();
@@ -207,7 +213,8 @@ const Upload1 = () => {
     }
   };
 
-  const hForm1N = () => {
+  const hForm1N = (e) => {
+    e.preventDefault();
     if (!values.cat) {
       setErr1(true);
       console.log("in if");
@@ -239,11 +246,12 @@ const Upload1 = () => {
     console.log(err1, error);
   };
 
-  const hForm2P = (e) => {
+  const hForm2P = () => {
     setForm2(false);
     setForm1(true);
   };
   const hForm2N = (e) => {
+    e.preventDefault();
     if (!values.prob) {
       setErr7(true);
     }
@@ -267,6 +275,7 @@ const Upload1 = () => {
   };
 
   const hForm3N = (e) => {
+    e.preventDefault();
     if (!values.users) {
       setErr11(true);
     }
@@ -299,7 +308,8 @@ const Upload1 = () => {
     setForm3(false);
   };
 
-  const hForm4N = () => {
+  const hForm4N = (e) => {
+    e.preventDefault();
     if (values.mem) {
       setErr16(true);
     }
@@ -340,14 +350,50 @@ const Upload1 = () => {
   };
 
   const hFormSP = (e) => {
+    e.preventDefault();
     setFormS(false);
     setForm4(true);
   };
 
-  const handleSubmit = () => {
-    exportComponentAsPNG(componentRef);
-    console.log(values);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const photo = exportComponentAsPNG(componentRef);
+    const element = componentRef.current;
+    const canvas = await html2canvas(element);
+    const data = canvas.toDataURL('image/jpg');
+    if (category === "student" || category === "individual") {
+      addDoc(collection(db, "ideas"), {
+        cat: values.cat,
+        title: values.title,
+        desc: values.desc,
+        pdfFile: data,
+        userName: username,
+        timestamp: serverTimestamp(),
+        status: "under-verification",
+        statusLogo: "https://i.ibb.co/W3Y9rx5/under-Verification.png",
+        category: category,
+        photoUrl: photoUrl,
+      });
+      navigate("/Idea-Review");
+    } else {
+
+      addDoc(collection(db, "ideas"), {
+        cat: values.cat,
+        title: values.title,
+        desc: values.desc,
+        pdfFile: data,
+        userName: username,
+        timestamp: serverTimestamp(),
+        status: "verified",
+        statusLogo: "https://i.ibb.co/tJR9T3x/verified.png",
+        category: category,
+        photoUrl: photoUrl,
+      });
+      navigate("/Post");
+    }
   };
+
+
 
   const ComponentToPrint = React.forwardRef((props, ref) => (
     // <div ref={ref}>Hello World</div>
@@ -428,7 +474,7 @@ const Upload1 = () => {
           className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
         >
           <div className="flex justify-center w-full mt-2">
-            <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
+            <h1 className="text-center justify-center font-poppins font-bold text-red-700 text-xl uppercase mt-2">
               IDEA DESCRIPTION
             </h1>
           </div>
@@ -538,7 +584,7 @@ const Upload1 = () => {
           className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
         >
           <div className="flex justify-center w-full mt-2">
-            <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
+            <h1 className="text-center justify-center font-poppins font-bold text-red-700 text-xl uppercase mt-2">
               Requirement
             </h1>
           </div>

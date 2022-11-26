@@ -29,7 +29,7 @@ import KnowMore3 from "./components/KnowMore3";
 import KnowMore4 from "./components/KnowMore4";
 import KnowMore5 from "./components/KnowMore5";
 import LogOutSuccessful from "./components/LogOutSuccessful";
-import IdeaForm from "./components/IdeaForm";
+// import IdeaForm from "./components/IdeaForm";
 import IdeaList from "./components/IdeaList";
 import Interactions from "./components/Interactions";
 import ForgotPass from "./components/ForgotPass";
@@ -400,7 +400,7 @@ const App = () => {
                       <Route
                         path="/Idea-Upload"
                         element={
-                          <IdeaForm
+                          <Upload1
                             username={user.displayName}
                             category={category}
                             photoUrl={photoUrl}
