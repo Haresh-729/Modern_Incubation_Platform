@@ -58,7 +58,9 @@ function CreateSession() {
         }).then(()=>{
           setErrorMsg(toast("Session Created Successfully"));
           setLoading(true);
-          navigate("/session");
+          setTimeout(()=>{
+            navigate("/session");
+          },4000);
         }).catch((error)=>{
           setErrorMsg(toast("Error in creating session"));
           setLoading(true);

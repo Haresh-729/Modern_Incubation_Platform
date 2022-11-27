@@ -24,6 +24,7 @@ function IdeaReview({
   const [likes, setLikes] = useState([]);
   const [likeCount, setLikeCount] = useState(0);
   const [show, setShow] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const navigate = useNavigate();
 
 
@@ -168,11 +169,10 @@ function IdeaReview({
                         {description}
                       </p>
                     </div>
-                    <div className="pl-16">
-                      <p className="text-base width-auto font-medium text-black flex-shrink">
-                        <a className="text-grey hover:text-gray-300" href={pdfFile}>View Document</a>
-                      </p>
-                    </div>
+                    {showDetails ? (
+                      <span className="text-grey pl-16 text-base width-auto font-medium flex-shrink hover:text-gray-300 cursor-pointer" onClick={() => setShowDetails(!showDetails)}>Hide Details
+                        <img className="mx-1" src={pdfFile} />
+                      </span>) : <span className="text-grey pl-16 text-base width-auto font-medium flex-shrink hover:text-gray-300 cursor-pointer " onClick={() => setShowDetails(!showDetails)}>View Details</span>}
                     <div className="pt-2 pl-16 flex flex-row space-x-8 ">
                       <button
                         onClick={() => [setLike(!like), setCollab(false), setToggleCmts(false), setStatus(false)]}
