@@ -373,6 +373,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
         statusLogo: "https://i.ibb.co/W3Y9rx5/under-Verification.png",
         category: category,
         photoUrl: photoUrl,
+        likeStatus:false
       });
       navigate("/Idea-Review");
     } else {
@@ -388,6 +389,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
         statusLogo: "https://i.ibb.co/tJR9T3x/verified.png",
         category: category,
         photoUrl: photoUrl,
+        likeStatus:false
       });
       navigate("/Post");
     }
@@ -893,7 +895,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                   </div>
                   <div className=" my-2 p-1 flex svelte-1l8159u">
                     <Select
-                      placeholder="Idea Category"
+                      placeholder="Enter Idea Category"
                       className="w-full  rounded-md border-[#7587A4] bg-white text-base font-normal text-[#7587A4] outline-none focus:border-blue focus:drop-shadow-2xl"
                       onChange={(event) =>
                         setValues((prev) => ({ ...prev, cat: event.value }))

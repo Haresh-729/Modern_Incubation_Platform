@@ -85,6 +85,7 @@ import "./App.css";
 
 import { useStateContext } from "./contexts/ContextProvider";
 import CreatePro from "./Group/CreatePro";
+import Search from "./components/Search";
 
 const App = () => {
   useEffect(() => {
@@ -376,7 +377,7 @@ const App = () => {
                       <Route path="/Contact-us" element={<ContactUs />} />
                       <Route
                         path="/Post"
-                        element={ideas.map(({ id, data }) => (
+                        element={[<Search pushData={IdeaPost.pullData}/>,ideas.map(({ id, data }) => (
                           <IdeaPost
                             key={id}
                             ideaId={id}
@@ -388,8 +389,9 @@ const App = () => {
                             status={data.status}
                             photoUrl={data.photoUrl}
                             cmntPhoto={photoUrl}
+                            likeStatus={data.likeStatus}
                           />
-                        ))}
+                        ))]}
                       />
                       <Route path="/Switchi" element={<ToDoList />} />
                       <Route path="/chat" element={<Chat />} />
