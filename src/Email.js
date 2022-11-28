@@ -1,16 +1,25 @@
-import { CourierClient } from "@trycourier/courier";
+const nodemailer = require("nodemailer");
 
-const courier = CourierClient({ authorizationToken: "YOUR_AUTH_TOKEN_HERE" });
-
-const { requestId } = await courier.send({
-  message: {
-    to: { "tiptop4002@gmail.com"
-    },
-    template: "ZNMP9F7YCVMCQQG6Z3Q4793JWT1N",
-    data: {
-      variables: "Haresh",
-    },
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "haresh.personal4@gmail.com",
+    pass: "thkeijnrnzogjlpd",
+  },
+  tls: {
+    rejectUnauthorized: false,
   },
 });
-// 
 
+transporter
+  .sendMail({
+    from: '"Haresh Kurade" <haresh.personal4@gmail.com>', // sender address
+    to: "kuradeharesh4002@gmail.com", // list of receivers
+    subject: "Medium @edigleyssonsilva ✔", // Subject line
+    text: "There is a new article. It's about sending emails, check it out!", // plain text body
+    html: "<b>There is a new article. It's about sending emails, check it out!</b>", // html body
+  })
+  .then((info) => {
+    console.log({ info });
+  })
+  .catch(console.error);
