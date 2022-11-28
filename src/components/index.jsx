@@ -60,3 +60,4 @@ export { default as Badges } from "./Badges";
 export { default as IdeaTemp } from "./IdeaTemp";
 export { default as CPDetails } from "./CPDetails";
 export { default as Upload1 } from "./Upload1";
+export { default as Developers } from "./Developers";

@@ -58,6 +58,7 @@ import GSidebar from "./Group/GSidebar";
 import GProfile from "./Group/GProfile";
 import Badges from "./components/Badges";
 import CPDetails from "./components/CPDetails";
+import Developers from "./components/Developers";
 
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -466,6 +467,7 @@ const App = () => {
                           />
                         }
                       />
+                      <Route path="/Developers" element={<Developers />} />
 
                       {/* <Route path="/Post1" element={<Post1 />} /> */}
                     </>
@@ -488,6 +490,7 @@ const App = () => {
               <Route path="*" element={<PNF />} />
               <Route path="/groupregister" element={<GRegister />} />
               <Route path="/grouplogin" element={<Glogin />} />
+              <Route path="/Developers" element={<Developers />} />
               <Route
                 path="/about"
                 element={[

@@ -128,7 +128,7 @@ export const ColorMappingPrimaryXAxis = {
 };
 
 export const bad_word = [
-  "kill","fuck","fuck you","mother fucker","fucker","fuck", "shit", "cock", "titties", "boner", "muff", "pussy", 
+  "Title","fuck you","fuck","aizavada","chutya","mc","gone case","asd","yz","kill","fuck","fuck you","mother fucker","fucker","fuck", "shit", "cock", "titties", "boner", "muff", "pussy", 
   "asshole", "cunt", "ass", "cockfoam", "nigger", "shit", "Oh, for fuck's sake", "fuck off", "fuk", "Hi", "Hii", "Byee", "bye", "Good morning",
 ];
 
@@ -294,6 +294,16 @@ export const links = [
       },
       {
         name: "Contact-Us",
+        icon: (
+          <img
+            src="https://i.ibb.co/y4s7K6g/icons8-communication-24.png"
+            alt="contactus"
+            border="0"
+          />
+        ),
+      },
+      {
+        name: "Developers",
         icon: (
           <img
             src="https://i.ibb.co/y4s7K6g/icons8-communication-24.png"
