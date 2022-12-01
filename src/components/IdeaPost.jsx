@@ -27,9 +27,7 @@ function IdeaPost({
   const [comments, setComments] = useState([]);
   const [show, setShow] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
-  const [data, setData] = useState(null);
-  const [ideas,setIdeas] = useState([]);
-  pullData = setData;
+  
 
   const postComment = async (e) => {
     e.preventDefault();
@@ -46,7 +44,6 @@ function IdeaPost({
     await deleteDoc(doc(db, `ideas/${ideaId}/comments`, commentId));
   };
 
-  console.log("Data" + data);
 
 
   useEffect(() => {
@@ -121,19 +118,6 @@ function IdeaPost({
   }, [ideaId]);
 
 
-  useEffect(() => {
-    onSnapshot(
-      collection(db, "ideas"),
-      orderBy("timestamp", "desc"),
-      (snapshot) => {
-        setIdeas(
-          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
-        );
-      }
-    );
-  }, []);
-
-  console.log(ideas)
 
   // console.log(location.state);
 
@@ -144,13 +128,13 @@ function IdeaPost({
         status === "verified" ?
           <div className="bg-cover w-full h-full flex flex-col items-center justify-start">
 
-            {
-              ideas.map(({id,data})=>(
-                
-                  < article className="my-2 w-4/5 sm:w-1/2 border rounded-[2rem] shadow-lg">
+
+
+
+            < article className="my-2 w-4/5 sm:w-1/2 border rounded-[2rem] shadow-lg">
               <div className="flex flex-shrink-0 p-4 pb-0">
                 {/* <a href="#" className="flex-shrink-0 group block">  */}
-  
+
                 {/* div1 main */}
                 <div className=" w-full flex flex-row justify-between">
                   {/* div 1.1 img&name */}
@@ -158,19 +142,19 @@ function IdeaPost({
                     <div>
                       <img
                         className="inline-block h-10 w-10 rounded-full"
-                        src={data.photoUrl}
+                        src={photoUrl}
                         alt=""
                       ></img>
                     </div>
                     <div className="ml-3 place-items-center">
                       <p className="text-base leading-6 font-medium text-[#304E81]">
-                        {data.userName}
+                        {username}
                       </p>
                     </div>
                   </div>
-  
+
                   {/* div 1.2 option&close */}
-  
+
                   <div className="flex justify-items-end space-x-4 ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -188,7 +172,7 @@ function IdeaPost({
                     </svg>
                     {
                       show ?
-  
+
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -213,7 +197,7 @@ function IdeaPost({
                           onClick={() => {
                             setShow(!show);
                           }}>
-  
+
                           <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)"
                             fill="#000000" stroke="none">
                             <path d="M203 263 c20 -2 37 -7 37 -11 0 -9 -183 -192 -192 -192 -4 0 -9 17
@@ -227,26 +211,26 @@ function IdeaPost({
                 </div>
                 {/* </a>  */}
               </div>
-  
+
               <div className="pl-16 ">
                 <div className="flex items-center">
-                  <h1 className="text-black font-bold text-2xl pr-4">{data.title}</h1>
+                  <h1 className="text-black font-bold text-2xl pr-4">{title}</h1>
                 </div>
               </div>
               {
                 show ?
                   <>
                     <div className="pl-16">
-  
+
                       <p className="text-base width-auto font-medium text-black flex-shrink">
-                        {data.desc}
+                        {description}
                       </p>
                     </div>
                     {/* <div className="pl-16">
                         <p className="text-base width-auto font-medium text-black flex-shrink"> */}
                     {showDetails ? (
                       <span className="text-grey pl-16 text-base width-auto font-medium flex-shrink hover:text-gray-300 cursor-pointer" onClick={() => setShowDetails(!showDetails)}>Hide Details
-                        <img className="mx-1" src={data.pdfFile} />
+                        <img className="mx-1" src={pdfFile} />
                       </span>) : <span className="text-grey pl-16 text-base width-auto font-medium flex-shrink hover:text-gray-300 cursor-pointer " onClick={() => setShowDetails(!showDetails)}>View Details</span>}
                     {/* </p>
                       </div> */}
@@ -273,7 +257,7 @@ function IdeaPost({
                               />
                             </svg>
                             :
-  
+
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -346,14 +330,14 @@ function IdeaPost({
                   : null
               }
             </article>
-                
-              ))
-            }
 
 
-      {toggleLike ? (
-        <div className="w-[20rem] bg-[#6788D3] bg-opacity-30 shadow-2xl rounded-3xl p-4 float-left">
-          {/* <div className="flex items-center justify-start pb-4">
+
+
+
+            {toggleLike ? (
+              <div className="w-[20rem] bg-[#6788D3] bg-opacity-30 shadow-2xl rounded-3xl p-4 float-left">
+                {/* <div className="flex items-center justify-start pb-4">
                   <div className="pr-4">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -370,92 +354,40 @@ function IdeaPost({
                   </div>
                 </div> */}
 
-          <div className="flex items-center justify-start pb-4">
-            <div className="pr-4">
-              <button onClick={handleLikes}>
+                <div className="flex items-center justify-start pb-4">
+                  <div className="pr-4">
+                    <button onClick={handleLikes}>
 
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"
-                  />
-                </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6.633 10.5c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 012.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 00.322-1.672V3a.75.75 0 01.75-.75A2.25 2.25 0 0116.5 4.5c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 01-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 00-1.423-.23H5.904M14.25 9h2.25M5.904 18.75c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 01-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 10.203 4.167 9.75 5 9.75h1.053c.472 0 .745.556.5.96a8.958 8.958 0 00-1.302 4.665c0 1.194.232 2.333.654 3.375z"
+                        />
+                      </svg>
 
 
 
-              </button>
-            </div>
-            <div>
-
-              <p className="text-lg text-gray-500 font-bold">LIKES</p>
-              <p className="text-lg text-[#013BBA] font-bold">{likeCount}</p>
-
-            </div>
-          </div>
-
-          <div className="overflow-y-auto h-[15rem] pb-3">
-            {likes.map(({ id, data }) => (
-              <div key={id} id={id}>
-                <div className="flex pb-3">
-                  <div>
-                    <img
-                      className="h-10 w-10 rounded-full mr-3"
-                      src={data.photoUrl}
-                      alt="Profie"
-                    />
+                    </button>
                   </div>
                   <div>
-                    <p className="flex justify-between text-md text-gray-500 font-bold">
-                      {data.uname}
-                    </p>
+
+                    <p className="text-lg text-gray-500 font-bold">LIKES</p>
+                    <p className="text-lg text-[#013BBA] font-bold">{likeCount}</p>
+
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )
-        :
-        collab ?
-          navigate("/chat")
-          :
-          toggleCmts ?
-            <div className="w-[20rem] bg-[#6788D3] bg-opacity-30 shadow-2xl rounded-3xl p-4 float-left">
-              <div className="flex items-center justify-start pb-4">
-                <div className="pr-4">
-                  <svg
-                    xmlns="http:www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-lg text-gray-500 font-bold">COMMENTS</p>
-                  <p className="text-lg text-[#013BBA] font-bold">{commentCount}</p>
-                </div>
-              </div>
 
-              <div>
                 <div className="overflow-y-auto h-[15rem] pb-3">
-                  {comments.map(({ id, data }) => (
-                    <div key={id}>
+                  {likes.map(({ id, data }) => (
+                    <div key={id} id={id}>
                       <div className="flex pb-3">
                         <div>
                           <img
@@ -465,70 +397,118 @@ function IdeaPost({
                           />
                         </div>
                         <div>
-                          <p className="flex justify-between text-md text-gray-500 font-bold">{data.uname}
-                            {
-                              data.uname === user.displayName ?
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="currentColor"
-                                  className="w-4 h-4 mt-1 ml-6 hover:stroke-blue"
-                                  onClick={() => {
-                                    deleteComments(id)
-                                  }}
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M6 18L18 6M6 6l12 12"
-                                  />
-                                </svg>
-                                :
-                                null
-                            }
-
+                          <p className="flex justify-between text-md text-gray-500 font-bold">
+                            {data.uname}
                           </p>
-                          <div className="w-[10rem] bg-slate-200 rounded-bl-3xl rounded-r-3xl">
-                            <p className=" px-2 py-2">{data.text}</p>
-                          </div>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
+            )
+              :
+              collab ?
+                navigate("/chat")
+                :
+                toggleCmts ?
+                  <div className="w-[20rem] bg-[#6788D3] bg-opacity-30 shadow-2xl rounded-3xl p-4 float-left">
+                    <div className="flex items-center justify-start pb-4">
+                      <div className="pr-4">
+                        <svg
+                          xmlns="http:www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-lg text-gray-500 font-bold">COMMENTS</p>
+                        <p className="text-lg text-[#013BBA] font-bold">{commentCount}</p>
+                      </div>
+                    </div>
 
-              <div>
-                <form className="flex items-center justify-start pt-2">
-                  <div className="flex w-full">
-                    <input onChange={event => setNewComment(event.target.value)} type="text" id="comment" value={newComment} className=" border-b-2 border-grey shadow-sm bg-white/0 w-full py-2 focus:outline-none focus:shadow-md focus:border-b-blue focus:border-b-2 transition-colors" autoComplete="off" placeholder='Add a comment' />
-                    <button disabled={!newComment} type="submit" onClick={postComment}>
-                      Post
-                    </button>
+                    <div>
+                      <div className="overflow-y-auto h-[15rem] pb-3">
+                        {comments.map(({ id, data }) => (
+                          <div key={id}>
+                            <div className="flex pb-3">
+                              <div>
+                                <img
+                                  className="h-10 w-10 rounded-full mr-3"
+                                  src={data.photoUrl}
+                                  alt="Profie"
+                                />
+                              </div>
+                              <div>
+                                <p className="flex justify-between text-md text-gray-500 font-bold">{data.uname}
+                                  {
+                                    data.uname === user.displayName ?
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth="1.5"
+                                        stroke="currentColor"
+                                        className="w-4 h-4 mt-1 ml-6 hover:stroke-blue"
+                                        onClick={() => {
+                                          deleteComments(id)
+                                        }}
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          d="M6 18L18 6M6 6l12 12"
+                                        />
+                                      </svg>
+                                      :
+                                      null
+                                  }
+
+                                </p>
+                                <div className="w-[10rem] bg-slate-200 rounded-bl-3xl rounded-r-3xl">
+                                  <p className=" px-2 py-2">{data.text}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <form className="flex items-center justify-start pt-2">
+                        <div className="flex w-full">
+                          <input onChange={event => setNewComment(event.target.value)} type="text" id="comment" value={newComment} className=" border-b-2 border-grey shadow-sm bg-white/0 w-full py-2 focus:outline-none focus:shadow-md focus:border-b-blue focus:border-b-2 transition-colors" autoComplete="off" placeholder='Add a comment' />
+                          <button disabled={!newComment} type="submit" onClick={postComment}>
+                            Post
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+
+
                   </div>
-                </form>
-              </div>
-
-
-            </div>
-            :
-            null
-      }
-    </div>
+                  :
+                  null
+            }
+          </div>
           :
-  null
+          null
 
-}
+      }
 
     </div >
   );
 }
 
-var pullData;
-IdeaPost.pullData = (data) => {
-  pullData(data);
-}
 
 export default IdeaPost;
