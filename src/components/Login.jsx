@@ -12,11 +12,35 @@ import { useNavigate } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 import { toast, ToastContainer } from "react-toastify";
 import { setDoc, serverTimestamp, doc } from "firebase/firestore";
-import { sendm } from "../Email.js";
-
+// import { sendm } from "../Email.js";
 // import { createTransport } from "nodemailer";
+// import { Mailer } from 'nodemailer-react'
 
 const Login = () => {
+
+  //  const WelcomeEmail = ( firstName ) => ({
+  //   subject: `👋 ${firstName}`,
+  //   body: (
+  //     <div>
+  //       <p>Hello {firstName}!</p>
+  //       <p>Hope you'll enjoy the package!</p>
+  //     </div>
+  //   )
+  // })
+  
+  // const transport = {
+  //   host: 'haresh.personal4@gmail.com',
+  //   secure: true,
+  //   auth: { user: 'haresh.personal4@gmail.com', pass: 'thkeijnrnzogjlpd' },
+  // }
+  // const defaults = {
+  //   from: "haresh.personal4@gmail.com",
+  // }
+  // const mailer = Mailer(
+  //   { transport, defaults },
+  //   { WelcomeEmail }
+  // )
+
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
@@ -63,7 +87,10 @@ const Login = () => {
           displayName: user.displayName,
         });
 
-        sendm();
+        // sendm();
+        mailer.send('WelcomeEmail', { firstName: 'Mathieu' }, {
+          to: 'kuradeharesh4002@gmail.com'
+        })
         navigate("/dashboard");
         setLoading(true);
       })

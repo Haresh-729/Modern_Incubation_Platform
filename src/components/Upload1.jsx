@@ -948,7 +948,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                       placeholder="Your Idea Heading.."
                       required
                       autoComplete="on"
-                      onKeyUp={check_val()}
+                      onKeyUp={check_val} //Remove or add () if page is not rendering.
                       className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
                       onChange={(event) =>
                         setValues((prev) => ({
