@@ -5,11 +5,12 @@ import { ToastContainer, toast } from "react-toastify";
 import { Formik, Form, Field, ErroMessage } from "formik";
 import * as Yup from "yup";
 import { bad_word } from "../data/dummy";
-import html2canvas from 'html2canvas';
-import {addDoc,collection,serverTimestamp} from 'firebase/firestore';
-import {db} from '../firebase';
-import {useNavigate} from 'react-router-dom';
+import html2canvas from "html2canvas";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
+import { useNavigate } from "react-router-dom";
 // import { WithContext as ReactTags } from 'react-tag-input';
+// import { render, Document as Doc, Text as Tex } from "redocx";
 
 import {
   Document,
@@ -360,7 +361,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
     // const photo = exportComponentAsPNG(componentRef);
     const element = componentRef.current;
     const canvas = await html2canvas(element);
-    const data = canvas.toDataURL('image/jpg');
+    const data = canvas.toDataURL("image/jpg");
     if (category === "student" || category === "individual") {
       addDoc(collection(db, "ideas"), {
         cat: values.cat,
@@ -376,7 +377,6 @@ const Upload1 = ({ username, category, photoUrl }) => {
       });
       navigate("/Idea-Review");
     } else {
-
       addDoc(collection(db, "ideas"), {
         cat: values.cat,
         title: values.title,
@@ -392,8 +392,6 @@ const Upload1 = ({ username, category, photoUrl }) => {
       navigate("/Post");
     }
   };
-
-
 
   const ComponentToPrint = React.forwardRef((props, ref) => (
     // <div ref={ref}>Hello World</div>

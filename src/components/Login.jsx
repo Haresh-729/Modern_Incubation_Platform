@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 import { toast, ToastContainer } from "react-toastify";
 import { setDoc, serverTimestamp, doc } from "firebase/firestore";
+import { sendm } from "../Email.js";
+
 // import { createTransport } from "nodemailer";
 
 const Login = () => {
@@ -61,6 +63,7 @@ const Login = () => {
           displayName: user.displayName,
         });
 
+        sendm();
         navigate("/dashboard");
         setLoading(true);
       })
