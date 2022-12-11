@@ -180,9 +180,7 @@ function IdeaPost({
                           strokeWidth="1.5"
                           stroke="currentColor"
                           className="w-6 h-6 hover:stroke-blue"
-                          onClick={() => {
-                            setShow(!show);
-                          }}
+                          onClick={() => [setCollab(false), setToggleLike(false), setToggleCmts(false),setShow(!show)]}
                         >
                           <path
                             strokeLinecap="round"
