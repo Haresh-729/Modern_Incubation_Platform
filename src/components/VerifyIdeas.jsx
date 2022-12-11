@@ -28,6 +28,9 @@ function VerifyIdeas({
     const [likeCount, setLikeCount] = useState(0);
     const [likes, setLikes] = useState([]);
     const [showDetails, setShowDetails] = useState(false);
+    const [showAForm,setShowAForm] = useState(false);
+    const [showRForm,setShowRForm] = useState(false);
+    const [feedback,setFeedback] = useState("");
 
     useEffect(() => {
         let unsubscribe;
@@ -122,9 +125,7 @@ function VerifyIdeas({
                                                             strokeWidth="1.5"
                                                             stroke="currentColor"
                                                             className="w-6 h-6 hover:stroke-blue"
-                                                            onClick={() => {
-                                                                setShow(!show);
-                                                            }}
+                                                            onClick={() => [setCollab(false), setLike(false), setToggleCmts(false), setShow(!show)]}
                                                         >
                                                             <path
                                                                 strokeLinecap="round"
@@ -162,31 +163,14 @@ function VerifyIdeas({
 
                                                 <>
 
-                                                    <button onClick={() => {
-                                                        updateDoc(doc(db, "ideas", ideaId), {
-                                                            status: "not-verified",
-                                                            statusLogo: "https://i.ibb.co/5hbBY04/not-Verified.png",
-                                                        }).then(() => {
-                                                            console.log("Document successfully updated!");
-                                                        }).catch((error) => {
-                                                            // The document probably doesn't exist.
-                                                            console.error("Error updating document: ", error);
-                                                        });
-                                                    }}>
+                                                    <button onClick={() => [
+                                                        setShowRForm(!showRForm),setShowAForm(false)
+                                                    ]}>
                                                         <img className="mr-4 h-5" src="https://i.ibb.co/ZBDkw5b/icons8-rejected-64-1.png" alt="statusLogo"></img>
                                                     </button>
-                                                    <button onClick={() => {
-                                                        updateDoc(doc(db, "ideas", ideaId), {
-                                                            status: "verified",
-                                                            statusLogo: "https://i.ibb.co/tbs1YjT/verified.png",
-                                                        }).then(() => {
-                                                            console.log("Document successfully updated!");
-                                                            navigate("/Post");
-                                                        }).catch((error) => {
-                                                            // The document probably doesn't exist.
-                                                            console.error("Error updating document: ", error);
-                                                        });
-                                                    }}>
+                                                    <button onClick={() => [
+                                                        setShowRForm(false),setShowAForm(!showAForm)
+                                                    ]}>
                                                         <img className=" h-5" src="https://i.ibb.co/vjPL21q/icons8-approval-64.png" alt="statusLogo"></img>
                                                     </button>
                                                 </>
@@ -306,6 +290,65 @@ function VerifyIdeas({
 
                                 }
 
+                                {
+                                    showAForm ?
+                                        <div className="w-full max-w-xs">
+                                            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-2" for="reason">
+                                                        Reason to accept the idea
+                                                    </label>
+                                                    <input onChange={(e)=>setFeedback(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="reason" type="text" placeholder="Enter the reason"/>
+                                                </div>
+                                                <div className="flex items-center justify-center">
+                                                    <button onClick={()=>{
+                                                            updateDoc(doc(db, "ideas", ideaId), {
+                                                                status: "verified",
+                                                                aORrreason:feedback,
+                                                                statusLogo: "https://i.ibb.co/tbs1YjT/verified.png",
+                                                            }).then(() => {
+                                                                console.log("Document successfully updated!");
+                                                                navigate("/Post");
+                                                            }).catch((error) => {
+                                                                // The document probably doesn't exist.
+                                                                console.error("Error updating document: ", error);
+                                                            });
+                                                        }} className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        :
+                                        showRForm ?
+                                            <div className="w-full max-w-xs">
+                                                <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                                                    <div className="mb-4">
+                                                        <label className="block text-gray-700 text-sm font-bold mb-2" for="reason">
+                                                        Reason to reject the idea
+                                                        </label>
+                                                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="reason" type="text" placeholder="Enter the reason"/>
+                                                    </div>
+                                                    <div className="flex items-center justify-center">
+                                                        <button onClick={()=>{
+                                                            updateDoc(doc(db, "ideas", ideaId), {
+                                                                status: "not-verified",
+                                                                aORrreason:feedback,
+                                                                statusLogo: "https://i.ibb.co/5hbBY04/not-Verified.png",
+                                                            }).then(() => {
+                                                                console.log("Document successfully updated!");
+                                                            }).catch((error) => {
+                                                                // The document probably doesn't exist.
+                                                                console.error("Error updating document: ", error);
+                                                            });
+                                                        }} className="bg-blue hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            : null
+                                }
 
                                 {like ? (
                                     <div className="w-[20rem] bg-[#6788D3] bg-opacity-30 shadow-2xl rounded-3xl p-4 float-left">

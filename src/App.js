@@ -357,6 +357,7 @@ const App = () => {
                             status={data.status}
                             category={data.category}
                             photoUrl={data.photoUrl}
+                            aORrreason={data.aORrreason}
                           />
                         ))}
                       />
@@ -382,7 +383,7 @@ const App = () => {
                       <Route path="/Contact-us" element={<ContactUs />} />
                       <Route
                         path="/Post"
-                        element={[<Search pushData={App.pullData}/>,ideas.map(( id, data ) => (
+                        element={[<Search pushData={App.pullData}/>,ideas.map(({ id, data} ) => (
                           dataa === data.cat ?
                           <IdeaPost
                             key={id}

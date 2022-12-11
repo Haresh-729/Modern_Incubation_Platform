@@ -13,7 +13,8 @@ function IdeaReview({
   pdfFile,
   description,
   photoUrl,
-  status
+  status,
+  aORrreason
 }) {
   const [like, setLike] = useState(false);
   const [collab, setCollab] = useState(false);
@@ -120,9 +121,7 @@ function IdeaReview({
                           strokeWidth="1.5"
                           stroke="currentColor"
                           className="w-6 h-6 hover:stroke-blue"
-                          onClick={() => {
-                            setShow(!show);
-                          }}
+                          onClick={() => [setStatus(false),setCollab(false), setLike(false), setToggleCmts(false),setShow(!show)]}
                         >
                           <path
                             strokeLinecap="round"
@@ -141,9 +140,9 @@ function IdeaReview({
                           <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)"
                             fill="#000000" stroke="none">
                             <path d="M203 263 c20 -2 37 -7 37 -11 0 -9 -183 -192 -192 -192 -4 0 -9 17
-                                                                         -11 38 -3 30 -4 28 -5 -15 l-2 -53 53 2 c43 1 45 2 15 5 -21 2 -38 7 -38 11 0
-                                                                        9 183 192 192 192 4 0 9 -17 11 -37 3 -31 4 -29 5 15 l2 52 -52 -2 c-44 -1
-                                                                        -46 -2 -15 -5z"/>
+                                                                           -11 38 -3 30 -4 28 -5 -15 l-2 -53 53 2 c43 1 45 2 15 5 -21 2 -38 7 -38 11 0
+                                                                          9 183 192 192 192 4 0 9 -17 11 -37 3 -31 4 -29 5 15 l2 52 -52 -2 c-44 -1
+                                                                          -46 -2 -15 -5z"/>
                           </g>
                         </svg>
                     }
@@ -238,9 +237,9 @@ function IdeaReview({
                   <div className="  bg-[#6788D3] border rounded-3xl bg-opacity-30">
                     <h1 className="pl-6 pt-2 text-redish tracking-wider font-extrabold ">IDEA NOT VERIFIED</h1>
                     <div className="mx-6 my-4 border rounded-2xl h-full  bg-[#ffff] text-grey">
-                      <h1 className="pl-4 pt-2 font-bold text-xs tracking-wider">DETAILS</h1>
+                      <h1 className="pl-4 pt-2 font-bold text-xs tracking-wider">Reason for rejecting the Idea</h1>
                       <p className="px-8 py-3 text-xs font-medium tracking-wide overflow-y-auto">
-                        The Idea wihich you are trying to upload has been rejected for some reason.
+                        {aORrreason}
                       </p>
                     </div>
                   </div>
@@ -249,9 +248,9 @@ function IdeaReview({
                     <div className="  bg-[#6788D3] border rounded-3xl bg-opacity-30">
                       <h1 className="pl-6 pt-2 text-redish tracking-wider font-extrabold ">IDEA VERIFIED</h1>
                       <div className="mx-6 my-4 border rounded-2xl h-full  bg-[#ffff] text-grey">
-                        <h1 className="pl-4 pt-2 font-bold text-xs tracking-wider">DETAILS</h1>
+                        <h1 className="pl-4 pt-2 font-bold text-xs tracking-wider">Reason for accepting the Idea</h1>
                         <p className="px-8 py-3 text-xs font-medium tracking-wide overflow-y-auto">
-                          The Idea wihich you are trying to upload has been approved successfully.
+                        {aORrreason}
                         </p>
                       </div>
                     </div>
@@ -261,7 +260,7 @@ function IdeaReview({
                       <div className="mx-6 my-4 border rounded-2xl h-full  bg-[#ffff] text-grey">
                         <h1 className="pl-4 pt-2 font-bold text-xs tracking-wider">DETAILS</h1>
                         <p className="px-8 py-3 text-xs font-medium tracking-wide overflow-y-auto">
-                          The Idea wihich you are trying to upload is under verification.
+                          {aORrreason}
                         </p>
                       </div>
                     </div>

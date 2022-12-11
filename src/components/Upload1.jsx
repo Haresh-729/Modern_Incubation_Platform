@@ -1,14 +1,13 @@
-import React from "react";
-import { useState, useRef } from "react";
+import React,{ useState, useRef,useEffect } from "react";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import { Formik, Form, Field, ErroMessage } from "formik";
 import * as Yup from "yup";
 import { bad_word } from "../data/dummy";
 import html2canvas from 'html2canvas';
-import {addDoc,collection,serverTimestamp} from 'firebase/firestore';
-import {db} from '../firebase';
-import {useNavigate} from 'react-router-dom';
+import { addDoc, collection, serverTimestamp, orderBy, onSnapshot, doc} from 'firebase/firestore';
+import { db } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 // import { WithContext as ReactTags } from 'react-tag-input';
 
 import {
@@ -136,6 +135,27 @@ const Upload1 = ({ username, category, photoUrl }) => {
   const [err19, setErr19] = useState(false);
   const [err20, setErr20] = useState(false);
   const [err21, setErr21] = useState(false);
+  const [ideas,setIdeas] = useState([]);
+  const [inputData,setInputData] = useState([]);
+
+  useEffect(() => {
+    onSnapshot(
+      collection(db, "ideas"),
+      orderBy("timestamp", "desc"),
+      (snapshot) => {
+        setIdeas(
+          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })).sort()
+        );
+      }
+    );
+  }, []);
+
+  useEffect(()=>{
+    setInputData(ideas[ideas.length-1]);
+  },[]);
+
+  console.log(inputData)
+  console.log(ideas)
 
   const options = [
     { value: "incubation", label: "Incubation" },
@@ -171,7 +191,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
     stack: "",
     rfs: "",
     stcu: "",
-    mem: "",
+    mem1: "",
     time: "",
     purpose: options.value,
     otherp: "",
@@ -195,7 +215,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
     stack: Yup.string().required,
     rfs: Yup.string().required,
     stcu: Yup.string().required,
-    mem: Yup.string().required,
+    mem1: Yup.string().required,
     time: Yup.string().required,
     purpose: Yup.string().required,
     otherp: Yup.string().required,
@@ -310,7 +330,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
 
   const hForm4N = (e) => {
     e.preventDefault();
-    if (values.mem) {
+    if (values.mem1) {
       setErr16(true);
     }
     if (!values.time) {
@@ -362,7 +382,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
     const canvas = await html2canvas(element);
     const data = canvas.toDataURL('image/jpg');
     if (category === "student" || category === "individual") {
-      addDoc(collection(db, "ideas"), {
+      addDoc(collection(db, "ideas",serverTimestamp()), {
         cat: values.cat,
         title: values.title,
         desc: values.desc,
@@ -370,15 +390,34 @@ const Upload1 = ({ username, category, photoUrl }) => {
         userName: username,
         timestamp: serverTimestamp(),
         status: "under-verification",
+        aORrreason:"The Idea wihich you are trying to upload is under verification.",
         statusLogo: "https://i.ibb.co/W3Y9rx5/under-Verification.png",
         category: category,
         photoUrl: photoUrl,
-        likeStatus:false
+        likeStatus: false,
+        subcat: values.subcat,
+        owner: values.owner,
+        refe: values.refe,
+        mem: values.mem,
+        prob: values.prob,
+        sol: values.sol,
+        core: values.core,
+        users: values.users,
+        keyf: values.keyf,
+        stack: values.stack,
+        rfs: values.rfs,
+        stcu: values.stcu,
+        mem1: values.mem1,
+        time: values.time,
+        purpose: values.purpose,
+        otherp: values.otherp,
+        req: req,
+        reason: values.reason,
       });
       navigate("/Idea-Review");
     } else {
 
-      addDoc(collection(db, "ideas"), {
+      addDoc(collection(db, "ideas",serverTimestamp()), {
         cat: values.cat,
         title: values.title,
         desc: values.desc,
@@ -386,10 +425,29 @@ const Upload1 = ({ username, category, photoUrl }) => {
         userName: username,
         timestamp: serverTimestamp(),
         status: "verified",
+        aORrreason:"The Idea which you are trying to upload has been approved successfully.",
         statusLogo: "https://i.ibb.co/tJR9T3x/verified.png",
         category: category,
         photoUrl: photoUrl,
-        likeStatus:false
+        likeStatus: false,
+        subcat: values.subcat,
+        owner: values.owner,
+        refe: values.refe,
+        mem: values.mem,
+        prob: values.prob,
+        sol: values.sol,
+        core: values.core,
+        users: values.users,
+        keyf: values.keyf,
+        stack: values.stack,
+        rfs: values.rfs,
+        stcu: values.stcu,
+        mem1: values.mem1,
+        time: values.time,
+        purpose: values.purpose,
+        otherp: values.otherp,
+        req: req,
+        reason: values.reason,
       });
       navigate("/Post");
     }
@@ -527,7 +585,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
           className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
         >
           <div className="flex justify-center w-full mt-2">
-            <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
+            <h1 className="text-center justify-center font-poppins font-bold text-red-700 text-xl uppercase mt-2">
               Implementation
             </h1>
           </div>
@@ -596,7 +654,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Members required for this Idea/Project
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.mem}</h1>
+                <h1 className="p-1 px-2">{values.mem1}</h1>
               </div>
             </div>
             <div className="w-full mx-2 flex-1  svelte-1l8159u">
@@ -643,104 +701,6 @@ const Upload1 = ({ username, category, photoUrl }) => {
 
   return (
     <div className="p-5">
-      {/* <div className="mx-4 p-4">
-        <div className="flex items-center">
-          <div className="flex items-center text-teal-600 relative">
-            <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-teal-600">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="100%"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-bookmark "
-              >
-                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </div>
-            <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-teal-600">
-              Personal
-            </div>
-          </div>
-          <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-teal-600"></div>
-          <div className="flex items-center text-white relative">
-            <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 bg-teal-600 border-teal-600">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="100%"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-user-plus "
-              >
-                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="8.5" cy="7" r="4"></circle>
-                <line x1="20" y1="8" x2="20" y2="14"></line>
-                <line x1="23" y1="11" x2="17" y2="11"></line>
-              </svg>
-            </div>
-            <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-teal-600">
-              Account
-            </div>
-          </div>
-          <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
-          <div className="flex items-center text-gray-500 relative">
-            <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-gray-300">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="100%"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-mail "
-              >
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-            </div>
-            <div className={`absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-gray-500`}>
-              Message
-            </div>
-          </div>
-          <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
-          <div className="flex items-center text-gray-500 relative">
-            <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-gray-300">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="100%"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-database "
-              >
-                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-              </svg>
-            </div>
-            <div className="absolute top-0 -ml-10 text-center mt-16 w-32 text-xs font-medium uppercase text-gray-500">
-              Confirm
-            </div>
-          </div>
-        </div>
-      </div> */}
-
       {form1 ? (
         <div>
           <div className="mx-4 p-4">
@@ -1786,7 +1746,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                       onChange={(event) =>
                         setValues((prev) => ({
                           ...prev,
-                          mem: event.target.value,
+                          mem1: event.target.value,
                         }))
                       }
                     />{" "}
