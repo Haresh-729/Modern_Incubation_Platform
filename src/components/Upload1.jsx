@@ -382,7 +382,9 @@ const Upload1 = ({ username, category, photoUrl }) => {
     const canvas = await html2canvas(element);
     const data = canvas.toDataURL('image/jpg');
     if (category === "student" || category === "individual") {
-      addDoc(collection(db, "ideas",serverTimestamp()), {
+      addDoc(collection(db, "ideas"), 
+      // removed serverTimestamp() from parameters of collection
+      { 
         cat: values.cat,
         title: values.title,
         desc: values.desc,
@@ -452,8 +454,6 @@ const Upload1 = ({ username, category, photoUrl }) => {
       navigate("/Post");
     }
   };
-
-
 
   const ComponentToPrint = React.forwardRef((props, ref) => (
     // <div ref={ref}>Hello World</div>

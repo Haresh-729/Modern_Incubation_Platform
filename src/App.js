@@ -13,7 +13,6 @@ import Sessions1 from "./components/Sessions1";
 import Sessions2 from "./components/Sessions2";
 import Maturity1 from "./components/Maturity1";
 import Quiz from "./components/Quiz";
-
 import { useState } from "react";
 import { auth, db } from "./firebase";
 import Nav from "./components/Nav";
@@ -47,7 +46,6 @@ import Glogin from "./Group/Glogin";
 import CreateSession from "./Group/CreateSession";
 import Post1 from "./components/Post1";
 import Upload1 from "./components/Upload1"
-
 import GroupTasks from "./Group/GroupTasks";
 import UpdateSession from "./Group/UpdateSession";
 import GroupDashboard from "./Group/GroupDashboard";
@@ -59,19 +57,16 @@ import GProfile from "./Group/GProfile";
 import Badges from "./components/Badges";
 import CPDetails from "./components/CPDetails";
 import Developers from "./components/Developers";
-
 import Aos from "aos";
 import "aos/dist/aos.css";
-
 import PNF from "./components/PNF";
 import { Oval } from "react-loader-spinner";
 import LoginRegister from "./components/LoginRegister";
 import Chat from "./components/Chat";
-
 import VerifyIdeas from "./components/VerifyIdeas";
 import Verification from "./components/Verification";
 import { collection, orderBy, onSnapshot, doc } from "firebase/firestore";
-
+// import {mail} from "../src/Email";
 import {
   Navbar,
   Footer,
@@ -80,15 +75,15 @@ import {
   Dashboard,
   Profile,
 } from "./components";
-
 import { Calendar, ToDoList, Pie } from "./pages";
 import "./App.css";
-
 import { useStateContext } from "./contexts/ContextProvider";
 import CreatePro from "./Group/CreatePro";
 import Search from "./components/Search";
 
 const App = () => {
+
+
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
