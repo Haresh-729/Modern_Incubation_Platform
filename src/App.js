@@ -536,7 +536,7 @@ const App = () => {
           <>
             <Routes>
               <Route
-                path="/"
+                path="/Dashboard"
                 element={[ <Nav />, <HeroSection />, <Slogens />, <Features /> ]}
               />
               <Route path="/forgot-pass" element={<ForgotPass />} />

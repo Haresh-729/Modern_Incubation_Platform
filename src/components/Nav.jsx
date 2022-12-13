@@ -57,7 +57,7 @@ export default function NavBar() {
                         <ul className="items-center justify-center space-y-2 md:flex md:space-x-6 md:space-y-0">
                             
                             <li className="text-gray-600 hover:text-blue-600">
-                                <Link to="/" className="text-gray-600 hover:text-blue-600 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 text-base font-medium text-gray-500 hover:text-gray-900">
+                                <Link to="/Dashboard" className="text-gray-600 hover:text-blue-600 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 text-base font-medium text-gray-500 hover:text-gray-900">
                                     Home
                                 </Link>
                                 </li>

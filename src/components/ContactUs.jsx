@@ -130,7 +130,7 @@ function ContactUs() {
                     </a>{" "}
                   </li>
                   <li>
-                    <a href="/" className="hover:underline">
+                    <a href="/Dashboard" className="hover:underline">
                       Home
                     </a>
                   </li>
