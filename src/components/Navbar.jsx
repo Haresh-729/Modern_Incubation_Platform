@@ -18,7 +18,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
       type="button"
       onClick={() => customFunc()}
       style={{ color }}
-      className="relative text-xl rounded-full p-3 hover:bg-red"
+      className="relative text-xl rounded-full p-3 "
     >
       <span
         style={{ background: dotColor }}
@@ -73,7 +73,7 @@ const Navbar = ({username, photoUrl,email,category}) => {
         icon={<Menu />}
         onClick={handleActiveMenu}
         style={{ background: currentColor }}
-        className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[3rem] h-[3rem] pb-1 text-center justify-center font-extrabold font-poppins text-xl text-[#03c9d7] rounded-[5rem] hover:text-white "
+        className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[3rem] h-[3rem] pb-1 text-center justify-center font-extrabold font-poppins text-xl text-[#ffffff] rounded-[5rem] hover:text-white "
       ></IconButton>
 
       <div className="flex">

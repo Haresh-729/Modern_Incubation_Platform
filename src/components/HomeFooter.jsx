@@ -70,7 +70,7 @@ const HomeFooter = () => {
                                     <li >
                                         <a href="https://modernsolnhub.com/page/microservices-certification-qw546f" className="hover:underline">Certification</a>                                   </li>
                                     <li >
-                                        <a href="/" className="hover:underline">Home</a>
+                                        <a href="/Dashboard" className="hover:underline">Home</a>
                                     </li>
                                     <li>
                                         <a href="https://modernsolnhub.com/" className="hover:underline">ModernSolHub</a>                                   </li>

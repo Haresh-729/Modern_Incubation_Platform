@@ -91,45 +91,45 @@ const App = () => {
       key: "696ba602ac32d4223f4a6bc5a5076c4c2e956eca572e1d8b807a3e2338fdd0dc/stage",
       onCommand: (commandData) => {
         if (commandData.command === "go:back") {
-        }else if (commandData.command === "changetoUpload") {
-          useNavigate("/Idea-Upload")
-        }else if (commandData.command === "changetoDashboard") {
-          useNavigate("/Dashboard")
-        }else if (commandData.command === "changetoProfile") {
-          useNavigate("/profile")
-        }else if (commandData.command === "changetoVerification") {
-          useNavigate("/Verification")
-        }else if (commandData.command === "changetoMaturity") {
-          useNavigate("/Maturity")
-        }else if (commandData.command === "changetoProfile") {
-          useNavigate("/profile")
-        }else if (commandData.command === "changetoPost") {
-          useNavigate("/Post")
-        }else if (commandData.command === "changetoCurrPro") {
-          useNavigate("/current-projects")
-        }else if (commandData.command === "changetoTask") {
-          useNavigate("/Tasks")
-        }else if (commandData.command === "changetoSessions") {
-          useNavigate("/sessions")
-        }else if (commandData.command === "changetoTodo") {
-          useNavigate("/To-Do-List")
-        }else if (commandData.command === "changetoCalendar") {
-          useNavigate("/Calendar")
-        }else if (commandData.command === "changetoEditor") {
-          useNavigate("/Switchi")
-        }else if (commandData.command === "changetoFAQS") {
-          useNavigate("/FAQs")
-        }else if (commandData.command === "changetoKnowmore") {
-          useNavigate("/Know-More")
-        }else if (commandData.command === "changetoAboutus") {
-          useNavigate("/About-Us")
-        }else if (commandData.command === "changetoContactUs") {
-          useNavigate("/Contact-us")
-        }else if (commandData.command === "changetoDEVELOPERS") {
-          useNavigate("/Developers")
-        }else if (commandData.command === "changetoIdeaReview"){
+        } else if (commandData.command === "changetoUpload") {
+          useNavigate("/Idea-Upload");
+        } else if (commandData.command === "changetoDashboard") {
+          useNavigate("/Dashboard");
+        } else if (commandData.command === "changetoProfile") {
+          useNavigate("/profile");
+        } else if (commandData.command === "changetoVerification") {
+          useNavigate("/Verification");
+        } else if (commandData.command === "changetoMaturity") {
+          useNavigate("/Maturity");
+        } else if (commandData.command === "changetoProfile") {
+          useNavigate("/profile");
+        } else if (commandData.command === "changetoPost") {
+          useNavigate("/Post");
+        } else if (commandData.command === "changetoCurrPro") {
+          useNavigate("/current-projects");
+        } else if (commandData.command === "changetoTask") {
+          useNavigate("/Tasks");
+        } else if (commandData.command === "changetoSessions") {
+          useNavigate("/sessions");
+        } else if (commandData.command === "changetoTodo") {
+          useNavigate("/To-Do-List");
+        } else if (commandData.command === "changetoCalendar") {
+          useNavigate("/Calendar");
+        } else if (commandData.command === "changetoEditor") {
+          useNavigate("/Switchi");
+        } else if (commandData.command === "changetoFAQS") {
+          useNavigate("/FAQs");
+        } else if (commandData.command === "changetoKnowmore") {
+          useNavigate("/Know-More");
+        } else if (commandData.command === "changetoAboutus") {
+          useNavigate("/About-Us");
+        } else if (commandData.command === "changetoContactUs") {
+          useNavigate("/Contact-us");
+        } else if (commandData.command === "changetoDEVELOPERS") {
+          useNavigate("/Developers");
+        } else if (commandData.command === "changetoIdeaReview") {
           useNavigate("/Idea-Review");
-        }        
+        }
       },
     });
   }, []);
@@ -237,13 +237,13 @@ const App = () => {
                     icon={<Gear />}
                     onClick={() => setThemeSettings(true)}
                     style={{ background: currentColor, borderRadius: "50%" }}
-                    className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[4rem] h-[4rem] pb-1 text-center justify-center font-extrabold font-poppins text-3xl mb-[7rem] mr-[.5rem] text-[#03c9d7] rounded-[5rem] hover:text-white "
+                    className="hidden transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[4rem] h-[4rem] pb-1 text-center justify-center font-extrabold font-poppins text-3xl mb-[7rem] mr-[.5rem] text-[#ffffff] rounded-[5rem] hover:text-[#000000] "
                   ></IconButton>
                 </TooltipComponent>
               </div>
               {category === "institute" || category === "organization" ? (
                 activeMenu ? (
-                  <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#B7F0FF] ">
+                  <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#ffffff] ">
                     <GSidebar />
                   </div>
                 ) : (
@@ -252,7 +252,7 @@ const App = () => {
                   </div>
                 )
               ) : activeMenu ? (
-                <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#B7F0FF] ">
+                <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-[#72D9FF] ">
                   <Sidebar />
                 </div>
               ) : (
@@ -279,7 +279,7 @@ const App = () => {
                   {themeSettings && <ThemeSettings />}
                   <Routes>
                     <>
-                    {/* {constan?(handleuup):null} */}
+                      {/* {constan?(handleuup):null} */}
                       {category === "organization" ||
                       category === "institute" ? (
                         <>
@@ -536,8 +536,8 @@ const App = () => {
           <>
             <Routes>
               <Route
-                path="/"
-                element={[ <Nav />, <HeroSection />, <Slogens />, <Features /> ]}
+                path="/Dashboard"
+                element={[<Nav />, <HeroSection />, <Slogens />, <Features />]}
               />
               <Route path="/forgot-pass" element={<ForgotPass />} />
               <Route path="/login" element={[<Nav />, <Login />]} />

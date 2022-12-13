@@ -100,7 +100,6 @@ const Quiz = () => {
             </div>
             <div className="answer-selection  ">
               {questions[currentQuestion].answerOptions.map((answerOptions) => (
-                // eslint-disable-next-line no-template-curly-in-string
                 <button
                   className={
                     'button ${clicked && answerOptions.isCorrect? "correct":"button"} transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110  md:text-xl md:w-[20rem] md:h-[3rem] w-[14rem] h-[1rem] md:mx-20 mt-6 py-8  mx-8 flex flex-wrap text-sm text-white rounded-lg bg-[#013BBA] hover:bg-slate-600 focus:bg-slate-600 place-content-center'

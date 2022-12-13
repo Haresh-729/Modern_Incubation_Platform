@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 
 export { default as Chat } from "./Chat";
 export { default as Pie } from "./Charts/Pie";

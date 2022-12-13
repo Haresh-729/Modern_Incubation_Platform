@@ -29,7 +29,7 @@ const GSidebar = () => {
           <div className="flex justify-between items-center">
           
             <Link
-              to="/"
+              to="/Dashboard"
               onClick={handleCloseSideBar}
               className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
             >

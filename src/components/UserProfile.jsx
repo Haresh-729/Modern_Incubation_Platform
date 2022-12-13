@@ -9,7 +9,7 @@ import avatar from '../data/avatar.jpg';
 import { getElementByID } from '@syncfusion/ej2/maps';
 
 const UserProfile = ({ username, photoUrl, email, category }) => {
-  const { currentColor } = useStateContext();
+  const { currentColor,setThemeSettings } = useStateContext();
 
   const navigate = useNavigate();
   const handleRoute1 = () => {
@@ -74,6 +74,22 @@ const UserProfile = ({ username, photoUrl, email, category }) => {
               <p className="text-gray-500 text-sm dark:text-gray-400"> To-do and Daily Tasks </p>
             </div>
           </div> */}
+      </div>
+      {/* <IconButton
+                    icon={<Gear />}
+                    onClick={() => setThemeSettings(true)}
+                    style={{ background: currentColor, borderRadius: "50%" }}
+                    className="hidden md:block transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[4rem] h-[4rem] pb-1 text-center justify-center font-extrabold font-poppins text-3xl mb-[7rem] mr-[.5rem] text-[#03c9d7] rounded-[5rem] hover:text-white "
+                  ></IconButton> */}
+      <div onClick={() => setThemeSettings(true)} className="transition  ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 mt-5">
+        <Button
+          color="white"
+          bgColor={currentColor}
+          text="Settings"
+          borderRadius="10px"
+          width="full"
+
+        />
       </div>
       <div onClick={() => {
         auth.signOut();
