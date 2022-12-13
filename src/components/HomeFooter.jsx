@@ -4,9 +4,9 @@ import React from 'react';
 const HomeFooter = () => {
     return (
     
-        <div data-aos="fade-up" className=" w-screen h-full lg:h-screen p-1">
+        <div data-aos="fade-up" className=" w-full  h-full lg:h-full p-1">
                
-            <h1 className='mt-2 lg:mt-10 lg:px-20 text-center text-base sm:text-lg md:text-xl lg:text-2xl  text-redish font-extrabold tracking-normal sm:tracking-wide md:tracking-wide lg:'>
+            <h1 className='mt-2  lg:mt-10 lg:px-20 text-center text-base sm:text-lg md:text-xl lg:text-2xl  text-redish font-extrabold tracking-normal sm:tracking-wide md:tracking-wide lg:'>
                 The collaborative platform that brings you one step closer to success!</h1>
             <div className="px-10 sm:px-20 md:px-28 " >
                 <ul className="flex flex-col space-y-4 justify-center py-5 md:px-28 my-5 lg:my-20 ">

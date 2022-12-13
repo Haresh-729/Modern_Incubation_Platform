@@ -6,7 +6,7 @@ const Features = () => {
     //starting main div..
 
     <div className="mb-[25rem] sm:mb-0  h-full lg:w-screen">
-      <img data-aos="fade-left" className="  md:block float-right mt-[14rem] absolute w-[48rem] sm:w-[22rem] md:w-[38rem] lg:w-[40rem]" src="https://i.ibb.co/BjHYqT0/cloud4.png" alt="clouds" />
+      <img data-aos="fade-in" className="  md:block float-right mt-[14rem] absolute w-[48rem] sm:w-[22rem] md:w-[38rem] lg:w-[40rem]" src="https://i.ibb.co/BjHYqT0/cloud4.png" alt="clouds" />
       <div className="w-screen h-screen" style={{ fontFamily: "Baloo Bhai 2" }}>
         <h1 className="text-center font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl lg:font-extrabold mt-6 md:mt-10 text-[#0139B5] leading-2 ">
           Features

@@ -18,7 +18,7 @@ function LogOutSuccessful(){
                 </div>
                 <div className="flex justify-between gap-10 items-center">
                 <button onClick={()=>{
-                    navigate('/')
+                    navigate('/Dashboard')
                 }} className=" transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 sm:text-lg lg:text-xl lg:py-2 lg:px-6 px-4 mt-4 font-extrabold font-poppins text-[0.7rem]  text-white bg-blue rounded-[0.3rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
                     HOME PAGE
                 </button>
