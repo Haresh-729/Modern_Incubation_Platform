@@ -80,17 +80,15 @@ function Sessions1() {
     {/* hh */}
 
     
-      <div className="select-none flex items-center mt-[1rem] w-[77rem] justify-center">
-        <IconButton icon={<ArrowLeft />} onClick={slideLeft} className="xl:ml-[4rem] lg:ml-[4rem] md:ml-6 sm:ml-6 ml-4 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110
-        w-[4rem] h-[3rem] lg:py-8 xl:py-8 md:py-6 sm:py-6 py-4 text-center flex items-center justify-center font-extrabold font-poppins xl:text-5xl lg:text-5xl md:text-4xl sm:text-3xl text-2xl text-black bg-white/30 border-2 border-white
-        shadow-lg rounded-full hover:bg-[#0589c7d3] hover:border-0 hover:text-white "></IconButton>
+      <div className="select-none flex items-center mt-[1rem] w-full justify-center">
+        <IconButton icon={<ArrowLeft />} onClick={slideLeft} className="hidden sm:block transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[4rem] h-[3rem] pb-[4rem] font-extrabold font-poppins text-5xl text-black bg-white/30 border-2 border-white shadow-lg rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white "></IconButton>
 
-        <div id="slider" className="overflow-x-scroll scrollbar-hide scroll-smooth ...w-full  xl:mx-[2rem] xl:relative flex items-center">
+        <div id="slider" className="mt-[5rem] overflow-x-scroll scrollbar-hide scroll-smooth w-[20rem] md:w-full xl:mx-[2rem] xl:relative flex items-center">
           {sessions.map(({id,data}) => (
             <div key={id} onClick={()=>{navigate("/Session-Details",{state:id})}} className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-101 bg-[#B1A429] w-full h-auto  rounded-[3rem] flex  xl:mx-[2rem] mx-2 mt-2 py-2">
-              <div className="bg-yellow-300 bg-gradient-to-t from-[#B1A429] w-[50rem] flex-wrap  flex rounded-[2rem] mx-16 px-4 ">
+              <div className=" bg-yellow-300 bg-gradient-to-t from-[#B1A429] w-[20rem] md:w-full flex-wrap h-[20rem]  flex rounded-[2rem] mx-[1rem] md:mx-16 md:px-4 ">
 
-                <div className="flex items-center justify-center">
+                <div className="overflow-y-scroll scrollbar-hide h-[20rem] flex items-center justify-center">
 
                   <div className="flex flex-col justify-center items-center">
                     <h1 className="text-3xl leading-loose text-center  mt-4 drop-shadow-[0_35px_35px_rgba(0,0,0,0.5)] text-blue font-bold">
@@ -114,7 +112,7 @@ function Sessions1() {
                       src={data.simg}
                       alt="python"
                       border="0"
-                      className="rounded w-[15rem]"
+                      className="hidden sm:block rounded w-[15rem]"
                     />
                   </div>
                 </div>
@@ -122,7 +120,7 @@ function Sessions1() {
             </div>
           ))}
         </div>
-        <IconButton icon={<ArrowRight />} onClick={slideRight} className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[4rem] h-[3rem] pb-[4rem] font-extrabold font-poppins text-5xl text-black bg-white/30 border-2 border-white shadow-lg rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white "></IconButton>
+        <IconButton icon={<ArrowRight />} onClick={slideRight} className="hidden sm:block transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[4rem] h-[3rem] pb-[4rem] font-extrabold font-poppins text-5xl text-black bg-white/30 border-2 border-white shadow-lg rounded-[5rem] hover:bg-[#0589c7d3] hover:border-0 hover:text-white "></IconButton>
       </div>
     </div>
     

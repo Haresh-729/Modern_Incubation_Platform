@@ -2,8 +2,8 @@ import React from "react";
 
 function CreateProject() {
   return (
-    <div className=" flex justify-center  w-screen h-screen">
-      <div className="mx-[1rem] xl:my-[4rem]  xl:flex xl:flex-wrap my-[4rem] bg-slate-100 border-b-8 border-r-8 border-gray-300  transperant-4 md:w-4/5 lg:w-4/5 xl:mt-14 mb-14 mt-14  xl:mx-10 h-fit xl:w-4/5 rounded-[2rem] xl:rounded-[4rem]   items-center justify-center">
+    <div className=" flex justify-center  w-screen h-full md:h-screen">
+      <div className="mx-[1rem] xl:my-[4rem]  xl:flex xl:flex-wrap my-[4rem] bg-slate-100 border-b-8 border-r-8 border-gray-300  transperant-4 md:w-4/5 lg:w-4/5 xl:mt-14 mb-14 mt-14 h-full xl:mx-10 xl:w-4/5 rounded-[2rem] xl:rounded-[4rem]   items-center justify-center">
         <h1 className="mt-4 text-xl  md:text-3xl lg:text-3xl  xl:text-5xl xl:font-bold text-[#EF4A37] xl:py-10  text-center">
           Initiate a Project
         </h1>
@@ -40,7 +40,7 @@ function CreateProject() {
               type="text"
               name=""
               id=""
-              className="w-full h-[2rem] rounded-[1rem] xl:w-[40rem] ml-1 xl:h-[7rem]
+              className="w-full h-[10rem] rounded-[1rem] xl:w-[40rem] ml-1 xl:h-[10rem]
               xl:rounded-[2rem]"
             />
           </div>

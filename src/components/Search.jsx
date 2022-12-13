@@ -18,7 +18,7 @@ const Search = (props) => {
 
   return (
     <React.Fragment>
-        <div className="pt-5 w-full h-full flex flex-col items-center justify-start">
+        <div className="mt-10 pt-5 w-full h-full flex flex-col items-center justify-start">
         <Select
               placeholder="Enter Idea Category"
               className=" mt-5 w-4/5 sm:w-1/2 border shadow-sm rounded-md border-[#7587A4] bg-white text-base font-normal text-[#7587A4] outline-none focus:border-blue focus:drop-shadow-2xl"
