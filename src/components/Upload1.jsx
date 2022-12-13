@@ -699,6 +699,8 @@ const Upload1 = ({ username, category, photoUrl }) => {
     </div>
   ));
 
+  
+
   return (
     <div className="p-5">
       {form1 ? (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
@@ -45,13 +45,13 @@ import GRegister from "./Group/GRegister";
 import Glogin from "./Group/Glogin";
 import CreateSession from "./Group/CreateSession";
 import Post1 from "./components/Post1";
-import Upload1 from "./components/Upload1"
+import Upload1 from "./components/Upload1";
 import GroupTasks from "./Group/GroupTasks";
 import UpdateSession from "./Group/UpdateSession";
 import GroupDashboard from "./Group/GroupDashboard";
 import GprofileEdit from "./Group/GprofileEdit";
 import CPDCreate from "./Group/CPDCreate";
-import CreateProject from './Group/CreateProject';
+import CreateProject from "./Group/CreateProject";
 import GSidebar from "./Group/GSidebar";
 import GProfile from "./Group/GProfile";
 import Badges from "./components/Badges";
@@ -80,9 +80,59 @@ import "./App.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import CreatePro from "./Group/CreatePro";
 import Search from "./components/Search";
+import alanBtn from "@alan-ai/alan-sdk-web";
+import { useNavigate } from "react-router-dom";
+import Topbutton from "./components/TopButton";
 
 const App = () => {
-
+  const [changetoUpload, setChangetoUpload] = useState(false);
+  useEffect(() => {
+    alanBtn({
+      key: "696ba602ac32d4223f4a6bc5a5076c4c2e956eca572e1d8b807a3e2338fdd0dc/stage",
+      onCommand: (commandData) => {
+        if (commandData.command === "go:back") {
+        }else if (commandData.command === "changetoUpload") {
+          useNavigate("/Idea-Upload")
+        }else if (commandData.command === "changetoDashboard") {
+          useNavigate("/Dashboard")
+        }else if (commandData.command === "changetoProfile") {
+          useNavigate("/profile")
+        }else if (commandData.command === "changetoVerification") {
+          useNavigate("/Verification")
+        }else if (commandData.command === "changetoMaturity") {
+          useNavigate("/Maturity")
+        }else if (commandData.command === "changetoProfile") {
+          useNavigate("/profile")
+        }else if (commandData.command === "changetoPost") {
+          useNavigate("/Post")
+        }else if (commandData.command === "changetoCurrPro") {
+          useNavigate("/current-projects")
+        }else if (commandData.command === "changetoTask") {
+          useNavigate("/Tasks")
+        }else if (commandData.command === "changetoSessions") {
+          useNavigate("/sessions")
+        }else if (commandData.command === "changetoTodo") {
+          useNavigate("/To-Do-List")
+        }else if (commandData.command === "changetoCalendar") {
+          useNavigate("/Calendar")
+        }else if (commandData.command === "changetoEditor") {
+          useNavigate("/Switchi")
+        }else if (commandData.command === "changetoFAQS") {
+          useNavigate("/FAQs")
+        }else if (commandData.command === "changetoKnowmore") {
+          useNavigate("/Know-More")
+        }else if (commandData.command === "changetoAboutus") {
+          useNavigate("/About-Us")
+        }else if (commandData.command === "changetoContactUs") {
+          useNavigate("/Contact-us")
+        }else if (commandData.command === "changetoDEVELOPERS") {
+          useNavigate("/Developers")
+        }else if (commandData.command === "changetoIdeaReview"){
+          useNavigate("/Idea-Review");
+        }        
+      },
+    });
+  }, []);
 
   useEffect(() => {
     Aos.init({ duration: 2000 });
@@ -143,8 +193,6 @@ const App = () => {
     };
   }, [userId]);
 
-  console.log("Data: " + dataa);
-
   //retrieved ideas info from firebase
   useEffect(() => {
     onSnapshot(
@@ -189,7 +237,7 @@ const App = () => {
                     icon={<Gear />}
                     onClick={() => setThemeSettings(true)}
                     style={{ background: currentColor, borderRadius: "50%" }}
-                    className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[3.6rem] h-[3.6rem] pb-1 text-center justify-center font-extrabold font-poppins text-3xl font-bold text-[#03c9d7] rounded-[5rem] hover:text-white "
+                    className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 w-[4rem] h-[4rem] pb-1 text-center justify-center font-extrabold font-poppins text-3xl mb-[7rem] mr-[.5rem] text-[#03c9d7] rounded-[5rem] hover:text-white "
                   ></IconButton>
                 </TooltipComponent>
               </div>
@@ -229,9 +277,9 @@ const App = () => {
                 </div>
                 <div>
                   {themeSettings && <ThemeSettings />}
-
                   <Routes>
                     <>
+                    {/* {constan?(handleuup):null} */}
                       {category === "organization" ||
                       category === "institute" ? (
                         <>
@@ -378,23 +426,26 @@ const App = () => {
                       <Route path="/Contact-us" element={<ContactUs />} />
                       <Route
                         path="/Post"
-                        element={[<Search pushData={App.pullData}/>,ideas.map(({ id, data} ) => (
-                          dataa === data.cat ?
-                          <IdeaPost
-                            key={id}
-                            ideaId={id}
-                            user={user}
-                            username={data.userName}
-                            title={data.title}
-                            description={data.desc}
-                            pdfFile={data.pdfFile}
-                            status={data.status}
-                            photoUrl={data.photoUrl}
-                            cmntPhoto={photoUrl}
-                            likeStatus={data.likeStatus}
-                          />
-                          : null
-                        ))]}
+                        element={[
+                          <Search pushData={App.pullData} />,
+                          ideas.map(({ id, data }) =>
+                            dataa === data.cat ? (
+                              <IdeaPost
+                                key={id}
+                                ideaId={id}
+                                user={user}
+                                username={data.userName}
+                                title={data.title}
+                                description={data.desc}
+                                pdfFile={data.pdfFile}
+                                status={data.status}
+                                photoUrl={data.photoUrl}
+                                cmntPhoto={photoUrl}
+                                likeStatus={data.likeStatus}
+                              />
+                            ) : null
+                          ),
+                        ]}
                       />
                       <Route path="/Switchi" element={<ToDoList />} />
                       <Route path="/chat" element={<Chat />} />
@@ -438,7 +489,7 @@ const App = () => {
                       <Route path="/pie" element={<Pie />} />
                       <Route path="/Editor" element={<Editor />} />
                       <Route path="/Upload1" element={<Upload1 />} />
-                      
+
                       <Route path="/pbadges" element={<Badges />} />
                       <Route path="/uploadv" element={<VScroll2 />} />
                       <Route path="/cpdetails" element={<CPDetails />} />
@@ -486,7 +537,7 @@ const App = () => {
             <Routes>
               <Route
                 path="/"
-                element={[<Nav />, <HeroSection />, <Slogens />, <Features />]}
+                element={[ <Nav />, <HeroSection />, <Slogens />, <Features /> ]}
               />
               <Route path="/forgot-pass" element={<ForgotPass />} />
               <Route path="/login" element={[<Nav />, <Login />]} />
@@ -530,6 +581,6 @@ const App = () => {
 var pullData;
 App.pullData = (data) => {
   pullData(data);
-}
+};
 
 export default App;

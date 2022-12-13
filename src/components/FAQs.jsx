@@ -48,6 +48,7 @@ function FAQs(){
                 label:"What comes in the Maturity test section?"
             },
             {
+                value:"No,you can give it ",
                 label:"Is it necessary to know all the coding languages while giving maturity test?"
             },
             {
