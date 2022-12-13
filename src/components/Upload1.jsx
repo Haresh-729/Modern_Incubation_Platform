@@ -1,11 +1,11 @@
-import React,{ useState, useRef,useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Select from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import { Formik, Form, Field, ErroMessage } from "formik";
 import * as Yup from "yup";
 import { bad_word } from "../data/dummy";
 import html2canvas from 'html2canvas';
-import { addDoc, collection, serverTimestamp, orderBy, onSnapshot, doc} from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp, orderBy, onSnapshot, doc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 // import { WithContext as ReactTags } from 'react-tag-input';
@@ -93,7 +93,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
   let error = 0;
   const check_val = () => {
     const bad_words = ["death", "kill", "murder"];
-    let check_text = values.title;
+    let check_text = title;
     for (var i = 0; i < bad_word.length; i++) {
       var val = bad_word[i];
       if (check_text.toLowerCase().indexOf(val.toString()) > -1) {
@@ -135,8 +135,9 @@ const Upload1 = ({ username, category, photoUrl }) => {
   const [err19, setErr19] = useState(false);
   const [err20, setErr20] = useState(false);
   const [err21, setErr21] = useState(false);
-  const [ideas,setIdeas] = useState([]);
-  const [inputData,setInputData] = useState([]);
+  const [ideas, setIdeas] = useState([]);
+  const [inputdata, setInputData] = useState(null);
+  const [copyData, setCopyData] = useState(false);
 
   useEffect(() => {
     onSnapshot(
@@ -144,17 +145,15 @@ const Upload1 = ({ username, category, photoUrl }) => {
       orderBy("timestamp", "desc"),
       (snapshot) => {
         setIdeas(
-          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() })).sort()
+          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         );
       }
     );
   }, []);
 
-  useEffect(()=>{
-    setInputData(ideas[ideas.length-1]);
-  },[]);
-
-  console.log(inputData)
+  useEffect(() => {
+    setInputData(ideas[ideas.length - 1]);
+  }, [ideas])
   console.log(ideas)
 
   const options = [
@@ -175,29 +174,53 @@ const Upload1 = ({ username, category, photoUrl }) => {
     { value: "other", label: "Other" },
   ];
 
-  const [values, setValues] = useState({
-    cat: options.value,
-    subcat: "",
-    title: "",
-    owner: "",
-    refe: "",
-    mem: "",
-    prob: "",
-    sol: "",
-    core: "",
-    desc: "",
-    users: "",
-    keyf: "",
-    stack: "",
-    rfs: "",
-    stcu: "",
-    mem1: "",
-    time: "",
-    purpose: options.value,
-    otherp: "",
-    req: req,
-    reason: "",
-  });
+  // const [values, setValues] = useState({
+  //   cat: options.value,
+  //   subcat: "",
+  //   title: "",
+  //   owner: "",
+  //   refe: "",
+  //   mem: "",
+  //   prob: "",
+  //   sol: "",
+  //   core: "",
+  //   desc: "",
+  //   users: "",
+  //   keyf: "",
+  //   stack: "",
+  //   rfs: "",
+  //   stcu: "",
+  //   mem1: "",
+  //   time: "",
+  //   purpose: options.value,
+  //   otherp: "",
+  //   req: req,
+  //   reason: "",
+  // });
+
+  // console.log(inputdata.map(({data})=>(data.subcat)))
+
+  const [cat, setCat] = useState(options.value);
+  const [subcat, setSubcat] = useState("");
+  const [title, setTitle] = useState("");
+  const [owner, setOwner] = useState("");
+  const [refe, setRefe] = useState("");
+  const [mem, setMem] = useState("");
+  const [prob, setProb] = useState("");
+  const [sol, setSol] = useState("");
+  const [core, setCore] = useState("");
+  const [desc, setDesc] = useState("");
+  const [users, setUsers] = useState("");
+  const [keyf, setKeyf] = useState("");
+  const [stack, setStack] = useState("");
+  const [rfs, setRfs] = useState("");
+  const [stcu, setStcu] = useState("");
+  const [mem1, setMem1] = useState("");
+  const [time, setTime] = useState("");
+  const [purpose, setPurpose] = useState(op.value);
+  const [otherp, setOtherp] = useState("");
+  const [req1, setReq1] = useState(req);
+  const [reason, setReason] = useState("");
 
   const validationSchema = Yup.object().shape({
     cat: Yup.string().required,
@@ -219,10 +242,37 @@ const Upload1 = ({ username, category, photoUrl }) => {
     time: Yup.string().required,
     purpose: Yup.string().required,
     otherp: Yup.string().required,
-    req: Yup.string().required,
+    req1: Yup.string().required,
     reason: Yup.string().required,
   });
 
+  const handleYes = () => {
+    setCat(inputdata.data.cat);
+      setSubcat(inputdata.data.subcat);
+      setTitle(inputdata.data.title);
+      setOwner(inputdata.data.owner);
+      setRefe(inputdata.data.refe);
+      setMem(inputdata.data.mem);
+      setProb(inputdata.data.prob);
+      setSol(inputdata.data.sol);
+      setCore(inputdata.data.core);
+      setDesc(inputdata.data.desc);
+      setUsers(inputdata.data.users);
+      setKeyf(inputdata.data.keyf);
+      setStack(inputdata.data.stack);
+      setRfs(inputdata.data.rfs);
+      setStcu(inputdata.data.stcu);
+      setMem1(inputdata.data.mem1);
+      setTime(inputdata.data.time);
+      setPurpose(inputdata.data.purpose);
+      setOtherp(inputdata.data.otherp);
+      setReq1(inputdata.data.req1);
+      setReason(inputdata.data.reason);
+    setCopyData(true);
+  }
+  console.log(inputdata)
+
+  console.log(cat);
   const getReq = (e) => {
     const { value, checked } = e.target;
     console.log(`${value} is ${checked}`);
@@ -235,23 +285,23 @@ const Upload1 = ({ username, category, photoUrl }) => {
 
   const hForm1N = (e) => {
     e.preventDefault();
-    if (!values.cat) {
+    if (!cat) {
       setErr1(true);
       console.log("in if");
     }
-    if (!values.subcat) {
+    if (!subcat) {
       setErr2(true);
     }
-    if (!values.title) {
+    if (!title) {
       setErr3(true);
     }
-    if (!values.owner) {
+    if (!owner) {
       setErr4(true);
     }
-    if (!values.refe) {
+    if (!refe) {
       setErr5(true);
     }
-    if (!values.mem) {
+    if (!mem) {
       setErr6(true);
     } else {
       setErr1(false);
@@ -272,16 +322,16 @@ const Upload1 = ({ username, category, photoUrl }) => {
   };
   const hForm2N = (e) => {
     e.preventDefault();
-    if (!values.prob) {
+    if (!prob) {
       setErr7(true);
     }
-    if (!values.sol) {
+    if (!sol) {
       setErr8(true);
     }
-    if (!values.core) {
+    if (!core) {
       setErr9(true);
     }
-    if (!values.desc) {
+    if (!desc) {
       setErr10(true);
     } else {
       setErr7(false);
@@ -296,19 +346,19 @@ const Upload1 = ({ username, category, photoUrl }) => {
 
   const hForm3N = (e) => {
     e.preventDefault();
-    if (!values.users) {
+    if (!users) {
       setErr11(true);
     }
-    if (!values.keyf) {
+    if (!keyf) {
       setErr12(true);
     }
-    if (!values.stack) {
+    if (!stack) {
       setErr13(true);
     }
-    if (!values.rfs) {
+    if (!rfs) {
       setErr14(true);
     }
-    if (!values.stcu) {
+    if (!stcu) {
       setErr15(true);
     } else {
       setErr11(false);
@@ -330,22 +380,22 @@ const Upload1 = ({ username, category, photoUrl }) => {
 
   const hForm4N = (e) => {
     e.preventDefault();
-    if (values.mem1) {
+    if (mem1) {
       setErr16(true);
     }
-    if (!values.time) {
+    if (!time) {
       setErr17(true);
     }
-    if (!values.purpose) {
+    if (!purpose) {
       setErr18(true);
     }
-    if (!values.otherp) {
+    if (!otherp) {
       setErr19(true);
     }
-    if (req) {
+    if (req1) {
       setErr20(true);
     }
-    if (!values.reason) {
+    if (!reason) {
       setErr21(true);
     } else {
       setErr16(false);
@@ -382,78 +432,77 @@ const Upload1 = ({ username, category, photoUrl }) => {
     const canvas = await html2canvas(element);
     const data = canvas.toDataURL('image/jpg');
     if (category === "student" || category === "individual") {
-      addDoc(collection(db, "ideas"), 
-      // removed serverTimestamp() from parameters of collection
-      { 
-        cat: values.cat,
-        title: values.title,
-        desc: values.desc,
+      addDoc(collection(db, "ideas"), {
+        cat: cat,
+        title: title,
+        desc: desc,
         pdfFile: data,
         userName: username,
         timestamp: serverTimestamp(),
         status: "under-verification",
-        aORrreason:"The Idea wihich you are trying to upload is under verification.",
+        aORrreason: "The Idea wihich you are trying to upload is under verification.",
         statusLogo: "https://i.ibb.co/W3Y9rx5/under-Verification.png",
         category: category,
         photoUrl: photoUrl,
         likeStatus: false,
-        subcat: values.subcat,
-        owner: values.owner,
-        refe: values.refe,
-        mem: values.mem,
-        prob: values.prob,
-        sol: values.sol,
-        core: values.core,
-        users: values.users,
-        keyf: values.keyf,
-        stack: values.stack,
-        rfs: values.rfs,
-        stcu: values.stcu,
-        mem1: values.mem1,
-        time: values.time,
-        purpose: values.purpose,
-        otherp: values.otherp,
-        req: req,
-        reason: values.reason,
+        subcat: subcat,
+        owner: owner,
+        refe: refe,
+        mem: mem,
+        prob: prob,
+        sol: sol,
+        core: core,
+        users: users,
+        keyf: keyf,
+        stack: stack,
+        rfs: rfs,
+        stcu: stcu,
+        mem1: mem1,
+        time: time,
+        purpose: purpose,
+        otherp: otherp,
+        req1: req,
+        reason: reason,
       });
       navigate("/Idea-Review");
     } else {
 
-      addDoc(collection(db, "ideas",serverTimestamp()), {
-        cat: values.cat,
-        title: values.title,
-        desc: values.desc,
+      addDoc(collection(db, "ideas"), {
+        cat: cat,
+        title: title,
+        desc: desc,
         pdfFile: data,
         userName: username,
         timestamp: serverTimestamp(),
         status: "verified",
-        aORrreason:"The Idea which you are trying to upload has been approved successfully.",
+        aORrreason: "The Idea which you are trying to upload has been approved successfully.",
         statusLogo: "https://i.ibb.co/tJR9T3x/verified.png",
         category: category,
         photoUrl: photoUrl,
         likeStatus: false,
-        subcat: values.subcat,
-        owner: values.owner,
-        refe: values.refe,
-        mem: values.mem,
-        prob: values.prob,
-        sol: values.sol,
-        core: values.core,
-        users: values.users,
-        keyf: values.keyf,
-        stack: values.stack,
-        rfs: values.rfs,
-        stcu: values.stcu,
-        mem1: values.mem1,
-        time: values.time,
-        purpose: values.purpose,
-        otherp: values.otherp,
+        subcat: subcat,
+        owner: owner,
+        refe: refe,
+        mem: mem,
+        prob: prob,
+        sol: sol,
+        core: core,
+        users: users,
+        keyf: keyf,
+        stack: stack,
+        rfs: rfs,
+        stcu: stcu,
+        mem1: mem1,
+        time: time,
+        purpose: purpose,
+        otherp: otherp,
         req: req,
-        reason: values.reason,
+        reason: reason,
       });
       navigate("/Post");
     }
   };
+
 
   const ComponentToPrint = React.forwardRef((props, ref) => (
     // <div ref={ref}>Hello World</div>
@@ -479,7 +528,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Idea/Project Category
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.cat}</h1>
+                <h1 className="p-1 px-2">{cat}</h1>
               </div>
             </div>
             <div className="w-full mx-2 flex-1 svelte-1l8159u">
@@ -487,7 +536,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Sub Category
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.subcat}</h1>
+                <h1 className="p-1 px-2">{subcat}</h1>
               </div>
             </div>
           </div>
@@ -497,7 +546,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Idea/Project Title
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.title}</h1>
+                <h1 className="p-1 px-2">{title}</h1>
               </div>
             </div>
           </div>
@@ -507,7 +556,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Idea/Project Owner
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.owner}</h1>
+                <h1 className="p-1 px-2">{owner}</h1>
               </div>
             </div>
             <div className="w-full mx-2 flex-1 svelte-1l8159u">
@@ -515,7 +564,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Idea/Project Reference
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.refe}</h1>
+                <h1 className="p-1 px-2">{refe}</h1>
               </div>
             </div>
             <div className="w-full mx-2 flex-1 svelte-1l8159u">
@@ -523,7 +572,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Idea/Project Members
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.mem}</h1>
+                <h1 className="p-1 px-2">{mem}</h1>
               </div>
             </div>
           </div>
@@ -544,7 +593,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Idea/Project Problem Statement
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.prob}</h1>
+                <h1 className="p-1 px-2">{prob}</h1>
               </div>
             </div>
           </div>
@@ -554,7 +603,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Idea/Project Solution
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.sol}</h1>
+                <h1 className="p-1 px-2">{sol}</h1>
               </div>
             </div>
           </div>
@@ -564,7 +613,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Core Functionality of Idea
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.core}</h1>
+                <h1 className="p-1 px-2">{core}</h1>
               </div>
             </div>
           </div>
@@ -574,7 +623,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Idea Description
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.desc}</h1>
+                <h1 className="p-1 px-2">{desc}</h1>
               </div>
             </div>
           </div>
@@ -595,7 +644,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Users for the Product
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.users}</h1>
+                <h1 className="p-1 px-2">{users}</h1>
               </div>
             </div>
           </div>
@@ -605,7 +654,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Key features in Idea/Project
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.keyf}</h1>
+                <h1 className="p-1 px-2">{keyf}</h1>
               </div>
             </div>
           </div>
@@ -615,7 +664,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Technology Stack I am thinking of
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.stack}</h1>
+                <h1 className="p-1 px-2">{stack}</h1>
               </div>
             </div>
             <div className="w-full mx-2 flex-1  svelte-1l8159u">
@@ -623,7 +672,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Reasons for selecting this stack
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.rfs}</h1>
+                <h1 className="p-1 px-2">{rfs}</h1>
               </div>
             </div>
           </div>
@@ -633,7 +682,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Technology stack that can also be used
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.stcu}</h1>
+                <h1 className="p-1 px-2">{stcu}</h1>
               </div>
             </div>
           </div>
@@ -654,7 +703,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Members required for this Idea/Project
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.mem1}</h1>
+                <h1 className="p-1 px-2">{mem1}</h1>
               </div>
             </div>
             <div className="w-full mx-2 flex-1  svelte-1l8159u">
@@ -662,7 +711,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Expected time to implement this Idea/Project
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.time}</h1>
+                <h1 className="p-1 px-2">{time}</h1>
               </div>
             </div>
           </div>
@@ -672,7 +721,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 Idea/Project is being developed for the Purpose of
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.purpose}</h1>
+                <h1 className="p-1 px-2">{purpose}</h1>
               </div>
             </div>
             <div className="w-full mx-2 flex-1  svelte-1l8159u">
@@ -690,7 +739,7 @@ const Upload1 = ({ username, category, photoUrl }) => {
                 How this idea came to my mind
               </div>
               <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                <h1 className="p-1 px-2">{values.reason}</h1>
+                <h1 className="p-1 px-2">{reason}</h1>
               </div>
             </div>
           </div>
@@ -699,10 +748,8 @@ const Upload1 = ({ username, category, photoUrl }) => {
     </div>
   ));
 
-  
-
   return (
-    <div className="p-5">
+    <div className="p-5 pt-[5rem]">
       {form1 ? (
         <div>
           <div className="mx-4 p-4">
@@ -848,178 +895,476 @@ const Upload1 = ({ username, category, photoUrl }) => {
               inputFieldPosition="bottom"
               autocomplete
               /> */}
-            <div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Idea Category
-                  </div>
-                  <div className=" my-2 p-1 flex svelte-1l8159u">
-                    <Select
-                      placeholder="Enter Idea Category"
-                      className="w-full  rounded-md border-[#7587A4] bg-white text-base font-normal text-[#7587A4] outline-none focus:border-blue focus:drop-shadow-2xl"
-                      onChange={(event) =>
-                        setValues((prev) => ({ ...prev, cat: event.value }))
-                      }
-                      options={options}
-                      id="cat"
-                      name="cat"
-                      required
-                      autoComplete="on"
-                    />
-                  </div>
-                  {err1 ? (
-                    <div className="ml-2 text-red-500 animate-bounce">
-                      Category is required
-                    </div>
-                  ) : null}
-                </div>
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Sub Category
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      required
-                      name="subcat"
-                      autoComplete="on"
-                      placeholder="Eg. Web based Software..."
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          subcat: event.target.value,
-                        }))
-                      }
-                    />
-                  </div>
-                  {err2 ? (
-                    <div className="ml-2 text-red-500 animate-bounce">
-                      Sub Category is required
-                    </div>
-                  ) : null}
-                </div>
-              </div>
+            {
+              inputdata ?
+                (
+                  copyData ?
+                  // inputdata.data.userName===username?
+                    <div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Idea Category
+                          </div>
+                          <div className=" my-2 p-1 flex svelte-1l8159u">
+                            <Select
+                              placeholder="Enter Idea Category"
+                              value={cat}
+                              className="w-full  rounded-md border-[#7587A4] bg-white text-base font-normal text-[#7587A4] outline-none focus:border-blue focus:drop-shadow-2xl"
+                              onChange={e => setCat(e.value)}
+                              options={options}
+                              id="cat"
+                              name="cat"
+                              required
+                              autoComplete="on"
+                            />
+                          </div>
+                          {err1 ? (
+                            <div className="ml-2 text-red-500 animate-bounce">
+                              Category is required
+                            </div>
+                          ) : null}
+                        </div>
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Sub Category
+                          </div>
+                          <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <input
+                              value={subcat}
+                              required
+                              name="subcat"
+                              autoComplete="on"
+                              placeholder="Eg. Web based Software..."
+                              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                              onChange={(event) =>
+                                setSubcat(event.target.value)
+                              }
+                            />
+                          </div>
+                          {err2 ? (
+                            <div className="ml-2 text-red-500 animate-bounce">
+                              Sub Category is required
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
 
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Idea/ Project Title
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Your Idea Heading.."
-                      required
-                      autoComplete="on"
-                      onKeyUp={check_val}
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          title: event.target.value,
-                        }))
-                      }
-                    />
-                  </div>
-                  <p id="bad_notice" className="text-red-500"></p>
-                  {err3 ? (
-                    <div className="ml-2 text-red-500 animate-bounce">
-                      Title is Must
-                    </div>
-                  ) : null}
-                </div>
-              </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Idea/ Project Title
+                          </div>
+                          <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <input
+                              placeholder="Your Idea Heading.."
+                              value={title}
+                              required
+                              autoComplete="on"
+                              onKeyUp={check_val}
+                              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                              onChange={e => setTitle(e.target.value)}
+                            />
+                          </div>
+                          <p id="bad_notice" className="text-red-500"></p>
+                          {err3 ? (
+                            <div className="ml-2 text-red-500 animate-bounce">
+                              Title is Must
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
 
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Idea/ Project Owner
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Ex.Haresh Kurade.."
-                      required
-                      autoComplete="on"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          owner: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err4 ? (
-                    <div className="ml-2 text-red-500 animate-bounce">
-                      Owner name must be there
-                    </div>
-                  ) : null}
-                </div>
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Idea/ Project Reference
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Ex. form College"
-                      required
-                      autoComplete="on"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          refe: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err5 ? (
-                    <div className="ml-2 text-red-500 animate-bounce">
-                      Reference is required(if not enter no)
-                    </div>
-                  ) : null}
-                </div>
-              </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Idea/ Project Owner
+                          </div>
+                          <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <input
+                              placeholder="Ex.Haresh Kurade.."
+                              value={owner}
+                              required
+                              autoComplete="on"
+                              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                              onChange={e => setOwner(e.target.value)}
+                            />{" "}
+                          </div>
+                          {err4 ? (
+                            <div className="ml-2 text-red-500 animate-bounce">
+                              Owner name must be there
+                            </div>
+                          ) : null}
+                        </div>
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Idea/ Project Reference
+                          </div>
+                          <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <input
+                              placeholder="Ex. form College"
+                              value={refe}
+                              required
+                              autoComplete="on"
+                              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                              onChange={e => setRefe(e.target.value)}
+                            />{" "}
+                          </div>
+                          {err5 ? (
+                            <div className="ml-2 text-red-500 animate-bounce">
+                              Reference is required(if not enter no)
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
 
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Idea/ Project Members (if any)
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Just a hint.."
-                      required
-                      autoComplete="on"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          mem: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err6 ? (
-                    <div className="ml-2 text-red-500 animate-bounce duration-75">
-                      members field is required
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Idea/ Project Members (if any)
+                          </div>
+                          <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <input
+                              placeholder="Just a hint.."
+                              value={mem}
+                              required
+                              autoComplete="on"
+                              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                              onChange={e => setMem(e.target.value)}
+                            />{" "}
+                          </div>
+                          {err6 ? (
+                            <div className="ml-2 text-red-500 animate-bounce duration-75">
+                              members field is required
+                            </div>
+                          ) : null}
+                        </div>
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                          </div>
+                          <div></div>
+                        </div>
+                      </div>
                     </div>
-                  ) : null}
-                </div>
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
+                    :
+                    (<div>
+                      <div className="w-full max-w-xs flex justify-center items-center">
+                        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                          <div className="mb-4">
+                            <div className="block text-gray-700 text-sm font-bold mb-2">
+                              Do you want to copy the previous data?
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <button onClick={handleYes} className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                              Yes
+                            </button>
+                            <button onClick={() => { setInputData(null) }} className="bg-red-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                              No
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Idea Category
+                          </div>
+                          <div className=" my-2 p-1 flex svelte-1l8159u">
+                            <Select
+                              placeholder="Enter Idea Category"
+                              className="w-full  rounded-md border-[#7587A4] bg-white text-base font-normal text-[#7587A4] outline-none focus:border-blue focus:drop-shadow-2xl"
+                              onChange={e => setCat(e.value)}
+                              options={options}
+                              id="cat"
+                              name="cat"
+                              required
+                              autoComplete="on"
+                            />
+                          </div>
+                          {err1 ? (
+                            <div className="ml-2 text-red-500 animate-bounce">
+                              Category is required
+                            </div>
+                          ) : null}
+                        </div>
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Sub Category
+                          </div>
+                          <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <input
+                              required
+                              name="subcat"
+                              autoComplete="on"
+                              placeholder="Eg. Web based Software..."
+                              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                              onChange={e => setSubcat(e.target.value)}
+                            />
+                          </div>
+                          {err2 ? (
+                            <div className="ml-2 text-red-500 animate-bounce">
+                              Sub Category is required
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Idea/ Project Title
+                          </div>
+                          <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <input
+                              placeholder="Your Idea Heading.."
+                              required
+                              autoComplete="on"
+                              onKeyUp={check_val}
+                              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                              onChange={e => setTitle(e.target.value)}
+                            />
+                          </div>
+                          <p id="bad_notice" className="text-red-500"></p>
+                          {err3 ? (
+                            <div className="ml-2 text-red-500 animate-bounce">
+                              Title is Must
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Idea/ Project Owner
+                          </div>
+                          <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <input
+                              placeholder="Ex.Haresh Kurade.."
+                              required
+                              autoComplete="on"
+                              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                              onChange={e => setOwner(e.target.value)}
+                            />{" "}
+                          </div>
+                          {err4 ? (
+                            <div className="ml-2 text-red-500 animate-bounce">
+                              Owner name must be there
+                            </div>
+                          ) : null}
+                        </div>
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Idea/ Project Reference
+                          </div>
+                          <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <input
+                              placeholder="Ex. form College"
+                              required
+                              autoComplete="on"
+                              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                              onChange={e => setRefe(e.target.value)}
+                            />{" "}
+                          </div>
+                          {err5 ? (
+                            <div className="ml-2 text-red-500 animate-bounce">
+                              Reference is required(if not enter no)
+                            </div>
+                          ) :
+                            null}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                            Idea/ Project Members (if any)
+                          </div>
+                          <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                            <input
+                              placeholder="Just a hint.."
+                              required
+                              autoComplete="on"
+                              className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                              onChange={e => setMem(e.target.value)}
+                            />{" "}
+                          </div>
+                          {err6 ? (
+                            <div className="ml-2 text-red-500 animate-bounce duration-75">
+                              members field is required
+                            </div>
+                          ) : null}
+                        </div>
+                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                          <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                            {" "}
+                          </div>
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>)
+                ) :
+                (<div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea Category
+                      </div>
+                      <div className=" my-2 p-1 flex svelte-1l8159u">
+                        <Select
+                          placeholder="Enter Idea Category"
+                          className="w-full  rounded-md border-[#7587A4] bg-white text-base font-normal text-[#7587A4] outline-none focus:border-blue focus:drop-shadow-2xl"
+                          onChange={e => setCat(e.value)}
+                          options={options}
+                          id="cat"
+                          name="cat"
+                          required
+                          autoComplete="on"
+                        />
+                      </div>
+                      {err1 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Category is required
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Sub Category
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          required
+                          name="subcat"
+                          autoComplete="on"
+                          placeholder="Eg. Web based Software..."
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setSubcat(e.target.value)}
+                        />
+                      </div>
+                      {err2 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Sub Category is required
+                        </div>
+                      ) : null}
+                    </div>
                   </div>
-                  <div></div>
-                </div>
-              </div>
-            </div>
+
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea/ Project Title
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Your Idea Heading.."
+                          required
+                          autoComplete="on"
+                          onKeyUp={check_val}
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setTitle(e.target.value)}
+                        />
+                      </div>
+                      <p id="bad_notice" className="text-red-500"></p>
+                      {err3 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Title is Must
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea/ Project Owner
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Ex.Haresh Kurade.."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setOwner(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err4 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Owner name must be there
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea/ Project Reference
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Ex. form College"
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setRefe(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err5 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Reference is required(if not enter no)
+                        </div>
+                      ) :
+                        null}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea/ Project Members (if any)
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Just a hint.."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setMem(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err6 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          members field is required
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                      </div>
+                      <div></div>
+                    </div>
+                  </div>
+                </div>)
+            }
             <div className="flex p-2 mt-4">
               <div className="flex-auto flex flex-row-reverse">
                 <button
@@ -1169,119 +1514,200 @@ const Upload1 = ({ username, category, photoUrl }) => {
             </div>
           </div>
           <div className="mt-8 p-4">
-            <div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Idea/Project Problem Statement
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Problem your Idea will solve.."
-                      required
-                      autoComplete="on"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          prob: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err7 ? (
-                    <div className="ml-2 text-red-500 animate-bounce">
-                      Problem statement is required
+            {
+              inputdata ?
+                (<div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea/Project Problem Statement
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          value={prob}
+                          placeholder="Problem your Idea will solve.."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setProb(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err7 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Problem statement is required
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-              </div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Idea/Project Solution
                   </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Idea will provide solution for.."
-                      required
-                      autoComplete="on"
-                      type="text"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          sol: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err8 ? (
-                    <div className="ml-2 text-red-500 animate-bounce">
-                      Solution is required
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea/Project Solution
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          value={sol}
+                          placeholder="Idea will provide solution for.."
+                          required
+                          autoComplete="on"
+                          type="text"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setSol(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err8 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Solution is required
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-              </div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Core Functionality of Idea
                   </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Main Reason for behind the Idea/Project.."
-                      required
-                      autoComplete="on"
-                      type="text"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          core: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err9 ? (
-                    <div className="ml-2 text-red-500 animate-bounce">
-                      Functionalities are required
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Core Functionality of Idea
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          value={core}
+                          placeholder="Main Reason for behind the Idea/Project.."
+                          required
+                          autoComplete="on"
+                          type="text"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setCore(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err9 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Functionalities are required
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-              </div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Idea Description
                   </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Explaination of entire Idea/Project..."
-                      required
-                      autoComplete="on"
-                      type="text"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          desc: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err10 ? (
-                    <div className="ml-2 text-red-500 animate-bounce">
-                      Description is required
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea Description
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          value={desc}
+                          placeholder="Explaination of entire Idea/Project..."
+                          required
+                          autoComplete="on"
+                          type="text"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setDesc(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err10 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Description is required
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-              </div>
-            </div>
+                  </div>
+                </div>)
+                :
+                (<div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea/Project Problem Statement
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Problem your Idea will solve.."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setProb(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err7 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Problem statement is required
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea/Project Solution
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Idea will provide solution for.."
+                          required
+                          autoComplete="on"
+                          type="text"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setSol(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err8 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Solution is required
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Core Functionality of Idea
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Main Reason for behind the Idea/Project.."
+                          required
+                          autoComplete="on"
+                          type="text"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setCore(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err9 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Functionalities are required
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea Description
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Explaination of entire Idea/Project..."
+                          required
+                          autoComplete="on"
+                          type="text"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setDesc(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err10 ? (
+                        <div className="ml-2 text-red-500 animate-bounce">
+                          Description is required
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>)
+            }
             <div className="flex p-2 mt-4">
               <button
                 onClick={hForm2P}
@@ -1438,141 +1864,236 @@ const Upload1 = ({ username, category, photoUrl }) => {
             </div>
           </div>
           <div className="mt-8 p-4">
-            <div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Users of the product
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Ex. School Students, Teenagers, Above age 45..."
-                      required
-                      autoComplete="on"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          users: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err11 ? (
-                    <div className="ml-2 text-red-500 animate-bounce duration-75">
-                      users must be entered.
+            {
+              inputdata ?
+                (<div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Users of the product
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          value={users}
+                          placeholder="Ex. School Students, Teenagers, Above age 45..."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setUsers(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err11 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          users must be entered.
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-              </div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Key Features in Idea/Project
                   </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Functionalities offered through Ide/Project.."
-                      required
-                      autoComplete="on"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          keyf: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err12 ? (
-                    <div className="ml-2 text-red-500 animate-bounce duration-75">
-                      Key features are required
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Key Features in Idea/Project
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          value={keyf}
+                          placeholder="Functionalities offered through Ide/Project.."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setKeyf(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err12 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          Key features are required
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-              </div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Technology Stack you thinking of
                   </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="MERN, Android,..."
-                      required
-                      autoComplete="on"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          stack: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err13 ? (
-                    <div className="ml-2 text-red-500 animate-bounce duration-75">
-                      Tech stack is required
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Technology Stack you thinking of
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          value={stack}
+                          placeholder="MERN, Android,..."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setStack(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err13 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          Tech stack is required
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Reasons for selecting this stack
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Answer according to you..."
-                      required
-                      autoComplete="on"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          rfs: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err14 ? (
-                    <div className="ml-2 text-red-500 animate-bounce duration-75">
-                      Reasons must be entered
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Reasons for selecting this stack
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          value={rfs}
+                          placeholder="Answer according to you..."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setRfs(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err14 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          Reasons must be entered
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-              </div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Stack That can also be used
                   </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Other technology stack that can be used.."
-                      required
-                      autoComplete="on"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          stcu: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err15 ? (
-                    <div className="ml-2 text-red-500 animate-bounce duration-75">
-                      This is required
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Stack That can also be used
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          value={stcu}
+                          placeholder="Other technology stack that can be used.."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setStcu(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err15 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          This is required
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-              </div>
-            </div>
+                  </div>
+                </div>)
+                :
+                (<div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Users of the product
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Ex. School Students, Teenagers, Above age 45..."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setUsers(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err11 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          users must be entered.
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Key Features in Idea/Project
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Functionalities offered through Ide/Project.."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setKeyf(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err12 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          Key features are required
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Technology Stack you thinking of
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="MERN, Android,..."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setStack(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err13 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          Tech stack is required
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Reasons for selecting this stack
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Answer according to you..."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setRfs(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err14 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          Reasons must be entered
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Stack That can also be used
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Other technology stack that can be used.."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setStcu(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err15 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          This is required
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>)
+            }
+
             <div className="flex p-2 mt-4">
               <button
                 onClick={hForm3P}
@@ -1729,219 +2250,397 @@ const Upload1 = ({ username, category, photoUrl }) => {
             </div>
           </div>
           <div className="mt-8 p-4">
-            <div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Members Required
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Ex. 5..."
-                      required
-                      autoComplete="off"
-                      type="number"
-                      min={1}
-                      max={10}
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          mem1: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err16 ? (
-                    <div className="ml-2 text-red-500 animate-bounce duration-75">
-                      How many members are required
-                    </div>
-                  ) : null}
-                </div>
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Expected Time for completion
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="Years..."
-                      required
-                      autoComplete="off"
-                      type="number"
-                      min={1}
-                      max={3}
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          time: event.target.value,
-                        }))
-                      }
-                    />{" "}
-                  </div>
-                  {err17 ? (
-                    <div className="ml-2 text-red-500 animate-bounce duration-75">
-                      Time is required
-                    </div>
-                  ) : null}
-                </div>
-                <div className="w-full mx-2 flex-1 svelte-1l8159u"></div>
-              </div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Idea/Project Purpose
-                  </div>
-                  <div className=" my-2 p-1 flex rounded svelte-1l8159u">
-                    <Select
-                      placeholder="Purpose"
-                      className="w-full rounded-md border-[#7587A4] bg-white text-base font-normal text-[#7587A4] outline-none focus:border-blue focus:drop-shadow-2xl"
-                      onChange={(event) =>
-                        setValues((prev) => ({ ...prev, purpose: event.value }))
-                      }
-                      options={op}
-                      id="purpose"
-                      required
-                    />
-                  </div>
-                  {err18 ? (
-                    <div className="ml-2 text-red-500 animate-bounce duration-75">
-                      Purpose must be entered
-                    </div>
-                  ) : null}
-                </div>
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    If Other
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="If other then specify..."
-                      autoComplete="off"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          otherp: event.target.value,
-                        }))
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col md:flex-row">
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    {" "}
-                    Requirement From Modernvate
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <div className="p-1 px-2 flex items-center xl:space-x-16 md:space-x-4 space-x-3">
-                      <div className="flex flex-wrap items-center">
-                        <input
-                          type="checkbox"
-                          name="checkbox1"
-                          id="checkboxButton1"
-                          className="h-5 w-5"
-                          value="guidance"
-                          onChange={(event) => getReq(event)}
-                        />
-                        <label
-                          htmlFor="checkboxButton1"
-                          className="pl-3 text-base font-medium text-[#7587A4]"
-                        >
-                          {" "}
-                          Guidance{" "}
-                        </label>
+            {
+              inputdata ?
+                (<div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Members Required
                       </div>
-                      <div className="flex items-center">
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
                         <input
-                          type="checkbox"
-                          name="checkbox1"
-                          id="checkboxButton2"
-                          className="h-5 w-5"
-                          value="support"
-                          onChange={(event) => getReq(event)}
-                        />
-                        <label
-                          htmlFor="checkboxButton2"
-                          className="pl-3 text-base font-medium text-[#7587A4]"
-                        >
-                          {" "}
-                          Support{" "}
-                        </label>
+                          value={mem1}
+                          placeholder="Ex. 5..."
+                          required
+                          autoComplete="off"
+                          type="number"
+                          min={1}
+                          max={10}
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setMem1(e.target.value)}
+                        />{" "}
                       </div>
-                      <div className="flex items-center">
-                        <input
-                          type="checkbox"
-                          name="checkbox1"
-                          id="checkboxButton3"
-                          className="h-5 w-5"
-                          value="tools"
-                          onChange={(event) => getReq(event)}
-                        />
-                        <label
-                          htmlFor="checkboxButton3"
-                          className="pl-3 text-base font-medium text-[#7587A4]"
-                        >
-                          {" "}
-                          Tools{" "}
-                        </label>
+                      {err16 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          How many members are required
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Expected Time for completion
                       </div>
-                      <div className="flex items-center">
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
                         <input
-                          type="checkbox"
-                          name="checkbox1"
-                          id="checkboxButton4"
-                          className="h-5 w-5"
-                          value="people"
-                          onChange={(event) => getReq(event)}
+                          value={time}
+                          placeholder="Years..."
+                          required
+                          autoComplete="off"
+                          type="number"
+                          min={1}
+                          max={3}
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setTime(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err17 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          Time is required
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u"></div>
+                  </div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea/Project Purpose
+                      </div>
+                      <div className=" my-2 p-1 flex rounded svelte-1l8159u">
+                        <Select
+                          value={purpose}
+                          placeholder="Purpose"
+                          className="w-full rounded-md border-[#7587A4] bg-white text-base font-normal text-[#7587A4] outline-none focus:border-blue focus:drop-shadow-2xl"
+                          onChange={e => setPurpose(e.value)}
+                          options={op}
+                          id="purpose"
+                          required
                         />
-                        <label
-                          htmlFor="checkboxButton4"
-                          className="pl-3 text-base font-medium text-[#7587A4]"
-                        >
-                          {" "}
-                          People{" "}
-                        </label>
+                      </div>
+                      {err18 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          Purpose must be entered
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        If Other
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          value={otherp}
+                          placeholder="If other then specify..."
+                          autoComplete="off"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setOtherp(e.target.value)}
+                        />
                       </div>
                     </div>
                   </div>
-                  {err20 ? (
-                    <div className="ml-2 text-red-500 animate-bounce duration-75">
-                      This is must
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Requirement From Modernvate
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <div className="p-1 px-2 flex items-center xl:space-x-16 md:space-x-4 space-x-3">
+                          <div className="flex flex-wrap items-center">
+                            <input
+                              type="checkbox"
+                              name="checkbox1"
+                              id="checkboxButton1"
+                              className="h-5 w-5"
+                              value="guidance"
+                              onChange={(event) => getReq(event)}
+                            />
+                            <label
+                              htmlFor="checkboxButton1"
+                              className="pl-3 text-base font-medium text-[#7587A4]"
+                            >
+                              {" "}
+                              Guidance{" "}
+                            </label>
+                          </div>
+                          <div className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="checkbox1"
+                              id="checkboxButton2"
+                              className="h-5 w-5"
+                              value="support"
+                              onChange={(event) => getReq(event)}
+                            />
+                            <label
+                              htmlFor="checkboxButton2"
+                              className="pl-3 text-base font-medium text-[#7587A4]"
+                            >
+                              {" "}
+                              Support{" "}
+                            </label>
+                          </div>
+                          <div className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="checkbox1"
+                              id="checkboxButton3"
+                              className="h-5 w-5"
+                              value="tools"
+                              onChange={(event) => getReq(event)}
+                            />
+                            <label
+                              htmlFor="checkboxButton3"
+                              className="pl-3 text-base font-medium text-[#7587A4]"
+                            >
+                              {" "}
+                              Tools{" "}
+                            </label>
+                          </div>
+                          <div className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="checkbox1"
+                              id="checkboxButton4"
+                              className="h-5 w-5"
+                              value="people"
+                              onChange={(event) => getReq(event)}
+                            />
+                            <label
+                              htmlFor="checkboxButton4"
+                              className="pl-3 text-base font-medium text-[#7587A4]"
+                            >
+                              {" "}
+                              People{" "}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      {err20 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          This is must
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-                <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                  <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
-                    How did the idea came into your mind
-                  </div>
-                  <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                    <input
-                      placeholder="If other then specify..."
-                      required
-                      autoComplete="on"
-                      className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
-                      onChange={(event) =>
-                        setValues((prev) => ({
-                          ...prev,
-                          reason: event.target.value,
-                        }))
-                      }
-                    />
-                  </div>
-                  {err21 ? (
-                    <div className="ml-2 text-red-500 animate-bounce duration-75">
-                      You have to answer this
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        How did the idea came into your mind
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          value={reason}
+                          placeholder="If other then specify..."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setReason(e.target.value)}
+                        />
+                      </div>
+                      {err21 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          You have to answer this
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                </div>
-              </div>
-            </div>
+                  </div>
+                </div>)
+                :
+                (<div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Members Required
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Ex. 5..."
+                          required
+                          autoComplete="off"
+                          type="number"
+                          min={1}
+                          max={10}
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setMem1(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err16 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          How many members are required
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Expected Time for completion
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="Years..."
+                          required
+                          autoComplete="off"
+                          type="number"
+                          min={1}
+                          max={3}
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setTime(e.target.value)}
+                        />{" "}
+                      </div>
+                      {err17 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          Time is required
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u"></div>
+                  </div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Idea/Project Purpose
+                      </div>
+                      <div className=" my-2 p-1 flex rounded svelte-1l8159u">
+                        <Select
+                          placeholder="Purpose"
+                          className="w-full rounded-md border-[#7587A4] bg-white text-base font-normal text-[#7587A4] outline-none focus:border-blue focus:drop-shadow-2xl"
+                          onChange={e => setPurpose(e.value)}
+                          options={op}
+                          id="purpose"
+                          required
+                        />
+                      </div>
+                      {err18 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          Purpose must be entered
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        If Other
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="If other then specify..."
+                          autoComplete="off"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setOtherp(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col md:flex-row">
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        {" "}
+                        Requirement From Modernvate
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <div className="p-1 px-2 flex items-center xl:space-x-16 md:space-x-4 space-x-3">
+                          <div className="flex flex-wrap items-center">
+                            <input
+                              type="checkbox"
+                              name="checkbox1"
+                              id="checkboxButton1"
+                              className="h-5 w-5"
+                              value="guidance"
+                              onChange={(event) => getReq(event)}
+                            />
+                            <label
+                              htmlFor="checkboxButton1"
+                              className="pl-3 text-base font-medium text-[#7587A4]"
+                            >
+                              {" "}
+                              Guidance{" "}
+                            </label>
+                          </div>
+                          <div className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="checkbox1"
+                              id="checkboxButton2"
+                              className="h-5 w-5"
+                              value="support"
+                              onChange={(event) => getReq(event)}
+                            />
+                            <label
+                              htmlFor="checkboxButton2"
+                              className="pl-3 text-base font-medium text-[#7587A4]"
+                            >
+                              {" "}
+                              Support{" "}
+                            </label>
+                          </div>
+                          <div className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="checkbox1"
+                              id="checkboxButton3"
+                              className="h-5 w-5"
+                              value="tools"
+                              onChange={(event) => getReq(event)}
+                            />
+                            <label
+                              htmlFor="checkboxButton3"
+                              className="pl-3 text-base font-medium text-[#7587A4]"
+                            >
+                              {" "}
+                              Tools{" "}
+                            </label>
+                          </div>
+                          <div className="flex items-center">
+                            <input
+                              type="checkbox"
+                              name="checkbox1"
+                              id="checkboxButton4"
+                              className="h-5 w-5"
+                              value="people"
+                              onChange={(event) => getReq(event)}
+                            />
+                            <label
+                              htmlFor="checkboxButton4"
+                              className="pl-3 text-base font-medium text-[#7587A4]"
+                            >
+                              {" "}
+                              People{" "}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      {err20 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          This is must
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className="w-full mx-2 flex-1 svelte-1l8159u">
+                      <div className="font-bold h-6 mt-3 text-gray-600 text-xs leading-8 uppercase">
+                        How did the idea came into your mind
+                      </div>
+                      <div className="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                        <input
+                          placeholder="If other then specify..."
+                          required
+                          autoComplete="on"
+                          className="p-1 px-2 appearance-none outline-none w-full text-gray-800"
+                          onChange={e => setReason(e.target.value)}
+                        />
+                      </div>
+                      {err21 ? (
+                        <div className="ml-2 text-red-500 animate-bounce duration-75">
+                          You have to answer this
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>)
+            }
             <div className="flex p-2 mt-4">
               <button
                 onClick={hForm4P}
@@ -2106,257 +2805,22 @@ const Upload1 = ({ username, category, photoUrl }) => {
             </div>
           </div>
           <div className="mt-8 p-4 ">
-            {/* <div className="border-2 rounded-[2rem] md:p-[3rem] p-2">
-                <div className="flex w-full justify-center">
-                  <h1 className="font-normal text-gray-600">
-                    *Confirm your Idea details before Submitting
-                  </h1>
-                </div>
-                <div id="dispBe"
-                  className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400">
-                      <div className="flex justify-center w-full mt-2">
-                        <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl mt-2">
-                          Basic Details
-                        </h1>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Idea/Project Category
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.cat}</h1>
-                          </div>
-                        </div>
-                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Sub Category
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.subcat}</h1>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Idea/Project Title
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.title}</h1>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Idea/Project Owner
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.owner}</h1>
-                          </div>
-                        </div>
-                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Idea/Project Reference
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.refe}</h1>
-                          </div>
-                        </div>
-                        <div className="w-full mx-2 flex-1 svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Idea/Project Members
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.mem}</h1>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
 
-                    <div
-                      id="dispId"
-                      className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
-                    >
-                      <div className="flex justify-center w-full mt-2">
-                        <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
-                          IDEA DESCRIPTION
-                        </h1>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Idea/Project Problem Statement
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.prob}</h1>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Idea/Project Solution
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.sol}</h1>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Core Functionality of Idea
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.core}</h1>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Idea Description
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.desc}</h1>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div
-                      id="dispImp"
-                      className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
-                    >
-                      <div className="flex justify-center w-full mt-2">
-                        <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
-                          Implementation
-                        </h1>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Users for the Product
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.users}</h1>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Key features in Idea/Project
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.keyf}</h1>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Technology Stack I am thinking of
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.stack}</h1>
-                          </div>
-                        </div>
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Reasons for selecting this stack
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.rfs}</h1>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Technology stack that can also be used
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.stcu}</h1>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div
-                      id="dispReq"
-                      className="border-3 border-teal-600 rounded-xl px-3 pb-2 mt-[2rem] bg-[#ffffff48] shadow-xl shadow-gray-400"
-                    >
-                      <div className="flex justify-center w-full mt-2">
-                        <h1 className="text-center justify-center uppercase font-poppins font-bold text-red-700 text-xl uppercase mt-2">
-                          Requirement
-                        </h1>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            Members required for this Idea/Project
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.mem}</h1>
-                          </div>
-                        </div>
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold md:h-6 mt-3 text-gray-600 text-md md:leading-8 uppercase">
-                            Expected time to implement this Idea/Project
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.time}</h1>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold md:h-6 mt-3 text-gray-600 text-md md:leading-8 uppercase">
-                            Idea/Project is being developed for the Purpose of
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.purpose}</h1>
-                          </div>
-                        </div>
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            My requirent through Modernvate is/are
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{req + " "}</h1>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col md:flex-row">
-                        <div className="w-full mx-2 flex-1  svelte-1l8159u">
-                          <div className="font-bold h-6 mt-3 text-gray-600 text-md leading-8 uppercase">
-                            How this idea came to my mind
-                          </div>
-                          <div className="shadow-md my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
-                            <h1 className="p-1 px-2">{values.reason}</h1>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-              </div> */}
             <React.Fragment>
               <ComponentToPrint ref={componentRef} />
             </React.Fragment>
             <div className="flex flex-row items-center justify-center w-full gap-8 mt-[4rem]">
               <button
                 onClick={hFormSP}
-                className="text-xl hover:scale-110 focus:outline-none flex justify-center w-1/3 px-4 py-2 rounded font-bold cursor-pointer 
-                      hover:bg-teal-400 font-poppins font-bold hover:text-white bg-gray-100 text-teal-600 border-2 duration-200 ease-in-out border-teal-600 transition"
+                className="text-xl hover:scale-110 focus:outline-none flex justify-center w-1/3 px-4 py-2 rounded cursor-pointer 
+                      hover:bg-teal-400 font-poppins hover:text-white bg-gray-100 text-teal-600 border-2 duration-200 ease-in-out border-teal-600 transition"
               >
                 Previous{" "}
               </button>
               <button
                 onClick={handleSubmit}
                 className="text-xl hover:scale-110 focus:outline-none flex justify-center w-1/3 px-4 py-2 rounded font-bold cursor-pointer
-                    hover:bg-teal-400 font-poppins font-bold bg-teal-600 text-teal-100 border duration-200 ease-in-out border-teal-600 transition"
+                    hover:bg-teal-400 font-poppins bg-teal-600 text-teal-100 border duration-200 ease-in-out border-teal-600 transition"
               >
                 SUBMIT
               </button>

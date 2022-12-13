@@ -92,6 +92,7 @@ const App = () => {
       onCommand: (commandData) => {
         if (commandData.command === "go:back") {
         } else if (commandData.command === "changetoUpload") {
+          console.log(commandData.command);
           useNavigate("/Idea-Upload");
         } else if (commandData.command === "changetoDashboard") {
           useNavigate("/Dashboard");
