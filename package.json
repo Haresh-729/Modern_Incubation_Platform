@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@alan-ai/alan-sdk-web": "^1.8.42",
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.12",
     "@react-pdf/renderer": "^3.0.1",
