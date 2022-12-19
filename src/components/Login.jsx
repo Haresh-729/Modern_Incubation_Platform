@@ -13,8 +13,55 @@ import { Oval } from "react-loader-spinner";
 import { toast, ToastContainer } from "react-toastify";
 import { setDoc, serverTimestamp, doc } from "firebase/firestore";
 // import { createTransport } from "nodemailer";
+// import { Mailer } from "nodemailer-react";
+// import { emaill } from '../Email'
 
 const Login = () => {
+  // const transport = {
+  //   service: "gmail",
+  //   // host: 'haresh.personal4@gmail.com',
+  //   secure: true,
+  //   auth: { user: "haresh.personal4@gmail.com", pass: "thkeijnrnzogjlpd" },
+  // };
+
+  // const defaults = {
+  //   from: "haresh.personal4@gmail.com",
+  // };
+
+  // const WelcomeEmail = ({ firstName }) => ({
+  //   subject: `👋 ${firstName}`,
+  //   body: (
+  //     <div>
+  //       <p>Hello {firstName}!</p>
+  //       <p>Hope you'll enjoy the package!</p>
+  //     </div>
+  //   ),
+  // });
+
+  // const mailer = Mailer({ transport, defaults }, { WelcomeEmail });
+
+  // export const PasswordEmail = /* ... */
+  // export const ReminderEmail = /* ... */
+
+
+  const [email1, setEmail1] = useState("kuradeharesh4002@gmail.com");
+
+  const sendEmail = async(e)=>{
+    // e.preventDefault();
+
+    setEmail1("kuradeharesh4002@gmail.com");
+
+    const res = await fetch("https://localhost:3001/register",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },body:({email1})
+    });
+    console.log(res);
+
+  }
+
+
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
@@ -62,6 +109,7 @@ const Login = () => {
         });
 
         navigate("/dashboard");
+        
         setLoading(true);
       })
       .catch((err) => {
@@ -71,16 +119,16 @@ const Login = () => {
       });
   };
 
-//   const transporter = nodemailer.createTransport({
-//     service: "gmail",
-//     auth: {
-//       user: "haresh.personal4@gmail.com",
-//       pass: "thkeijnrnzogjlpd",
-//     },
-//     tls: {
-//       rejectUnauthorized: false,
-//     },
-//   });
+  //   const transporter = nodemailer.createTransport({
+  //     service: "gmail",
+  //     auth: {
+  //       user: "haresh.personal4@gmail.com",
+  //       pass: "thkeijnrnzogjlpd",
+  //     },
+  //     tls: {
+  //       rejectUnauthorized: false,
+  //     },
+  //   });
 
   const signInWithGithub = () => {
     setLoading(false);
@@ -207,6 +255,7 @@ const Login = () => {
                 LOGIN ACCOUNT
               </button>
             </div>
+            
             {/* <p className="font-bold text-[0.75rem] text-red-500">{errorMsg}</p> */}
             <ToastContainer />
             <Link to="/register">
@@ -228,6 +277,15 @@ const Login = () => {
               </p>
             </Link>
           </form>
+          <div className="relative w-full px-12">
+              <button
+                onClick={sendEmail}
+                // disabled={submitButtonDisabled}
+                className="w-full p-1 my-4 sm:my-8 lg:my-6 xl:my-8 font-bold lg:extrabold xl:font-extrabold font-poppins text-sm sm:text-sm md:text-sm lg:text-xl xl:text-2xl text-white bg-blue rounded-[0.3rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 "
+              >
+                SEND MAIL
+              </button>
+            </div>
         </div>
 
         <div className="h-screen hidden md:block lg:block md:w-1/2 xl:2/3">
