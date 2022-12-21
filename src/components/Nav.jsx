@@ -74,7 +74,7 @@ export default function NavBar() {
               <li className="text-gray-600 hover:text-blue-600">
                 {/* <a href="javascript:void(0)">Services</a> */}
                 <Link
-                  to="/Dashboard/service"
+                  to="/service"
                   className="text-gray-600 hover:text-blue-600 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 text-base font-medium text-gray-500 hover:text-gray-900"
                 >
                   Services
@@ -83,7 +83,7 @@ export default function NavBar() {
               <li className="text-gray-600 hover:text-blue-600">
                 {/* <a href="javascript:void(0)">About Us</a> */}
                 <Link
-                  to="/Dashboard/about"
+                  to="/about"
                   className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 text-base font-medium text-gray-500 hover:text-gray-900"
                 >
                   About Us
@@ -91,14 +91,14 @@ export default function NavBar() {
               </li>
               <li className="pt-3 lg:pt-0 md:pt-0">
                 <Link
-                  to="/Dashboard/login"
+                  to="/login"
                   className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 whitespace-nowrap text-base font-medium text-indigo-800 hover:text-indigo-900"
                 >
                   Login
                 </Link>
 
                 <Link
-                  to="/Dashboard/register"
+                  to="/register"
                   className="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 lg:ml-8 lg:inline-flex items-center justify-center whitespace-nowrap md:rounded-md md:border md:border-transparent md:bg-indigo-600 lg:rounded-md lg:border lg:border-transparent lg:bg-indigo-600 px-4 py-2 text-base font-medium lg:text-white shadow-sm hover:bg-indigo-700 md:ml-3 ml-3"
                 >
                   Register

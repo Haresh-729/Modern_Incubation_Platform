@@ -285,15 +285,15 @@ const App = () => {
                       category === "institute" ? (
                         <>
                           <Route
-                            path="/Dashboard/Tasks"
+                            path="/Tasks"
                             element={<GroupTasks />}
                           />
                           <Route
-                            path="/Dashboard/Create-Project"
+                            path="/Create-Project"
                             element={<CreatePro />}
                           />
                           <Route
-                            path="/Dashboard/Verify-Ideas"
+                            path="/Verify-Ideas"
                             element={ideas.map(({ id, data }) => (
                               <VerifyIdeas
                                 key={id}
@@ -322,26 +322,26 @@ const App = () => {
                             }
                           />
                           <Route
-                            path="/Dashboard/Create-Session"
+                            path="/Create-Session"
                             element={<CreateSession />}
                           />
                           <Route
-                            path="/Dashboard/ProfileEdit"
+                            path="/ProfileEdit"
                             element={<GprofileEdit />}
                           />
                           <Route
-                            path="/Dashboard/UpdateSession"
+                            path="/UpdateSession"
                             element={<UpdateSession />}
                           />
                           <Route
-                            path="/Dashboard/Profile"
+                            path="/Profile"
                             element={<GProfile />}
                           />
                         </>
                       ) : (
                         <>
                           <Route
-                            path="/Dashboard/profile"
+                            path="/profile"
                             element={
                               <Profile
                                 username={user.displayName}
@@ -354,7 +354,7 @@ const App = () => {
 
                       {/* dashboard  */}
                       <Route
-                        path="/Dashboard/dashboard"
+                        path="/dashboard"
                         element={
                           <Dashboard
                             username={user.displayName}
@@ -366,33 +366,33 @@ const App = () => {
                       {/* profile */}
 
                       {/* apps  */}
-                      <Route path="/Dashboard/To-Do-List" element={<Std />} />
+                      <Route path="/To-Do-List" element={<Std />} />
 
                       <Route
-                        path="/Dashboard/Calendar"
+                        path="/Calendar"
                         element={<Calendar />}
                       />
-                      <Route path="/Dashboard/FAQs" element={<FAQs />} />
+                      <Route path="/FAQs" element={<FAQs />} />
                       <Route
-                        path="/Dashboard/Current-Projects"
+                        path="/Current-Projects"
                         element={<CurrentProjects />}
                       />
-                      <Route path="/Dashboard/Tasks" element={<Tasks />} />
+                      <Route path="/Tasks" element={<Tasks />} />
                       <Route
-                        path="/Dashboard/Session"
+                        path="/Session"
                         element={<Sessions1 />}
                       />
                       <Route
-                        path="/Dashboard/Session-Details"
+                        path="/Session-Details"
                         element={<Sessions2 user={user.uid} />}
                       />
                       <Route
-                        path="/Dashboard/Maturity"
+                        path="/Maturity"
                         element={<Maturity1 />}
                       />
-                      <Route path="/Dashboard/Quiz" element={<Quiz />} />
+                      <Route path="/Quiz" element={<Quiz />} />
                       <Route
-                        path="/Dashboard/Profile-Edit"
+                        path="/Profile-Edit"
                         element={
                           <ProfileEdit
                             username={user.displayName}
@@ -402,7 +402,7 @@ const App = () => {
                         }
                       />
                       <Route
-                        path="/Dashboard/Idea-Review"
+                        path="/Idea-Review"
                         element={ideas.map(({ id, data }) => (
                           <IdeaReview
                             key={id}
@@ -421,7 +421,7 @@ const App = () => {
                         ))}
                       />
                       <Route
-                        path="/Dashboard/Verify-Ideas"
+                        path="/Verify-Ideas"
                         element={ideas.map(({ id, data }) => (
                           <VerifyIdeas
                             key={id}
@@ -440,11 +440,11 @@ const App = () => {
                         ))}
                       />
                       <Route
-                        path="/Dashboard/Contact-us"
+                        path="/Contact-us"
                         element={<ContactUs />}
                       />
                       <Route
-                        path="/Dashboard/Post"
+                        path="/Post"
                         element={[
                           <Search pushData={App.pullData} />,
                           ideas.map(({ id, data }) =>
@@ -466,14 +466,14 @@ const App = () => {
                           ),
                         ]}
                       />
-                      <Route path="/Dashboard/Switchi" element={<ToDoList />} />
-                      <Route path="/Dashboard/chat" element={<Chat />} />
+                      <Route path="/Switchi" element={<ToDoList />} />
+                      <Route path="/chat" element={<Chat />} />
                       <Route
-                        path="/Dashboard/Verification"
+                        path="/Verification"
                         element={[<Verification />, <VScroll1 />]}
                       />
                       <Route
-                        path="/Dashboard/Idea-Upload"
+                        path="/Idea-Upload"
                         element={
                           <Upload1
                             username={user.displayName}
@@ -483,7 +483,7 @@ const App = () => {
                         }
                       />
                       <Route
-                        path="/Dashboard/Know-More"
+                        path="/Know-More"
                         element={[
                           <KnowMore1 />,
                           <KnowMore2 />,
@@ -494,7 +494,7 @@ const App = () => {
                       />
 
                       <Route
-                        path="/Dashboard/About-Us"
+                        path="/About-Us"
                         element={[
                           <AboutUs1 />,
                           <AboutUs2 />,
@@ -505,14 +505,14 @@ const App = () => {
                       />
 
                       {/* charts  */}
-                      <Route path="/Dashboard/pie" element={<Pie />} />
-                      <Route path="/Dashboard/Editor" element={<Editor />} />
-                      <Route path="/Dashboard/Upload1" element={<Upload1 />} />
+                      <Route path="/pie" element={<Pie />} />
+                      <Route path="/Editor" element={<Editor />} />
+                      <Route path="/Upload1" element={<Upload1 />} />
 
-                      <Route path="/Dashboard/pbadges" element={<Badges />} />
-                      <Route path="/Dashboard/uploadv" element={<VScroll2 />} />
+                      <Route path="/pbadges" element={<Badges />} />
+                      <Route path="/uploadv" element={<VScroll2 />} />
                       <Route
-                        path="/Dashboard/cpdetails"
+                        path="/cpdetails"
                         element={<CPDetails />}
                       />
                       {/* <Route
@@ -535,7 +535,7 @@ const App = () => {
                           /> */}
 
                       <Route
-                        path="/Dashboard/Post1"
+                        path="/Post1"
                         element={
                           <Post1
                             user={user}
@@ -545,7 +545,7 @@ const App = () => {
                         }
                       />
                       <Route
-                        path="/Dashboard/Developers"
+                        path="/Developers"
                         element={<Developers />}
                       />
 
@@ -561,21 +561,21 @@ const App = () => {
           <>
             <Routes>
               <Route
-                path="/Dashboard"
+                path=""
                 element={[<Nav />, <HeroSection />, <Slogens />, <Features />]}
               />
-              <Route path="/Dashboard/forgot-pass" element={<ForgotPass />} />
-              <Route path="/Dashboard/login" element={[<Nav />, <Login />]} />
+              <Route path="/forgot-pass" element={<ForgotPass />} />
+              <Route path="/login" element={[<Nav />, <Login />]} />
               <Route
-                path="/Dashboard/register"
+                path="/register"
                 element={[<Nav />, <Register />]}
               />
               <Route path="*" element={<PNF />} />
-              <Route path="/Dashboard/groupregister" element={<GRegister />} />
-              <Route path="/Dashboard/grouplogin" element={<Glogin />} />
-              <Route path="/Dashboard/Developers" element={<Developers />} />
+              <Route path="/groupregister" element={<GRegister />} />
+              <Route path="/grouplogin" element={<Glogin />} />
+              <Route path="/Developers" element={<Developers />} />
               <Route
-                path="/Dashboard/about"
+                path="/about"
                 element={[
                   <Nav />,
                   <AboutUs1 />,
@@ -586,11 +586,11 @@ const App = () => {
                 ]}
               />
               <Route
-                path="/Dashboard/service"
+                path="/service"
                 element={[<Nav />, <AboutUs3 />]}
               />
               <Route
-                path="/Dashboard/know-more"
+                path="/know-more"
                 element={[
                   <Nav />,
                   <KnowMore1 />,
@@ -600,7 +600,7 @@ const App = () => {
                   <KnowMore5 />,
                 ]}
               />
-              <Route path="/Dashboard/Logout" element={<LogOutSuccessful />} />
+              <Route path="/Logout" element={<LogOutSuccessful />} />
             </Routes>
           </>
         )}
