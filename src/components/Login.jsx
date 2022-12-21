@@ -44,22 +44,48 @@ const Login = () => {
   // export const ReminderEmail = /* ... */
 
 
-  const [email1, setEmail1] = useState("kuradeharesh4002@gmail.com");
+  // const [email1, setEmail1] = useState("kuradeharesh4002@gmail.com");
 
-  const sendEmail = async(e)=>{
-    // e.preventDefault();
+  // const sendEmail = async(e)=>{
+  //   // e.preventDefault();
 
-    setEmail1("kuradeharesh4002@gmail.com");
+  //   // setEmail1("kuradeharesh4002@gmail.com");
+  //   // const email = "kuradeharesh4002@gmail.com";
 
-    const res = await fetch("https://localhost:3001/register",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },body:({email1})
+  //   const res = await fetch("http://localhost:3001/",{
+  //     method:"POST",
+  //     headers:{
+  //       "Content-Type":"application/json"
+  //     },body:JSON.stringify({email1})
+  //   });
+    
+
+  // }
+
+  const sendEmail = async (e) => {
+    e.preventDefault();
+    const email1="manasjagtap20@gmail.com";
+
+    const res = await fetch("http://localhost:3001/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email1
+        })
     });
-    console.log(res);
 
-  }
+    const data = await res.json();
+    console.log(data);
+
+    if (data.status === 401 || !data) {
+        console.log("error")
+    } else {
+        console.log("Email sent")
+    }
+}
+
 
 
   const [loading, setLoading] = useState(true);
