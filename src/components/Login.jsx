@@ -43,24 +43,43 @@ const Login = () => {
   // export const PasswordEmail = /* ... */
   // export const ReminderEmail = /* ... */
 
+  // const sendEmail = async(e)=>{
+  //   // e.preventDefault();
 
-  const [email1, setEmail1] = useState("kuradeharesh4002@gmail.com");
+  //   // setEmail1("kuradeharesh4002@gmail.com");
+  //   // const email = "kuradeharesh4002@gmail.com";
 
-  const sendEmail = async(e)=>{
-    // e.preventDefault();
+  //   const res = await fetch("http://localhost:3001/",{
+  //     method:"POST",
+  //     headers:{
+  //       "Content-Type":"application/json"
+  //     },body:JSON.stringify({email1})
+  //   });
 
-    setEmail1("kuradeharesh4002@gmail.com");
+  // }
 
-    const res = await fetch("https://localhost:3001/register",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },body:({email1})
+  const [email1, setEmail1] = useState("");
+  const sendEmail = async (e) => {
+    e.preventDefault();
+    // const email1="hareshkurade4002@gmail.com";
+
+    const res = await fetch("http://localhost:3001/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email1 }),
     });
-    console.log(res);
 
-  }
+    const data = await res.json();
+    console.log(data);
 
+    if (data.status === 401 || !data) {
+      console.log("error");
+    } else {
+      console.log("Email sent");
+    }
+  };
 
   const [loading, setLoading] = useState(true);
 
@@ -85,8 +104,27 @@ const Login = () => {
     setSubmitButtonDisabled(true);
     setLoading(false);
     signInWithEmailAndPassword(auth, values.email, values.password)
-      .then(async (res) => {
+      .then(async (ress) => {
         setSubmitButtonDisabled(false);
+        setEmail1(values.email);
+
+        const res = await fetch("http://localhost:3001/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email1 }),
+        });
+
+        const data = await res.json();
+        console.log(data);
+
+        if (data.status === 401 || !data) {
+          console.log("error");
+        } else {
+          console.log("Email sent");
+        }
+
         navigate("/dashboard");
         setLoading(true);
       })
@@ -109,7 +147,7 @@ const Login = () => {
         });
 
         navigate("/dashboard");
-        
+
         setLoading(true);
       })
       .catch((err) => {
@@ -168,8 +206,8 @@ const Login = () => {
   // ManasCode End
 
   return (
-    <div className="w-screen h-full">
-      <div className="mx-4 flex-col justify-center w-auto h-screen, md:mx-4 lg:mx-8 pt-2">
+    <div className="w-full h-full">
+      <div className="mx-4 flex-col justify-center w-auto h-full, md:mx-4 lg:mx-8 pt-2">
         <div
           data-aos="fade-left"
           className=" float-none md:float-right flex flex-col items-center justify-center md:w-1/2 lg:w-2/5 py-4 sm:mx-14 md:mx-4 lg:mx-2 lg:py-5  xl:py-14 my-4 lg:my-8 bg-white/30 rounded-[2rem] lg:rounded-[4rem] xl:rounded-[5rem]  border-2 border-offwhite shadow-lg xl:1/3"
@@ -255,7 +293,7 @@ const Login = () => {
                 LOGIN ACCOUNT
               </button>
             </div>
-            
+
             {/* <p className="font-bold text-[0.75rem] text-red-500">{errorMsg}</p> */}
             <ToastContainer />
             <Link to="/register">
@@ -277,15 +315,15 @@ const Login = () => {
               </p>
             </Link>
           </form>
-          <div className="relative w-full px-12">
-              <button
-                onClick={sendEmail}
-                // disabled={submitButtonDisabled}
-                className="w-full p-1 my-4 sm:my-8 lg:my-6 xl:my-8 font-bold lg:extrabold xl:font-extrabold font-poppins text-sm sm:text-sm md:text-sm lg:text-xl xl:text-2xl text-white bg-blue rounded-[0.3rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 "
-              >
-                SEND MAIL
-              </button>
-            </div>
+          {/* <div className="relative w-full px-12">
+            <button
+              onClick={sendEmail}
+              // disabled={submitButtonDisabled}
+              className="w-full p-1 my-4 sm:my-8 lg:my-6 xl:my-8 font-bold lg:extrabold xl:font-extrabold font-poppins text-sm sm:text-sm md:text-sm lg:text-xl xl:text-2xl text-white bg-blue rounded-[0.3rem] hover:bg-lb focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50 "
+            >
+              SEND MAIL
+            </button>
+          </div> */}
         </div>
 
         <div className="h-screen hidden md:block lg:block md:w-1/2 xl:2/3">
