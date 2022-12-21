@@ -217,7 +217,7 @@ const App = () => {
 
   return (
     <div className="bg-[url('https://i.ibb.co/Smq2X7B/background.png')] bg-cover ">
-      <BrowserRouter >
+      <BrowserRouter>
         {user && user.displayName ? (
           <div className={currentMode === "Dark" ? "dark" : ""}>
             <div className="flex relative dark:bg-main-dark-bg">
@@ -284,13 +284,16 @@ const App = () => {
                       {category === "organization" ||
                       category === "institute" ? (
                         <>
-                          <Route path="/Dashboard/Tasks" element={<GroupTasks />} />
                           <Route
-                            path="/Dashboard/Create-Project"
+                            path="/Tasks"
+                            element={<GroupTasks />}
+                          />
+                          <Route
+                            path="/Create-Project"
                             element={<CreatePro />}
                           />
                           <Route
-                            path="/Dashboard/Verify-Ideas"
+                            path="/Verify-Ideas"
                             element={ideas.map(({ id, data }) => (
                               <VerifyIdeas
                                 key={id}
@@ -319,23 +322,26 @@ const App = () => {
                             }
                           />
                           <Route
-                            path="/Dashboard/Create-Session"
+                            path="/Create-Session"
                             element={<CreateSession />}
                           />
                           <Route
-                            path="/Dashboard/ProfileEdit"
+                            path="/ProfileEdit"
                             element={<GprofileEdit />}
                           />
                           <Route
-                            path="/Dashboard/UpdateSession"
+                            path="/UpdateSession"
                             element={<UpdateSession />}
                           />
-                          <Route path="/Dashboard/Profile" element={<GProfile />} />
+                          <Route
+                            path="/Profile"
+                            element={<GProfile />}
+                          />
                         </>
                       ) : (
                         <>
                           <Route
-                            path="/Dashboard/profile"
+                            path="/profile"
                             element={
                               <Profile
                                 username={user.displayName}
@@ -348,7 +354,7 @@ const App = () => {
 
                       {/* dashboard  */}
                       <Route
-                        path="/Dashboard/dashboard"
+                        path="/dashboard"
                         element={
                           <Dashboard
                             username={user.displayName}
@@ -360,24 +366,33 @@ const App = () => {
                       {/* profile */}
 
                       {/* apps  */}
-                      <Route path="/Dashboard/To-Do-List" element={<Std />} />
+                      <Route path="/To-Do-List" element={<Std />} />
 
-                      <Route path="/Dashboard/Calendar" element={<Calendar />} />
-                      <Route path="/Dashboard/FAQs" element={<FAQs />} />
                       <Route
-                        path="/Dashboard/Current-Projects"
+                        path="/Calendar"
+                        element={<Calendar />}
+                      />
+                      <Route path="/FAQs" element={<FAQs />} />
+                      <Route
+                        path="/Current-Projects"
                         element={<CurrentProjects />}
                       />
-                      <Route path="/Dashboard/Tasks" element={<Tasks />} />
-                      <Route path="/Dashboard/Session" element={<Sessions1 />} />
+                      <Route path="/Tasks" element={<Tasks />} />
                       <Route
-                        path="/Dashboard/Session-Details"
+                        path="/Session"
+                        element={<Sessions1 />}
+                      />
+                      <Route
+                        path="/Session-Details"
                         element={<Sessions2 user={user.uid} />}
                       />
-                      <Route path="/Dashboard/Maturity" element={<Maturity1 />} />
-                      <Route path="/Dashboard/Quiz" element={<Quiz />} />
                       <Route
-                        path="/Dashboard/Profile-Edit"
+                        path="/Maturity"
+                        element={<Maturity1 />}
+                      />
+                      <Route path="/Quiz" element={<Quiz />} />
+                      <Route
+                        path="/Profile-Edit"
                         element={
                           <ProfileEdit
                             username={user.displayName}
@@ -387,7 +402,7 @@ const App = () => {
                         }
                       />
                       <Route
-                        path="/Dashboard/Idea-Review"
+                        path="/Idea-Review"
                         element={ideas.map(({ id, data }) => (
                           <IdeaReview
                             key={id}
@@ -406,7 +421,7 @@ const App = () => {
                         ))}
                       />
                       <Route
-                        path="/Dashboard/Verify-Ideas"
+                        path="/Verify-Ideas"
                         element={ideas.map(({ id, data }) => (
                           <VerifyIdeas
                             key={id}
@@ -424,9 +439,12 @@ const App = () => {
                           />
                         ))}
                       />
-                      <Route path="/Dashboard/Contact-us" element={<ContactUs />} />
                       <Route
-                        path="/Dashboard/Post"
+                        path="/Contact-us"
+                        element={<ContactUs />}
+                      />
+                      <Route
+                        path="/Post"
                         element={[
                           <Search pushData={App.pullData} />,
                           ideas.map(({ id, data }) =>
@@ -448,14 +466,14 @@ const App = () => {
                           ),
                         ]}
                       />
-                      <Route path="/Dashboard/Switchi" element={<ToDoList />} />
-                      <Route path="/Dashboard/chat" element={<Chat />} />
+                      <Route path="/Switchi" element={<ToDoList />} />
+                      <Route path="/chat" element={<Chat />} />
                       <Route
-                        path="/Dashboard/Verification"
+                        path="/Verification"
                         element={[<Verification />, <VScroll1 />]}
                       />
                       <Route
-                        path="/Dashboard/Idea-Upload"
+                        path="/Idea-Upload"
                         element={
                           <Upload1
                             username={user.displayName}
@@ -465,7 +483,7 @@ const App = () => {
                         }
                       />
                       <Route
-                        path="/Dashboard/Know-More"
+                        path="/Know-More"
                         element={[
                           <KnowMore1 />,
                           <KnowMore2 />,
@@ -476,7 +494,7 @@ const App = () => {
                       />
 
                       <Route
-                        path="/Dashboard/About-Us"
+                        path="/About-Us"
                         element={[
                           <AboutUs1 />,
                           <AboutUs2 />,
@@ -487,13 +505,16 @@ const App = () => {
                       />
 
                       {/* charts  */}
-                      <Route path="/Dashboard/pie" element={<Pie />} />
-                      <Route path="/Dashboard/Editor" element={<Editor />} />
-                      <Route path="/Dashboard/Upload1" element={<Upload1 />} />
+                      <Route path="/pie" element={<Pie />} />
+                      <Route path="/Editor" element={<Editor />} />
+                      <Route path="/Upload1" element={<Upload1 />} />
 
-                      <Route path="/Dashboard/pbadges" element={<Badges />} />
-                      <Route path="/Dashboard/uploadv" element={<VScroll2 />} />
-                      <Route path="/Dashboard/cpdetails" element={<CPDetails />} />
+                      <Route path="/pbadges" element={<Badges />} />
+                      <Route path="/uploadv" element={<VScroll2 />} />
+                      <Route
+                        path="/cpdetails"
+                        element={<CPDetails />}
+                      />
                       {/* <Route
                             path="/Post1"
                             element={ideas.map(({ id, data }) => (
@@ -514,7 +535,7 @@ const App = () => {
                           /> */}
 
                       <Route
-                        path="/Dashboard/Post1"
+                        path="/Post1"
                         element={
                           <Post1
                             user={user}
@@ -523,7 +544,10 @@ const App = () => {
                           />
                         }
                       />
-                      <Route path="/Dashboard/Developers" element={<Developers />} />
+                      <Route
+                        path="/Developers"
+                        element={<Developers />}
+                      />
 
                       {/* <Route path="/Post1" element={<Post1 />} /> */}
                     </>
@@ -537,18 +561,21 @@ const App = () => {
           <>
             <Routes>
               <Route
-                path="/Dashboard"
+                path=""
                 element={[<Nav />, <HeroSection />, <Slogens />, <Features />]}
               />
-              <Route path="/Dashboard/forgot-pass" element={<ForgotPass />} />
-              <Route path="/Dashboard/login" element={[<Nav />, <Login />]} />
-              <Route path="/Dashboard/register" element={[<Nav />, <Register />]} />
-              <Route path="*" element={<PNF />} />
-              <Route path="/Dashboard/groupregister" element={<GRegister />} />
-              <Route path="/Dashboard/grouplogin" element={<Glogin />} />
-              <Route path="/Dashboard/Developers" element={<Developers />} />
+              <Route path="/forgot-pass" element={<ForgotPass />} />
+              <Route path="/login" element={[<Nav />, <Login />]} />
               <Route
-                path="/Dashboard/about"
+                path="/register"
+                element={[<Nav />, <Register />]}
+              />
+              <Route path="*" element={<PNF />} />
+              <Route path="/groupregister" element={<GRegister />} />
+              <Route path="/grouplogin" element={<Glogin />} />
+              <Route path="/Developers" element={<Developers />} />
+              <Route
+                path="/about"
                 element={[
                   <Nav />,
                   <AboutUs1 />,
@@ -558,9 +585,12 @@ const App = () => {
                   <AboutUs5 />,
                 ]}
               />
-              <Route path="/Dashboard/service" element={[<Nav />, <AboutUs3 />]} />
               <Route
-                path="/Dashboard/know-more"
+                path="/service"
+                element={[<Nav />, <AboutUs3 />]}
+              />
+              <Route
+                path="/know-more"
                 element={[
                   <Nav />,
                   <KnowMore1 />,
@@ -570,7 +600,7 @@ const App = () => {
                   <KnowMore5 />,
                 ]}
               />
-              <Route path="/Dashboard/Logout" element={<LogOutSuccessful />} />
+              <Route path="/Logout" element={<LogOutSuccessful />} />
             </Routes>
           </>
         )}
