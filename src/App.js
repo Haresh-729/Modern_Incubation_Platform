@@ -217,7 +217,7 @@ const App = () => {
 
   return (
     <div className="bg-[url('https://i.ibb.co/Smq2X7B/background.png')] bg-cover ">
-      <BrowserRouter basename="/Dashboard">
+      <BrowserRouter >
         {user && user.displayName ? (
           <div className={currentMode === "Dark" ? "dark" : ""}>
             <div className="flex relative dark:bg-main-dark-bg">
