@@ -217,7 +217,7 @@ const App = () => {
 
   return (
     <div className="bg-[url('https://i.ibb.co/Smq2X7B/background.png')] bg-cover ">
-      <BrowserRouter >
+      <BrowserRouter>
         {user && user.displayName ? (
           <div className={currentMode === "Dark" ? "dark" : ""}>
             <div className="flex relative dark:bg-main-dark-bg">
@@ -284,7 +284,10 @@ const App = () => {
                       {category === "organization" ||
                       category === "institute" ? (
                         <>
-                          <Route path="/Dashboard/Tasks" element={<GroupTasks />} />
+                          <Route
+                            path="/Dashboard/Tasks"
+                            element={<GroupTasks />}
+                          />
                           <Route
                             path="/Dashboard/Create-Project"
                             element={<CreatePro />}
@@ -330,7 +333,10 @@ const App = () => {
                             path="/Dashboard/UpdateSession"
                             element={<UpdateSession />}
                           />
-                          <Route path="/Dashboard/Profile" element={<GProfile />} />
+                          <Route
+                            path="/Dashboard/Profile"
+                            element={<GProfile />}
+                          />
                         </>
                       ) : (
                         <>
@@ -362,19 +368,28 @@ const App = () => {
                       {/* apps  */}
                       <Route path="/Dashboard/To-Do-List" element={<Std />} />
 
-                      <Route path="/Dashboard/Calendar" element={<Calendar />} />
+                      <Route
+                        path="/Dashboard/Calendar"
+                        element={<Calendar />}
+                      />
                       <Route path="/Dashboard/FAQs" element={<FAQs />} />
                       <Route
                         path="/Dashboard/Current-Projects"
                         element={<CurrentProjects />}
                       />
                       <Route path="/Dashboard/Tasks" element={<Tasks />} />
-                      <Route path="/Dashboard/Session" element={<Sessions1 />} />
+                      <Route
+                        path="/Dashboard/Session"
+                        element={<Sessions1 />}
+                      />
                       <Route
                         path="/Dashboard/Session-Details"
                         element={<Sessions2 user={user.uid} />}
                       />
-                      <Route path="/Dashboard/Maturity" element={<Maturity1 />} />
+                      <Route
+                        path="/Dashboard/Maturity"
+                        element={<Maturity1 />}
+                      />
                       <Route path="/Dashboard/Quiz" element={<Quiz />} />
                       <Route
                         path="/Dashboard/Profile-Edit"
@@ -424,7 +439,10 @@ const App = () => {
                           />
                         ))}
                       />
-                      <Route path="/Dashboard/Contact-us" element={<ContactUs />} />
+                      <Route
+                        path="/Dashboard/Contact-us"
+                        element={<ContactUs />}
+                      />
                       <Route
                         path="/Dashboard/Post"
                         element={[
@@ -493,7 +511,10 @@ const App = () => {
 
                       <Route path="/Dashboard/pbadges" element={<Badges />} />
                       <Route path="/Dashboard/uploadv" element={<VScroll2 />} />
-                      <Route path="/Dashboard/cpdetails" element={<CPDetails />} />
+                      <Route
+                        path="/Dashboard/cpdetails"
+                        element={<CPDetails />}
+                      />
                       {/* <Route
                             path="/Post1"
                             element={ideas.map(({ id, data }) => (
@@ -523,7 +544,10 @@ const App = () => {
                           />
                         }
                       />
-                      <Route path="/Dashboard/Developers" element={<Developers />} />
+                      <Route
+                        path="/Dashboard/Developers"
+                        element={<Developers />}
+                      />
 
                       {/* <Route path="/Post1" element={<Post1 />} /> */}
                     </>
@@ -542,7 +566,10 @@ const App = () => {
               />
               <Route path="/Dashboard/forgot-pass" element={<ForgotPass />} />
               <Route path="/Dashboard/login" element={[<Nav />, <Login />]} />
-              <Route path="/Dashboard/register" element={[<Nav />, <Register />]} />
+              <Route
+                path="/Dashboard/register"
+                element={[<Nav />, <Register />]}
+              />
               <Route path="*" element={<PNF />} />
               <Route path="/Dashboard/groupregister" element={<GRegister />} />
               <Route path="/Dashboard/grouplogin" element={<Glogin />} />
@@ -558,7 +585,10 @@ const App = () => {
                   <AboutUs5 />,
                 ]}
               />
-              <Route path="/Dashboard/service" element={[<Nav />, <AboutUs3 />]} />
+              <Route
+                path="/Dashboard/service"
+                element={[<Nav />, <AboutUs3 />]}
+              />
               <Route
                 path="/Dashboard/know-more"
                 element={[
