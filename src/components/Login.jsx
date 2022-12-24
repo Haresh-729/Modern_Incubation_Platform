@@ -58,9 +58,12 @@ const Login = () => {
 
   // }
 
-  const [email1, setEmail1] = useState("");
+  // const [email1, setEmail1] = useState();
   const sendEmail = async (e) => {
     e.preventDefault();
+    // setEmail1(values.email);
+    // console.log(email1);
+    // console.log(values.email);
     // const email1="hareshkurade4002@gmail.com";
 
     const res = await fetch("http://localhost:3001/register", {
@@ -103,11 +106,12 @@ const Login = () => {
     setErrorMsg("");
     setSubmitButtonDisabled(true);
     setLoading(false);
+    const email1 = values.email;
+    console.log(email1);
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(async (ress) => {
         setSubmitButtonDisabled(false);
-        setEmail1(values.email);
-
+        
         const res = await fetch("http://localhost:3001/register", {
           method: "POST",
           headers: {
