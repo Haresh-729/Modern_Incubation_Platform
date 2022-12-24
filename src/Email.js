@@ -1,19 +1,17 @@
 const nodemailer = require("nodemailer");
 
-
 const emaill = () => {
-
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "haresh.personal4@gmail.com",
-      pass: "thkeijnrnzogjlpd",
+      user: process.env.Email,
+      pass: process.env.Word,
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
-  
+
   transporter
     .sendMail({
       from: '"Haresh Kurade" <haresh.personal4@gmail.com>', // sender address
@@ -26,9 +24,6 @@ const emaill = () => {
       console.log({ info });
     })
     .catch(console.error);
-}
+};
 
-
-module.exports={emaill};
-
-
+module.exports = { emaill };

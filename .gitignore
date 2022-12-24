@@ -24,3 +24,6 @@ yarn-error.log*
 
 /nodemailerAPI/.env
 /nodemailerAPI/node_modules
+
+
+/src/.env
